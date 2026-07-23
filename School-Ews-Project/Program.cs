@@ -7,7 +7,5 @@ public class Program
     public static void Main()
     {
         var state = new AppState();
-
-
     }
 }
