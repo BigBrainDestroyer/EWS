@@ -74,11 +74,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/bigbraindestroyer/Desktop/School-Ews-Project/School-Ews-Project.csproj",
+      "projectUniqueName": "/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/School-Ews-Project.csproj",
       "projectName": "School-Ews-Project",
-      "projectPath": "/home/bigbraindestroyer/Desktop/School-Ews-Project/School-Ews-Project.csproj",
+      "projectPath": "/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/School-Ews-Project.csproj",
       "packagesPath": "/home/bigbraindestroyer/.nuget/packages/",
-      "outputPath": "/home/bigbraindestroyer/Desktop/School-Ews-Project/obj/",
+      "outputPath": "/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/bigbraindestroyer/.nuget/NuGet/NuGet.Config"
@@ -133,7 +133,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.109/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.110/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

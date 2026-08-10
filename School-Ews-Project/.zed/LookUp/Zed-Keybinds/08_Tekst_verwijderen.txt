@@ -1,0 +1,27 @@
+TEKENS, WOORDEN EN REGELS VERWIJDEREN
+
+Alt + ' is de verwijderlaag.
+
+Houd Alt en ' vast.
+
+Alt + ' + J = teken links verwijderen
+
+Alt + ' + L = teken rechts verwijderen
+
+Alt + ' + N = vorig woord of subwoord verwijderen
+
+Alt + ' + M = volgend woord of subwoord verwijderen
+
+Alt + ; + - = huidige regel verwijderen
+
+Wanneer meerdere regels geselecteerd zijn:
+Alt + ; + - = geselecteerde regels verwijderen
+
+In de projectsidebar:
+Alt + ; + - = geselecteerd bestand of map naar de prullenbak
+
+Bij deze combinatie is de laatste toets het minteken (-).
+
+Let op:
+De gewone Delete-toets werkt in deze keymap als Escape.
+Gebruik Alt + ' + L om rechts van de cursor te verwijderen.

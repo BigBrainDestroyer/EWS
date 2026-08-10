@@ -1,0 +1,17 @@
+TABS EN NAVIGATIEGESCHIEDENIS
+
+Houd Alt en D vast.
+
+Alt + D + J = geopende tab links
+
+Alt + D + L = geopende tab rechts
+
+Alt + D + I = vooruit in navigatiegeschiedenis
+
+Alt + D + K = terug in navigatiegeschiedenis
+
+Alt + D + , = huidige tab sluiten
+
+Alt + D + . = laatst gesloten tab opnieuw openen
+
+Zolang Alt en D vaststaan, kun je J, L, I of K meerdere keren indrukken.

@@ -1,0 +1,47 @@
+CONTEXTAFHANKELIJKE TOETSEN
+
+Deze toetsen hebben bewust een andere functie afhankelijk van waar je bent.
+
+Alt + F
+
+In de editor:
+- symbolen in huidig bestand bekijken
+
+In de projectsidebar:
+- nieuw bestand maken
+
+
+Alt + R
+
+In de editor:
+- referenties van een symbool zoeken
+
+In de projectsidebar:
+- nieuwe map maken
+
+
+Alt + S + D
+
+In de editor:
+- regel of geselecteerde regels dupliceren
+
+In de projectsidebar:
+- bestand of map hernoemen
+
+
+Alt + ; + -
+
+In de editor:
+- huidige regel of geselecteerde regels verwijderen
+
+In de projectsidebar:
+- geselecteerd bestand of map naar de prullenbak
+
+
+Alt + C en Alt + V
+
+In de editor:
+- normale editoractie voor kopiëren en plakken
+
+In de terminal:
+- terminalactie voor kopiëren en plakken

@@ -1,0 +1,30 @@
+REGELS BEWERKEN
+
+Alt + S is de regelbewerkingslaag.
+
+Houd Alt en S vast.
+
+Alt + S + I = huidige regel omhoog verplaatsen
+
+Alt + S + K = huidige regel omlaag verplaatsen
+
+Alt + S + J = regel of selectie naar links uitspringen
+
+Alt + S + L = regel of selectie naar rechts inspringen
+
+Alt + S + D = huidige regel dupliceren
+
+Bij geselecteerde regels:
+Alt + S + D = geselecteerde regels dupliceren
+
+Alt + Enter = nieuwe lege regel boven de huidige regel
+
+Enter = normale nieuwe regel
+
+Alt + S + Q = commentaar aan/uit
+
+Alt + S + F = symbool hernoemen
+
+Alt + S + - = syntactische selectie verkleinen
+
+Alt + S + = = syntactische selectie uitbreiden

@@ -1,0 +1,15 @@
+MEERDERE CURSORS
+
+Houd Alt, A en S vast.
+
+Alt + A + S + I = extra cursor boven toevoegen
+
+Alt + A + S + K = extra cursor onder toevoegen
+
+Alt + A + S + Backspace =
+laatst toegevoegde cursor verwijderen
+
+Zolang Alt, A en S vaststaan, kun je I of K meerdere keren indrukken.
+
+Laat daarna bij voorkeur los in deze volgorde:
+S, A, Alt.

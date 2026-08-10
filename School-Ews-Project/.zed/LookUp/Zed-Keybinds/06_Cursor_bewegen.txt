@@ -1,0 +1,29 @@
+CURSOR BEWEGEN IN CODE
+
+Alt + J = één teken links
+
+Alt + L = één teken rechts
+
+Alt + I = één regel omhoog
+
+Alt + K = één regel omlaag
+
+Alt + N = vorig woord of subwoord
+
+Alt + M = volgend woord of subwoord
+
+Alt + O = naar begin van de regel
+
+Alt + P = naar einde van de regel
+
+Alt + Z + I = vijf regels omhoog
+
+Alt + Z + K = vijf regels omlaag
+
+Voor de grote sprong:
+
+1. Houd linker Alt vast.
+2. Houd Z vast.
+3. Druk I of K zo vaak als nodig.
+
+Z mag onbeperkt vastblijven en wordt niet getypt.

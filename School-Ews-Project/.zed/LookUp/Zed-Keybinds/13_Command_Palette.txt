@@ -1,0 +1,15 @@
+COMMAND PALETTE
+
+Alt + B = Command Palette openen
+
+Voorlopig via de Command Palette:
+
+- Code Action / Quick Fix
+- Format Document
+- Restart Language Server
+- zeldzame acties waarvoor nog geen eigen shortcut bestaat
+
+Enter = geselecteerde opdracht uitvoeren
+
+Escape = Command Palette sluiten
+Delete = Command Palette sluiten

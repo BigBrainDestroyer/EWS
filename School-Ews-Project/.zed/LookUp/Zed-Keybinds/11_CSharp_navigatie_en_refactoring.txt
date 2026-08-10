@@ -1,0 +1,28 @@
+C# NAVIGATIE EN REFACTORING
+
+Alt + - = naar definitie springen
+
+Alt + R = alle referenties zoeken
+
+Alt + S + F = symbool veilig hernoemen
+
+Dit geldt onder andere voor:
+- class
+- method
+- property
+- variabele
+- parameter
+
+Alt + , = vorige fout of waarschuwing
+
+Alt + . = volgende fout of waarschuwing
+
+Alt + Q = classes, methods, properties en andere symbolen
+          in het hele project zoeken
+
+Alt + F = symbolen in het huidige bestand bekijken
+
+Na een sprong:
+
+Alt + D + K = terug
+Alt + D + I = weer vooruit

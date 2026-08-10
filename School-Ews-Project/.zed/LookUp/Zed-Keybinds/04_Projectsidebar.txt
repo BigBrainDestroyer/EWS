@@ -1,0 +1,23 @@
+PROJECTSIDEBAR
+
+Alt + [ = projectsidebar openen/focus geven
+
+In de projectsidebar:
+
+Alt + I = selectie omhoog
+Alt + K = selectie omlaag
+
+Alt + J = map inklappen / naar links
+Alt + L = map uitklappen / naar rechts
+
+Enter = geselecteerd bestand openen
+
+Alt + F = nieuw bestand maken
+
+Alt + R = nieuwe map maken
+
+Alt + S + D = geselecteerd bestand of map hernoemen
+
+Alt + ; + - = geselecteerd bestand of map naar de prullenbak
+
+Bij de laatste combinatie is de laatste toets het minteken (-).

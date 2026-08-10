@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yCZNtaOkP5Q=",
+  "dgSpecHash": "rFDIh+MLDlQ=",
   "success": true,
-  "projectFilePath": "/home/bigbraindestroyer/Desktop/School-Ews-Project/School-Ews-Project.csproj",
+  "projectFilePath": "/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/School-Ews-Project.csproj",
   "expectedPackageFiles": [
     "/home/bigbraindestroyer/.nuget/packages/raylib-cs/8.0.0/raylib-cs.8.0.0.nupkg.sha512"
   ],

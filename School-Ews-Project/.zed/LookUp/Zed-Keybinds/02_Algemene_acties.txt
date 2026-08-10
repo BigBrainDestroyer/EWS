@@ -1,0 +1,21 @@
+ALGEMENE ACTIES
+
+Alt + B = Command Palette openen
+
+Alt + T = terminal openen/sluiten
+
+Alt + C = kopiëren
+Alt + V = plakken
+Alt + X = knippen
+
+Ctrl + S = bestand opslaan
+
+Enter = bevestigen / openen / normale nieuwe regel
+
+Escape = venster sluiten / actie annuleren
+Delete = venster sluiten / actie annuleren
+
+Backspace = normaal teken links verwijderen
+
+Alt + U = undo / ongedaan maken
+Alt + H = redo / opnieuw uitvoeren

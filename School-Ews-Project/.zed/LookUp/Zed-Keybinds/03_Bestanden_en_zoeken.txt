@@ -1,0 +1,20 @@
+BESTANDEN EN ZOEKEN
+
+Alt + W = bestand zoeken door naam te typen
+
+Alt + Q = classes, methods, properties en andere symbolen
+          zoeken in het hele project
+
+Alt + E = tekst zoeken in het hele project
+
+Alt + F = symbolen bekijken in het huidige bestand
+
+Alt + G = tekst zoeken in het huidige bestand
+
+Snel kiezen:
+
+- Bestandsnaam bekend: Alt + W
+- Class of method bekend: Alt + Q
+- Tekst ergens in project: Alt + E
+- Class of method in huidig bestand: Alt + F
+- Tekst in huidig bestand: Alt + G

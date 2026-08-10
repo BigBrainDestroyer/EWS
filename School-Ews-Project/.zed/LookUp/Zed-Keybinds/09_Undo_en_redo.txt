@@ -1,0 +1,13 @@
+UNDO EN REDO
+
+Alt + U = undo / ongedaan maken
+
+Alt + H = redo / opnieuw uitvoeren
+
+Bij meerdere cursors:
+
+Alt + A + S + Backspace =
+laatst toegevoegde cursor verwijderen
+
+Dit laatste is geen gewone undo.
+Het verwijdert alleen de laatst toegevoegde extra cursor.

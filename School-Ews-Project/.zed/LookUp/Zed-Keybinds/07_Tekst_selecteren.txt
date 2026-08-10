@@ -1,0 +1,30 @@
+TEKST SELECTEREN
+
+Alt + A is de selectielaag.
+
+Houd Alt en A vast.
+
+Alt + A + J = één teken links selecteren
+
+Alt + A + L = één teken rechts selecteren
+
+Alt + A + I = omhoog selecteren
+
+Alt + A + K = omlaag selecteren
+
+Alt + A + N = vorig woord of subwoord selecteren
+
+Alt + A + M = volgend woord of subwoord selecteren
+
+Alt + A + O = selecteren tot begin van de regel
+
+Alt + A + P = selecteren tot einde van de regel
+
+Alt + A + \ = alles selecteren
+
+Alt + S + - = syntactische selectie verkleinen
+
+Alt + S + = = syntactische selectie uitbreiden
+
+Zolang Alt en A vaststaan, kun je de eindtoets meerdere keren indrukken.
+De A wordt niet getypt.

@@ -1,0 +1,37 @@
+ALGEMENE REGELS
+
+Gebruik voor Personal Keys de linker Alt-toets.
+
+Alt vasthouden = shortcutmodus
+
+J = links
+L = rechts
+I = omhoog
+K = omlaag
+
+Deze richtingen blijven overal hetzelfde:
+- in de code
+- in de projectsidebar
+- in zoekvensters
+- in menu's
+
+Bij een tussenkey houd je alle toetsen vast:
+
+Alt + Z + I:
+1. Houd Alt vast.
+2. Houd Z vast.
+3. Druk I.
+
+Zolang Alt en Z vaststaan, kun je I opnieuw indrukken of vasthouden.
+De Z wordt niet getypt.
+
+Bij twee tussenkeys:
+
+Alt + A + S + I:
+1. Houd Alt vast.
+2. Houd A vast.
+3. Houd S vast.
+4. Druk I.
+
+Laat daarna bij voorkeur los in omgekeerde volgorde:
+S, A, Alt.
