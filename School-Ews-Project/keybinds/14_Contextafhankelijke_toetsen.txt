@@ -1,0 +1,49 @@
+CONTEXTAFHANKELIJKE TOETSEN
+===========================
+
+Dezelfde toets kan iets anders doen afhankelijk van waar de focus staat.
+
+Alt + F
+-------
+
+Editor:              outline huidig bestand
+Projectsidebar:      nieuw bestand
+
+Alt + R
+-------
+
+Editor:              alle referenties
+Projectsidebar:      nieuwe map
+
+Alt + S + D
+-----------
+
+Editor:              regel dupliceren
+Projectsidebar:      bestand/map hernoemen
+
+Alt + ; + -
+-----------
+
+Editor:              huidige regel verwijderen
+Projectsidebar:      bestand/map naar prullenbak
+
+Alt + C / Alt + V
+-------------------
+
+Editor:              editor kopiëren/plakken
+Terminal:            terminal kopiëren/plakken
+
+Alt + I / Alt + K
+-------------------
+
+Editor:              cursor omhoog/omlaag
+Completion:          vorige/volgende suggestie
+Picker/menu:         vorig/volgend item
+Signature help:      vorige/volgende signature
+Zoekbalk:            vorige/volgende zoekopdracht
+
+Delete
+------
+
+Overal:              Escape/cancel
+

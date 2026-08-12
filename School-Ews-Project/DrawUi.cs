@@ -10,8 +10,6 @@ public class DrawUi
     public DrawUi(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
-
-        
     }
     
     public void Ui()

@@ -1,0 +1,37 @@
+CODE NAVIGATIE, DIAGNOSTICS EN REFACTORING
+==========================================
+
+TOETSEN                         ACTIE
+------------------------------------------------------------------
+Alt + F                         Outline huidig bestand
+Alt + Q                         Projectsymbolen/classes zoeken
+Alt + -                         Naar definitie
+Alt + R                         Alle referenties zoeken
+Alt + S vasthouden + F          Symbool hernoemen
+Alt + ,                         Vorige diagnostic/fout
+Alt + .                         Volgende/huidige diagnostic/fout
+
+Syntaxselectie
+--------------
+
+Alt + S vasthouden + -          Kleinere syntaxnode selecteren
+Alt + S vasthouden + =          Grotere syntaxnode selecteren
+
+Praktische voorbeelden
+-----------------------
+
+Class in het hele project zoeken:
+  Alt + Q
+
+Methode of class in huidig bestand zoeken:
+  Alt + F
+
+Vanaf een aanroep naar de definitie:
+  Alt + -
+
+Kijken waar een methode/property wordt gebruikt:
+  Alt + R
+
+Veilig hernoemen in het project:
+  Alt en S vasthouden, daarna F
+

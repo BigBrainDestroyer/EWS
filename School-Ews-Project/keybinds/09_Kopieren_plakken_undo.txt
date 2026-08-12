@@ -1,0 +1,15 @@
+KOPIEREN, PLAKKEN, KNIPPEN, UNDO EN REDO
+========================================
+
+TOETSEN                    ACTIE
+-------------------------------------------------------------
+Alt + C                    Kopiëren
+Alt + V                    Plakken
+Alt + X                    Knippen
+Alt + U                    Undo
+Alt + H                    Redo
+
+Deze toetsen werken door Zed heen. In de editor worden de directe
+editoracties gebruikt. In de terminal gebruiken Alt+C en Alt+V de speciale
+terminal-copy- en terminal-pasteacties.
+

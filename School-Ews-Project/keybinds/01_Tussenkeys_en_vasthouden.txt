@@ -1,0 +1,56 @@
+TUSSENKEYS EN VASTHOUDEN
+========================
+
+Tussenkeys in deze keymap
+-------------------------
+
+  A   selecteren
+  Z   vijf regels bewegen
+  S   regels/code bewerken
+  D   tabs en navigatiegeschiedenis
+  '   tekst verwijderen
+  ;   hele regel verwijderen
+
+Correct indrukken
+-----------------
+
+  Alt vasthouden
+  tussenkey vasthouden
+  actietoets indrukken
+
+Voorbeelden:
+
+  Alt + A vasthouden + J   selecteer één teken naar links
+  Alt + Z vasthouden + I   vijf regels omhoog
+  Alt + S vasthouden + L   regel inspringen
+  Alt + D vasthouden + L   volgende tab
+
+Loslaten
+--------
+
+De laag stopt onmiddellijk als de tussenkey wordt losgelaten. Alt hoeft niet
+losgelaten te worden.
+
+Voorbeeld voor zes regels omhoog:
+
+  1. Houd Alt en Z vast.
+  2. Druk I: vijf regels omhoog.
+  3. Laat Z los, maar houd Alt vast.
+  4. Druk I: nog één regel omhoog.
+
+Meerdere tussenkeys
+-------------------
+
+Voor Alt + A + S + I:
+
+  Alt, A en S blijven ingedrukt terwijl je I indrukt.
+
+Zodra A of S wordt losgelaten, stopt de volledige tussenlaag. Dit voorkomt
+dat een oude selectie- of bewerkingslaag ongemerkt actief blijft.
+
+Herhalen
+--------
+
+Een tussenkey mag onbeperkt vastblijven. Zijn keyboard-repeat wordt
+onderdrukt. De actietoets mag je meerdere keren indrukken of vasthouden.
+

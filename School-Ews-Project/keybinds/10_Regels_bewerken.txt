@@ -1,0 +1,33 @@
+REGELS EN SYNTAXIS BEWERKEN
+===========================
+
+Houd Alt en S vast terwijl je de laatste toets indrukt.
+
+TOETSEN                         ACTIE
+------------------------------------------------------------------
+Alt + S + I                     Huidige regel omhoog verplaatsen
+Alt + S + K                     Huidige regel omlaag verplaatsen
+Alt + S + J                     Regel minder inspringen (outdent)
+Alt + S + L                     Regel verder inspringen (indent)
+Alt + S + D                     Regel naar beneden dupliceren
+Alt + S + Q                     Commentaar aan/uit
+Alt + S + -                     Kleinere syntaxnode selecteren
+Alt + S + =                     Grotere syntaxnode selecteren
+Alt + S + F                     Symbool hernoemen
+Alt + Enter                     Nieuwe regel boven huidige regel
+
+Directe alternatieven
+---------------------
+
+Ctrl + Alt + I                 Regel omhoog
+Ctrl + Alt + K                 Regel omlaag
+Ctrl + Alt + J                 Outdent
+Ctrl + Alt + L                 Indent
+Ctrl + Alt + D                 Regel dupliceren
+Ctrl + Alt + Q                 Commentaar aan/uit
+Ctrl + Alt + -                 Kleinere syntaxnode
+Ctrl + Alt + =                 Grotere syntaxnode
+Ctrl + Alt + F                 Hernoemen
+
+Hele regel verwijderen staat in 08_Tekst_verwijderen.txt.
+

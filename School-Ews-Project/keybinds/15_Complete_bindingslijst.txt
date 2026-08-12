@@ -1,0 +1,147 @@
+COMPLETE EXACTE BINDINGSLIJST
+=============================
+
+Dit is de complete gebruikersgerichte lijst uit keymap.json van Personal Keys
+2.1.1. De schrijfwijze links is dezelfde als in Zeds keymapbestand.
+
+GLOBAAL
+-------
+alt-b                         -> Command Palette
+alt-t                         -> terminalpaneel
+alt-w                         -> bestandzoeker
+alt-q                         -> projectsymbolen
+alt-e                         -> projecttekst zoeken
+alt-[                         -> projectsidebar focus/toggle
+alt-c                         -> kopiëren
+alt-backspace                 -> vorig woord/subwoord verwijderen
+alt-v                         -> plakken
+alt-x                         -> knippen
+alt-u                         -> undo
+alt-h                         -> redo
+alt-j                         -> links
+alt-l                         -> rechts
+alt-i                         -> omhoog
+alt-k                         -> omlaag
+alt-n                         -> vorig subwoordbegin
+alt-m                         -> volgend subwoordeinde
+alt-o                         -> regelbegin
+alt-p                         -> regeleinde
+delete                        -> Escape/cancel
+alt-a alt-j                   -> links selecteren
+alt-a alt-l                   -> rechts selecteren
+alt-a alt-i                   -> omhoog selecteren
+alt-a alt-k                   -> omlaag selecteren
+alt-a alt-n                   -> tot vorig subwoordbegin selecteren
+alt-a alt-m                   -> tot volgend subwoordeinde selecteren
+alt-a alt-o                   -> tot regelbegin selecteren
+alt-a alt-p                   -> tot regeleinde selecteren
+alt-a alt-\                   -> alles selecteren
+alt-' alt-j                   -> Backspace
+alt-' alt-l                   -> Delete
+alt-' alt-n                   -> vorig subwoord verwijderen
+alt-' alt-m                   -> volgend subwoord verwijderen
+alt-d alt-j                   -> vorige tab
+alt-d alt-l                   -> volgende tab
+alt-d alt-i                   -> vooruit in navigatiegeschiedenis
+alt-d alt-k                   -> terug in navigatiegeschiedenis
+alt-d alt-,                   -> actieve tab sluiten
+alt-d alt-.                   -> gesloten tab heropenen
+alt-z alt-i                   -> vijf regels omhoog
+alt-z alt-k                   -> vijf regels omlaag
+ctrl-alt-shift-j              -> vorige tab
+ctrl-alt-shift-l              -> volgende tab
+ctrl-alt-shift-i              -> vooruit in geschiedenis
+ctrl-alt-shift-k              -> terug in geschiedenis
+ctrl-alt-shift-,              -> actieve tab sluiten
+ctrl-alt-shift-.              -> gesloten tab heropenen
+
+EDITOR
+------
+alt-c                         -> kopiëren
+alt-v                         -> plakken
+alt-x                         -> knippen
+alt-g                         -> zoeken in huidig bestand
+alt-f                         -> outline
+alt-j                         -> cursor links
+alt-l                         -> cursor rechts
+alt-i                         -> cursor omhoog
+alt-k                         -> cursor omlaag
+alt-n                         -> vorig subwoordbegin
+alt-m                         -> volgend subwoordeinde
+alt-o                         -> regelbegin
+alt-p                         -> regeleinde
+alt-a alt-j                   -> links selecteren
+alt-a alt-l                   -> rechts selecteren
+alt-a alt-i                   -> omhoog selecteren
+alt-a alt-k                   -> omlaag selecteren
+alt-a alt-n                   -> tot vorig subwoordbegin selecteren
+alt-a alt-m                   -> tot volgend subwoordeinde selecteren
+alt-a alt-o                   -> tot regelbegin selecteren
+alt-a alt-p                   -> tot regeleinde selecteren
+alt-a alt-\                   -> alles selecteren
+alt-' alt-j                   -> teken links verwijderen
+alt-' alt-l                   -> teken rechts verwijderen
+alt-' alt-n                   -> vorig subwoord verwijderen
+alt-' alt-m                   -> volgend subwoord verwijderen
+alt-; alt--                   -> regel verwijderen
+alt-u                         -> undo
+alt-h                         -> redo
+alt-s alt-i                   -> regel omhoog verplaatsen
+alt-s alt-k                   -> regel omlaag verplaatsen
+alt-s alt-j                   -> outdent
+alt-s alt-l                   -> indent
+alt-s alt-d                   -> regel dupliceren
+alt-enter                     -> nieuwe regel boven
+alt-s alt-q                   -> commentaar aan/uit
+alt-s alt--                   -> kleinere syntaxnode
+alt-s alt-=                   -> grotere syntaxnode
+alt--                         -> naar definitie
+alt-r                         -> alle referenties
+alt-s alt-f                   -> hernoemen
+alt-,                         -> vorige diagnostic
+alt-.                         -> volgende/huidige diagnostic
+alt-a alt-s alt-i             -> selectie boven toevoegen
+alt-a alt-s alt-k             -> selectie onder toevoegen
+alt-a alt-s alt-backspace     -> selectie terugdraaien
+ctrl-alt-i                    -> regel omhoog
+ctrl-alt-k                    -> regel omlaag
+ctrl-alt-j                    -> outdent
+ctrl-alt-l                    -> indent
+ctrl-alt-d                    -> regel dupliceren
+ctrl-alt-q                    -> commentaar aan/uit
+ctrl-alt--                    -> kleinere syntaxnode
+ctrl-alt-=                    -> grotere syntaxnode
+ctrl-alt-f                    -> hernoemen
+ctrl-alt-shift-u              -> selectie boven toevoegen
+ctrl-alt-shift-o              -> selectie onder toevoegen
+ctrl-alt-shift-backspace      -> selectie terugdraaien
+ctrl-alt-backspace            -> regel verwijderen
+
+PROJECTSIDEBAR (NIET TIJDENS NAAM BEWERKEN)
+-------------------------------------------
+alt-f                         -> nieuw bestand
+alt-r                         -> nieuwe map
+alt-s alt-d                   -> hernoemen
+alt-; alt--                   -> naar prullenbak
+ctrl-alt-backspace            -> naar prullenbak
+
+TERMINAL
+--------
+alt-c                         -> terminal kopiëren
+alt-v                         -> terminal plakken
+
+AUTOMATISCH TOEGEVOEGDE ZED-CONTEXTEN
+-------------------------------------
+alt-i                         -> vorige completion/code action/menu/signature
+alt-k                         -> volgende completion/code action/menu/signature
+alt-j                         -> menu parent of gewone editor links
+alt-l                         -> menu child of gewone editor rechts
+alt-i / alt-k in zoekbalk     -> vorige/volgende zoekopdracht
+
+Niet zelf gebruiken
+-------------------
+
+De lange ctrl-alt-shift-a/b-reeksen in de gegenereerde keymap zijn interne
+Personal Keys-codes. Ze zijn geen handmatige shortcuts en staan daarom niet in
+de praktische bestanden.
+

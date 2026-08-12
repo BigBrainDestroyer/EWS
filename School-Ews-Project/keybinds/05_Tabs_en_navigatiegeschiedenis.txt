@@ -1,0 +1,27 @@
+TABS EN NAVIGATIEGESCHIEDENIS
+=============================
+
+Houd Alt en D vast terwijl je de laatste toets indrukt.
+
+TOETSEN                         ACTIE
+------------------------------------------------------------------
+Alt + D + J                     Vorige tab
+Alt + D + L                     Volgende tab
+Alt + D + I                     Vooruit in navigatiegeschiedenis
+Alt + D + K                     Terug in navigatiegeschiedenis
+Alt + D + ,                     Actieve tab sluiten
+Alt + D + .                     Laatst gesloten tab heropenen
+
+Directe alternatieven
+---------------------
+
+Ctrl + Alt + Shift + J          Vorige tab
+Ctrl + Alt + Shift + L          Volgende tab
+Ctrl + Alt + Shift + I          Vooruit in geschiedenis
+Ctrl + Alt + Shift + K          Terug in geschiedenis
+Ctrl + Alt + Shift + ,          Actieve tab sluiten
+Ctrl + Alt + Shift + .          Gesloten tab heropenen
+
+Na het loslaten van D werken I/J/K/L onmiddellijk weer als gewone
+Alt-navigatietoetsen, ook wanneer Alt nog ingedrukt blijft.
+

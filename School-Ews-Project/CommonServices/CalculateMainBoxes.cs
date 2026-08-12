@@ -17,17 +17,17 @@ public class CalculateMainBoxes
         if(_state.common.boxes.MainBoxPixelLengths != null && _state.common.boxes.MainBoxPixelLengths.Count() > 0)
         {   
             int[] pixelWidths = CalculatePixelLength(
-                new float[]{_state.common.boxes.MainBoxProcentageWidths[MainBoxNames.Archive],
-                    _state.common.boxes.MainBoxProcentageWidths[MainBoxNames.Maze],
-                    _state.common.boxes.MainBoxProcentageWidths[MainBoxNames.Statistics],
-                    _state.common.boxes.MainBoxProcentageWidths[MainBoxNames.Editor]}, 
+                new float[]{_state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Archive],
+                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Maze],
+                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Statistics],
+                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Editor]}, 
                     Raylib.GetScreenWidth());
 
             int[] pixelHeights = CalculatePixelLength(
-               new float[]{_state.common.boxes.MainBoxProcentageHeights[MainBoxNames.Archive],
-                    _state.common.boxes.MainBoxProcentageHeights[MainBoxNames.Maze],
-                    _state.common.boxes.MainBoxProcentageHeights[MainBoxNames.Statistics],
-                    _state.common.boxes.MainBoxProcentageHeights[MainBoxNames.Editor]}, 
+               new float[]{_state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Archive],
+                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Maze],
+                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Statistics],
+                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Editor]}, 
                     Raylib.GetScreenHeight());
             
             if (pixelHeights != null && pixelWidths != null && pixelHeights.Length > 0 && pixelWidths.Length > 0)
@@ -52,7 +52,7 @@ public class CalculateMainBoxes
         }
         
         int[] newPieceLengths = new int[pieces.Length];
-        float leftOverPixels = 0;
+        double leftOverPixels = 0;
         int counter = 0;
 
         foreach(float piece in pieces)
@@ -65,39 +65,27 @@ public class CalculateMainBoxes
             counter += 1;
         }
 
-        if(screenLength == Raylib.GetScreenHeight())
-        {
-            for(int r = 0, x = 0; x < leftOverPixels; r++)
-            {
-                if (pieces[r] < 99f)
-                {
-                    newPieceLengths[r] += 1;
-
-                    x += 1;
-                }
-            }
-        }
-        else
-        {
-            for(int i = 0; i < leftOverPixels; i++)
-            {
-                if(newPieceLengths.Length > i && newPieceLengths[i] == newPieceLengths[i + 1])
-                {
-                    newPieceLengths[i] += 1;
-                    newPieceLengths[i + 1] += 1;
-                }
-                else if(i > 0 && newPieceLengths[i] == newPieceLengths[i - 1])
-                {
-                    newPieceLengths[i] += 1;
-                    newPieceLengths[i - 1] += 1;
-                }
-                else
-                {
-                    newPieceLengths[i] += 1;
-                }
-            }
-        }
+        counter = 0;
         
+        leftOverPixels = Math.Ceiling(leftOverPixels);
+
+        if(leftOverPixels == 2)
+        {
+            //in de hoogte kan je niet meer dan 1 pixel krijgen omdat de boxes met 100f worden geskipt dus blijven er nog maar 2 over waar maximaal 
+            leftOverPixels = 3;
+        }
+
+        foreach(float piece in pieces)
+        {
+            if(piece < 100f && leftOverPixels > 0)
+            {
+                newPieceLengths[counter] += 1;
+                leftOverPixels -= 1;
+            }
+
+            counter += 1;
+        }
+
         return newPieceLengths;
     }
 

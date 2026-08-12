@@ -1,0 +1,39 @@
+CURSOR BEWEGEN
+==============
+
+Gewone beweging
+---------------
+
+TOETSEN                    ACTIE
+-------------------------------------------------------------
+Alt + J                    Eén positie links
+Alt + L                    Eén positie rechts
+Alt + I                    Eén regel omhoog
+Alt + K                    Eén regel omlaag
+Alt + N                    Naar begin vorig subwoord/woorddeel
+Alt + M                    Naar einde volgend subwoord/woorddeel
+Alt + O                    Naar begin van de regel
+Alt + P                    Naar einde van de regel
+
+Vijf regels tegelijk
+---------------------
+
+Houd Alt en Z vast:
+
+Alt + Z + I                Vijf regels omhoog
+Alt + Z + K                Vijf regels omlaag
+
+Voor zes regels omhoog:
+
+  Alt+Z vasthouden + I     vijf omhoog
+  Z loslaten, Alt houden
+  I                        één extra omhoog
+
+Completionmenu zichtbaar
+-------------------------
+
+Wanneer Zed suggesties toont, kiezen Alt+I en Alt+K de vorige/volgende
+suggestie. Ze verplaatsen dan bewust niet de tekstcursor. Zie ook:
+
+  13_Completion_menus_en_zoeken.txt
+

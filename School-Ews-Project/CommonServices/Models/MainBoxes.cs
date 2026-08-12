@@ -4,7 +4,7 @@ namespace Program;
 
 public class MainBoxes
 {
-    public Dictionary<MainBoxNames, float> MainBoxProcentageWidths { get; } =
+    public Dictionary<MainBoxNames, float> MainBoxPercentageWidths { get; } =
     new Dictionary<MainBoxNames, float>{
         {MainBoxNames.Archive   , 20f},
         {MainBoxNames.Maze      , 40f},
@@ -12,7 +12,7 @@ public class MainBoxes
         {MainBoxNames.Editor    , 40f}
     };
 
-    public Dictionary<MainBoxNames, float> MainBoxProcentageHeights { get; } =
+    public Dictionary<MainBoxNames, float> MainBoxPercentageHeights { get; } =
     new Dictionary<MainBoxNames, float>{
         {MainBoxNames.Archive   , 100f},
         {MainBoxNames.Maze      , 70f},
