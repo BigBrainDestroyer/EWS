@@ -10,6 +10,14 @@ public class DrawDiagnostics
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
+
+    public void Draw()
+    {
+        if(_state.common.settings.DrawDiagnostics == true)
+        {
+            DrawMainBoxes();
+        }
+    }
     
     public void DrawMainBoxes()
     {

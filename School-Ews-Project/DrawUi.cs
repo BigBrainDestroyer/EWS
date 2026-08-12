@@ -5,20 +5,21 @@ namespace Program;
 public class DrawUi
 {
     private readonly AppState _state;
-    private readonly DrawDiagnostics _draw;
+    private readonly DrawDiagnostics _diagnostics;
 
     public DrawUi(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+
+        _diagnostics = new DrawDiagnostics(_state);
     }
     
     public void Ui()
     {
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.RayWhite);
-
-        var _draw = new DrawDiagnostics(_state);
-        _draw.DrawMainBoxes();
+        
+        _diagnostics.Draw();
 
         Raylib.EndDrawing();
     }

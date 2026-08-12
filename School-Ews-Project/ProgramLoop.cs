@@ -5,14 +5,13 @@ namespace Program;
 public class ProgramLoop
 {
     private readonly AppState _state;
-    private readonly CalculateMainBoxes _calculateMainBoxes;
     private readonly DrawUi _draw;
+    private readonly UpdateApp _update;
 
     public ProgramLoop(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
-        
-        _calculateMainBoxes = new CalculateMainBoxes(_state);
+        _update = new UpdateApp(_state);
         _draw = new DrawUi(_state);
     }
     
@@ -20,8 +19,8 @@ public class ProgramLoop
     {
         while(!Raylib.WindowShouldClose())
         {
-            _calculateMainBoxes.UpdateMainBoxes();
-            
+            _update.App();
+
             _draw.Ui();
         }
     }

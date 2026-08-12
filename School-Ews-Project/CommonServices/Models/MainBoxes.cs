@@ -2,6 +2,14 @@ using System.Numerics;
 
 namespace Program;
 
+public enum MainBoxNames
+{
+    Archive,
+    Maze,
+    Statistics,
+    Editor
+}
+
 public class MainBoxes
 {
     public Dictionary<MainBoxNames, float> MainBoxPercentageWidths { get; } =
