@@ -15,13 +15,6 @@ public class EditorBoxLayout
     // TextPanel (tekst van algo)
     // terminal (notes)
 
-    public Dictionary<EditorBoxNames, float> BoxPercentageWidths { get; } =
-    new Dictionary<EditorBoxNames, float>{
-        {EditorBoxNames.Header   , 100f},
-        {EditorBoxNames.TextPanel, 100f},
-        {EditorBoxNames.Terminal , 100f}
-    };
-
     public Dictionary<EditorBoxNames, float> BoxPercentageHeights { get; } =
     new Dictionary<EditorBoxNames, float>{
         {EditorBoxNames.Header   , 10f},
