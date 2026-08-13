@@ -56,6 +56,8 @@ public class CalculateEditorLayout
                 break;
             }
         }
+
+        CalculatePosition(boxNames);
     }
 
     public (int, double) CalculatePixelHeightLength(float childBoxPercentageHeight, int parentBoxHeight, double leftOverPixels)
@@ -64,5 +66,17 @@ public class CalculateEditorLayout
         leftOverPixels += childBoxPixelHeight - (int)childBoxPixelHeight;
 
         return ((int)childBoxPixelHeight, leftOverPixels);
+    }
+
+    public void CalculatePosition(EditorBoxNames[] boxNames)
+    {
+        int boxHeightPixel = 0;
+
+        foreach(EditorBoxNames boxName in boxNames)
+        {
+            _state.editor.layout.boxes.BoxPixelPositions[boxName] = new Vector2(_state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor].X, boxHeightPixel);
+
+            boxHeightPixel += (int)_state.editor.layout.boxes.BoxPixelLengths[boxName].Y; 
+        }
     }
 }

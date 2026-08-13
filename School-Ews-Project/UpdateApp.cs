@@ -17,5 +17,7 @@ public class UpdateApp
     public void App()
     {
         _calculateMainBoxes.UpdateMainBoxes();
+
+        _EditorLayout.UpdateEditorLayout();
     }
 }
