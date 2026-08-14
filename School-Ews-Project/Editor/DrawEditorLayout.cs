@@ -16,7 +16,7 @@ public class DrawEditorLayout
         DrawEditorLayoutBoxes();
     }
     
-    public void DrawEditorLayoutBoxes()
+    private void DrawEditorLayoutBoxes()
     {
         Raylib.DrawRectangleV(
             _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Header], 

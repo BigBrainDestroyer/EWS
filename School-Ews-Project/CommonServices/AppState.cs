@@ -3,6 +3,6 @@ namespace Program;
 
 public class AppState
 {
-    public CommonServices common { get; set; } = new CommonServices();
-    public Editor editor { get; set; } = new Editor();
+    public CommonServicesState common { get; set; } = new CommonServicesState();
+    public EditorState editor { get; set; } = new EditorState();
 }

@@ -16,7 +16,7 @@ public class CalculateEditorLayout
         UpdateEditorLayoutBoxes();
     }
 
-    public void UpdateEditorLayoutBoxes()
+    private void UpdateEditorLayoutBoxes()
     {
         EditorBoxNames[] boxNames = Enum.GetValues<EditorBoxNames>();
         double leftOverPixels = 0;
@@ -60,7 +60,7 @@ public class CalculateEditorLayout
         CalculatePosition(boxNames);
     }
 
-    public (int, double) CalculatePixelHeightLength(float childBoxPercentageHeight, int parentBoxHeight, double leftOverPixels)
+    private (int, double) CalculatePixelHeightLength(float childBoxPercentageHeight, int parentBoxHeight, double leftOverPixels)
     {
         float childBoxPixelHeight = (childBoxPercentageHeight / 100f) * (float)parentBoxHeight;
         leftOverPixels += childBoxPixelHeight - (int)childBoxPixelHeight;
@@ -68,7 +68,7 @@ public class CalculateEditorLayout
         return ((int)childBoxPixelHeight, leftOverPixels);
     }
 
-    public void CalculatePosition(EditorBoxNames[] boxNames)
+    private void CalculatePosition(EditorBoxNames[] boxNames)
     {
         int boxHeightPixel = 0;
 

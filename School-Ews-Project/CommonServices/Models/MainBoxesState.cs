@@ -10,7 +10,7 @@ public enum MainBoxNames
     Editor
 }
 
-public class MainBoxes
+public class MainBoxesState
 {
     public Dictionary<MainBoxNames, float> MainBoxPercentageWidths { get; } =
     new Dictionary<MainBoxNames, float>{

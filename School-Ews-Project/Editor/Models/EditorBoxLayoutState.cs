@@ -10,7 +10,7 @@ public enum EditorBoxNames
     Terminal
 }
 
-public class EditorBoxLayout
+public class EditorBoxLayoutState
 {
     // header (knopen enz)
     // TextPanel (tekst van algo)
