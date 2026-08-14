@@ -37,7 +37,7 @@ public class EditorBoxLayoutState
         {EditorBoxNames.Terminal , new Vector2(0,0)}
     };
 
-    public Dictionary<EditorBoxNames, Color> BoxLayoutColors { get; set; } =
+    public Dictionary<EditorBoxNames, Color> BoxLayoutColors { get; } =
     new Dictionary<EditorBoxNames, Color>{
         {EditorBoxNames.Header   , new Color(43, 46, 49, 255)},
         {EditorBoxNames.TextPanel, new Color(51, 59, 67, 255)},

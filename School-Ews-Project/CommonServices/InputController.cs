@@ -18,16 +18,14 @@ public class InputController
 
     public List<int> GetKeyboardInput()
     {
-        if(Raylib.GetCharPressed() == 0)
-        {
-            return new List<int>();
-        }
-
+        int Char = Raylib.GetCharPressed();
         List<int> newKeyboardInput = new List<int>();
 
-        while(Raylib.GetCharPressed() != 0)
-        {
-            newKeyboardInput.Add(Raylib.GetCharPressed());            
+        while(Char != 0)
+        {   
+            newKeyboardInput.Add(Char);
+
+            Char = Raylib.GetCharPressed();
         }
 
         return newKeyboardInput;

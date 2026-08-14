@@ -74,7 +74,11 @@ public class CalculateEditorLayout
 
         foreach(EditorBoxNames boxName in boxNames)
         {
-            _state.editor.layout.boxes.BoxPixelPositions[boxName] = new Vector2(_state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor].X, boxHeightPixel);
+            _state.editor.layout.boxes.BoxPixelPositions[boxName] = 
+                new Vector2(
+                    _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor].X,
+                    boxHeightPixel
+                );
 
             boxHeightPixel += (int)_state.editor.layout.boxes.BoxPixelLengths[boxName].Y; 
         }

@@ -71,7 +71,6 @@ public class CalculateMainBoxes
 
         if(leftOverPixels == 2)
         {
-            //in de hoogte kan je niet meer dan 1 pixel krijgen omdat de boxes met 100f worden geskipt dus blijven er nog maar 2 over waar maximaal 
             leftOverPixels = 3;
         }
 
