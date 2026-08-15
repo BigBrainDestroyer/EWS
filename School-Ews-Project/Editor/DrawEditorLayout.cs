@@ -1,4 +1,5 @@
 using Raylib_cs;
+using System.Numerics;
 
 namespace Program;
 
@@ -14,6 +15,8 @@ public class DrawEditorLayout
     public void DrawEditor()
     {
         DrawEditorLayoutBoxes();
+
+        DrawEditorTextPanel();
     }
     
     private void DrawEditorLayoutBoxes()
@@ -35,5 +38,39 @@ public class DrawEditorLayout
             _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal], 
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
         );
+    }
+
+    private void DrawEditorTextPanel()
+    {
+        DrawTextPanelCursor();
+
+        DrawPanelText();
+    }
+
+    private void DrawTextPanelCursor()
+    {
+        Raylib.DrawRectangle(
+            (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X + (int)_state.editor.layout.textPanel.GridColumnPositions[(int)_state.editor.layout.textPanel.CursorPosition.X],
+            (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y + (int)_state.editor.layout.textPanel.GridRowPositions[(int)_state.editor.layout.textPanel.CursorPosition.Y],
+            _state.editor.layout.textPanel.CursorWidth,
+            _state.editor.layout.textPanel.TextSize,
+            _state.editor.layout.textPanel.CursorColor
+        );
+    }
+
+    private void DrawPanelText()
+    {
+        foreach(string text in _state.editor.layout.textPanel.PanelText)
+        {
+            Raylib.DrawTextEx(
+                _state.common.font.EditorTextPanel,
+                text,
+                new Vector2(_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X, _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y),
+                _state.editor.layout.textPanel.TextSize,
+                _state.editor.layout.textPanel.CharSpacing,
+                new Color(220, 223, 228, 255)
+            );
+
+        }
     }
 }

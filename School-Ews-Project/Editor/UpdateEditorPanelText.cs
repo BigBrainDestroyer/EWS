@@ -15,36 +15,60 @@ public class UpdateEditorPanelText
 
     public void UpdatingPanelText()
     {
-        if(_state.common.input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter))
+        if(_state.common.input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
         {
-            _state.editor.layout.textPanel.PanelText = 
-            UpdatingText(_state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput);
-        }        
+            (_state.editor.layout.textPanel.CursorPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput) = 
+                UpdatingText(_state.editor.layout.textPanel.CursorPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput);
+        }
     }
 
-    private List<string> UpdatingText(List<string> panelText, List<int> chars)
+    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorPosition, List<string> panelText, List<int> chars)
     {
         StringBuilder newString = new StringBuilder(panelText[(int)_state.editor.layout.textPanel.CursorPosition.Y]);
 
         if(Raylib.IsKeyPressed(KeyboardKey.Space))
         {
-            (_state.editor.layout.textPanel.CursorPosition, newString, panelText) = 
-                UpdateSpaceToText(_state.editor.layout.textPanel.CursorPosition, newString, panelText);
+            (cursorPosition, newString, panelText) = 
+                UpdateSpaceToText(cursorPosition, newString, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Enter))
+        {
+            (cursorPosition, newString, panelText) = 
+                UpdateEnterToText(cursorPosition, newString, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Backspace))
+        {
+            (cursorPosition, newString, panelText) = 
+                UpdateBackspaceToString(cursorPosition, newString, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Up))
+        {
+            cursorPosition = 
+                UpdateUpToText(cursorPosition, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Down))
+        {
+            cursorPosition = 
+                UpdateDownToText(cursorPosition, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Left))
+        {
+            cursorPosition = 
+                UpdateLeftToText(cursorPosition, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Right))
+        {
+            cursorPosition =
+                UpdateRightToText(cursorPosition, panelText);
         }
         
-        if(Raylib.IsKeyPressed(KeyboardKey.Enter))
+        if(chars.Count > 0)
         {
-            (_state.editor.layout.textPanel.CursorPosition, newString, panelText) = 
-                UpdateEnterToText(_state.editor.layout.textPanel.CursorPosition, newString, panelText);
+            (cursorPosition, panelText, chars) =
+                UpdateCharInputToText(cursorPosition, newString, panelText, chars);
         }
-
-        if(Raylib.IsKeyPressed(KeyboardKey.Backspace))
-        {
-            (_state.editor.layout.textPanel.CursorPosition, newString, panelText) = 
-                UpdateBackspaceToString(_state.editor.layout.textPanel.CursorPosition, newString, panelText);
-        }
-
-        return panelText;
+        
+        return (cursorPosition, panelText, chars);
     }
 
     private (Vector2, StringBuilder, List<string>) UpdateSpaceToText(Vector2 cursorPosition, StringBuilder newString, List<string> panelText)
@@ -84,7 +108,7 @@ public class UpdateEditorPanelText
 
     private (Vector2, StringBuilder, List<string>) UpdateBackspaceToString(Vector2 cursorPosition, StringBuilder newString, List<string> panelText)
     {
-        if(cursorPosition.X == 0 && cursorPosition.Y == 1)//weet niet zeker 1 of 0 maar dat zien we wel
+        if(cursorPosition.X == 0 && cursorPosition.Y == 0)//weet niet zeker 1 of 0 maar dat zien we wel
         {
             return (cursorPosition, newString, panelText);
         }
@@ -110,5 +134,95 @@ public class UpdateEditorPanelText
         panelText[(int)cursorPosition.Y] = newString.ToString();
 
         return (cursorPosition, newString, panelText);
+    }
+
+    private Vector2 UpdateUpToText(Vector2 cursorPosition, List<string> panelText)
+    {
+        if((int)cursorPosition.Y == 0) //Ik weet niet of dit 1 of 0 moet zijn maar ik denk 1
+        {
+            return cursorPosition;
+        }
+        else if(panelText[(int)cursorPosition.Y].Length > panelText[(int)cursorPosition.Y - 1].Length)
+        {
+            cursorPosition.Y -= 1;
+            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+
+            return cursorPosition;
+        }
+
+        cursorPosition.Y -= 1;
+
+        return cursorPosition;
+    }
+
+    private Vector2 UpdateDownToText(Vector2 cursorPosition, List<string> panelText)
+    {
+        if((int)cursorPosition.Y == panelText.Count)
+        {
+            return cursorPosition;
+        }
+        else if(panelText[(int)cursorPosition.Y].Length > panelText[(int)cursorPosition.Y + 1].Length)
+        {
+            cursorPosition.Y += 1;
+            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+
+            return cursorPosition;
+        }
+
+        cursorPosition.Y += 1;
+
+        return cursorPosition;
+    }
+
+    private Vector2 UpdateLeftToText(Vector2 cursorPosition, List<string> panelText)
+    {
+        if(cursorPosition.X == 0 && cursorPosition.Y == 0)//Ik weet niet of Y 0 of 1 is
+        {
+            return cursorPosition;
+        }
+        else if(cursorPosition.X == 0)
+        {
+            cursorPosition.Y -= 1;
+            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+
+            return cursorPosition;
+        }
+
+        cursorPosition.X -= 1;
+        
+        return cursorPosition;
+    }
+
+    private Vector2 UpdateRightToText(Vector2 cursorPosition, List<string> panelText)
+    {
+        if(cursorPosition.X == panelText[(int)cursorPosition.Y].Length && cursorPosition.Y == panelText.Count)
+        {
+            return cursorPosition;
+        }
+        else if(cursorPosition.X == panelText[(int)cursorPosition.Y].Length)
+        {
+            cursorPosition.Y += 1;
+            cursorPosition.X = 0;
+
+            return cursorPosition;
+        }
+
+        cursorPosition.X += 1;
+        
+        return cursorPosition;
+    }
+
+    private (Vector2, List<string>, List<int>) UpdateCharInputToText(Vector2 cursorPosition, StringBuilder newString, List<string> panelText, List<int> chars)
+    {
+        foreach(int character in chars)
+        {
+            newString.Append((char)character);
+        }
+
+        chars = new List<int>();
+
+        panelText[(int)cursorPosition.Y] = newString.ToString();
+
+        return (cursorPosition, panelText, chars);
     }
 }

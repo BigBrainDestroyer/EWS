@@ -5,17 +5,19 @@ namespace Program;
 public class CalculateEditorLayout
 {
     private readonly AppState _state;
-    
+    private readonly UpdateEditorTextPanel _updateEditorTextPanel;
+
     public CalculateEditorLayout(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+        _updateEditorTextPanel = new UpdateEditorTextPanel(_state);
     }
 
     public void UpdateEditorLayout()
     {
         UpdateEditorLayoutBoxes();
-        
-        
+
+        _updateEditorTextPanel.UpdateTextPanel();
     }
 
     private void UpdateEditorLayoutBoxes()

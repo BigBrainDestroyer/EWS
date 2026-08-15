@@ -1,5 +1,4 @@
 using System.Numerics;
-using System.Text;
 using Raylib_cs;
 
 namespace Program;
@@ -22,17 +21,25 @@ public class UpdateEditorTextPanel
             CalculateTextGrid(
                 _state.common.font.EditorTextPanel,
                 (float)_state.editor.layout.textPanel.TextSize,
-                (float)_state.editor.layout.textPanel.charSpacing,
+                (float)_state.editor.layout.textPanel.CharSpacing,
                 (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X,
                 (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
             );
-
+        
         _updateEditorPanelText.UpdatingPanelText();
+
+        _state.editor.layout.textPanel.CursorWidth =
+            CalculateTextPanelCursorWidth(
+                _state.editor.layout.textPanel.GridColumnPositions, 
+                _state.editor.layout.textPanel.CursorPosition, 
+                (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
+                (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X
+            );
     }
 
     private (float[], float[]) CalculateTextGrid(Font textFond, float textHeight, float charSpacing, int areaWidth, int areaHeight)
     {
-        Vector2 charDimensions = Raylib.MeasureTextEx(textFond, "T", textHeight, charSpacing);
+        Vector2 charDimensions = Raylib.MeasureTextEx(textFond, "t", textHeight, charSpacing);
         
         float columnArrayLength = areaWidth / charDimensions.X;
         float[] columnPositions = new float[(int)columnArrayLength];
@@ -57,5 +64,21 @@ public class UpdateEditorTextPanel
         }
 
         return gridPositions;
+    }
+
+    private int CalculateTextPanelCursorWidth(float[] gridColumnPositions, Vector2 cursorPosition, int textPanelStartingPosition, int textPanelWidth)
+    {
+        float newCursorWidth = 0;
+
+        if(cursorPosition.X == gridColumnPositions.Length)
+        {
+            newCursorWidth = textPanelStartingPosition + textPanelWidth - textPanelStartingPosition + gridColumnPositions[(int)cursorPosition.X];
+
+            return (int)newCursorWidth;
+        }
+        
+        newCursorWidth = gridColumnPositions[(int)cursorPosition.X + 1] - gridColumnPositions[(int)cursorPosition.X];
+        
+        return (int)newCursorWidth;
     }
 }
