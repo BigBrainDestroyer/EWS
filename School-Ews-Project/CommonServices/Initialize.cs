@@ -27,6 +27,4 @@ public class Initialize
     {
         _state.common.font.EditorTextPanel = Raylib.LoadFontEx("Resources/Lilex-Refular.ttf", 32, null, 0);
     }
-
-    
 }

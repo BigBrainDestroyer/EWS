@@ -14,6 +14,8 @@ public class CalculateEditorLayout
     public void UpdateEditorLayout()
     {
         UpdateEditorLayoutBoxes();
+        
+        
     }
 
     private void UpdateEditorLayoutBoxes()

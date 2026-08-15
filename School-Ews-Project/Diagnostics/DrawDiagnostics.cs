@@ -19,7 +19,7 @@ public class DrawDiagnostics
         }
     }
     
-    public void DrawMainBoxes()
+    private void DrawMainBoxes()
     {
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive], 
