@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Text;
 using Raylib_cs;
 
 namespace Program;
@@ -6,10 +7,13 @@ namespace Program;
 public class UpdateEditorTextPanel
 {
     private readonly AppState _state;
+    private readonly UpdateEditorPanelText _updateEditorPanelText;
 
     public UpdateEditorTextPanel(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+
+        _updateEditorPanelText = new UpdateEditorPanelText(_state);
     }
 
     public void UpdateTextPanel()
@@ -23,7 +27,7 @@ public class UpdateEditorTextPanel
                 (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
             );
 
-            
+        _updateEditorPanelText.UpdatingPanelText();
     }
 
     private (float[], float[]) CalculateTextGrid(Font textFond, float textHeight, float charSpacing, int areaWidth, int areaHeight)
