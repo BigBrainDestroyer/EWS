@@ -45,6 +45,7 @@ public class UpdateEditorTextPanel
             );
     }
 
+    
     private (float[], float[]) CalculateTextGrid(Font textFond, float textHeight, float charSpacing, int areaWidth, int areaHeight)
     {
         Vector2 charDimensions = Raylib.MeasureTextEx(textFond, "t", textHeight, charSpacing);
@@ -61,6 +62,7 @@ public class UpdateEditorTextPanel
         return (columnPositions, rowPositions);
     }
 
+    
     private float[] GridArrayLoop (float[] gridPositions, float increment)
     {
         float gridPosition = 0;
@@ -74,14 +76,13 @@ public class UpdateEditorTextPanel
         return gridPositions;
     }
 
+    
     private int CalculateTextPanelCursorWidth(float[] gridColumnPositions, Vector2 cursorTextPosition, int textPanelStartingPosition, int textPanelWidth)
     {
         float newCursorWidth = 0;
 
-        if(cursorTextPosition.X == gridColumnPositions.Length)
+        if(cursorTextPosition.X >= gridColumnPositions.Length - 1)
         {
-            newCursorWidth = MathF.Round(textPanelStartingPosition + textPanelWidth - textPanelStartingPosition + gridColumnPositions[(int)cursorTextPosition.X]);
-
             return (int)newCursorWidth;
         }
 
@@ -90,6 +91,7 @@ public class UpdateEditorTextPanel
         return (int)newCursorWidth;
     }
 
+    
     private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorTextPosition)
     {
         Vector2 newCursorPosition =

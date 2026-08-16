@@ -20,6 +20,4 @@ public class UpdateEditorLayout
 
         _updateEditorTextPanel.UpdateTextPanel();
     }
-
-
 }

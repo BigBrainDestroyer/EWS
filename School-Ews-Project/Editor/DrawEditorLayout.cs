@@ -60,16 +60,20 @@ public class DrawEditorLayout
 
     private void DrawPanelText()
     {
+        int counter = 0;
+
         foreach(string text in _state.editor.layout.textPanel.PanelText)
         {
             Raylib.DrawTextEx(
                 _state.common.font.EditorTextPanel,
                 text,
-                new Vector2(_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X, _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y),
+                new Vector2(_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X, _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y + _state.editor.layout.textPanel.GridRowPositions[counter]),
                 _state.editor.layout.textPanel.TextSize,
                 _state.editor.layout.textPanel.CharSpacing,
                 _state.editor.layout.textPanel.TextColor
             );
+
+            counter++;
         }
     }
 }
