@@ -16,7 +16,8 @@ public class Initialize
         const int screenWidth = 800;
         const int screenHeight  = 600; 
 
-        Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);        
+        Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
+        Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
         Raylib.InitWindow(screenWidth, screenHeight, "EWS");
 
         Raylib.SetTargetFPS(60);
@@ -25,6 +26,7 @@ public class Initialize
 
     public void Fonts()
     {
-        _state.common.font.EditorTextPanel = Raylib.LoadFontEx("Resources/Lilex-Regular.ttf", 32, null, 0);
+        _state.common.font.EditorTextPanel = Raylib.LoadFontEx("Resources/Lilex-Medium.ttf", 32, null, 0);
+        Raylib.SetTextureFilter(_state.common.font.EditorTextPanel.Texture, TextureFilter.Bilinear);
     }
 }

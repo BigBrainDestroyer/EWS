@@ -17,202 +17,202 @@ public class UpdateEditorPanelText
     {
         if(_state.common.input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
         {
-            (_state.editor.layout.textPanel.CursorPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput) = 
-                UpdatingText(_state.editor.layout.textPanel.CursorPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput);
+            (_state.editor.layout.textPanel.CursorTextPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput) = 
+                UpdatingText(_state.editor.layout.textPanel.CursorTextPosition, _state.editor.layout.textPanel.PanelText, _state.common.input.KeyboardCharInput);
         }
     }
 
-    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorPosition, List<string> panelText, List<int> chars)
+    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars)
     {
-        StringBuilder newString = new StringBuilder(panelText[(int)_state.editor.layout.textPanel.CursorPosition.Y]);
+        StringBuilder newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
 
         if(Raylib.IsKeyPressed(KeyboardKey.Space))
         {
-            (cursorPosition, newString, panelText) = 
-                UpdateSpaceToText(cursorPosition, newString, panelText);
+            (cursorTextPosition, newString, panelText) = 
+                UpdateSpaceToText(cursorTextPosition, newString, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
-            (cursorPosition, newString, panelText) = 
-                UpdateEnterToText(cursorPosition, newString, panelText);
+            (cursorTextPosition, newString, panelText) = 
+                UpdateEnterToText(cursorTextPosition, newString, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Backspace))
         {
-            (cursorPosition, newString, panelText) = 
-                UpdateBackspaceToString(cursorPosition, newString, panelText);
+            (cursorTextPosition, newString, panelText) = 
+                UpdateBackspaceToString(cursorTextPosition, newString, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Up))
         {
-            cursorPosition = 
-                UpdateUpToText(cursorPosition, panelText);
+            cursorTextPosition = 
+                UpdateUpToText(cursorTextPosition, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Down))
         {
-            cursorPosition = 
-                UpdateDownToText(cursorPosition, panelText);
+            cursorTextPosition = 
+                UpdateDownToText(cursorTextPosition, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Left))
         {
-            cursorPosition = 
-                UpdateLeftToText(cursorPosition, panelText);
+            cursorTextPosition = 
+                UpdateLeftToText(cursorTextPosition, panelText);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Right))
         {
-            cursorPosition =
-                UpdateRightToText(cursorPosition, panelText);
+            cursorTextPosition =
+                UpdateRightToText(cursorTextPosition, panelText);
         }
         
         if(chars.Count > 0)
         {
-            (cursorPosition, panelText, chars) =
-                UpdateCharInputToText(cursorPosition, newString, panelText, chars);
+            (cursorTextPosition, panelText, chars) =
+                UpdateCharInputToText(cursorTextPosition, newString, panelText, chars);
         }
         
-        return (cursorPosition, panelText, chars);
+        return (cursorTextPosition, panelText, chars);
     }
 
-    private (Vector2, StringBuilder, List<string>) UpdateSpaceToText(Vector2 cursorPosition, StringBuilder newString, List<string> panelText)
+    private (Vector2, StringBuilder, List<string>) UpdateSpaceToText(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText)
     {
-        newString.Insert((int)cursorPosition.X, " ");        
-        panelText[(int)cursorPosition.Y] = newString.ToString();
+        newString.Insert((int)cursorTextPosition.X, " ");        
+        panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
-        cursorPosition.X += 1;
+        cursorTextPosition.X += 1;
 
-        return (cursorPosition, newString, panelText);
+        return (cursorTextPosition, newString, panelText);
     }
 
-    private (Vector2, StringBuilder, List<string>) UpdateEnterToText(Vector2 cursorPosition, StringBuilder newString, List<string> panelText)
+    private (Vector2, StringBuilder, List<string>) UpdateEnterToText(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText)
     {
         
-        string newRow = newString.ToString((int)cursorPosition.X, newString.Length - (int)cursorPosition.X);
+        string newRow = newString.ToString((int)cursorTextPosition.X, newString.Length - (int)cursorTextPosition.X);
 
-        panelText[(int)cursorPosition.Y] = newString.ToString(0, (int)cursorPosition.X);
+        panelText[(int)cursorTextPosition.Y] = newString.ToString(0, (int)cursorTextPosition.X);
 
-        cursorPosition.Y += 1;
+        cursorTextPosition.Y += 1;
 
-        if(panelText.Count < cursorPosition.Y)
+        if(panelText.Count < cursorTextPosition.Y)
         {
-            panelText.Add(newString.ToString(0, newString.Length - (int)cursorPosition.X));
+            panelText.Add(newString.ToString(0, newString.Length - (int)cursorTextPosition.X));
         }
         else
         {
-            panelText.Insert((int)cursorPosition.Y, newString.ToString(0, newString.Length - (int)cursorPosition.X));
+            panelText.Insert((int)cursorTextPosition.Y, newString.ToString(0, newString.Length - (int)cursorTextPosition.X));
         }
 
-        cursorPosition.X = 0;
+        cursorTextPosition.X = 0;
 
-        newString = new StringBuilder(panelText[(int)cursorPosition.Y]);
+        newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
 
-        return (cursorPosition, newString, panelText);
+        return (cursorTextPosition, newString, panelText);
     }
 
-    private (Vector2, StringBuilder, List<string>) UpdateBackspaceToString(Vector2 cursorPosition, StringBuilder newString, List<string> panelText)
+    private (Vector2, StringBuilder, List<string>) UpdateBackspaceToString(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText)
     {
-        if(cursorPosition.X == 0 && cursorPosition.Y == 0)//weet niet zeker 1 of 0 maar dat zien we wel
+        if(cursorTextPosition.X == 0 && cursorTextPosition.Y == 0)//weet niet zeker 1 of 0 maar dat zien we wel
         {
-            return (cursorPosition, newString, panelText);
+            return (cursorTextPosition, newString, panelText);
         }
-        else if(cursorPosition.X == 0)
+        else if(cursorTextPosition.X == 0)
         {
-            cursorPosition.X = panelText[(int)cursorPosition.Y - 1].Length;
+            cursorTextPosition.X = panelText[(int)cursorTextPosition.Y - 1].Length;
 
-            newString.Insert(0, panelText[(int)cursorPosition.Y - 1]);
+            newString.Insert(0, panelText[(int)cursorTextPosition.Y - 1]);
             
-            panelText.RemoveAt((int)cursorPosition.Y);
+            panelText.RemoveAt((int)cursorTextPosition.Y);
 
-            cursorPosition.Y -= 1;
+            cursorTextPosition.Y -= 1;
 
-            panelText[(int)cursorPosition.Y] = newString.ToString();
+            panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
-            return (cursorPosition, newString, panelText);
+            return (cursorTextPosition, newString, panelText);
         }
 
-        cursorPosition.X -= 1;
+        cursorTextPosition.X -= 1;
         
-        newString.Remove((int)cursorPosition.X, 1);
+        newString.Remove((int)cursorTextPosition.X, 1);
         
-        panelText[(int)cursorPosition.Y] = newString.ToString();
+        panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
-        return (cursorPosition, newString, panelText);
+        return (cursorTextPosition, newString, panelText);
     }
 
-    private Vector2 UpdateUpToText(Vector2 cursorPosition, List<string> panelText)
+    private Vector2 UpdateUpToText(Vector2 cursorTextPosition, List<string> panelText)
     {
-        if((int)cursorPosition.Y == 0) //Ik weet niet of dit 1 of 0 moet zijn maar ik denk 1
+        if((int)cursorTextPosition.Y == 0) //Ik weet niet of dit 1 of 0 moet zijn maar ik denk 1
         {
-            return cursorPosition;
+            return cursorTextPosition;
         }
-        else if(panelText[(int)cursorPosition.Y].Length > panelText[(int)cursorPosition.Y - 1].Length)
+        else if(panelText[(int)cursorTextPosition.Y].Length > panelText[(int)cursorTextPosition.Y - 1].Length)
         {
-            cursorPosition.Y -= 1;
-            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+            cursorTextPosition.Y -= 1;
+            cursorTextPosition.X = panelText[(int)cursorTextPosition.Y].Length;
 
-            return cursorPosition;
+            return cursorTextPosition;
         }
 
-        cursorPosition.Y -= 1;
+        cursorTextPosition.Y -= 1;
 
-        return cursorPosition;
+        return cursorTextPosition;
     }
 
-    private Vector2 UpdateDownToText(Vector2 cursorPosition, List<string> panelText)
+    private Vector2 UpdateDownToText(Vector2 cursorTextPosition, List<string> panelText)
     {
-        if((int)cursorPosition.Y == panelText.Count)
+        if((int)cursorTextPosition.Y == panelText.Count)
         {
-            return cursorPosition;
+            return cursorTextPosition;
         }
-        else if(panelText[(int)cursorPosition.Y].Length > panelText[(int)cursorPosition.Y + 1].Length)
+        else if(panelText[(int)cursorTextPosition.Y].Length > panelText[(int)cursorTextPosition.Y + 1].Length)
         {
-            cursorPosition.Y += 1;
-            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+            cursorTextPosition.Y += 1;
+            cursorTextPosition.X = panelText[(int)cursorTextPosition.Y].Length;
 
-            return cursorPosition;
+            return cursorTextPosition;
         }
 
-        cursorPosition.Y += 1;
+        cursorTextPosition.Y += 1;
 
-        return cursorPosition;
+        return cursorTextPosition;
     }
 
-    private Vector2 UpdateLeftToText(Vector2 cursorPosition, List<string> panelText)
+    private Vector2 UpdateLeftToText(Vector2 cursorTextPosition, List<string> panelText)
     {
-        if(cursorPosition.X == 0 && cursorPosition.Y == 0)//Ik weet niet of Y 0 of 1 is
+        if(cursorTextPosition.X == 0 && cursorTextPosition.Y == 0)//Ik weet niet of Y 0 of 1 is
         {
-            return cursorPosition;
+            return cursorTextPosition;
         }
-        else if(cursorPosition.X == 0)
+        else if(cursorTextPosition.X == 0)
         {
-            cursorPosition.Y -= 1;
-            cursorPosition.X = panelText[(int)cursorPosition.Y].Length;
+            cursorTextPosition.Y -= 1;
+            cursorTextPosition.X = panelText[(int)cursorTextPosition.Y].Length;
 
-            return cursorPosition;
+            return cursorTextPosition;
         }
 
-        cursorPosition.X -= 1;
+        cursorTextPosition.X -= 1;
         
-        return cursorPosition;
+        return cursorTextPosition;
     }
 
-    private Vector2 UpdateRightToText(Vector2 cursorPosition, List<string> panelText)
+    private Vector2 UpdateRightToText(Vector2 cursorTextPosition, List<string> panelText)
     {
-        if(cursorPosition.X == panelText[(int)cursorPosition.Y].Length && cursorPosition.Y == panelText.Count)
+        if(cursorTextPosition.X == panelText[(int)cursorTextPosition.Y].Length && cursorTextPosition.Y == panelText.Count)
         {
-            return cursorPosition;
+            return cursorTextPosition;
         }
-        else if(cursorPosition.X == panelText[(int)cursorPosition.Y].Length)
+        else if(cursorTextPosition.X == panelText[(int)cursorTextPosition.Y].Length)
         {
-            cursorPosition.Y += 1;
-            cursorPosition.X = 0;
+            cursorTextPosition.Y += 1;
+            cursorTextPosition.X = 0;
 
-            return cursorPosition;
+            return cursorTextPosition;
         }
 
-        cursorPosition.X += 1;
+        cursorTextPosition.X += 1;
         
-        return cursorPosition;
+        return cursorTextPosition;
     }
 
-    private (Vector2, List<string>, List<int>) UpdateCharInputToText(Vector2 cursorPosition, StringBuilder newString, List<string> panelText, List<int> chars)
+    private (Vector2, List<string>, List<int>) UpdateCharInputToText(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText, List<int> chars)
     {
         foreach(int character in chars)
         {
@@ -221,8 +221,8 @@ public class UpdateEditorPanelText
 
         chars = new List<int>();
 
-        panelText[(int)cursorPosition.Y] = newString.ToString();
+        panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
-        return (cursorPosition, panelText, chars);
+        return (cursorTextPosition, panelText, chars);
     }
 }
