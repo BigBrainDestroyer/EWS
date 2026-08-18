@@ -24,6 +24,7 @@ public class Initialize
         Raylib.MaximizeWindow();
     }
 
+    
     public void Fonts()
     {
         _state.common.font.EditorTextPanel = Raylib.LoadFontEx("Resources/Lilex-Medium.ttf", 32, null, 0);

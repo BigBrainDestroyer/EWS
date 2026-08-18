@@ -16,6 +16,7 @@ public class InputController
         _state.common.input.KeyboardCharInput = GetKeyboardInput();
     }
 
+    
     public List<int> GetKeyboardInput()
     {
         int Char = Raylib.GetCharPressed();

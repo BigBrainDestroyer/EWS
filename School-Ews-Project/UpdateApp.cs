@@ -13,7 +13,7 @@ public class UpdateApp
         _calculateMainBoxes = new CalculateMainBoxes(_state);
         _EditorLayout = new UpdateEditorLayout(_state);
     }
-
+    
     public void App()
     {
         _calculateMainBoxes.UpdateMainBoxes();

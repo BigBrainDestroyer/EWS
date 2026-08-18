@@ -22,6 +22,7 @@ public class UpdateEditorPanelText
         }
     }
 
+    
     private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars)
     {
         StringBuilder newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
@@ -66,6 +67,7 @@ public class UpdateEditorPanelText
         return (cursorTextPosition, panelText, chars);
     }
 
+    
     private (Vector2, StringBuilder, List<string>) UpdateEnterToText(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText)
     {
         string newRow = newString.ToString((int)cursorTextPosition.X, newString.Length - (int)cursorTextPosition.X);
@@ -90,6 +92,7 @@ public class UpdateEditorPanelText
         return (cursorTextPosition, newString, panelText);
     }
 
+    
     private (Vector2, StringBuilder, List<string>) UpdateBackspaceToString(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText)
     {
         if(cursorTextPosition.X == 0 && cursorTextPosition.Y == 0)//weet niet zeker 1 of 0 maar dat zien we wel
@@ -120,6 +123,7 @@ public class UpdateEditorPanelText
         return (cursorTextPosition, newString, panelText);
     }
 
+    
     private Vector2 UpdateUpToText(Vector2 cursorTextPosition, List<string> panelText)
     {
         if((int)cursorTextPosition.Y == 0)
@@ -139,6 +143,7 @@ public class UpdateEditorPanelText
         return cursorTextPosition;
     }
 
+    
     private Vector2 UpdateDownToText(Vector2 cursorTextPosition, List<string> panelText)
     {
         if((int)cursorTextPosition.Y == panelText.Count - 1)
@@ -158,6 +163,7 @@ public class UpdateEditorPanelText
         return cursorTextPosition;
     }
 
+    
     private Vector2 UpdateLeftToText(Vector2 cursorTextPosition, List<string> panelText)
     {
         if(cursorTextPosition.X == 0 && cursorTextPosition.Y == 0)
@@ -177,6 +183,7 @@ public class UpdateEditorPanelText
         return cursorTextPosition;
     }
 
+    
     private Vector2 UpdateRightToText(Vector2 cursorTextPosition, List<string> panelText)
     {
         if(cursorTextPosition.X == panelText[(int)cursorTextPosition.Y].Length && cursorTextPosition.Y == panelText.Count - 1)
@@ -196,6 +203,7 @@ public class UpdateEditorPanelText
         return cursorTextPosition;
     }
 
+    
     private (Vector2, List<string>, List<int>) UpdateCharInputToText(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText, List<int> chars)
     {
         foreach(int character in chars)

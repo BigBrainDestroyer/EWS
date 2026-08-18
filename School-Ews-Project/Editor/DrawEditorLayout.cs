@@ -47,6 +47,7 @@ public class DrawEditorLayout
         DrawPanelText();
     }
 
+    
     private void DrawTextPanelCursor()
     {
         Raylib.DrawRectangle(
@@ -58,6 +59,7 @@ public class DrawEditorLayout
         );
     }
 
+    
     private void DrawPanelText()
     {
         int counter = 0;

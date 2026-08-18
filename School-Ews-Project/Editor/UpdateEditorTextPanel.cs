@@ -29,11 +29,8 @@ public class UpdateEditorTextPanel
         _updateEditorPanelText.UpdatingPanelText();
 
         _state.editor.layout.textPanel.CursorWidth =
-            CalculateTextPanelCursorWidth(
-                _state.editor.layout.textPanel.GridColumnPositions, 
-                _state.editor.layout.textPanel.CursorTextPosition, 
-                (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
-                (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X
+            CalculateTextPanelCursorWidth( 
+                _state.editor.layout.textPanel.CursorTextPosition 
             );
 
         _state.editor.layout.textPanel.CursorPosition = 
@@ -41,6 +38,7 @@ public class UpdateEditorTextPanel
                 _state.editor.layout.boxes.BoxPixelPositions, 
                 _state.editor.layout.textPanel.GridColumnPositions,
                 _state.editor.layout.textPanel.GridRowPositions,
+                _state.editor.layout.textPanel.CursorPosition,
                 _state.editor.layout.textPanel.CursorTextPosition
             );
     }
@@ -77,29 +75,29 @@ public class UpdateEditorTextPanel
     }
 
     
-    private int CalculateTextPanelCursorWidth(float[] gridColumnPositions, Vector2 cursorTextPosition, int textPanelStartingPosition, int textPanelWidth)
+    private int CalculateTextPanelCursorWidth(Vector2 cursorTextPosition)
     {
-        float newCursorWidth = 0;
+        Vector2 newCursorWidth = Raylib.MeasureTextEx(_state.common.font.EditorTextPanel, " ", _state.editor.layout.textPanel.TextSize, _state.editor.layout.textPanel.CharSpacing);
+     
+        newCursorWidth.X = MathF.Round(newCursorWidth.X);
 
-        if(cursorTextPosition.X >= gridColumnPositions.Length - 1)
-        {
-            return (int)newCursorWidth;
-        }
-
-        newCursorWidth = MathF.Round(gridColumnPositions[(int)cursorTextPosition.X + 1] - gridColumnPositions[(int)cursorTextPosition.X]);
-
-        return (int)newCursorWidth;
+        return (int)newCursorWidth.X;
     }
 
     
-    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorTextPosition)
+    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition)
     {
-        Vector2 newCursorPosition =
+        if(cursorTextPosition.X >= gridColumnPositions.Length || cursorTextPosition.Y >= gridRowPositions.Length)
+        {
+            return cursorPosition;
+        }
+        
+        cursorPosition =
             new Vector2(
                 boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X],
                 boxPixelPositions[EditorBoxNames.TextPanel].Y + gridRowPositions[(int)cursorTextPosition.Y]
             );
 
-        return newCursorPosition;
+        return cursorPosition;
     }
 }

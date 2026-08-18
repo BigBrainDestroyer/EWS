@@ -16,7 +16,7 @@ public class ProgramLoop
         _draw = new DrawUi(_state);
         _update = new UpdateApp(_state);
     }
-    
+
     public void Loop()
     {
         while(!Raylib.WindowShouldClose())

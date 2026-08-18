@@ -17,6 +17,6 @@ public class EditorTextPanelLayoutState
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);
 
     public int CursorWidth { get; set; }
-    public int TextSize { get; set; } = 20;
+    public int TextSize { get; set; } = 25;
     public int CharSpacing { get; set; } = 0;
 }

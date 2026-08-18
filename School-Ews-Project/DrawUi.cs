@@ -15,7 +15,7 @@ public class DrawUi
         _diagnostics = new DrawDiagnostics(_state);
         _drawEditorLayout = new DrawEditorLayout(_state);
     }
-    
+ 
     public void Ui()
     {
         Raylib.BeginDrawing();

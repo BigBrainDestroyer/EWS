@@ -55,6 +55,7 @@ public class UpdateEditorLayoutBoxes
         CalculatePosition(boxNames);
     }
 
+    
     private (int, double) CalculatePixelHeightLength(float childBoxPercentageHeight, int parentBoxHeight, double leftOverPixels)
     {
         float childBoxPixelHeight = (childBoxPercentageHeight / 100f) * (float)parentBoxHeight;
@@ -63,6 +64,7 @@ public class UpdateEditorLayoutBoxes
         return ((int)childBoxPixelHeight, leftOverPixels);
     }
 
+    
     private void CalculatePosition(EditorBoxNames[] boxNames)
     {
         int boxHeightPixel = 0;
