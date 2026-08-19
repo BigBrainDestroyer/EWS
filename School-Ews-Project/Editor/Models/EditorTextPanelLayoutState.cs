@@ -23,10 +23,10 @@ public class EditorTextPanelLayoutState
 
     public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 1;
     public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;
-    
+
     public int TextHorizontalPixelOffSet { get; set; } = 0;
     public int TextVerticalPixelOffSet { get; set; } = 0;
-    
+
     public int CursorWidth { get; set; }
     public int TextSize { get; set; } = 25;
     public int CharSpacing { get; set; } = 0;

@@ -18,24 +18,24 @@ public class DrawEditorLayout
 
         DrawEditorTextPanel();
     }
-    
+
     private void DrawEditorLayoutBoxes()
     {
         Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Header], 
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Header], 
+            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Header],
+            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Header],
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Header]
         );
 
         Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel], 
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel], 
+            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel],
+            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel],
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
         );
 
         Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal], 
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal], 
+            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal],
+            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal],
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
         );
     }
@@ -49,7 +49,7 @@ public class DrawEditorLayout
         DrawTextRowNumbersBox();
     }
 
-    
+
     private void DrawTextPanelCursor()
     {
         Raylib.DrawRectangle(
@@ -61,14 +61,14 @@ public class DrawEditorLayout
         );
     }
 
-    
+
     private void DrawPanelText()
     {
         var panel = _state.editor.layout.textPanel;
-        
+
         float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
         float RowIncrement = 0;
-        
+
         for (int i = 0; panel.TextPosition.Y + RowIncrement <= maxBottomY && i < _state.editor.layout.textPanel.PanelText.Count; i++)
         {
             float currentY = panel.TextPosition.Y + RowIncrement;
@@ -81,7 +81,7 @@ public class DrawEditorLayout
                 panel.CharSpacing,
                 panel.TextColor
             );
-            
+
             RowIncrement += panel.TextSize;
         }
     }
