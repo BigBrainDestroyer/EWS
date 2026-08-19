@@ -42,6 +42,9 @@ public class DrawEditorLayout
 
     private void DrawEditorTextPanel()
     {
+        Console.WriteLine($"{Raylib.GetScreenWidth()}");
+        Console.WriteLine($"{Raylib.GetScreenHeight()}");
+
         DrawTextPanelCursor();
 
         DrawPanelText();
@@ -64,25 +67,25 @@ public class DrawEditorLayout
 
     private void DrawPanelText()
     {
-        var panel = _state.editor.layout.textPanel;
+        var _panel = _state.editor.layout.textPanel;
 
         float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
         float RowIncrement = 0;
 
-        for (int i = 0; panel.TextPosition.Y + RowIncrement <= maxBottomY && i < _state.editor.layout.textPanel.PanelText.Count; i++)
+        for (int i = 0; _panel.TextPosition.Y + RowIncrement <= maxBottomY && i < _panel.ViewText.Count; i++)
         {
-            float currentY = panel.TextPosition.Y + RowIncrement;
+            float currentY = _panel.TextPosition.Y + RowIncrement;
 
             Raylib.DrawTextEx(
                 _state.common.font.EditorTextPanel,
-                _state.editor.layout.textPanel.PanelText[i],
-                new Vector2 (panel.TextPosition.X, currentY),
-                panel.TextSize,
-                panel.CharSpacing,
-                panel.TextColor
+                _state.editor.layout.textPanel.ViewText[i],
+                new Vector2 (_panel.TextPosition.X, currentY),
+                _panel.TextSize,
+                _panel.CharSpacing,
+                _panel.TextColor
             );
 
-            RowIncrement += panel.TextSize;
+            RowIncrement += _panel.TextSize;
         }
     }
 

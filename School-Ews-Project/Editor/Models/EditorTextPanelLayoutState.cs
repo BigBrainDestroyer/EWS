@@ -9,6 +9,7 @@ public class EditorTextPanelLayoutState
     public Color TextColor { get; set; } = new Color(220, 223, 228, 255);
 
     public List<string> PanelText { get; set; } = new List<string>() {""};
+    public List<string> ViewText { get; set; } = new List<string>();
 
     public float[] RownumbersColumnGrid { get; set; } = new float[0];
     public float[] RownumbersRowGrid { get; set; } = new float[0];
@@ -21,8 +22,11 @@ public class EditorTextPanelLayoutState
     public Vector2 CursorPosition { get; set; } = new Vector2(0,0);
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);
 
-    public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 1;
+    public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 0;
     public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;
+
+    public int TextGridBoxesOffSetX { get; set; } = 0;
+    public int TextGridBoxesOffSetY { get; set; } = 0;
 
     public int TextHorizontalPixelOffSet { get; set; } = 0;
     public int TextVerticalPixelOffSet { get; set; } = 0;

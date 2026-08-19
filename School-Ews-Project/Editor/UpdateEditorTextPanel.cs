@@ -36,12 +36,12 @@ public class UpdateEditorTextPanel
                 (int)_layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
             );
 
-            (_layout.textPanel.TextRowNumberBoxPositions, _layout.textPanel.TextRowNumberBoxLengths) =
+        (_layout.textPanel.TextRowNumberBoxPositions, _layout.textPanel.TextRowNumberBoxLengths) =
                 CalculateTextRowNumbersBox(
                     _layout.boxes.BoxPixelPositions,
                     _layout.boxes.BoxPixelLengths,
                     _layout.textPanel.GridColumnPositions,
-                    _layout.textPanel.RowNumbersTotalGridSpace
+                    _layout.textPanel.GridBoxesSpaceOffRowNumbers
                 );
 
         _layout.textPanel.TextPosition =
@@ -66,14 +66,15 @@ public class UpdateEditorTextPanel
                 _layout.textPanel.GridColumnPositions,
                 _layout.textPanel.GridRowPositions,
                 _layout.textPanel.CursorPosition,
-                _layout.textPanel.CursorTextPosition
+                _layout.textPanel.CursorTextPosition,
+                _layout.textPanel.TextRowNumberBoxLengths
             );
     }
 
 
     private int UpdateGridBoxesSpaceOffRowNumbers(int amountRowNumbers, int extraGridBoxSpaceBetweenTextAndRowNumbers)
     {
-        int whiteSpace = 2;
+        int whiteSpace = 3;
         float gridSpace = 0;
 
         for (float i = amountRowNumbers; i >= 10; gridSpace++)
@@ -81,9 +82,9 @@ public class UpdateEditorTextPanel
             i = i * 0.1f;
         }
 
-        gridSpace += extraGridBoxSpaceBetweenTextAndRowNumbers + whiteSpace;
+        gridSpace += extraGridBoxSpaceBetweenTextAndRowNumbers ;
 
-        return (int)gridSpace;
+        return (int)gridSpace + whiteSpace;
     }
 
 
@@ -91,10 +92,10 @@ public class UpdateEditorTextPanel
     {
         Vector2 charDimensions = Raylib.MeasureTextEx(textFond, "t", textHeight, charSpacing);
 
-        float columnArrayLength = MathF.Ceiling(areaWidth / charDimensions.X);
+        float columnArrayLength = MathF.Ceiling((float)areaWidth / charDimensions.X);
         float[] columnPositions = new float[(int)columnArrayLength];
 
-        float rowArrayLength = MathF.Ceiling(areaHeight / charDimensions.Y);
+        float rowArrayLength = MathF.Ceiling((float)areaHeight / charDimensions.Y);
         float[] rowPositions = new float[(int)rowArrayLength];
 
         columnPositions = GridArrayLoop(columnPositions, charDimensions.X);
@@ -107,6 +108,7 @@ public class UpdateEditorTextPanel
     private float[] GridArrayLoop (float[] gridPositions, float increment)
     {
         float gridPosition = 0;
+        
         for (int i = 0; i < gridPositions.Length; i++)
         {
             gridPositions[i] = gridPosition;
@@ -118,22 +120,27 @@ public class UpdateEditorTextPanel
     }
 
 
-    private (Vector2, Vector2) CalculateTextRowNumbersBox(Dictionary<EditorBoxNames, Vextor2> parentBoxPositions, Dictionary<EditorBoxNames, Vextor2> parentBoxLengthsLengths, float[] gridColumnPositions, int amountOfColumnGridSpace)
+    private (Vector2, Vector2) CalculateTextRowNumbersBox(Dictionary<EditorBoxNames, Vector2> parentBoxPositions, Dictionary<EditorBoxNames, Vector2> parentBoxLengths, float[] gridColumnPositions, int amountOfColumnGridSpace)
     {
         Vector2 newBoxPositions = parentBoxPositions[EditorBoxNames.TextPanel];
 
         Vector2 newBoxLengths =
             new Vector2(
-                0,
+                -1, //Raylib base spacing between chars 
                 parentBoxLengths[EditorBoxNames.TextPanel].Y
             );
 
-        for(int i = 0; i == amountOfColumnGridSpace; i++)
+        for(int i = 0; i < amountOfColumnGridSpace; i++)
         {
-            boxLengths.X += gridColumnPositions;
+            if(i >= gridColumnPositions.Length -1)
+            {
+                break;
+            }
+            
+            newBoxLengths.X += gridColumnPositions[i];
         }
 
-        return (boxPositions, boxLengths);
+        return (newBoxPositions, newBoxLengths);
     }
 
 
@@ -152,7 +159,7 @@ public class UpdateEditorTextPanel
 
         for (int i = 0; i < GridBoxesSpaceOffRowNumbers; i ++)
         {
-            newTextPosition.X += gridColumnPositions[i];
+            newTextPosition.X += (int)gridColumnPositions[i];
         }
 
         return newTextPosition;
@@ -175,7 +182,7 @@ public class UpdateEditorTextPanel
     }
 
 
-    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition)
+    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths)
     {
         if(cursorTextPosition.X >= gridColumnPositions.Length || cursorTextPosition.Y >= gridRowPositions.Length)
         {
@@ -184,7 +191,7 @@ public class UpdateEditorTextPanel
 
         cursorPosition =
             new Vector2(
-                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X],
+                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X] + textRowNumberBoxLengths.X,
                 boxPixelPositions[EditorBoxNames.TextPanel].Y + gridRowPositions[(int)cursorTextPosition.Y]
             );
 
