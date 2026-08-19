@@ -45,6 +45,8 @@ public class DrawEditorLayout
         DrawTextPanelCursor();
 
         DrawPanelText();
+
+        DrawTextRowNumbersBox();
     }
 
     
@@ -82,5 +84,14 @@ public class DrawEditorLayout
             
             RowIncrement += panel.TextSize;
         }
+    }
+
+    private void DrawTextRowNumbersBox()
+    {
+        Raylib.DrawRectangleV(
+            _state.editor.layout.textPanel.TextRowNumberBoxPositions,
+            _state.editor.layout.textPanel.TextRowNumberBoxLengths,
+            Color.Red
+        );
     }
 }

@@ -17,47 +17,61 @@ public class UpdateEditorTextPanel
 
     public void UpdateTextPanel()
     {
+        var _layout = _state.editor.layout;
+        
         _updateEditorPanelText.UpdatingPanelText();
 
-        _state.editor.layout.textPanel.RowNumbersGridSpace = UpdateRowNumbersGridSpace(_state.editor.layout.textPanel.PanelText.Count, _state.editor.layout.textPanel.RowNumbersGridSpacing);
+        _layout.textPanel.GridBoxesSpaceOffRowNumbers = 
+            UpdateGridBoxesSpaceOffRowNumbers(
+                _layout.textPanel.PanelText.Count, 
+                _layout.textPanel.ExtraGridBoxSpaceBetweenTextAndRowNumbers
+            );
 
-        (_state.editor.layout.textPanel.GridColumnPositions, _state.editor.layout.textPanel.GridRowPositions) = 
+        (_layout.textPanel.GridColumnPositions, _layout.textPanel.GridRowPositions) = 
             CalculateTextGrid(
                 _state.common.font.EditorTextPanel,
-                (float)_state.editor.layout.textPanel.TextSize,
-                (float)_state.editor.layout.textPanel.CharSpacing,
-                (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X,
-                (int)_state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
+                (float)_layout.textPanel.TextSize,
+                (float)_layout.textPanel.CharSpacing,
+                (int)_layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X,
+                (int)_layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
             );
 
-        _state.editor.layout.textPanel.TextPosition = 
+            (_layout.textPanel.TextRowNumberBoxPositions)
+                CalculateTextRowNumbersBox(
+                    _layout.boxes.BoxPixelPositions,
+                    _layout.boxes.BoxPixelLengths,
+                    _layout.textPanel.GridColumnPositions,
+                    _layout.textPanel.RowNumbersTotalGridSpace
+                );
+
+        _layout.textPanel.TextPosition = 
             UpdateTextPosition(
-                _state.editor.layout.textPanel.GridColumnPositions, 
-                _state.editor.layout.textPanel.RowNumbersGridSpace,
-                _state.editor.layout.textPanel.CursorPosition,
-                _state.editor.layout.textPanel.TextHorizontalPixelOffSet,
-                _state.editor.layout.textPanel.TextVerticalPixelOffSet,
-                (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
-                (int)_state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y
+                _layout.textPanel.GridColumnPositions, 
+                _layout.textPanel.GridBoxesSpaceOffRowNumbers,
+                _layout.textPanel.CursorPosition,
+                _layout.textPanel.TextHorizontalPixelOffSet,
+                _layout.textPanel.TextVerticalPixelOffSet,
+                (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
+                (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y
             );
 
-        _state.editor.layout.textPanel.CursorWidth =
+        _layout.textPanel.CursorWidth =
             CalculateTextPanelCursorWidth( 
-                _state.editor.layout.textPanel.CursorTextPosition 
+                _layout.textPanel.CursorTextPosition 
             );
 
-        _state.editor.layout.textPanel.CursorPosition = 
+        _layout.textPanel.CursorPosition = 
             UpdateCursorPosition(
-              _state.editor.layout.boxes.BoxPixelPositions, 
-                _state.editor.layout.textPanel.GridColumnPositions,
-                _state.editor.layout.textPanel.GridRowPositions,
-                _state.editor.layout.textPanel.CursorPosition,
-                _state.editor.layout.textPanel.CursorTextPosition
+              _layout.boxes.BoxPixelPositions, 
+                _layout.textPanel.GridColumnPositions,
+                _layout.textPanel.GridRowPositions,
+                _layout.textPanel.CursorPosition,
+                _layout.textPanel.CursorTextPosition
             );
     }
 
     
-    private int UpdateRowNumbersGridSpace(int amountRowNumbers, int rowNumbersGridSpacing)
+    private int UpdateGridBoxesSpaceOffRowNumbers(int amountRowNumbers, int extraGridBoxSpaceBetweenTextAndRowNumbers)
     {
         int whiteSpace = 2;
         float gridSpace = 0;
@@ -67,7 +81,7 @@ public class UpdateEditorTextPanel
             i = i * 0.1f;
         }
 
-        gridSpace += rowNumbersGridSpacing + whiteSpace;
+        gridSpace += extraGridBoxSpaceBetweenTextAndRowNumbers + whiteSpace;
 
         return (int)gridSpace;
     }
@@ -104,9 +118,9 @@ public class UpdateEditorTextPanel
     }
 
     
-    private Vector2 UpdateTextPosition(float[] gridColumnPositions, int rowNumbersGridSpace, Vector2 cursorTextPosition, int textPixelOffSetColumn, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
+    private Vector2 UpdateTextPosition(float[] gridColumnPositions, int GridBoxesSpaceOffRowNumbers, Vector2 cursorTextPosition, int textPixelOffSetColumn, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
     {
-        if(gridColumnPositions.Length < rowNumbersGridSpace)
+        if(gridColumnPositions.Length < GridBoxesSpaceOffRowNumbers)
         {   
             return new Vector2();
         }
@@ -117,7 +131,7 @@ public class UpdateEditorTextPanel
                 panelTextStartingPositionY - textPixelOffSetRow
             );
 
-        for (int i = 0; i < rowNumbersGridSpace; i ++)
+        for (int i = 0; i < GridBoxesSpaceOffRowNumbers; i ++)
         {
             newTextPosition.X += gridColumnPositions[i];
         }

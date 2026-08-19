@@ -15,14 +15,18 @@ public class EditorTextPanelLayoutState
     public float[] GridColumnPositions { get; set; } = new float[0];
     public float[] GridRowPositions { get; set; } = new float[0];
 
+    public Vector2 TextRowNumberBoxPositions { get; set; } = new Vector2(0,0);
+    public Vector2 TextRowNumberBoxLengths { get; set; } = new Vector2(0,0);
     public Vector2 TextPosition { get; set; } = new Vector2(0, 0);
     public Vector2 CursorPosition { get; set; } = new Vector2(0,0);
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);
 
-    public int RowNumbersGridSpacing { get; set; } = 1;
-    public int RowNumbersGridSpace { get; set; } = 3;
+    public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 1;
+    public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;
+    
     public int TextHorizontalPixelOffSet { get; set; } = 0;
     public int TextVerticalPixelOffSet { get; set; } = 0;
+    
     public int CursorWidth { get; set; }
     public int TextSize { get; set; } = 25;
     public int CharSpacing { get; set; } = 0;
