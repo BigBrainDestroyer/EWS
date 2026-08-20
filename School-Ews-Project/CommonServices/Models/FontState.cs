@@ -4,5 +4,6 @@ namespace Program;
 
 public class FontState
 {
-    public Font EditorTextPanel { get; set; }
+    public Font EditorPanelText { get; set; }
+    public Font EditorPanelRowNumbers { get; set; }
 }

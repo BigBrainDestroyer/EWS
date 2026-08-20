@@ -14,42 +14,45 @@ public class DrawEditorLayout
 
     public void DrawEditor()
     {
-        DrawEditorLayoutBoxes();
-
+        DrawEditorHeader();
+        
         DrawEditorTextPanel();
+
+        DrawEditorTerminal();
     }
 
-    private void DrawEditorLayoutBoxes()
+    
+    private void DrawEditorHeader()
     {
         Raylib.DrawRectangleV(
             _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Header],
             _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Header],
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Header]
         );
-
-        Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel],
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel],
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
-        );
-
-        Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal],
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal],
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
-        );
     }
 
+    
     private void DrawEditorTextPanel()
     {
-        Console.WriteLine($"{Raylib.GetScreenWidth()}");
-        Console.WriteLine($"{Raylib.GetScreenHeight()}");
+        DrawEditorTextPanelBackRound();
 
         DrawTextPanelCursor();
 
         DrawPanelText();
 
         DrawTextRowNumbersBox();
+
+        DrawRowNumbers();
+    }
+
+
+    private void DrawEditorTextPanelBackRound()
+    {
+        Raylib.DrawRectangleV(
+            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel],
+            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel],
+            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
+        );
     }
 
 
@@ -77,7 +80,7 @@ public class DrawEditorLayout
             float currentY = _panel.TextPosition.Y + RowIncrement;
 
             Raylib.DrawTextEx(
-                _state.common.font.EditorTextPanel,
+                _state.common.font.EditorPanelText,
                 _state.editor.layout.textPanel.ViewText[i],
                 new Vector2 (_panel.TextPosition.X, currentY),
                 _panel.TextSize,
@@ -94,7 +97,47 @@ public class DrawEditorLayout
         Raylib.DrawRectangleV(
             _state.editor.layout.textPanel.TextRowNumberBoxPositions,
             _state.editor.layout.textPanel.TextRowNumberBoxLengths,
-            Color.Red
+            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
+        );
+    }
+
+    private void DrawRowNumbers()
+    {
+        var _panel = _state.editor.layout.textPanel;
+
+        int restoreBaseOffSet = 1;
+        float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
+        float RowIncrement = 0;
+
+        for (int i = _panel.TextGridBoxesOffSetY + restoreBaseOffSet; i <= _panel.ViewText.Count; i++)
+        {
+            if(_panel.RowNumbersPosition.Y + RowIncrement > maxBottomY)
+            {
+                break;
+            }
+            
+            float currentY = _panel.RowNumbersPosition.Y + RowIncrement;
+
+            Raylib.DrawTextEx(
+                _state.common.font.EditorPanelRowNumbers,
+                $"{i}",
+                new Vector2 (_panel.RowNumbersPosition.X, currentY),
+                _panel.TextSize,
+                _panel.CharSpacing,
+                _panel.RowNumberColor
+            );
+
+            RowIncrement += _panel.TextSize;
+        }
+    }
+
+    
+    private void DrawEditorTerminal()
+    {
+        Raylib.DrawRectangleV(
+            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal],
+            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal],
+            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
         );
     }
 }

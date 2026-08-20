@@ -7,17 +7,18 @@ public class EditorTextPanelLayoutState
 {
     public Color CursorColor { get; set; } = new Color(95, 179, 179, 255);
     public Color TextColor { get; set; } = new Color(220, 223, 228, 255);
+    public Color RowNumberColor { get; set; } = new Color(145, 155, 165, 255);
+    public Color ActiveRowNumberColor { get; set; } = new Color(220, 223, 228, 255);
 
     public List<string> PanelText { get; set; } = new List<string>() {""};
     public List<string> ViewText { get; set; } = new List<string>();
 
-    public float[] RownumbersColumnGrid { get; set; } = new float[0];
-    public float[] RownumbersRowGrid { get; set; } = new float[0];
     public float[] GridColumnPositions { get; set; } = new float[0];
     public float[] GridRowPositions { get; set; } = new float[0];
-
+    
     public Vector2 TextRowNumberBoxPositions { get; set; } = new Vector2(0,0);
     public Vector2 TextRowNumberBoxLengths { get; set; } = new Vector2(0,0);
+    public Vector2 RowNumbersPosition { get; set; } = new Vector2(0, 0);
     public Vector2 TextPosition { get; set; } = new Vector2(0, 0);
     public Vector2 CursorPosition { get; set; } = new Vector2(0,0);
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);

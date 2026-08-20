@@ -28,8 +28,11 @@ public class Initialize
 
     
     public void Fonts()
-    {
-        _state.common.font.EditorTextPanel = Raylib.LoadFontEx("Resources/Lilex-Medium.ttf", 32, null, 0);
-        Raylib.SetTextureFilter(_state.common.font.EditorTextPanel.Texture, TextureFilter.Bilinear);
+    {   
+        _state.common.font.EditorPanelText = Raylib.LoadFontEx("Resources/Lilex-Regular.ttf", _state.editor.layout.textPanel.TextSize, null, 0);
+        Raylib.SetTextureFilter(_state.common.font.EditorPanelText.Texture, TextureFilter.Bilinear);
+
+        _state.common.font.EditorPanelRowNumbers = Raylib.LoadFontEx("Resources/Lilex-ExtraLight.ttf", _state.editor.layout.textPanel.TextSize, null, 0);
+        Raylib.SetTextureFilter(_state.common.font.EditorPanelRowNumbers.Texture, TextureFilter.Bilinear);
     }
 }

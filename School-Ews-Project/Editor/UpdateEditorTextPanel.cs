@@ -29,7 +29,7 @@ public class UpdateEditorTextPanel
 
         (_layout.textPanel.GridColumnPositions, _layout.textPanel.GridRowPositions) =
             CalculateTextGrid(
-                _state.common.font.EditorTextPanel,
+                _state.common.font.EditorPanelText,
                 (float)_layout.textPanel.TextSize,
                 (float)_layout.textPanel.CharSpacing,
                 (int)_layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].X,
@@ -50,6 +50,15 @@ public class UpdateEditorTextPanel
                 _layout.textPanel.GridBoxesSpaceOffRowNumbers,
                 _layout.textPanel.CursorPosition,
                 _layout.textPanel.TextHorizontalPixelOffSet,
+                _layout.textPanel.TextVerticalPixelOffSet,
+                (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
+                (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y
+            );
+
+        _layout.textPanel.RowNumbersPosition =
+            UpdateRowNumberTextPosition(
+                _layout.textPanel.GridColumnPositions,
+                _layout.textPanel.GridBoxesSpaceOffRowNumbers,
                 _layout.textPanel.TextVerticalPixelOffSet,
                 (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
                 (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].Y
@@ -165,12 +174,34 @@ public class UpdateEditorTextPanel
         return newTextPosition;
     }
 
+    private Vector2 UpdateRowNumberTextPosition(float[] gridColumnPositions, int GridBoxesSpaceOffRowNumbers, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
+    {
+        if(gridColumnPositions.Length < GridBoxesSpaceOffRowNumbers)
+        {
+            return new Vector2();
+        }
+
+        int gridBoxesWhiteSpaceLeft = 2;
+
+        Vector2 newNumberPosition =
+            new Vector2(
+                panelTextStartingPositionX,
+                panelTextStartingPositionY - textPixelOffSetRow
+            );
+
+        for (int i = 0; i < gridBoxesWhiteSpaceLeft; i ++)
+        {
+            newNumberPosition.X += (int)gridColumnPositions[i];
+        }
+
+        return newNumberPosition;
+    }
 
     private int CalculateTextPanelCursorWidth(Vector2 cursorTextPosition)
     {
         Vector2 newCursorWidth =
             Raylib.MeasureTextEx(
-                _state.common.font.EditorTextPanel,
+                _state.common.font.EditorPanelText,
                 " ",
                 _state.editor.layout.textPanel.TextSize,
                 _state.editor.layout.textPanel.CharSpacing

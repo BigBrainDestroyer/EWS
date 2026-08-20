@@ -250,7 +250,7 @@ public class UpdateEditorPanelText
         StringBuilder newString;
         List<string> newViewText = new List<string>();
 
-        for (int i = textGridBoxesOffSetY; i < gridRowPositions.Length - 1; i++)
+        for (int i = textGridBoxesOffSetY, x =  0; x < gridRowPositions.Length; i++, x++)
         {
             if(i == panelText.Count)
             {
@@ -270,10 +270,18 @@ public class UpdateEditorPanelText
             }
 
             newViewText.Add(newString.ToString());
-            
-            Console.WriteLine(newViewText[i]);
         }
 
         return newViewText;
+    }
+
+    private (int, int) UpdateGridBoxesOffSet(List<string> panelText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY)
+    {
+        int newTextGridBoxesOffSetX = textGridBoxesOffSetX;
+        int newTextGridBoxesOffSetY = textGridBoxesOffSetY;
+
+        
+
+        return (newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
     }
 }
