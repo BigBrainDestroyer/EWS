@@ -292,9 +292,21 @@ public class UpdateEditorPanelText
         int newTextGridBoxesOffSetY = textGridBoxesOffSetY;
 
         //eerst kijken of cusro in viewpanelstaat
-        if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX)
+
+        if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX && (int)cursorTextPosition.X <= textGridBoxesOffSetX)
+        {
+            
+        }
+        else if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX)
         {
             newTextGridBoxesOffSetX = (int)cursorTextPosition.X - gridColumnPositions.Length + 1 + gridBoxesSpaceOffRowNumbers +1;
+            Console.WriteLine(newTextGridBoxesOffSetX);
+        }
+        else if((int)cursorTextPosition.X <= textGridBoxesOffSetX)
+        {
+            Console.WriteLine("hell yea dit werkt");
+            newTextGridBoxesOffSetX = (int)cursorTextPosition.X;
+
             Console.WriteLine(newTextGridBoxesOffSetX);
         }
         

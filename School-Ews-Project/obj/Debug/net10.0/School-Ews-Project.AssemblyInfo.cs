@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("School-Ews-Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f71ebf828f7e2c91364d063b768d953cf4d9e1b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f28a450f0d73e392b15dbe45b11ed7ccb810cce")]
 [assembly: System.Reflection.AssemblyProductAttribute("School-Ews-Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("School-Ews-Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

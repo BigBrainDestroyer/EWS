@@ -150,8 +150,6 @@ public class UpdateEditorTextPanel
                 parentBoxLengths[EditorBoxNames.TextPanel].Y
             );
 
-        Console.WriteLine(newBoxLengths.X);
-
         return (newBoxPositions, newBoxLengths);
     }
 
@@ -217,7 +215,9 @@ public class UpdateEditorTextPanel
         {
             textGridBoxesOffSetX -= 1;
         }
-        
+
+        Console.WriteLine((int)cursorTextPosition.X - textGridBoxesOffSetX);
+
         cursorPosition =
             new Vector2(
                 boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X - textGridBoxesOffSetX] + textRowNumberBoxLengths.X,
