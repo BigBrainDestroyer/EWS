@@ -32,7 +32,7 @@ public class UpdateEditorPanelText
                     _textPanel.GridBoxesSpaceOffRowNumbers
                 );
         }
-
+        
         if(Raylib.IsWindowResized())
         {
             _textPanel.ViewText = UpdateViewText(
@@ -44,6 +44,17 @@ public class UpdateEditorPanelText
                 _textPanel.GridBoxesSpaceOffRowNumbers
             );
         }
+
+        (_textPanel.CursorTextPosition, _textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY) = 
+            UpdateGridBoxesOffSet(
+                _textPanel.ViewText,
+                _textPanel.GridColumnPositions,
+                _textPanel.GridRowPositions,
+                _textPanel.CursorTextPosition,
+                _textPanel.TextGridBoxesOffSetX,
+                _textPanel.TextGridBoxesOffSetY,
+                _textPanel.GridBoxesSpaceOffRowNumbers
+            );
     }
 
     
@@ -87,7 +98,7 @@ public class UpdateEditorPanelText
             (cursorTextPosition, panelText, chars) =
                 UpdateCharInputToText(cursorTextPosition, newString, panelText, chars);
         }
-
+        
         List<string> viewText = UpdateViewText(panelText, gridColumnPositions, gridRowPositions, textGridBoxesOffSetX, textGridBoxesOffSetY, gridBoxesSpaceOffRowNumbers);
 
         return (cursorTextPosition, panelText, viewText, chars);
@@ -275,13 +286,18 @@ public class UpdateEditorPanelText
         return newViewText;
     }
 
-    private (int, int) UpdateGridBoxesOffSet(List<string> panelText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY)
+    private (Vector2, int, int) UpdateGridBoxesOffSet(List<string> viewText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
         int newTextGridBoxesOffSetX = textGridBoxesOffSetX;
         int newTextGridBoxesOffSetY = textGridBoxesOffSetY;
 
+        //eerst kijken of cusro in viewpanelstaat
+        if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX)
+        {
+            newTextGridBoxesOffSetX = (int)cursorTextPosition.X - gridColumnPositions.Length + 1 + gridBoxesSpaceOffRowNumbers +1;
+            Console.WriteLine(newTextGridBoxesOffSetX);
+        }
         
-
-        return (newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
+        return (cursorTextPosition, newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
     }
 }

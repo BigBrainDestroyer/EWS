@@ -11,7 +11,7 @@ public class EditorTextPanelLayoutState
     public Color ActiveRowNumberColor { get; set; } = new Color(220, 223, 228, 255);
 
     public List<string> PanelText { get; set; } = new List<string>() {""};
-    public List<string> ViewText { get; set; } = new List<string>();
+    public List<string> ViewText { get; set; } = new List<string>() {""};
 
     public float[] GridColumnPositions { get; set; } = new float[0];
     public float[] GridRowPositions { get; set; } = new float[0];
@@ -28,6 +28,8 @@ public class EditorTextPanelLayoutState
 
     public int TextGridBoxesOffSetX { get; set; } = 0;
     public int TextGridBoxesOffSetY { get; set; } = 0;
+
+    public int TextTypingWhiteSpaceLeft { get; set; } 
 
     public int TextHorizontalPixelOffSet { get; set; } = 0;
     public int TextVerticalPixelOffSet { get; set; } = 0;

@@ -19,8 +19,6 @@ public class UpdateEditorTextPanel
     {
         var _layout = _state.editor.layout;
 
-        _updateEditorPanelText.UpdatingPanelText();
-
         _layout.textPanel.GridBoxesSpaceOffRowNumbers =
             UpdateGridBoxesSpaceOffRowNumbers(
                 _layout.textPanel.PanelText.Count,
@@ -36,6 +34,8 @@ public class UpdateEditorTextPanel
                 (int)_layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel].Y
             );
 
+        _updateEditorPanelText.UpdatingPanelText();
+            
         (_layout.textPanel.TextRowNumberBoxPositions, _layout.textPanel.TextRowNumberBoxLengths) =
                 CalculateTextRowNumbersBox(
                     _layout.boxes.BoxPixelPositions,
@@ -46,9 +46,7 @@ public class UpdateEditorTextPanel
 
         _layout.textPanel.TextPosition =
             UpdateTextPosition(
-                _layout.textPanel.GridColumnPositions,
-                _layout.textPanel.GridBoxesSpaceOffRowNumbers,
-                _layout.textPanel.CursorPosition,
+                _layout.textPanel.TextRowNumberBoxLengths,
                 _layout.textPanel.TextHorizontalPixelOffSet,
                 _layout.textPanel.TextVerticalPixelOffSet,
                 (int)_layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel].X,
@@ -76,7 +74,8 @@ public class UpdateEditorTextPanel
                 _layout.textPanel.GridRowPositions,
                 _layout.textPanel.CursorPosition,
                 _layout.textPanel.CursorTextPosition,
-                _layout.textPanel.TextRowNumberBoxLengths
+                _layout.textPanel.TextRowNumberBoxLengths,
+                _layout.textPanel.TextGridBoxesOffSetX
             );
     }
 
@@ -132,51 +131,45 @@ public class UpdateEditorTextPanel
     private (Vector2, Vector2) CalculateTextRowNumbersBox(Dictionary<EditorBoxNames, Vector2> parentBoxPositions, Dictionary<EditorBoxNames, Vector2> parentBoxLengths, float[] gridColumnPositions, int amountOfColumnGridSpace)
     {
         Vector2 newBoxPositions = parentBoxPositions[EditorBoxNames.TextPanel];
+        Vector2 newBoxLengths;
 
-        Vector2 newBoxLengths =
+        if(amountOfColumnGridSpace >= gridColumnPositions.Length)
+        {
+            newBoxLengths =
+                new Vector2(
+                    parentBoxLengths[EditorBoxNames.TextPanel].X,
+                    parentBoxLengths[EditorBoxNames.TextPanel].Y
+                );
+
+            return (newBoxPositions, newBoxLengths);
+        }
+        
+        newBoxLengths =
             new Vector2(
-                -1, //Raylib base spacing between chars 
+                gridColumnPositions[amountOfColumnGridSpace] -1, //Raylib base spacing between chars 
                 parentBoxLengths[EditorBoxNames.TextPanel].Y
             );
 
-        for(int i = 0; i < amountOfColumnGridSpace; i++)
-        {
-            if(i >= gridColumnPositions.Length -1)
-            {
-                break;
-            }
-            
-            newBoxLengths.X += gridColumnPositions[i];
-        }
+        Console.WriteLine(newBoxLengths.X);
 
         return (newBoxPositions, newBoxLengths);
     }
 
 
-    private Vector2 UpdateTextPosition(float[] gridColumnPositions, int GridBoxesSpaceOffRowNumbers, Vector2 cursorTextPosition, int textPixelOffSetColumn, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
+    private Vector2 UpdateTextPosition(Vector2 textRowNumberBoxLengths, int textPixelOffSetColumn, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
     {
-        if(gridColumnPositions.Length < GridBoxesSpaceOffRowNumbers)
-        {
-            return new Vector2();
-        }
-
         Vector2 newTextPosition =
             new Vector2(
-                panelTextStartingPositionX - textPixelOffSetColumn,
+                panelTextStartingPositionX + textRowNumberBoxLengths.X - textPixelOffSetColumn,
                 panelTextStartingPositionY - textPixelOffSetRow
             );
-
-        for (int i = 0; i < GridBoxesSpaceOffRowNumbers; i ++)
-        {
-            newTextPosition.X += (int)gridColumnPositions[i];
-        }
 
         return newTextPosition;
     }
 
-    private Vector2 UpdateRowNumberTextPosition(float[] gridColumnPositions, int GridBoxesSpaceOffRowNumbers, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
+    private Vector2 UpdateRowNumberTextPosition(float[] gridColumnPositions, int gridBoxesSpaceOffRowNumbers, int textPixelOffSetRow, int panelTextStartingPositionX, int panelTextStartingPositionY)
     {
-        if(gridColumnPositions.Length < GridBoxesSpaceOffRowNumbers)
+        if(gridColumnPositions.Length < gridBoxesSpaceOffRowNumbers)
         {
             return new Vector2();
         }
@@ -213,16 +206,21 @@ public class UpdateEditorTextPanel
     }
 
 
-    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths)
+    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths, int textGridBoxesOffSetX)
     {
-        if(cursorTextPosition.X >= gridColumnPositions.Length || cursorTextPosition.Y >= gridRowPositions.Length)
+        if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y >= gridRowPositions.Length)
         {
             return cursorPosition;
         }
 
+        if(textGridBoxesOffSetX > 0)
+        {
+            textGridBoxesOffSetX -= 1;
+        }
+        
         cursorPosition =
             new Vector2(
-                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X] + textRowNumberBoxLengths.X,
+                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X - textGridBoxesOffSetX] + textRowNumberBoxLengths.X,
                 boxPixelPositions[EditorBoxNames.TextPanel].Y + gridRowPositions[(int)cursorTextPosition.Y]
             );
 
