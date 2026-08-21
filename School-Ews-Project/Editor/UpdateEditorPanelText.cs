@@ -7,10 +7,13 @@ namespace Program;
 public class UpdateEditorPanelText
 {
     private readonly AppState _state;
+    private readonly UpdateTextView _updateTextView;
 
     public UpdateEditorPanelText(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+
+        _updateTextView = new UpdateTextView(_state);
     }
 
     public void UpdatingPanelText()
@@ -18,9 +21,11 @@ public class UpdateEditorPanelText
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;
 
+        _textPanel.TextGridBoxesOffSetY = _updateTextView.UpdateScrollWheelOffSet(_textPanel.PanelText, _textPanel.TextGridBoxesOffSetY);
+        
         if(_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
         {
-            (_textPanel.CursorTextPosition, _textPanel.PanelText, _textPanel.ViewText, _input.KeyboardCharInput) =
+            (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput) =
                 UpdatingText(
                     _textPanel.CursorTextPosition,
                     _textPanel.PanelText,
@@ -31,47 +36,18 @@ public class UpdateEditorPanelText
                     _textPanel.TextGridBoxesOffSetY,
                     _textPanel.GridBoxesSpaceOffRowNumbers
                 );
+
+            _updateTextView.UpdateView();
         }
         
         if(Raylib.IsWindowResized())
         {
-            _textPanel.ViewText = UpdateViewText(
-                _textPanel.PanelText, 
-                _textPanel.GridColumnPositions,
-                _textPanel.GridRowPositions,
-                _textPanel.TextGridBoxesOffSetX,
-                _textPanel.TextGridBoxesOffSetY,
-                _textPanel.GridBoxesSpaceOffRowNumbers
-            );
+            _updateTextView.UpdateView();
         }
-
-        (_textPanel.CursorTextPosition, _textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY) = 
-            UpdateGridBoxesOffSet(
-                _textPanel.ViewText,
-                _textPanel.GridColumnPositions,
-                _textPanel.GridRowPositions,
-                _textPanel.CursorTextPosition,
-                _textPanel.TextGridBoxesOffSetX,
-                _textPanel.TextGridBoxesOffSetY,
-                _textPanel.GridBoxesSpaceOffRowNumbers,
-                _textPanel.TextNavigationWhiteSpaceRight,
-                _textPanel.TextNavigationWhiteSpaceLeft,
-                _textPanel.TextNavigationWhiteSpaceDown,
-                _textPanel.TextNavigationWhiteSpaceUp
-            );
-
-            _textPanel.ViewText = UpdateViewText(
-                _textPanel.PanelText, 
-                _textPanel.GridColumnPositions,
-                _textPanel.GridRowPositions,
-                _textPanel.TextGridBoxesOffSetX,
-                _textPanel.TextGridBoxesOffSetY,
-                _textPanel.GridBoxesSpaceOffRowNumbers
-            );
     }
 
     
-    private (Vector2, List<string>, List<string>,List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions,int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
+    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions,int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
         StringBuilder newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
 
@@ -111,10 +87,8 @@ public class UpdateEditorPanelText
             (cursorTextPosition, panelText, chars) =
                 UpdateCharInputToText(cursorTextPosition, newString, panelText, chars);
         }
-        
-        List<string> viewText = UpdateViewText(panelText, gridColumnPositions, gridRowPositions, textGridBoxesOffSetX, textGridBoxesOffSetY, gridBoxesSpaceOffRowNumbers);
 
-        return (cursorTextPosition, panelText, viewText, chars);
+        return (cursorTextPosition, panelText, chars);
     }
 
 
@@ -267,77 +241,5 @@ public class UpdateEditorPanelText
         panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
         return (cursorTextPosition, panelText, chars);
-    }
-
-    private List<string> UpdateViewText(List<string> panelText, float[] gridColumnPositions, float[] gridRowPositions, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
-    {
-        StringBuilder newString;
-        List<string> newViewText = new List<string>();
-
-        for (int i = textGridBoxesOffSetY, x =  0; x < gridRowPositions.Length; i++, x++)
-        {
-            if(i == panelText.Count)
-            {
-                break;
-            }
-
-            newString = new StringBuilder(panelText[i]);
-
-            if(newString.Length >= textGridBoxesOffSetX)
-            {
-                newString.Remove(0, textGridBoxesOffSetX);
-
-                if(newString.Length >= gridColumnPositions.Length + textGridBoxesOffSetX - gridBoxesSpaceOffRowNumbers)
-                {
-                    newString.Length =  gridColumnPositions.Length - gridBoxesSpaceOffRowNumbers;
-                }
-            }
-            else
-            {
-                newString.Length = 0;
-            }
-
-            newViewText.Add(newString.ToString());
-        }
-
-        return newViewText;
-    }
-
-    private (Vector2, int, int) UpdateGridBoxesOffSet(List<string> viewText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers, int textTypingWhiteSpaceRight, int textTypingWhiteSpaceLeft, int textTypingWhiteSpaceDown,  int textTypingWhiteSpaceUp)
-    {
-        int newTextGridBoxesOffSetX = textGridBoxesOffSetX;
-        int newTextGridBoxesOffSetY = textGridBoxesOffSetY;
-
-        //eerst kijken of cusro in viewpanelstaat
-
-        if((int)cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length - 1 - textTypingWhiteSpaceRight - gridBoxesSpaceOffRowNumbers)
-        {
-            int gridColumnTextLength = gridColumnPositions.Length - gridBoxesSpaceOffRowNumbers;
-
-            newTextGridBoxesOffSetX = Math.Abs(gridColumnTextLength -1 - textTypingWhiteSpaceRight - (int)cursorTextPosition.X);
-        }
-        else if((int)cursorTextPosition.X <= textGridBoxesOffSetX + textTypingWhiteSpaceLeft && (int)cursorTextPosition.X >= textTypingWhiteSpaceLeft)
-        {
-            newTextGridBoxesOffSetX = (int)cursorTextPosition.X - textTypingWhiteSpaceLeft;
-        }
-        else if((int)cursorTextPosition.X <= textGridBoxesOffSetX)
-        {
-            newTextGridBoxesOffSetX = (int)cursorTextPosition.X;
-        }
-
-        if((int)cursorTextPosition.Y <= textGridBoxesOffSetY + textTypingWhiteSpaceUp && (int)cursorTextPosition.Y > textTypingWhiteSpaceUp)
-        {
-            newTextGridBoxesOffSetY = (int)cursorTextPosition.Y - textTypingWhiteSpaceUp;
-        }
-        else if((int)cursorTextPosition.Y <= textGridBoxesOffSetY)
-        {
-            newTextGridBoxesOffSetY = (int)cursorTextPosition.Y;
-        }
-        else if((int)cursorTextPosition.Y - textGridBoxesOffSetY >= gridRowPositions.Length - 1 - textTypingWhiteSpaceDown)
-        {
-            newTextGridBoxesOffSetY = Math.Abs(gridRowPositions.Length - 1 - textTypingWhiteSpaceDown - (int)cursorTextPosition.Y);
-        }
-        
-        return (cursorTextPosition, newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
     }
 }

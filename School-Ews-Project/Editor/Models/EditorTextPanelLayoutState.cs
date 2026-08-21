@@ -31,7 +31,7 @@ public class EditorTextPanelLayoutState
 
     public int TextNavigationWhiteSpaceRight { get; set; } = 2;
     public int TextNavigationWhiteSpaceLeft { get; set; } = 1;
-    public int TextNavigationWhiteSpaceDown { get; set; } = 0;
+    public int TextNavigationWhiteSpaceDown { get; set; } = 1;
     public int TextNavigationWhiteSpaceUp { get; set; } = 1;
 
 
@@ -39,6 +39,6 @@ public class EditorTextPanelLayoutState
     public int TextVerticalPixelOffSet { get; set; } = 0;
 
     public int CursorWidth { get; set; }
-    public int TextSize { get; set; } = 25;
+    public int TextSize { get; set; } = 23;
     public int CharSpacing { get; set; } = 0;
 }

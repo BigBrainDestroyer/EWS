@@ -215,14 +215,6 @@ public class UpdateEditorTextPanel
         int cursorColumnPosition = (int)cursorTextPosition.X - textGridBoxesOffSetX;
         int cursorRowPosition = (int)cursorTextPosition.Y - textGridBoxesOffSetY;
 
-       // Console.WriteLine($"textGridBoxesOffSet: {textGridBoxesOffSetX}");
-
-        //Console.WriteLine($"(int)cursorTextPosition.X: {(int)cursorTextPosition.X}");
-
-        //Console.WriteLine($"cursorColumnPosition: {(int)cursorTextPosition.X - textGridBoxesOffSetX}");
-
-        //Console.WriteLine(gridColumnPositions.Length - 3);
-
         cursorPosition =
             new Vector2(
                 boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[cursorColumnPosition] + textRowNumberBoxLengths.X,
