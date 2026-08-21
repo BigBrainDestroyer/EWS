@@ -29,7 +29,11 @@ public class EditorTextPanelLayoutState
     public int TextGridBoxesOffSetX { get; set; } = 0;
     public int TextGridBoxesOffSetY { get; set; } = 0;
 
-    public int TextTypingWhiteSpaceLeft { get; set; } 
+    public int TextNavigationWhiteSpaceRight { get; set; } = 2;
+    public int TextNavigationWhiteSpaceLeft { get; set; } = 1;
+    public int TextNavigationWhiteSpaceDown { get; set; } = 0;
+    public int TextNavigationWhiteSpaceUp { get; set; } = 1;
+
 
     public int TextHorizontalPixelOffSet { get; set; } = 0;
     public int TextVerticalPixelOffSet { get; set; } = 0;

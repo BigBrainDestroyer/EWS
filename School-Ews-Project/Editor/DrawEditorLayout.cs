@@ -109,7 +109,7 @@ public class DrawEditorLayout
         float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
         float RowIncrement = 0;
 
-        for (int i = _panel.TextGridBoxesOffSetY + restoreBaseOffSet; i <= _panel.ViewText.Count; i++)
+        for (int i = _panel.TextGridBoxesOffSetY + restoreBaseOffSet; i <= _panel.PanelText.Count; i++)
         {
             if(_panel.RowNumbersPosition.Y + RowIncrement > maxBottomY)
             {

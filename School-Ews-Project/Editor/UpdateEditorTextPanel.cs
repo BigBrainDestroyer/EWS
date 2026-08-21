@@ -69,13 +69,14 @@ public class UpdateEditorTextPanel
 
         _layout.textPanel.CursorPosition =
             UpdateCursorPosition(
-              _layout.boxes.BoxPixelPositions,
+                _layout.boxes.BoxPixelPositions,
                 _layout.textPanel.GridColumnPositions,
                 _layout.textPanel.GridRowPositions,
                 _layout.textPanel.CursorPosition,
                 _layout.textPanel.CursorTextPosition,
                 _layout.textPanel.TextRowNumberBoxLengths,
-                _layout.textPanel.TextGridBoxesOffSetX
+                _layout.textPanel.TextGridBoxesOffSetX,
+                _layout.textPanel.TextGridBoxesOffSetY
             );
     }
 
@@ -204,24 +205,28 @@ public class UpdateEditorTextPanel
     }
 
 
-    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths, int textGridBoxesOffSetX)
+    private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths, int textGridBoxesOffSetX, int textGridBoxesOffSetY)
     {
-        if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y >= gridRowPositions.Length)
+        if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y - textGridBoxesOffSetY>= gridRowPositions.Length)
         {
             return cursorPosition;
         }
 
-        if(textGridBoxesOffSetX > 0)
-        {
-            textGridBoxesOffSetX -= 1;
-        }
+        int cursorColumnPosition = (int)cursorTextPosition.X - textGridBoxesOffSetX;
+        int cursorRowPosition = (int)cursorTextPosition.Y - textGridBoxesOffSetY;
 
-        Console.WriteLine((int)cursorTextPosition.X - textGridBoxesOffSetX);
+       // Console.WriteLine($"textGridBoxesOffSet: {textGridBoxesOffSetX}");
+
+        //Console.WriteLine($"(int)cursorTextPosition.X: {(int)cursorTextPosition.X}");
+
+        //Console.WriteLine($"cursorColumnPosition: {(int)cursorTextPosition.X - textGridBoxesOffSetX}");
+
+        //Console.WriteLine(gridColumnPositions.Length - 3);
 
         cursorPosition =
             new Vector2(
-                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[(int)cursorTextPosition.X - textGridBoxesOffSetX] + textRowNumberBoxLengths.X,
-                boxPixelPositions[EditorBoxNames.TextPanel].Y + gridRowPositions[(int)cursorTextPosition.Y]
+                boxPixelPositions[EditorBoxNames.TextPanel].X + gridColumnPositions[cursorColumnPosition] + textRowNumberBoxLengths.X,
+                boxPixelPositions[EditorBoxNames.TextPanel].Y + gridRowPositions[cursorRowPosition]
             );
 
         return cursorPosition;

@@ -53,6 +53,19 @@ public class UpdateEditorPanelText
                 _textPanel.CursorTextPosition,
                 _textPanel.TextGridBoxesOffSetX,
                 _textPanel.TextGridBoxesOffSetY,
+                _textPanel.GridBoxesSpaceOffRowNumbers,
+                _textPanel.TextNavigationWhiteSpaceRight,
+                _textPanel.TextNavigationWhiteSpaceLeft,
+                _textPanel.TextNavigationWhiteSpaceDown,
+                _textPanel.TextNavigationWhiteSpaceUp
+            );
+
+            _textPanel.ViewText = UpdateViewText(
+                _textPanel.PanelText, 
+                _textPanel.GridColumnPositions,
+                _textPanel.GridRowPositions,
+                _textPanel.TextGridBoxesOffSetX,
+                _textPanel.TextGridBoxesOffSetY,
                 _textPanel.GridBoxesSpaceOffRowNumbers
             );
     }
@@ -279,6 +292,10 @@ public class UpdateEditorPanelText
                     newString.Length =  gridColumnPositions.Length - gridBoxesSpaceOffRowNumbers;
                 }
             }
+            else
+            {
+                newString.Length = 0;
+            }
 
             newViewText.Add(newString.ToString());
         }
@@ -286,28 +303,39 @@ public class UpdateEditorPanelText
         return newViewText;
     }
 
-    private (Vector2, int, int) UpdateGridBoxesOffSet(List<string> viewText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
+    private (Vector2, int, int) UpdateGridBoxesOffSet(List<string> viewText, float[] gridColumnPositions, float[] gridRowPositions , Vector2 cursorTextPosition, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers, int textTypingWhiteSpaceRight, int textTypingWhiteSpaceLeft, int textTypingWhiteSpaceDown,  int textTypingWhiteSpaceUp)
     {
         int newTextGridBoxesOffSetX = textGridBoxesOffSetX;
         int newTextGridBoxesOffSetY = textGridBoxesOffSetY;
 
         //eerst kijken of cusro in viewpanelstaat
 
-        if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX && (int)cursorTextPosition.X <= textGridBoxesOffSetX)
+        if((int)cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length - 1 - textTypingWhiteSpaceRight - gridBoxesSpaceOffRowNumbers)
         {
-            
+            int gridColumnTextLength = gridColumnPositions.Length - gridBoxesSpaceOffRowNumbers;
+
+            newTextGridBoxesOffSetX = Math.Abs(gridColumnTextLength -1 - textTypingWhiteSpaceRight - (int)cursorTextPosition.X);
         }
-        else if((int)cursorTextPosition.X >= gridColumnPositions.Length - 1 - gridBoxesSpaceOffRowNumbers + textGridBoxesOffSetX)
+        else if((int)cursorTextPosition.X <= textGridBoxesOffSetX + textTypingWhiteSpaceLeft && (int)cursorTextPosition.X >= textTypingWhiteSpaceLeft)
         {
-            newTextGridBoxesOffSetX = (int)cursorTextPosition.X - gridColumnPositions.Length + 1 + gridBoxesSpaceOffRowNumbers +1;
-            Console.WriteLine(newTextGridBoxesOffSetX);
+            newTextGridBoxesOffSetX = (int)cursorTextPosition.X - textTypingWhiteSpaceLeft;
         }
         else if((int)cursorTextPosition.X <= textGridBoxesOffSetX)
         {
-            Console.WriteLine("hell yea dit werkt");
             newTextGridBoxesOffSetX = (int)cursorTextPosition.X;
+        }
 
-            Console.WriteLine(newTextGridBoxesOffSetX);
+        if((int)cursorTextPosition.Y <= textGridBoxesOffSetY + textTypingWhiteSpaceUp && (int)cursorTextPosition.Y > textTypingWhiteSpaceUp)
+        {
+            newTextGridBoxesOffSetY = (int)cursorTextPosition.Y - textTypingWhiteSpaceUp;
+        }
+        else if((int)cursorTextPosition.Y <= textGridBoxesOffSetY)
+        {
+            newTextGridBoxesOffSetY = (int)cursorTextPosition.Y;
+        }
+        else if((int)cursorTextPosition.Y - textGridBoxesOffSetY >= gridRowPositions.Length - 1 - textTypingWhiteSpaceDown)
+        {
+            newTextGridBoxesOffSetY = Math.Abs(gridRowPositions.Length - 1 - textTypingWhiteSpaceDown - (int)cursorTextPosition.Y);
         }
         
         return (cursorTextPosition, newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
