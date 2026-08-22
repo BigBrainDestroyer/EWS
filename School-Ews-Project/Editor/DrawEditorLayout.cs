@@ -112,11 +112,18 @@ public class DrawEditorLayout
         float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
         float RowIncrement = 0;
 
+        Color numberColor = _panel.RowNumberColor;
+
         for (int i = _panel.TextGridBoxesOffSetY + restoreBaseOffSet; i <= _panel.PanelText.Count; i++)
         {
             if(_panel.RowNumbersPosition.Y + RowIncrement > maxBottomY)
             {
                 break;
+            }
+            
+            if(_panel.CursorTextPosition.Y == i - restoreBaseOffSet)
+            {
+                numberColor = _panel.ActiveRowNumberColor;
             }
             
             float currentY = _panel.RowNumbersPosition.Y + RowIncrement;
@@ -127,10 +134,12 @@ public class DrawEditorLayout
                 new Vector2 (_panel.RowNumbersPosition.X, currentY),
                 _panel.TextSize,
                 _panel.CharSpacing,
-                _panel.RowNumberColor
+                numberColor
             );
 
             RowIncrement += _panel.TextSize;
+
+            numberColor = _panel.RowNumberColor;
         }
     }
 
