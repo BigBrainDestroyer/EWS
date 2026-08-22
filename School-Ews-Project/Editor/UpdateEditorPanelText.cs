@@ -21,9 +21,9 @@ public class UpdateEditorPanelText
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;
 
-        _textPanel.TextGridBoxesOffSetY = _updateTextView.UpdateScrollWheelOffSet(_textPanel.PanelText, _textPanel.TextGridBoxesOffSetY);
+        _updateTextView.IsMouseWheelActive();
         
-        if(_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
+        if(_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
         {
             (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput) =
                 UpdatingText(
@@ -32,6 +32,7 @@ public class UpdateEditorPanelText
                     _input.KeyboardCharInput,
                     _textPanel.GridColumnPositions,
                     _textPanel.GridRowPositions,
+                    _textPanel.TapTextSpaces,
                     _textPanel.TextGridBoxesOffSetX,
                     _textPanel.TextGridBoxesOffSetY,
                     _textPanel.GridBoxesSpaceOffRowNumbers
@@ -47,7 +48,7 @@ public class UpdateEditorPanelText
     }
 
     
-    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions,int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
+    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions, string tapTextSpaces, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
         StringBuilder newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
 
@@ -60,6 +61,11 @@ public class UpdateEditorPanelText
         {
             (cursorTextPosition, newString, panelText) = 
                 UpdateBackspaceToString(cursorTextPosition, newString, panelText);
+        }
+        else if(Raylib.IsKeyPressed(KeyboardKey.Tab))
+        {
+            (cursorTextPosition, newString, panelText) =
+                UpdateTabToString(cursorTextPosition, newString, panelText, tapTextSpaces);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Up))
         {
@@ -147,7 +153,17 @@ public class UpdateEditorPanelText
         return (cursorTextPosition, newString, panelText);
     }
 
-    
+    private (Vector2, StringBuilder, List<string>) UpdateTabToString(Vector2 cursorTextPosition, StringBuilder newString, List<string> panelText, string tapTextSpaces)
+    {
+        newString.Insert((int)cursorTextPosition.X, tapTextSpaces);
+
+        panelText[(int)cursorTextPosition.Y] = newString.ToString();
+
+        cursorTextPosition.X += tapTextSpaces.Length;
+
+        return (cursorTextPosition, newString, panelText);
+    }
+
     private Vector2 UpdateUpToText(Vector2 cursorTextPosition, List<string> panelText)
     {
         if((int)cursorTextPosition.Y == 0)

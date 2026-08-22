@@ -207,9 +207,9 @@ public class UpdateEditorTextPanel
 
     private Vector2 UpdateCursorPosition(Dictionary<EditorBoxNames,Vector2> boxPixelPositions, float[] gridColumnPositions, float[] gridRowPositions, Vector2 cursorPosition, Vector2 cursorTextPosition, Vector2 textRowNumberBoxLengths, int textGridBoxesOffSetX, int textGridBoxesOffSetY)
     {
-        if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y - textGridBoxesOffSetY>= gridRowPositions.Length)
+        if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y - textGridBoxesOffSetY>= gridRowPositions.Length || cursorTextPosition.Y < textGridBoxesOffSetY || cursorTextPosition.X < textGridBoxesOffSetX)
         {
-            return cursorPosition;
+            return new Vector2(-1,-1);
         }
 
         int cursorColumnPosition = (int)cursorTextPosition.X - textGridBoxesOffSetX;

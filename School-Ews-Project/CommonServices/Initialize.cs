@@ -20,7 +20,7 @@ public class Initialize
         //Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
         Raylib.InitWindow(screenWidth, screenHeight, "EWS");
 
-        Raylib.SetTargetFPS(60);
+        Raylib.SetTargetFPS(240);
         Raylib.MaximizeWindow();
 
         Raylib.SetWindowMinSize(_state.common.settings.MinimalScreenWidth, _state.common.settings.MinimalScreenHeight);

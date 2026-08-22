@@ -13,6 +13,27 @@ public class UpdateTextView
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
+    public void IsMouseWheelActive()
+    {
+        var _input = _state.common.input;
+        var _textPanel = _state.editor.layout.textPanel;
+        
+        if(_input.MouseWheelInput != 0)
+        {
+            _textPanel.TextGridBoxesOffSetY = UpdateScrollWheelOffSet(_textPanel.PanelText, _textPanel.TextGridBoxesOffSetY);
+
+            _textPanel.ViewText = 
+                UpdateViewText(
+                    _textPanel.PanelText, 
+                    _textPanel.GridColumnPositions,
+                    _textPanel.GridRowPositions,
+                    _textPanel.TextGridBoxesOffSetX,
+                    _textPanel.TextGridBoxesOffSetY,
+                    _textPanel.GridBoxesSpaceOffRowNumbers
+                );
+        }
+    }
+
     public void UpdateView()
     {
         var _textPanel = _state.editor.layout.textPanel;
@@ -42,7 +63,7 @@ public class UpdateTextView
         );
     }
 
-    private List<string> UpdateViewText(List<string> panelText, float[] gridColumnPositions, float[] gridRowPositions, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
+    public List<string> UpdateViewText(List<string> panelText, float[] gridColumnPositions, float[] gridRowPositions, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
         StringBuilder newString;
         List<string> newViewText = new List<string>();
@@ -114,6 +135,9 @@ public class UpdateTextView
 
     public int UpdateScrollWheelOffSet(List<string> panelText, int currentTextGridBoxesOffSetY)
     {
+        var _input = _state.common.input;
+        var _textPanel = _state.editor.layout.textPanel;
+        
         int newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
         int wheelMovement = (int)Raylib.GetMouseWheelMove();
 
@@ -121,11 +145,11 @@ public class UpdateTextView
 
         if (wheelMovement != 0)
         {
-            newTextGridBoxesOffSetY += wheelMovement;
+            newTextGridBoxesOffSetY -= wheelMovement;
 
-            if (newTextGridBoxesOffSetY < 0 || newTextGridBoxesOffSetY > panelText.Count -1)
+            if (newTextGridBoxesOffSetY < 0 || newTextGridBoxesOffSetY >= panelText.Count)
             {
-                newTextGridBoxesOffSetY = 0;
+                return newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
             }
         }
 

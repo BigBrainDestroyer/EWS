@@ -58,13 +58,16 @@ public class DrawEditorLayout
 
     private void DrawTextPanelCursor()
     {
-        Raylib.DrawRectangle(
-            (int)_state.editor.layout.textPanel.CursorPosition.X,
-            (int)_state.editor.layout.textPanel.CursorPosition.Y,
-            _state.editor.layout.textPanel.CursorWidth,
-            _state.editor.layout.textPanel.TextSize,
-            _state.editor.layout.textPanel.CursorColor
-        );
+        if(_state.editor.layout.textPanel.CursorPosition.X != -1 || _state.editor.layout.textPanel.CursorPosition.Y != -1)
+        {
+            Raylib.DrawRectangle(
+                (int)_state.editor.layout.textPanel.CursorPosition.X,
+                (int)_state.editor.layout.textPanel.CursorPosition.Y,
+                _state.editor.layout.textPanel.CursorWidth,
+                _state.editor.layout.textPanel.TextSize,
+                _state.editor.layout.textPanel.CursorColor
+            );
+        }
     }
 
 

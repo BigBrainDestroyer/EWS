@@ -23,6 +23,8 @@ public class EditorTextPanelLayoutState
     public Vector2 CursorPosition { get; set; } = new Vector2(0,0);
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);
 
+    public string TapTextSpaces { get; set; } = "    ";//4
+
     public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 0;
     public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;
 
