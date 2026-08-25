@@ -7,6 +7,7 @@ public class DrawUi
     private readonly AppState _state;
     private readonly DrawDiagnostics _diagnostics;
     private readonly DrawEditorLayout _drawEditorLayout;
+    private readonly DrawMazeLayout _drawMazeLayout;
 
     public DrawUi(AppState state)
     {
@@ -14,6 +15,7 @@ public class DrawUi
 
         _diagnostics = new DrawDiagnostics(_state);
         _drawEditorLayout = new DrawEditorLayout(_state);
+        _drawMazeLayout = new DrawMazeLayout(_state);
     }
  
     public void Ui()
@@ -24,6 +26,8 @@ public class DrawUi
         _diagnostics.Draw();
 
         _drawEditorLayout.DrawEditor();
+
+        _drawMazeLayout.Maze();
 
         Raylib.EndDrawing();
     }                           

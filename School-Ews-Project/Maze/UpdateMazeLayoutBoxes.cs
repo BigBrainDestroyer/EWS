@@ -22,74 +22,34 @@ public class UpdateMazeLayoutBoxes
         var _mazeBoxes = _state.maze.layout.boxes;
         
         MazeViewBoxNames[] boxNames = Enum.GetValues<MazeViewBoxNames>();
-        double leftOverWidthsPixels = 0;
-        double leftOverHeightsPixels = 0;
 
         foreach(MazeViewBoxNames boxName in boxNames)
         {
-            (_mazeBoxes.BoxPixelLengths[boxName], leftOverWidthsPixels, leftOverHeightsPixels) = 
+            (_mazeBoxes.BoxPixelLengths[boxName]) = 
                 CalculatePixelLength(
+                    boxName,
                     _mazeBoxes.BoxPercentageLengths[boxName], 
-                    _commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze],
-                    leftOverWidthsPixels,
-                    leftOverHeightsPixels
+                    _commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze]
                 );
-        }
-        
-        leftOverWidthsPixels  = Math.Round(leftOverWidthsPixels);
-        leftOverHeightsPixels = Math.Round(leftOverHeightsPixels);
-        
-        foreach(MazeViewBoxNames boxName in boxNames)
-        {
-            bool noLeftOverPixels = true;
-
-            if(leftOverWidthsPixels > 0)
-            {
-                _mazeBoxes.BoxPixelLengths[boxName] = 
-                    new Vector2(
-                        _mazeBoxes.BoxPixelLengths[boxName].X + 1, 
-                        _mazeBoxes.BoxPixelLengths[boxName].Y
-                    );
-                
-                leftOverWidthsPixels -= 1;
-
-                noLeftOverPixels = false;
-            }
-
-            if(leftOverHeightsPixels > 0)
-            {
-                _mazeBoxes.BoxPixelLengths[boxName] = 
-                    new Vector2(
-                        _mazeBoxes.BoxPixelLengths[boxName].X,
-                        _mazeBoxes.BoxPixelLengths[boxName].Y + 1
-                    );
-                
-                leftOverHeightsPixels -= 1;
-
-                noLeftOverPixels = false;
-            }
-
-            if(noLeftOverPixels)
-            {
-                break;
-            }
         }
 
         CalculatePosition();
     }
 
-    private (Vector2, double, double) CalculatePixelLength(Vector2 childBoxPercentageLengths, Vector2 parentBoxLengths, double leftOverWidthPixels, double leftOverHightPixels)
+    private Vector2 CalculatePixelLength(MazeViewBoxNames boxName, Vector2 childBoxPercentageLengths, Vector2 parentBoxLengths)
     {
         Vector2 childBoxPixelLengths = 
             new Vector2(
                 (childBoxPercentageLengths.X / 100f) * parentBoxLengths.X,
                 (childBoxPercentageLengths.Y / 100f) * parentBoxLengths.Y
             );
-        
-        leftOverWidthPixels += childBoxPixelLengths.X - childBoxPixelLengths.X;
-        leftOverHightPixels += childBoxPixelLengths.Y - childBoxPixelLengths.Y;
 
-        return (childBoxPixelLengths, leftOverWidthPixels, leftOverHightPixels);
+        if(boxName == MazeViewBoxNames.ParentBox || boxName == MazeViewBoxNames.CommonData)
+        {
+            childBoxPixelLengths.X = MathF.Round(childBoxPixelLengths.X);
+        }
+        
+        return childBoxPixelLengths;
     }
 
     
