@@ -273,16 +273,16 @@ public class MazeGenerator
 
         if(navigator.Y - currentIncrement >= 0)
         {
-            allNearWallStates[0] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y - currentIncrement);
+            allNearWallStates[(int)Directions.Up] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y - currentIncrement);
 
             checkNavigator.X = navigator.X;
             checkNavigator.Y = navigator.Y - currentIncrement;
 
-            checkNearSlotStates[0] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[0] =
+            allNearWallStates[(int)Directions.Up] =
                     new WallState[]{
                         WallState.Closed,
                         WallState.Closed,
@@ -293,16 +293,16 @@ public class MazeGenerator
 
         if(navigator.X + currentIncrement < mazeSize.X)
         {
-            allNearWallStates[1] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + currentIncrement, navigator.Y);
+            allNearWallStates[(int)Directions.Right] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + currentIncrement, navigator.Y);
 
             checkNavigator.X = navigator.X + currentIncrement;
             checkNavigator.Y = navigator.Y;
 
-            checkNearSlotStates[1] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[1] =
+            allNearWallStates[(int)Directions.Right] =
                     new WallState[]{
                         WallState.Closed,
                         WallState.Closed,
@@ -313,16 +313,16 @@ public class MazeGenerator
 
         if(navigator.Y + currentIncrement < mazeSize.Y)
         {
-            allNearWallStates[2] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y + currentIncrement);
+            allNearWallStates[(int)Directions.Down] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y + currentIncrement);
 
             checkNavigator.X = navigator.X;
             checkNavigator.Y = navigator.Y + currentIncrement;
 
-            checkNearSlotStates[2] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[2] =
+            allNearWallStates[(int)Directions.Down] =
                     new WallState[]{
                         WallState.Closed,
                         WallState.Closed,
@@ -333,16 +333,16 @@ public class MazeGenerator
 
         if(navigator.X - currentIncrement >= 0)
         {
-            allNearWallStates[3] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - currentIncrement, navigator.Y);
+            allNearWallStates[(int)Directions.Left] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - currentIncrement, navigator.Y);
 
             checkNavigator.X = navigator.X - currentIncrement;
             checkNavigator.Y = navigator.Y;
 
-            checkNearSlotStates[3] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[3] =
+            allNearWallStates[(int)Directions.Left] =
                 new WallState[]{
                     WallState.Closed,
                     WallState.Closed,
@@ -376,16 +376,16 @@ public class MazeGenerator
 
         if(navigator.Y - incrementY >= 0 && navigator.X + incrementX < mazeSize.X)
         {
-            allNearWallStates[0] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y - incrementY);
+            allNearWallStates[(int)Directions.Up] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y - incrementY);
 
             checkNavigator.X = navigator.X + incrementX;
             checkNavigator.Y = navigator.Y - incrementY;
 
-            checkNearSlotStates[0] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[0] =
+            allNearWallStates[(int)Directions.Up] =
                 new WallState[]{
                     WallState.Closed,
                     WallState.Closed,
@@ -396,16 +396,16 @@ public class MazeGenerator
 
         if(navigator.X + incrementX < mazeSize.X && navigator.Y + incrementY < mazeSize.Y)
         {
-            allNearWallStates[1] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y + incrementY);
+            allNearWallStates[(int)Directions.Right] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y + incrementY);
 
             checkNavigator.X = navigator.X + incrementX;
             checkNavigator.Y = navigator.Y + incrementY;
 
-            checkNearSlotStates[1] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[1] =
+            allNearWallStates[(int)Directions.Right] =
                 new WallState[]{
                     WallState.Closed,
                     WallState.Closed,
@@ -416,16 +416,16 @@ public class MazeGenerator
 
         if(navigator.Y + incrementY < mazeSize.Y && navigator.X - incrementX >= 0)
         {
-            allNearWallStates[2] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y + incrementY);
+            allNearWallStates[(int)Directions.Down] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y + incrementY);
 
             checkNavigator.X = navigator.X - incrementX;
             checkNavigator.Y = navigator.Y + incrementY;
 
-            checkNearSlotStates[2] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[2] =
+            allNearWallStates[(int)Directions.Down] =
                 new WallState[]{
                     WallState.Closed,
                     WallState.Closed,
@@ -436,16 +436,16 @@ public class MazeGenerator
 
         if (navigator.X - incrementX >= 0 && navigator.Y - incrementY >= 0)
         {
-            allNearWallStates[3] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y - incrementY);
+            allNearWallStates[(int)Directions.Left] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y - incrementY);
 
             checkNavigator.X = navigator.X - incrementX;
             checkNavigator.Y = navigator.Y - incrementY;
 
-            checkNearSlotStates[3] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
-            allNearWallStates[3] =
+            allNearWallStates[(int)Directions.Left] =
                 new WallState[]{
                     WallState.Closed,
                     WallState.Closed,
@@ -491,44 +491,44 @@ public class MazeGenerator
         {
             givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y - 1);
 
-            allNearSlotStates[0] = givenSlotState;
+            allNearSlotStates[(int)Directions.Up] = givenSlotState;
         }
         else
         {
-            allNearSlotStates[0] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
+            allNearSlotStates[(int)Directions.Up] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
         }
 
         if(navigator.X + 1 < mazeSize.X)
         {
             givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + 1, navigator.Y);
 
-            allNearSlotStates[1] = givenSlotState;
+            allNearSlotStates[(int)Directions.Right] = givenSlotState;
         }
         else
         {
-            allNearSlotStates[1] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
+            allNearSlotStates[(int)Directions.Right] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
         }
 
         if(navigator.Y + 1 < mazeSize.Y)
         {
             givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y + 1);
 
-            allNearSlotStates[2] = givenSlotState;
+            allNearSlotStates[(int)Directions.Down] = givenSlotState;
         }
         else
         {
-            allNearSlotStates[2] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
+            allNearSlotStates[(int)Directions.Down] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
         }
 
         if(navigator.X - 1 >= 0)
         {
             givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - 1, navigator.Y);
 
-            allNearSlotStates[3] = givenSlotState;
+            allNearSlotStates[(int)Directions.Left] = givenSlotState;
         }
         else
         {
-            allNearSlotStates[3] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
+            allNearSlotStates[(int)Directions.Left] = new WallState[]{WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze, WallState.OutsideMaze};
         }
 
         for (int i = 0; i < currentNavigatorSlotOptions.Length; i++)
