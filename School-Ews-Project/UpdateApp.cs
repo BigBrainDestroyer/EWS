@@ -24,7 +24,10 @@ public class UpdateApp
 
         _editorLayout.EditorLayout();
 
-        _mazeGenerator.Generator();
+        if(_state.maze.generator.AllMazes.Length < 1)
+        {
+            _mazeGenerator.Generator();
+        }
 
         _mazeLayout.MazeLayout();
     }

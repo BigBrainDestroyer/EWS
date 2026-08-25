@@ -38,8 +38,6 @@ public struct WallStates
 
 public class MazeGeneratorState
 {
-    public Maze CurrentMaze { get; set; }
-
     public Maze[] AllMazes { get; set; } = new Maze[0];
 
     public int[][] MazeSeedBach { get; set; } = new int[0][];

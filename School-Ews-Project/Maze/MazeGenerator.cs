@@ -1,5 +1,4 @@
 using System.Numerics;
-using System.Linq;
 
 namespace Program;
 
@@ -35,6 +34,33 @@ public class MazeGenerator
                     _generator.MazeSize,
                     _generator.MazeSeedBach[i]
                 );
+        }
+
+        foreach (Maze maze in _generator.AllMazes)
+        {
+            Console.WriteLine("De H");
+            foreach (Array array in maze.UsingXToGetRightArray)
+            {
+                foreach (int wallState in array)
+                {
+                    Console.Write(wallState);
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("De V");
+            foreach (Array array in maze.UsingYToGetRightArray)
+            {
+                foreach (int wallState in array)
+                {
+                    Console.Write(wallState);
+                }
+
+                Console.WriteLine();
+            }
+
+            Console.WriteLine();
         }
     }
 
@@ -474,7 +500,7 @@ public class MazeGenerator
         WallState[] givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y);
         WallState[][] allNearSlotStates = new WallState[4][];
         bool[] currentNavigatorSlotOptions = new bool[4];
-
+        
         for (int i = 0; i < givenSlotState.Length; i++)
         {
             if(givenSlotState[i] == WallState.Closed)
@@ -563,7 +589,7 @@ public class MazeGenerator
 
         if(newSlotNavigator - 1 >= 0)
         {
-            if(newSlotNavigator < WallStates[arrayNavigator].Length)
+            if(newSlotNavigator < WallStates[arrayNavigator].Length -1)
             {
                 newWallState.X = WallStates[arrayNavigator][newSlotNavigator - 1];
                 newWallState.Y = WallStates[arrayNavigator][newSlotNavigator];

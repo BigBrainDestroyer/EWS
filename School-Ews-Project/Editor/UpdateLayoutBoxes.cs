@@ -13,6 +13,9 @@ public class UpdateEditorLayoutBoxes
 
     public void EditorLayoutBoxes()
     {
+        var _editorBoxes = _state.editor.layout.boxes;
+        var _commonBoxes = _state.common.boxes;
+
         EditorBoxNames[] boxNames = Enum.GetValues<EditorBoxNames>();
         double leftOverPixels = 0;
         
@@ -20,14 +23,14 @@ public class UpdateEditorLayoutBoxes
         {
             (int boxPixelHeight, leftOverPixels) = 
                 CalculatePixelHeightLength(
-                    _state.editor.layout.boxes.BoxPercentageHeights[boxName], 
-                    (int)_state.common.boxes.MainBoxPixelLengths[MainBoxNames.Editor].Y,
+                    _editorBoxes.BoxPercentageHeights[boxName], 
+                    (int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Editor].Y,
                     leftOverPixels
                 );
 
-            _state.editor.layout.boxes.BoxPixelLengths[boxName] = 
+            _editorBoxes.BoxPixelLengths[boxName] = 
                 new Vector2(
-                    _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Editor].X,
+                    _commonBoxes.MainBoxPixelLengths[MainBoxNames.Editor].X,
                     boxPixelHeight
                 );
         }
@@ -38,10 +41,10 @@ public class UpdateEditorLayoutBoxes
         {
             if(leftOverPixels > 0)
             {
-                _state.editor.layout.boxes.BoxPixelLengths[boxName] = 
+                _editorBoxes.BoxPixelLengths[boxName] = 
                     new Vector2(
-                        _state.editor.layout.boxes.BoxPixelLengths[boxName].X, 
-                        _state.editor.layout.boxes.BoxPixelLengths[boxName].Y + 1
+                        _editorBoxes.BoxPixelLengths[boxName].X, 
+                        _editorBoxes.BoxPixelLengths[boxName].Y + 1
                     );
                 
                 leftOverPixels -= 1;
