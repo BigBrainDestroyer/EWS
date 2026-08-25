@@ -4,8 +4,8 @@ namespace Program;
 
 public struct Maze
 {
-    public int[][] X;
-    public int[][] Y;
+    public WallState[][] UsingXToGetRightArray;
+    public WallState[][] UsingYToGetRightArray;
 }
 
 public struct MazeNavigator
@@ -14,16 +14,23 @@ public struct MazeNavigator
     public int Y;
 }
 
+public struct WallStates
+{
+    public WallState X;
+    public WallState Y;
+}
+
 public class MazeGeneratorState
 {
     public Maze CurrentMaze { get; set; }
 
+    public Maze[] AllMazes { get; set; } = new Maze[0];
+
+    public int[][] MazeSeedBach { get; set; } = new int[0][];
+    
     public Vector2 MazeSize = new Vector2(10, 10);
 
     public int MazeMakers { get; set; } = 1;
-
-    public int[] MazeSeed { get; set; } = new int[0];
-
-
-
+    
+    public int MazeBachSize { get; set; } = 1;
 }
