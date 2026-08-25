@@ -3,12 +3,7 @@ using System.Linq;
 
 namespace Program;
 
-public enum WallState
-{
-    Open,
-    Closed,
-    OutsideMaze
-}
+
 public class MazeGenerator
 {
     private readonly AppState _state;
@@ -20,7 +15,7 @@ public class MazeGenerator
         _seed = new GenerateMazeSeed(_state);
     }
 
-    public void Generator()
+    public void Generator() // 0 Up 1 Right 2 Down 3 Left
     {
         var _generator = _state.maze.generator;
 
@@ -38,42 +33,8 @@ public class MazeGenerator
             _generator.AllMazes[i] =
                 MakeMaze(
                     _generator.MazeSize,
-                    new int[] {3,0,1,4,1,3,2,2,4,0,3,3,4,4,1,4,2,2,2,0,0,1,4,3,4,1,0,4,2,2,1,2,0,3,1,4,2,0,4,2,2,1,1,4,1,3,4,1,1,2,3,2,3,4,2,4,2,1,0,3,1,1,2,0,3,4,3,1,4,1,2,1,4,0,1,1,2,1,4,3,0,4,2,4,0,2,0,2,3,2,1,2,2,4,3,1,1,3,3,4}
+                    _generator.MazeSeedBach[i]
                 );
-
-            foreach(int seedNumber in _generator.MazeSeedBach[i])
-            {
-                Console.Write(seedNumber);
-            }
-            Console.WriteLine();
-        }
-
-
-        foreach (Maze maze in _generator.AllMazes)
-        {
-            Console.WriteLine("De H");
-            foreach (Array array in maze.UsingXToGetRightArray)
-            {
-                foreach (int wallState in array)
-                {
-                    Console.Write(wallState);
-                }
-
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("De V");
-            foreach (Array array in maze.UsingYToGetRightArray)
-            {
-                foreach (int wallState in array)
-                {
-                    Console.Write(wallState);
-                }
-
-                Console.WriteLine();
-            }
-
-            Console.WriteLine();
         }
     }
 
@@ -162,13 +123,13 @@ public class MazeGenerator
 
         switch(index)
         {
-            case 0: newMaze.UsingXToGetRightArray[navigator.X][navigator.Y - 1] = WallState.Open;
+            case (int)Directions.Up: newMaze.UsingXToGetRightArray[navigator.X][navigator.Y - 1] = WallState.Open;
                 navigator.Y -= 1; break;
-            case 1: newMaze.UsingYToGetRightArray[navigator.Y][navigator.X] = WallState.Open;
+            case (int)Directions.Right: newMaze.UsingYToGetRightArray[navigator.Y][navigator.X] = WallState.Open;
                 navigator.X += 1; break;
-            case 2: newMaze.UsingXToGetRightArray[navigator.X][navigator.Y] = WallState.Open;
+            case (int)Directions.Down: newMaze.UsingXToGetRightArray[navigator.X][navigator.Y] = WallState.Open;
                 navigator.Y += 1; break;
-            case 3: newMaze.UsingYToGetRightArray[navigator.Y][navigator.X - 1] = WallState.Open;
+            case (int)Directions.Left: newMaze.UsingYToGetRightArray[navigator.Y][navigator.X - 1] = WallState.Open;
                 navigator.X -= 1; break;
         }
 
@@ -230,10 +191,10 @@ public class MazeGenerator
         {
             switch(index)
             {
-                case 0: navigator.Y -= currentIncrement; break;
-                case 1: navigator.X += currentIncrement; break;
-                case 2: navigator.Y += currentIncrement; break;
-                case 3: navigator.X -= currentIncrement; break;
+                case (int)Directions.Up:    navigator.Y -= currentIncrement; break;
+                case (int)Directions.Right: navigator.X += currentIncrement; break;
+                case (int)Directions.Down:  navigator.Y += currentIncrement; break;
+                case (int)Directions.Left:  navigator.X -= currentIncrement; break;
             }
         }
         else if(searchDistantCorners)
@@ -254,10 +215,10 @@ public class MazeGenerator
 
             switch(index)
             {
-                case 0: navigator.X += incrementX; navigator.Y -= incrementY; break;
-                case 1: navigator.X += incrementX; navigator.Y += incrementY; break;
-                case 2: navigator.X -= incrementX; navigator.Y += incrementY; break;
-                case 3: navigator.X -= incrementX; navigator.Y -= incrementY; break;
+                case (int)Directions.Up:    navigator.X += incrementX; navigator.Y -= incrementY; break;
+                case (int)Directions.Right: navigator.X += incrementX; navigator.Y += incrementY; break;
+                case (int)Directions.Down:  navigator.X -= incrementX; navigator.Y += incrementY; break;
+                case (int)Directions.Left:  navigator.X -= incrementX; navigator.Y -= incrementY; break;
             }
         }
 

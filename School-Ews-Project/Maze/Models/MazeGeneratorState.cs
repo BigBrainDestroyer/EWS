@@ -2,6 +2,21 @@ using System.Numerics;
 
 namespace Program;
 
+public enum WallState
+{
+    Open,
+    Closed,
+    OutsideMaze
+}
+
+public enum Directions
+{
+    Up,
+    Right,
+    Down,
+    Left
+}
+
 public struct Maze
 {
     public WallState[][] UsingXToGetRightArray;
@@ -19,6 +34,7 @@ public struct WallStates
     public WallState X;
     public WallState Y;
 }
+
 
 public class MazeGeneratorState
 {
