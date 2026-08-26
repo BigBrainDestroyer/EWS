@@ -27,7 +27,7 @@ public class UpdateMazeLayoutBoxes
 
         foreach(MazeViewBoxNames boxName in boxNames)
         {
-            Vector2 parentBox = (boxName == MazeViewBoxNames.Maze || boxName == MazeViewBoxNames.CommonData) ? _mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox] : _commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze];
+            Vector2 parentBox = (boxName == MazeViewBoxNames.Maze || boxName == MazeViewBoxNames.CommonData) ? _mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox] : _commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze];
             
             (_mazeBoxes.BoxPixelLengths[boxName]) = 
                 CalculatePixelLength(
@@ -91,8 +91,8 @@ public class UpdateMazeLayoutBoxes
         var _mazeView = _state.maze.layout.mazeView;
         var _commonBoxes = _state.common.boxes;
 
-        int whiteWidthSpace = ((int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].X - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].X)/2;
-        int whiteHightSpace = ((int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y)/2;
+        int whiteWidthSpace = ((int)_commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze].X - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].X)/2;
+        int whiteHightSpace = ((int)_commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y)/2;
 
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Background] = _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze];
         

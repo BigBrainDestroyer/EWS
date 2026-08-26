@@ -8,6 +8,7 @@ public class DrawUi
     private readonly DrawDiagnostics _diagnostics;
     private readonly DrawEditorLayout _drawEditorLayout;
     private readonly DrawMazeLayout _drawMazeLayout;
+    private readonly DrawCommonHeader _drawCommonHeader;
 
     public DrawUi(AppState state)
     {
@@ -16,15 +17,18 @@ public class DrawUi
         _diagnostics = new DrawDiagnostics(_state);
         _drawEditorLayout = new DrawEditorLayout(_state);
         _drawMazeLayout = new DrawMazeLayout(_state);
+        _drawCommonHeader = new DrawCommonHeader(_state);
     }
  
     public void Ui()
     {
         Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.RayWhite);
-        
-        _diagnostics.Draw();
+        Raylib.ClearBackground(new Color(43, 46, 49, 255));
 
+        _drawCommonHeader.CommonHeader();
+
+        _diagnostics.Draw();
+        
         _drawEditorLayout.DrawEditor();
 
         _drawMazeLayout.Maze();

@@ -65,7 +65,7 @@ public class MainBoxesState
     public Vector2 HeaderPixelLengths { get; set;}= new Vector2();
     public Vector2 HeaderPixelPosition = new Vector2(0,0);
 
-    public float MainBoxesPercentageSpacing { get; set; } = 4f;
+    public float MainBoxesPercentageSpacing { get; set; } = 2f;
 
     public float MainBoxesPixelSpacing { get; set; }
 }

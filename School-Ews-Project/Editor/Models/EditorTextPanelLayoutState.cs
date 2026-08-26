@@ -27,7 +27,7 @@ public class EditorTextPanelLayoutState
 
     public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 0;
     public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;
-
+    
     public int TextGridBoxesOffSetX { get; set; } = 0;
     public int TextGridBoxesOffSetY { get; set; } = 0;
 

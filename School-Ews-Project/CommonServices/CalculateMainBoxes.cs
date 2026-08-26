@@ -12,7 +12,7 @@ public class CalculateMainBoxes
         _state = state ?? throw new ArgumentNullException(nameof(state));
     } 
 
-    public void  updateMainBoxes()
+    public void  UpdateMainBoxes()
     {
         var _mainBoxes = _state.common.boxes;
 
@@ -80,11 +80,11 @@ public class CalculateMainBoxes
             {
                 newMainBoxPixelLengths.Add(boxName, mainColumnsPixelLengths[MainColumnsName.Archive]);
             }
-            else if(boxName == MainBoxNames.Maze || boxName == MainBoxNames.Terminal)
+            else if(boxName == MainBoxNames.Editor || boxName == MainBoxNames.Terminal)
             {
                 newMainBoxPixelLengths.Add(boxName,
                     new Vector2(
-                        mainColumnsPixelLengths[MainColumnsName.Editor].X * (mainBoxPercentages[boxName].X / 100f),
+                        (mainColumnsPixelLengths[MainColumnsName.Editor].X - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].X / 100f),
                         (mainColumnsPixelLengths[MainColumnsName.Editor].Y - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].Y / 100f)
                     ));
             }
@@ -129,7 +129,7 @@ public class CalculateMainBoxes
                 headerPixelLengths.Y + mainBoxPixelSpacing
             ));
 
-        newMainBoxPixelPositions.Add(MainBoxNames.Statistics,
+        newMainBoxPixelPositions.Add(MainBoxNames.Terminal,
             new Vector2(
                 newMainBoxPixelPositions[MainBoxNames.Statistics].X + mainBoxPixelLengths[MainBoxNames.Statistics].X + mainBoxPixelSpacing,
                 newMainBoxPixelPositions[MainBoxNames.Editor].Y + mainBoxPixelLengths[MainBoxNames.Editor].Y + mainBoxPixelSpacing

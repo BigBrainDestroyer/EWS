@@ -14,23 +14,10 @@ public class DrawEditorLayout
 
     public void DrawEditor()
     {
-        DrawEditorHeader();
-        
         DrawEditorTextPanel();
 
         DrawEditorTerminal();
     }
-
-    
-    private void DrawEditorHeader()
-    {
-        Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Header],
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Header],
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Header]
-        );
-    }
-
     
     private void DrawEditorTextPanel()
     {
@@ -147,8 +134,8 @@ public class DrawEditorLayout
     private void DrawEditorTerminal()
     {
         Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal],
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.Terminal],
+            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
             _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
         );
     }

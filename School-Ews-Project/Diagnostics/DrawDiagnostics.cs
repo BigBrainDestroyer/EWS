@@ -23,25 +23,25 @@ public class DrawDiagnostics
     {
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive], 
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Archive],
             Color.Yellow
         );
 
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Maze], 
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Maze],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Maze],
             Color.DarkGray
         );
 
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Statistics], 
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Statistics],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Statistics],
             Color.DarkBlue
         );
 
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor], 
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Editor],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Editor],
             Color.Red
         );
     }
