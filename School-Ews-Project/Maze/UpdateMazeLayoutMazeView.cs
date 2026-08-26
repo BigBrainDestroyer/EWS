@@ -24,10 +24,10 @@ public class UpdateMazeLayoutMazeView
                 _layout.boxes.BoxPixelPositions[MazeViewBoxNames.Maze]
             );
 
-        CalculateMazeSlotPixelLength(
-            _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
-            _generator.MazeSize
-        );
+        _layout.mazeView.MazeSlotLengths = CalculateMazeSlotPixelLength(
+                _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
+                _generator.MazeSize
+            );
     }
 
     private Maze UpdateCurrentMaze(Maze[] allMazes, int allMazePosition)
@@ -65,8 +65,8 @@ public class UpdateMazeLayoutMazeView
     {
         Vector2 newSlotPixelLengths = 
             new Vector2(
-                mazeBoxLengths.X / mazeSize.X - 1,
-                mazeBoxLengths.Y / mazeSize.Y - 1
+                mazeBoxLengths.X / (mazeSize.X - 1),
+                mazeBoxLengths.Y / (mazeSize.Y - 1)
             );
 
         return newSlotPixelLengths;

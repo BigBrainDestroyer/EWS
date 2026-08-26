@@ -23,6 +23,4 @@ public class UpdateMazeLayout
 
         _layoutMazeView.MazeView();
     }    
-
-
 }

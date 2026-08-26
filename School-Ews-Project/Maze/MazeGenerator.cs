@@ -589,7 +589,7 @@ public class MazeGenerator
 
         if(newSlotNavigator - 1 >= 0)
         {
-            if(newSlotNavigator < WallStates[arrayNavigator].Length -1)
+            if(newSlotNavigator < WallStates[arrayNavigator].Length)
             {
                 newWallState.X = WallStates[arrayNavigator][newSlotNavigator - 1];
                 newWallState.Y = WallStates[arrayNavigator][newSlotNavigator];
@@ -600,7 +600,7 @@ public class MazeGenerator
                 newWallState.Y = WallState.OutsideMaze;
             }
         }
-        else
+        else if(arrayNavigator - 1 >= 0)
         {
             newWallState.X = WallState.OutsideMaze;
             newWallState.Y = WallStates[arrayNavigator][newSlotNavigator];

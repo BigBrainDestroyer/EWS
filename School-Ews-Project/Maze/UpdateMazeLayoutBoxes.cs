@@ -25,11 +25,14 @@ public class UpdateMazeLayoutBoxes
 
         foreach(MazeViewBoxNames boxName in boxNames)
         {
+            Vector2 parentBox = (boxName == MazeViewBoxNames.Maze || boxName == MazeViewBoxNames.CommonData) ? _mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox] : _commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze];
+            
+
             (_mazeBoxes.BoxPixelLengths[boxName]) = 
                 CalculatePixelLength(
                     boxName,
                     _mazeBoxes.BoxPercentageLengths[boxName], 
-                    _commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze]
+                    parentBox
                 );
         }
 
@@ -58,8 +61,8 @@ public class UpdateMazeLayoutBoxes
         var _mazeBoxes = _state.maze.layout.boxes;
         var _commonBoxes = _state.common.boxes;
 
-        int whiteWidthSpace = (int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].X - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].X;
-        int whiteHightSpace = (int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y;
+        int whiteWidthSpace = ((int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].X - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].X)/2;
+        int whiteHightSpace = ((int)_commonBoxes.MainBoxPixelLengths[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y)/2;
 
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Background] = _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze];
         
@@ -70,7 +73,7 @@ public class UpdateMazeLayoutBoxes
             );
 
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Maze] = _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.ParentBox];
-        _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Maze] =
+        _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.CommonData] =
             new Vector2(
                 _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.ParentBox].X + _mazeBoxes.BoxPixelLengths[MazeViewBoxNames.Maze].X, 
                 _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.ParentBox].Y
