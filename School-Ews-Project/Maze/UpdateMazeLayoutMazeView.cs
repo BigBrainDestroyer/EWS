@@ -15,19 +15,22 @@ public class UpdateMazeLayoutMazeView
     {
         var _generator = _state.maze.generator;
         var _layout = _state.maze.layout;
+
+        if(_generator.ReadingAllMazes)
+        {
+            _layout.mazeView.CurrentMaze = UpdateCurrentMaze(_generator.AllMazes, _layout.mazeView.AllMazePosition);
+        }
         
-        _layout.mazeView.CurrentMaze = UpdateCurrentMaze(_generator.AllMazes, _layout.mazeView.AllMazePosition);
-
-        (_layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze], _layout.boxes.BoxPixelPositions[MazeViewBoxNames.Maze]) = 
-            UpdateMazeLengthsAndPosition(
-                _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze], 
-                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.Maze]
-            );
-
         _layout.mazeView.MazeSlotLengths = CalculateMazeSlotPixelLength(
                 _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
                 _generator.MazeSize
             );
+
+        _layout.mazeView.CommonDataSingleBoxLengths = 
+            CalculateCommonDataSingleBoxLengths(_layout.mazeView.CommonDataBoxState, _layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData]);
+
+        _layout.mazeView.CommonDataCharHight =
+            CalculatingCommonDataCharHight(_layout.mazeView.CommonDataSingleBoxLengths);
     }
 
     private Maze UpdateCurrentMaze(Maze[] allMazes, int allMazePosition)
@@ -35,30 +38,6 @@ public class UpdateMazeLayoutMazeView
         Maze newCurrentMaze = allMazes[allMazePosition];
 
         return newCurrentMaze;
-    }
-
-    private (Vector2, Vector2) UpdateMazeLengthsAndPosition(Vector2 boxPixelLengths, Vector2 boxPosition)
-    {
-        int lengthDifference = 0;
-
-        if(boxPixelLengths.X > boxPixelLengths.Y)
-        {
-            lengthDifference = (int)(MathF.Abs(boxPixelLengths.Y - boxPixelLengths.X));
-
-            boxPixelLengths.X = boxPixelLengths.Y;
-
-            boxPosition.X += lengthDifference / 2;
-        }
-        else
-        {
-            lengthDifference = (int)(MathF.Abs(boxPixelLengths.X - boxPixelLengths.Y));
-
-            boxPixelLengths.Y = boxPixelLengths.X;
-
-            boxPosition.Y += lengthDifference / 2;
-        }
-        
-        return (boxPixelLengths, boxPosition);
     }
 
     private Vector2 CalculateMazeSlotPixelLength(Vector2 mazeBoxLengths, Vector2 mazeSize)
@@ -70,5 +49,45 @@ public class UpdateMazeLayoutMazeView
             );
 
         return newSlotPixelLengths;
+    }
+
+    private Vector2 CalculateCommonDataSingleBoxLengths(Dictionary<CommonDataNames, bool> commonDataState, Vector2 parentBoxLengths)
+    {
+        CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
+        int amountOfCommonDataBoxes = 0;
+
+        foreach(CommonDataNames boxName in boxNames)
+        {
+            if(commonDataState[boxName] == true)
+            {
+                amountOfCommonDataBoxes += 1;
+            }
+        }
+        
+        Vector2 newBoxLengths =
+            new Vector2(
+                parentBoxLengths.X,
+                parentBoxLengths.Y/amountOfCommonDataBoxes
+            );
+
+        return newBoxLengths;
+    }
+
+    private Vector2 CalculatingCommonDataBoxLengthsPixelSpacing(Vector2 commonDataSingleBoxLengths, Vector2 commonDataSingleBoxPercentageSpacing)
+    {
+        Vector2 newCommonDataBoxPixelSpacing =
+            new Vector2(
+                (commonDataSingleBoxPercentageSpacing.X / 100f) * commonDataSingleBoxLengths.X,
+                (commonDataSingleBoxPercentageSpacing.X / 100f) * commonDataSingleBoxLengths.Y
+            );
+
+        return newCommonDataBoxPixelSpacing;
+    }
+    
+    private float CalculatingCommonDataCharHight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing)
+    {
+        float newCharHight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y)/2;
+
+        return newCharHight;
     }
 }

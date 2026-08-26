@@ -3,13 +3,61 @@ using Raylib_cs;
 
 namespace Program;
 
+public enum CommonDataNames
+{
+    State,
+    CoreProcessorUsagePercentage,
+    RamTotalUsage,
+    SlotSearched,
+    Time
+}
+
 public class MazeLayoutMazeViewState
 {
-    public Maze CurrentMaze { get; set; }
+    public Maze CurrentMaze { get; set; } = new Maze(new WallState[0][], new WallState[0][]);
 
+    public Dictionary<CommonDataNames, bool> CommonDataBoxState { get; set; } =
+        new Dictionary<CommonDataNames, bool>{
+            {CommonDataNames.State, true},
+            {CommonDataNames.CoreProcessorUsagePercentage, true},
+            {CommonDataNames.RamTotalUsage, true},
+            {CommonDataNames.SlotSearched, true},
+            {CommonDataNames.Time, true}
+        };
+
+    public Dictionary<CommonDataNames, string> CommonDataTitle { get; } =
+        new Dictionary<CommonDataNames, string>{
+            {CommonDataNames.State, "State"},
+            {CommonDataNames.CoreProcessorUsagePercentage, "CPU Usage"},
+            {CommonDataNames.RamTotalUsage, "RAM Usage"},
+            {CommonDataNames.SlotSearched, "SlotSearched"},
+            {CommonDataNames.Time, "Time"}
+        };
+
+    public Dictionary<CommonDataNames, string> CommonDataInformation { get; set; } =
+        new Dictionary<CommonDataNames, string>{
+            {CommonDataNames.State, "Inactive"},
+            {CommonDataNames.CoreProcessorUsagePercentage, "___"},
+            {CommonDataNames.RamTotalUsage, "___ / _GB"},
+            {CommonDataNames.SlotSearched, "___"},
+            {CommonDataNames.Time, "__:__"}
+        };
+        
+    public Vector2 CommonDataSingleBoxLengths { get; set; } = new Vector2();
+    
     public Vector2 MazeSlotLengths { get; set; } = new Vector2();
 
-    public float LineThick { get; set; } = 6;
+    public Vector2 CommonDataBoxPercentageSpacing { get; set; } = new Vector2(4f, 3f);
+
+    public Vector2 CommonDataBoxPixelSpacing { get; set; } = new Vector2();
+
+    public float LineThick { get; set; } = 1;
+
+    public float CommonDataCharHight { get; set; } = 10;
 
     public int AllMazePosition { get; set; } = 0;
-}
+
+    
+
+
+} 

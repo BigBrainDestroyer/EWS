@@ -18,50 +18,32 @@ public class MazeGenerator
     {
         var _generator = _state.maze.generator;
 
-        _seed.Generate();
-
         _generator.AllMazes = new Maze[_generator.MazeBachSize];
-
-        for (int i = 0; i < _generator.AllMazes.Length; i++)
+        _generator.ReadingAllMazes = false;
+        
+        Task.Run(() =>
         {
-            if(i == _generator.MazeSeedBach.Length)
-            {
-                break;
-            }
+            _seed.Generate();
 
-            _generator.AllMazes[i] =
-                MakeMaze(
-                    _generator.MazeSize,
-                    _generator.MazeSeedBach[i]
-                );
-        }
+            int mazeLength = _generator.AllMazes.Length;
+            int seedBachLength = _generator.MazeSeedBach.Length;
 
-        foreach (Maze maze in _generator.AllMazes)
-        {
-            Console.WriteLine("De H");
-            foreach (Array array in maze.UsingXToGetRightArray)
+            Parallel.For(0, mazeLength, (i, loop) =>
             {
-                foreach (int wallState in array)
+                if (i == seedBachLength)
                 {
-                    Console.Write(wallState);
+                    loop.Break();
                 }
 
-                Console.WriteLine();
-            }
+                _generator.AllMazes[i] =
+                    MakeMaze(
+                        _generator.MazeSize,
+                        _generator.MazeSeedBach[i]
+                    );
+            });
 
-            Console.WriteLine("De V");
-            foreach (Array array in maze.UsingYToGetRightArray)
-            {
-                foreach (int wallState in array)
-                {
-                    Console.Write(wallState);
-                }
-
-                Console.WriteLine();
-            }
-
-            Console.WriteLine();
-        }
+            _generator.ReadingAllMazes = true;
+        });
     }
 
     private Maze MakeMaze( Vector2 mazeSize, int[] seed)
