@@ -19,7 +19,7 @@ public enum MainBoxNames
 }
 
 public class MainBoxesState
-{   
+{
     public Dictionary<MainColumnsName, Vector2> MainColumnsPercentage { get; set; } =
         new Dictionary<MainColumnsName, Vector2>{
             {MainColumnsName.Archive, new Vector2(12f, 100f)},
@@ -61,8 +61,9 @@ public class MainBoxesState
         {MainBoxNames.Terminal  , new Vector2(0,0)}
     };
 
-    public Vector2 HeaderPercentages = new Vector2(100f, 10f);
-    public Vector2 HeaderPixelLengths = new Vector2(100f, 10f);
+    public Vector2 HeaderPercentages { get; set; } = new Vector2(100f, 10f);
+    public Vector2 HeaderPixelLengths { get; set;}= new Vector2();
+    public Vector2 HeaderPixelPosition = new Vector2(0,0);
 
     public float MainBoxesPercentageSpacing { get; set; } = 4f;
 
