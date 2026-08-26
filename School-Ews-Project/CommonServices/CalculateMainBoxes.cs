@@ -17,13 +17,16 @@ public class CalculateMainBoxes
         var _mainBoxes = _state.common.boxes;
 
         _mainBoxes.HeaderPixelLengths =
-            CalculatingHeaderPixelLengths(_mainBoxes.HeaderPercentages);
+            CalculateHeaderPixelLengths(_mainBoxes.HeaderPercentages);
 
-        _mainBoxes.MainColumnslengths =
+        (_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing) =
             CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesSpacing);
+
+        _mainBoxes.MainBoxPercentages =
+            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
     }
 
-    private Vector2 CalculatingHeaderPixelLengths(Vector2 HeaderPercentages)
+    private Vector2 CalculateHeaderPixelLengths(Vector2 HeaderPercentages)
     {
         Vector2 newHeaderPixelLengths =
             new Vector2(
@@ -34,7 +37,7 @@ public class CalculateMainBoxes
         return newHeaderPixelLengths;
     }
 
-    private Dictionary<MainColumnsName, Vector2> CalculateMainColumnLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPercentage, Vector2 headerPixelLengths, float mainBoxesSpacing)
+    private (Dictionary<MainColumnsName, Vector2>, float)CalculateMainColumnLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPercentage, Vector2 headerPixelLengths, float mainBoxesSpacing)
     {
         MainColumnsName[] columnNames = Enum.GetValues<MainColumnsName>();
 
@@ -59,7 +62,40 @@ public class CalculateMainBoxes
             );
         }
 
-        return newMainColumnLengths;
+        return (newMainColumnLengths, mainBoxPixelSpacing);
+    }
+
+    private Dictionary<MainBoxNames, Vector2> CalculateMainBoxLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPixelLengths, Dictionary<MainBoxNames, Vector2> mainBoxPercentages, float mainBoxPixelSpacing)
+    {
+        MainBoxNames[] boxNames = Enum.GetValues<MainBoxNames>();
+
+        Dictionary<MainBoxNames, Vector2> newMainBoxPixelLengths = new Dictionary<MainBoxNames, Vector2>();
+
+        foreach(MainBoxNames boxName in boxNames)
+        {
+            if(boxName == MainBoxNames.Archive)
+            {
+                newMainBoxPixelLengths.Add(boxName, mainColumnsPixelLengths[MainColumnsName.Archive]);
+            }
+            else if(boxName == MainBoxNames.Maze || boxName == MainBoxNames.Terminal)
+            {
+                newMainBoxPixelLengths.Add(boxName,
+                    new Vector2(
+                        mainColumnsPixelLengths[MainColumnsName.Editor].X * (mainBoxPercentages[boxName].X / 100f),
+                        (mainColumnsPixelLengths[MainColumnsName.Editor].Y - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].Y / 100f)
+                    ));
+            }
+            else if(boxName == MainBoxNames.Maze || boxName == MainBoxNames.Statistics)
+            {
+                newMainBoxPixelLengths.Add(boxName,
+                    new Vector2(
+                        mainColumnsPixelLengths[MainColumnsName.Visualize].X * (mainBoxPercentages[boxName].X / 100f),
+                        (mainColumnsPixelLengths[MainColumnsName.Visualize].Y - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].Y / 100f)
+                    ));
+            }
+        }
+
+        return newMainBoxPixelLengths;
     }
     
     public void UpdateMainBoxes()

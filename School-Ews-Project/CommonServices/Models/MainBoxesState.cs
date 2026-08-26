@@ -14,7 +14,8 @@ public enum MainBoxNames
     Archive,
     Maze,
     Statistics,
-    Editor
+    Editor,
+    Terminal
 }
 
 public class MainBoxesState
@@ -26,47 +27,44 @@ public class MainBoxesState
             {MainColumnsName.Editor, new Vector2(40f, 100f)}
         };
 
-    public Dictionary<MainColumnsName, Vector2> MainColumnslengths { get; set; } =
+    public Dictionary<MainColumnsName, Vector2> MainColumnsPixelLengths { get; set; } =
         new Dictionary<MainColumnsName, Vector2>{
             {MainColumnsName.Archive, new Vector2()},
             {MainColumnsName.Visualize, new Vector2()},
             {MainColumnsName.Editor, new Vector2()}
         };
 
-    public Dictionary<MainBoxNames, float> MainBoxPercentageWidths { get; } =
-    new Dictionary<MainBoxNames, float>{
-        {MainBoxNames.Archive   , 20f},
-        {MainBoxNames.Maze      , 40f},
-        {MainBoxNames.Statistics, 40f},
-        {MainBoxNames.Editor    , 40f}
-    };
+    public Dictionary<MainBoxNames, Vector2> MainBoxPercentages { get; } =
+        new Dictionary<MainBoxNames, Vector2>{
+            {MainBoxNames.Archive   , new Vector2(100f, 100f)},
+            {MainBoxNames.Maze      , new Vector2(100f, 65f)},
+            {MainBoxNames.Statistics, new Vector2(100f, 35f)},
+            {MainBoxNames.Editor    , new Vector2(100f, 65f)},
+            {MainBoxNames.Terminal  , new Vector2(100f, 35f)}
+        };
 
-    public Dictionary<MainBoxNames, float> MainBoxPercentageHeights { get; } =
-    new Dictionary<MainBoxNames, float>{
-        {MainBoxNames.Archive   , 100f},
-        {MainBoxNames.Maze      , 70f},
-        {MainBoxNames.Statistics, 30f},
-        {MainBoxNames.Editor    , 100f}
-    };
-
-    public Dictionary<MainBoxNames, Vector2> MainBoxPixelLengths { get; set; } = 
-    new Dictionary<MainBoxNames, Vector2>{
-        {MainBoxNames.Archive   , new Vector2(0,0)},
-        {MainBoxNames.Maze      , new Vector2(0,0)},
-        {MainBoxNames.Statistics, new Vector2(0,0)},
-        {MainBoxNames.Editor    , new Vector2(0,0)}
-    };
+    public Dictionary<MainBoxNames, Vector2> MainBoxPixelLengts { get; } =
+        new Dictionary<MainBoxNames, Vector2>{
+            {MainBoxNames.Archive   , new Vector2(0,0)},
+            {MainBoxNames.Maze      , new Vector2(0,0)},
+            {MainBoxNames.Statistics, new Vector2(0,0)},
+            {MainBoxNames.Editor    , new Vector2(0,0)},
+            {MainBoxNames.Terminal  , new Vector2(0,0)}
+        };
 
     public Dictionary<MainBoxNames, Vector2> MainBoxPixelPositions { get; set; } =
     new Dictionary<MainBoxNames, Vector2>{
         {MainBoxNames.Archive   , new Vector2(0,0)},
         {MainBoxNames.Maze      , new Vector2(0,0)},
         {MainBoxNames.Statistics, new Vector2(0,0)},
-        {MainBoxNames.Editor    , new Vector2(0,0)}
+        {MainBoxNames.Editor    , new Vector2(0,0)},
+        {MainBoxNames.Terminal  , new Vector2(0,0)}
     };
 
     public Vector2 HeaderPercentages = new Vector2(100f, 10f);
     public Vector2 HeaderPixelLengths = new Vector2(100f, 10f);
 
-    public float MainBoxesSpacing { get; set; } = 4f;
+    public float MainBoxesPercentageSpacing { get; set; } = 4f;
+
+    public float MainBoxesPixelSpacing { get; set; }
 }
