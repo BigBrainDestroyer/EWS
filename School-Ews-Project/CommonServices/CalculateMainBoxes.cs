@@ -12,6 +12,56 @@ public class CalculateMainBoxes
         _state = state ?? throw new ArgumentNullException(nameof(state));
     } 
 
+    public void  updateMainBoxes()
+    {
+        var _mainBoxes = _state.common.boxes;
+
+        _mainBoxes.HeaderPixelLengths =
+            CalculatingHeaderPixelLengths(_mainBoxes.HeaderPercentages);
+
+        _mainBoxes.MainColumnslengths =
+            CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesSpacing);
+    }
+
+    private Vector2 CalculatingHeaderPixelLengths(Vector2 HeaderPercentages)
+    {
+        Vector2 newHeaderPixelLengths =
+            new Vector2(
+                MathF.Round(Raylib.GetScreenWidth()  * (HeaderPercentages.X / 100f)),
+                MathF.Round(Raylib.GetScreenHeight() * (HeaderPercentages.Y / 100f))
+            );
+
+        return newHeaderPixelLengths;
+    }
+
+    private Dictionary<MainColumnsName, Vector2> CalculateMainColumnLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPercentage, Vector2 headerPixelLengths, float mainBoxesSpacing)
+    {
+        MainColumnsName[] columnNames = Enum.GetValues<MainColumnsName>();
+
+        Dictionary<MainColumnsName, Vector2> newMainColumnLengths = new Dictionary<MainColumnsName, Vector2>();
+
+        float mainBoxPixelSpacing = MathF.Round((Raylib.GetScreenHeight() - headerPixelLengths.Y) * (mainBoxesSpacing/100f));
+
+        Vector2 leftOverWindowPixelLengths = 
+            new Vector2(
+                Raylib.GetScreenWidth() - (mainBoxPixelSpacing * mainColumnsPercentage.Count),
+                (Raylib.GetScreenHeight() - headerPixelLengths.Y) - (mainBoxPixelSpacing * 2) 
+            );
+
+        foreach(MainColumnsName columnName in columnNames)
+        {
+            newMainColumnLengths.Add(
+                columnName, 
+                new Vector2(
+                    leftOverWindowPixelLengths.X * (mainColumnsPercentage[columnName].X/100f),
+                    leftOverWindowPixelLengths.Y * (mainColumnsPercentage[columnName].Y/100f)
+                )
+            );
+        }
+
+        return newMainColumnLengths;
+    }
+    
     public void UpdateMainBoxes()
     {
         if(_state.common.boxes.MainBoxPixelLengths != null && _state.common.boxes.MainBoxPixelLengths.Count() > 0)

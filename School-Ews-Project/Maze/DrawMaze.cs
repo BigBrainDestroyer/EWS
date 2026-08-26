@@ -87,7 +87,7 @@ public class DrawMazeLayout
         {
             foreach (WallState wallState in _mazeView.CurrentMaze.UsingXToGetRightArray[i])
             {
-                if ((int)wallState == 1)
+                if (wallState == WallState.Closed)
                 {
                     Raylib.DrawLineEx(
                         new Vector2(
@@ -125,7 +125,6 @@ public class DrawMazeLayout
             );
 
         int counter = 0;
-
 
         foreach(CommonDataNames boxName in boxNames)
         {
