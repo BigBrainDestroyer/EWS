@@ -48,7 +48,7 @@ public class MazeGeneratorState
 
     public int[][] MazeSeedBach { get; set; } = new int[0][];
     
-    public Vector2 MazeSize = new Vector2(150, 150);
+    public Vector2 MazeSize = new Vector2(50, 50);
 
     public bool ReadingAllMazes { get; set; } = false;
 

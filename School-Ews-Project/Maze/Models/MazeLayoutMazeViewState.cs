@@ -7,6 +7,7 @@ public enum CommonDataNames
 {
     State,
     CoreProcessorUsagePercentage,
+    GPU,
     RamTotalUsage,
     SlotSearched,
     Time
@@ -20,6 +21,7 @@ public class MazeLayoutMazeViewState
         new Dictionary<CommonDataNames, bool>{
             {CommonDataNames.State, true},
             {CommonDataNames.CoreProcessorUsagePercentage, true},
+            {CommonDataNames.GPU, true},
             {CommonDataNames.RamTotalUsage, true},
             {CommonDataNames.SlotSearched, true},
             {CommonDataNames.Time, true}
@@ -29,6 +31,7 @@ public class MazeLayoutMazeViewState
         new Dictionary<CommonDataNames, string>{
             {CommonDataNames.State, "State"},
             {CommonDataNames.CoreProcessorUsagePercentage, "CPU Usage"},
+            {CommonDataNames.GPU, "GPU Usage"},
             {CommonDataNames.RamTotalUsage, "RAM Usage"},
             {CommonDataNames.SlotSearched, "SlotSearched"},
             {CommonDataNames.Time, "Time"}
@@ -37,7 +40,8 @@ public class MazeLayoutMazeViewState
     public Dictionary<CommonDataNames, string> CommonDataInformation { get; set; } =
         new Dictionary<CommonDataNames, string>{
             {CommonDataNames.State, "Inactive"},
-            {CommonDataNames.CoreProcessorUsagePercentage, "___"},
+            {CommonDataNames.CoreProcessorUsagePercentage, "__%"},
+            {CommonDataNames.GPU, "__%"},
             {CommonDataNames.RamTotalUsage, "___ / _GB"},
             {CommonDataNames.SlotSearched, "___"},
             {CommonDataNames.Time, "__:__"}
@@ -47,7 +51,7 @@ public class MazeLayoutMazeViewState
     
     public Vector2 MazeSlotLengths { get; set; } = new Vector2();
 
-    public Vector2 CommonDataBoxPercentageSpacing { get; set; } = new Vector2(4f, 3f);
+    public Vector2 CommonDataBoxPercentageSpacing { get; set; } = new Vector2(13f, 25f);
 
     public Vector2 CommonDataBoxPixelSpacing { get; set; } = new Vector2();
 
@@ -55,9 +59,9 @@ public class MazeLayoutMazeViewState
 
     public float CommonDataCharHight { get; set; } = 10;
 
+    public float CommonDataCharSpacing { get; set; } = 0;
+
     public int AllMazePosition { get; set; } = 0;
 
-    
-
-
+    public int AmountOfCommonDataBoxes { get; set; } = 5;
 } 

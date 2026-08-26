@@ -23,7 +23,10 @@ public class DrawMazeLayout
 
         DrawMaze();
 
-        DrawCommonData();
+        if(_state.maze.layout.mazeView.CommonDataCharHight > 0)
+        {
+            DrawCommonData();
+        }
     }
 
     private void DrawBackground()
@@ -110,12 +113,50 @@ public class DrawMazeLayout
 
     private void DrawCommonData()
     {
-        var _boxes = _state.maze.layout.boxes;
-        
-        Raylib.DrawRectangleV(
-            _boxes.BoxPixelPositions[MazeViewBoxNames.CommonData],
-            _boxes.BoxPixelLengths[MazeViewBoxNames.CommonData],
-            Color.Red
-        );
+        var _layout = _state.maze.layout;
+        var _font = _state.common.font;
+
+        CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
+
+        Vector2 textPosition =
+            new Vector2(
+                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.CommonData].X + _layout.mazeView.CommonDataBoxPixelSpacing.X,
+                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.CommonData].Y
+            );
+
+        int counter = 0;
+
+
+        foreach(CommonDataNames boxName in boxNames)
+        {
+            if(_layout.mazeView.CommonDataBoxState[boxName])
+            {
+                counter++;
+
+                Raylib.DrawTextEx(
+                    _font.EditorPanelText,
+                    _layout.mazeView.CommonDataTitle[boxName],
+                    textPosition,
+                    _layout.mazeView.CommonDataCharHight,
+                    _layout.mazeView.CommonDataCharSpacing,
+                    Color.RayWhite
+                );
+
+                textPosition.Y += _layout.mazeView.CommonDataCharHight;
+
+                Raylib.DrawTextEx(
+                    _font.EditorPanelText,
+                    _layout.mazeView.CommonDataInformation[boxName],
+                    textPosition,
+                    _layout.mazeView.CommonDataCharHight,
+                    _layout.mazeView.CommonDataCharSpacing,
+                    Color.Gray
+                );
+
+                textPosition.Y +=_layout.mazeView.CommonDataSingleBoxLengths.Y - _layout.mazeView.CommonDataCharHight;
+            }
+        }
     }
+
+    
 }

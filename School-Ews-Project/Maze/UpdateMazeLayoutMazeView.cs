@@ -26,11 +26,15 @@ public class UpdateMazeLayoutMazeView
                 _generator.MazeSize
             );
 
-        _layout.mazeView.CommonDataSingleBoxLengths = 
+        (_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.AmountOfCommonDataBoxes) = 
             CalculateCommonDataSingleBoxLengths(_layout.mazeView.CommonDataBoxState, _layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData]);
 
-        _layout.mazeView.CommonDataCharHight =
-            CalculatingCommonDataCharHight(_layout.mazeView.CommonDataSingleBoxLengths);
+        _layout.mazeView.CommonDataBoxPixelSpacing =
+                CalculatingCommonDataBoxLengthsPixelSpacing(_layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData], _layout.mazeView.CommonDataBoxPercentageSpacing);
+
+
+    _layout.mazeView.CommonDataCharHight =
+            CalculatingCommonDataCharHight(_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.CommonDataBoxPercentageSpacing, _layout.mazeView.AmountOfCommonDataBoxes);
     }
 
     private Maze UpdateCurrentMaze(Maze[] allMazes, int allMazePosition)
@@ -51,7 +55,7 @@ public class UpdateMazeLayoutMazeView
         return newSlotPixelLengths;
     }
 
-    private Vector2 CalculateCommonDataSingleBoxLengths(Dictionary<CommonDataNames, bool> commonDataState, Vector2 parentBoxLengths)
+    private (Vector2, int) CalculateCommonDataSingleBoxLengths(Dictionary<CommonDataNames, bool> commonDataState, Vector2 parentBoxLengths)
     {
         CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
         int amountOfCommonDataBoxes = 0;
@@ -70,7 +74,7 @@ public class UpdateMazeLayoutMazeView
                 parentBoxLengths.Y/amountOfCommonDataBoxes
             );
 
-        return newBoxLengths;
+        return (newBoxLengths, amountOfCommonDataBoxes);
     }
 
     private Vector2 CalculatingCommonDataBoxLengthsPixelSpacing(Vector2 commonDataSingleBoxLengths, Vector2 commonDataSingleBoxPercentageSpacing)
@@ -84,10 +88,19 @@ public class UpdateMazeLayoutMazeView
         return newCommonDataBoxPixelSpacing;
     }
     
-    private float CalculatingCommonDataCharHight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing)
+    private float CalculatingCommonDataCharHight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing, int amountOfCommonDataBoxes)
     {
         float newCharHight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y)/2;
 
+        if (newCharHight < 7 && amountOfCommonDataBoxes < 6)
+        {
+            newCharHight = 10;
+        }
+        else if(newCharHight < 16 && amountOfCommonDataBoxes < 6)
+        {
+            newCharHight = 16;
+        }
+        
         return newCharHight;
     }
 }
