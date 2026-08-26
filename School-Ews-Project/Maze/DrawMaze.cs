@@ -58,9 +58,12 @@ public class DrawMazeLayout
                 if ((int)wallState == 1)
                 {
                     Raylib.DrawLineEx(
-                        startPosition,
                         new Vector2(
-                            startPosition.X + _mazeView.MazeSlotLengths.X,
+                            startPosition.X - (_mazeView.LineThick/2),
+                            startPosition.Y
+                        ),
+                        new Vector2(
+                            startPosition.X + _mazeView.MazeSlotLengths.X + (_mazeView.LineThick/2),
                             startPosition.Y
                         ),
                         _mazeView.LineThick,
@@ -84,10 +87,13 @@ public class DrawMazeLayout
                 if ((int)wallState == 1)
                 {
                     Raylib.DrawLineEx(
-                        startPosition,
                         new Vector2(
                             startPosition.X,
-                            startPosition.Y + _mazeView.MazeSlotLengths.Y
+                            startPosition.Y - (_mazeView.LineThick/2)
+                        ),
+                        new Vector2(
+                            startPosition.X,
+                            startPosition.Y + _mazeView.MazeSlotLengths.Y + (_mazeView.LineThick/2)
                         ),
                         _mazeView.LineThick,
                         Color.Pink

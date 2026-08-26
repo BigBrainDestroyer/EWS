@@ -16,7 +16,7 @@ public class MazeLayoutBoxesState
     public Dictionary<MazeViewBoxNames, Vector2> BoxPercentageLengths { get; } =
         new Dictionary<MazeViewBoxNames, Vector2>{
             {MazeViewBoxNames.Background, new Vector2(100f, 100f)},
-            {MazeViewBoxNames.ParentBox , new Vector2(90f, 90f)},
+            {MazeViewBoxNames.ParentBox , new Vector2(94f, 94f)},
             {MazeViewBoxNames.CommonData, new Vector2(30f, 100f)},
             {MazeViewBoxNames.Maze      , new Vector2(70f, 100f)}
         };
