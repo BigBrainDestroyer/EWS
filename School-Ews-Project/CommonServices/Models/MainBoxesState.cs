@@ -34,7 +34,7 @@ public class MainBoxesState
             {MainColumnsName.Editor, new Vector2()}
         };
 
-    public Dictionary<MainBoxNames, Vector2> MainBoxPercentages { get; } =
+    public Dictionary<MainBoxNames, Vector2> MainBoxPercentages { get; set; } =
         new Dictionary<MainBoxNames, Vector2>{
             {MainBoxNames.Archive   , new Vector2(100f, 100f)},
             {MainBoxNames.Maze      , new Vector2(100f, 65f)},
@@ -43,7 +43,7 @@ public class MainBoxesState
             {MainBoxNames.Terminal  , new Vector2(100f, 35f)}
         };
 
-    public Dictionary<MainBoxNames, Vector2> MainBoxPixelLengts { get; } =
+    public Dictionary<MainBoxNames, Vector2> MainBoxPixelLengts { get; set; } =
         new Dictionary<MainBoxNames, Vector2>{
             {MainBoxNames.Archive   , new Vector2(0,0)},
             {MainBoxNames.Maze      , new Vector2(0,0)},

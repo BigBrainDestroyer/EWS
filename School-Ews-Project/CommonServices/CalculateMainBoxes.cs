@@ -20,10 +20,13 @@ public class CalculateMainBoxes
             CalculateHeaderPixelLengths(_mainBoxes.HeaderPercentages);
 
         (_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing) =
-            CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesSpacing);
+            CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPercentageSpacing);
 
-        _mainBoxes.MainBoxPercentages =
-            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
+        _mainBoxes.MainBoxPixelLengts =
+            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxPercentages, _mainBoxes.MainBoxesPixelSpacing);
+
+        _mainBoxes.MainBoxPixelPositions =
+            CalculateMainBoxPositions(_mainBoxes.MainBoxPixelLengts, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
     }
 
     private Vector2 CalculateHeaderPixelLengths(Vector2 HeaderPercentages)
