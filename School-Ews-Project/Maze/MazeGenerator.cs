@@ -20,7 +20,7 @@ public class MazeGenerator
 
         _generator.AllMazes = new Maze[_generator.MazeBachSize];
         _generator.ReadingAllMazes = false;
-        
+
         Task.Run(() =>
         {
             _seed.Generate();
@@ -292,10 +292,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Up] =
                     new WallState[]{
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze
                     };
         }
 
@@ -312,10 +312,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Right] =
                     new WallState[]{
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze
                     };
         }
 
@@ -332,10 +332,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Down] =
                     new WallState[]{
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed,
-                        WallState.Closed
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze,
+                        WallState.OutsideMaze
                     };
         }
 
@@ -352,10 +352,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Left] =
                 new WallState[]{
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze
                 };
         }
 
@@ -395,10 +395,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Up] =
                 new WallState[]{
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze
                 };
         }
 
@@ -415,10 +415,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Right] =
                 new WallState[]{
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze
                 };
         }
 
@@ -435,10 +435,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Down] =
                 new WallState[]{
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze
                 };
         }
 
@@ -455,10 +455,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Left] =
                 new WallState[]{
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed,
-                    WallState.Closed
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze,
+                    WallState.OutsideMaze
                 };
         }
 
@@ -482,7 +482,7 @@ public class MazeGenerator
         WallState[] givenSlotState = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y);
         WallState[][] allNearSlotStates = new WallState[4][];
         bool[] currentNavigatorSlotOptions = new bool[4];
-        
+
         for (int i = 0; i < givenSlotState.Length; i++)
         {
             if(givenSlotState[i] == WallState.Closed)

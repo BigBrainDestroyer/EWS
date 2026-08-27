@@ -61,11 +61,11 @@ public class MainBoxesState
         {MainBoxNames.Terminal  , new Vector2(0,0)}
     };
 
-    public Vector2 HeaderPercentages { get; set; } = new Vector2(100f, 10f);
+    public Vector2 HeaderPercentages { get; set; } = new Vector2(100f, 6f);
     public Vector2 HeaderPixelLengths { get; set;}= new Vector2();
     public Vector2 HeaderPixelPosition = new Vector2(0,0);
 
-    public float MainBoxesPercentageSpacing { get; set; } = 2f;
+    public float MainBoxesPercentageSpacing { get; set; } = 1.35f;
 
     public float MainBoxesPixelSpacing { get; set; }
 }
