@@ -5,6 +5,9 @@ namespace Program;
 
 public class EditorTextPanelLayoutState
 {
+    public Color TextPanelBackgroundColor { get; set; } = new Color(51, 59, 67, 255);
+    public Color TerminalBackgroundColor { get; set; } = new Color(51, 59, 67, 255);
+    
     public Color CursorColor { get; set; } = new Color(95, 179, 179, 255);
     public Color TextColor { get; set; } = new Color(220, 223, 228, 255);
     public Color RowNumberColor { get; set; } = new Color(145, 155, 165, 255);
@@ -41,6 +44,6 @@ public class EditorTextPanelLayoutState
     public int TextVerticalPixelOffSet { get; set; } = 0;
 
     public int CursorWidth { get; set; }
-    public int TextSize { get; set; } = 23;
+    public int TextSize { get; set; } = 60;
     public int CharSpacing { get; set; } = 0;
 }

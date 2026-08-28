@@ -55,7 +55,7 @@ public class MazeLayoutMazeViewState
 
     public Vector2 CommonDataBoxPixelSpacing { get; set; } = new Vector2();
 
-    public float LineThick { get; set; } = 1;
+    public float LineThick { get; set; } = 3;
 
     public float CommonDataCharHight { get; set; } = 10;
 

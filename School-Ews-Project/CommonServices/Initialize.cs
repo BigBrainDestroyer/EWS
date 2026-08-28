@@ -34,5 +34,8 @@ public class Initialize
 
         _state.common.font.EditorPanelRowNumbers = Raylib.LoadFontEx("Resources/Lilex-ExtraLight.ttf", _state.editor.layout.textPanel.TextSize, null, 0);
         Raylib.SetTextureFilter(_state.common.font.EditorPanelRowNumbers.Texture, TextureFilter.Bilinear);
+
+        _state.common.font.MazeCommonData = Raylib.LoadFontEx("Resources/Lilex-ExtraLight.ttf", (int)_state.maze.layout.mazeView.CommonDataCharHight, null, 0);
+        Raylib.SetTextureFilter(_state.common.font.MazeCommonData.Texture, TextureFilter.Bilinear);
     }
 }

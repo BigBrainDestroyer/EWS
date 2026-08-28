@@ -1,3 +1,5 @@
+//Update: Terminal kan hier wel gw gedrawd worden maar de states worden gewijzicht later
+
 using Raylib_cs;
 using System.Numerics;
 
@@ -35,10 +37,12 @@ public class DrawEditorLayout
 
     private void DrawEditorTextPanelBackRound()
     {
+        var _boxes = _state.common.boxes;
+
         Raylib.DrawRectangleV(
-            _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.TextPanel],
-            _state.editor.layout.boxes.BoxPixelLengths[EditorBoxNames.TextPanel],
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
+            _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
+            _boxes.MainBoxPixelLengts[MainBoxNames.Editor],
+            _state.editor.layout.textPanel.TextPanelBackgroundColor
         );
     }
 
@@ -62,7 +66,7 @@ public class DrawEditorLayout
     {
         var _panel = _state.editor.layout.textPanel;
 
-        float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
+        float maxBottomY = _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal].Y;
         float RowIncrement = 0;
 
         for (int i = 0; _panel.TextPosition.Y + RowIncrement <= maxBottomY && i < _panel.ViewText.Count; i++)
@@ -87,16 +91,17 @@ public class DrawEditorLayout
         Raylib.DrawRectangleV(
             _state.editor.layout.textPanel.TextRowNumberBoxPositions,
             _state.editor.layout.textPanel.TextRowNumberBoxLengths,
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.TextPanel]
+            _state.editor.layout.textPanel.TerminalBackgroundColor
         );
     }
 
     private void DrawRowNumbers()
     {
         var _panel = _state.editor.layout.textPanel;
+        var _boxes = _state.common.boxes;
 
         int restoreBaseOffSet = 1;
-        float maxBottomY = _state.editor.layout.boxes.BoxPixelPositions[EditorBoxNames.Terminal].Y;
+        float maxBottomY = _boxes.MainBoxPixelPositions[MainBoxNames.Editor].Y + _boxes.MainBoxPixelLengts[MainBoxNames.Editor].Y;
         float RowIncrement = 0;
 
         Color numberColor = _panel.RowNumberColor;
@@ -136,7 +141,7 @@ public class DrawEditorLayout
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
-            _state.editor.layout.boxes.BoxLayoutColors[EditorBoxNames.Terminal]
+            _state.editor.layout.textPanel.TerminalBackgroundColor
         );
     }
 }
