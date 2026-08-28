@@ -20,7 +20,7 @@ public class DrawEditorLayout
 
         DrawEditorTerminal();
     }
-    
+
     private void DrawEditorTextPanel()
     {
         DrawEditorTextPanelBackRound();
@@ -32,6 +32,8 @@ public class DrawEditorLayout
         DrawTextRowNumbersBox();
 
         DrawRowNumbers();
+
+        DrawWriteOverTextBoxes();
     }
 
 
@@ -49,7 +51,7 @@ public class DrawEditorLayout
 
     private void DrawTextPanelCursor()
     {
-        if(_state.editor.layout.textPanel.CursorPosition.X != -1 || _state.editor.layout.textPanel.CursorPosition.Y != -1)
+        if (_state.editor.layout.textPanel.CursorPosition.X != -1 || _state.editor.layout.textPanel.CursorPosition.Y != -1)
         {
             Raylib.DrawRectangle(
                 (int)_state.editor.layout.textPanel.CursorPosition.X,
@@ -76,7 +78,7 @@ public class DrawEditorLayout
             Raylib.DrawTextEx(
                 _state.common.font.EditorPanelText,
                 _state.editor.layout.textPanel.ViewText[i],
-                new Vector2 (_panel.TextPosition.X, currentY),
+                new Vector2(_panel.TextPosition.X, currentY),
                 _panel.TextSize,
                 _panel.CharSpacing,
                 _panel.TextColor
@@ -108,22 +110,22 @@ public class DrawEditorLayout
 
         for (int i = _panel.TextGridBoxesOffSetY + restoreBaseOffSet; i <= _panel.PanelText.Count; i++)
         {
-            if(_panel.RowNumbersPosition.Y + RowIncrement > maxBottomY)
+            if (_panel.RowNumbersPosition.Y + RowIncrement > maxBottomY)
             {
                 break;
             }
-            
-            if(_panel.CursorTextPosition.Y == i - restoreBaseOffSet)
+
+            if (_panel.CursorTextPosition.Y == i - restoreBaseOffSet)
             {
                 numberColor = _panel.ActiveRowNumberColor;
             }
-            
+
             float currentY = _panel.RowNumbersPosition.Y + RowIncrement;
 
             Raylib.DrawTextEx(
                 _state.common.font.EditorPanelRowNumbers,
                 $"{i}",
-                new Vector2 (_panel.RowNumbersPosition.X, currentY),
+                new Vector2(_panel.RowNumbersPosition.X, currentY),
                 _panel.TextSize,
                 _panel.CharSpacing,
                 numberColor
@@ -135,13 +137,30 @@ public class DrawEditorLayout
         }
     }
 
-    
+
     private void DrawEditorTerminal()
     {
         Raylib.DrawRectangleV(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
             _state.editor.layout.textPanel.TerminalBackgroundColor
+        );
+    }
+
+    private void DrawWriteOverTextBoxes()
+    {
+        var _textPanel = _state.editor.layout.textPanel;
+
+        Raylib.DrawRectangleV(
+            _textPanel.WriteOverBoxPositionHorizontalText,
+            _textPanel.WriteOverBoxLengthsHorizontalText,
+            _state.common.boxes.MainBoxesBackgroundColor
+        );
+
+        Raylib.DrawRectangleV(
+            _textPanel.WriteOverBoxPositionVerticalText,
+            _textPanel.WriteOverBoxLengthsVerticalText,
+            _state.common.boxes.MainBoxesBackgroundColor
         );
     }
 }

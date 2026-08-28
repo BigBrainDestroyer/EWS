@@ -23,7 +23,7 @@ public class DrawUi
     public void Ui()
     {
         Raylib.BeginDrawing();
-        Raylib.ClearBackground(new Color(43, 46, 49, 255));
+        Raylib.ClearBackground(_state.common.boxes.MainBoxesBackgroundColor);
 
         _drawCommonHeader.CommonHeader();
 

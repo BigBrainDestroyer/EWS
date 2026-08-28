@@ -1,4 +1,5 @@
 using System.Numerics;
+using Raylib_cs;
 
 namespace Program;
 
@@ -20,6 +21,9 @@ public enum MainBoxNames
 
 public class MainBoxesState
 {
+    public Color HeaderBackgroundColor { get; set; } = new Color(18, 22, 26, 255);
+    public Color MainBoxesBackgroundColor { get; set; } = new Color(43, 46, 49, 255);
+
     public Dictionary<MainColumnsName, Vector2> MainColumnsPercentage { get; set; } =
         new Dictionary<MainColumnsName, Vector2>{
             {MainColumnsName.Archive, new Vector2(12f, 100f)},

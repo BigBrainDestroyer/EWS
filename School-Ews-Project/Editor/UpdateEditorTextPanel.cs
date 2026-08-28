@@ -36,7 +36,19 @@ public class UpdateEditorTextPanel
             );
 
         _updateEditorPanelText.UpdatingPanelText();
-            
+
+        (_layout.textPanel.WriteOverBoxPositionHorizontalText, _layout.textPanel.WriteOverBoxPositionVerticalText) =
+            CalculateWriteOverBoxPositions(
+                _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
+                _boxes.MainBoxPixelLengts[MainBoxNames.Editor]
+            );
+
+        (_layout.textPanel.WriteOverBoxLengthsHorizontalText, _layout.textPanel.WriteOverBoxLengthsVerticalText) =
+            CalculateWriteOverBoxLengths(
+                _boxes.MainBoxPixelLengts[MainBoxNames.Editor],
+                _boxes.MainBoxesPixelSpacing
+            );
+
         (_layout.textPanel.TextRowNumberBoxPositions, _layout.textPanel.TextRowNumberBoxLengths) =
                 CalculateTextRowNumbersBox(
                     _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
@@ -129,6 +141,39 @@ public class UpdateEditorTextPanel
         return gridPositions;
     }
 
+    private (Vector2, Vector2) CalculateWriteOverBoxPositions(Vector2 parentBoxPosition, Vector2 parentBoxLengths)
+    {
+        Vector2 newWriteOverBoxPositionsHorizontal =
+            new Vector2(
+                parentBoxPosition.X,
+                parentBoxPosition.Y + parentBoxLengths.Y
+            );
+
+        Vector2 newWriteOverBoxPositionsVertical =
+            new Vector2(
+                parentBoxPosition.X + parentBoxLengths.X,
+                parentBoxPosition.Y
+            );
+
+        return (newWriteOverBoxPositionsHorizontal, newWriteOverBoxPositionsVertical);
+    }
+
+    private (Vector2, Vector2) CalculateWriteOverBoxLengths(Vector2 parentBoxLengths, float mainBoxSpacing)
+    {
+        Vector2 newWriteOverBoxLengthsHorizontal =
+            new Vector2(
+                parentBoxLengths.X + mainBoxSpacing,
+                mainBoxSpacing
+            );
+
+        Vector2 newWriteOverBoxLengthsVertical =
+            new Vector2(
+                mainBoxSpacing,
+                parentBoxLengths.Y
+            );
+
+        return (newWriteOverBoxLengthsHorizontal, newWriteOverBoxLengthsVertical);
+    }
 
     private (Vector2, Vector2) CalculateTextRowNumbersBox(Vector2 parentBoxPositions, Vector2 parentBoxLengths, float[] gridColumnPositions, int amountOfColumnGridSpace)
     {

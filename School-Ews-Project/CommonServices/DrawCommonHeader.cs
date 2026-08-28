@@ -23,7 +23,7 @@ public class DrawCommonHeader
         Raylib.DrawRectangleV(
             _boxes.HeaderPixelPosition,
             _boxes.HeaderPixelLengths,
-            new Color(18, 22, 26, 255)
+           _boxes.HeaderBackgroundColor 
         );
     }  
 }
