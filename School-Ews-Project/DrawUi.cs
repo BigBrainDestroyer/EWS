@@ -9,6 +9,7 @@ public class DrawUi
     private readonly DrawEditorLayout _drawEditorLayout;
     private readonly DrawMazeLayout _drawMazeLayout;
     private readonly DrawCommonHeader _drawCommonHeader;
+    private readonly DrawArchive _drawArchive;
 
     public DrawUi(AppState state)
     {
@@ -18,6 +19,7 @@ public class DrawUi
         _drawEditorLayout = new DrawEditorLayout(_state);
         _drawMazeLayout = new DrawMazeLayout(_state);
         _drawCommonHeader = new DrawCommonHeader(_state);
+        _drawArchive = new DrawArchive(_state);
     }
  
     public void Ui()
@@ -32,6 +34,8 @@ public class DrawUi
         _drawEditorLayout.DrawEditor();
 
         _drawMazeLayout.Maze();
+
+        _drawArchive.Archive();
 
         Raylib.EndDrawing();
     }                           

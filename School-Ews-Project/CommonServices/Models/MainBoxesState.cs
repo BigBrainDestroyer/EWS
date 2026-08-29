@@ -26,9 +26,9 @@ public class MainBoxesState
 
     public Dictionary<MainColumnsName, Vector2> MainColumnsPercentage { get; set; } =
         new Dictionary<MainColumnsName, Vector2>{
-            {MainColumnsName.Archive, new Vector2(12f, 100f)},
-            {MainColumnsName.Visualize, new Vector2(48f, 100f)},
-            {MainColumnsName.Editor, new Vector2(40f, 100f)}
+            {MainColumnsName.Archive, new Vector2(20f, 100f)},
+            {MainColumnsName.Visualize, new Vector2(43f, 100f)},
+            {MainColumnsName.Editor, new Vector2(37f, 100f)}
         };
 
     public Dictionary<MainColumnsName, Vector2> MainColumnsPixelLengths { get; set; } =
