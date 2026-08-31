@@ -59,7 +59,7 @@ public class UpdateArchiveLayoutBoxes
             newArchiveLayoutBoxPositions.Add(boxName,
                 new Vector2(
                 parentBoxPositions.X + ((parentBoxLengths.X - boxLengths[boxName].X)/2),
-                parentBoxPositions.Y)
+                parentBoxPositions.Y + boxIncrement)
             );
 
             boxIncrement += boxLengths[boxName].Y;

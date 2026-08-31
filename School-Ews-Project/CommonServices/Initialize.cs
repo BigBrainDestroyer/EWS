@@ -20,6 +20,8 @@ public class Initialize
         Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
         Raylib.InitWindow(screenWidth, screenHeight, "EWS");
 
+        Raylib.SetWindowMonitor(0);
+
         Raylib.SetTargetFPS(240);
         Raylib.MaximizeWindow();
 

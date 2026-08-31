@@ -119,4 +119,25 @@ public static class Custom
         currentRectanglePosition = new Vector2(position.X + radius, position.Y + radius);
         Raylib.DrawRectangleV(currentRectanglePosition, mainBoxSize, color);
     }
+
+    public static void DrawCustomRectangleOutlining(Vector2 position, Vector2 size, float radius, BoolVector4 boolVector4, float outlineSize, Color outlineColor, Color rectangleColor)
+    {
+        DrawCustomRectangle(position, size, radius, boolVector4, outlineColor);
+
+        float totalOutlineSize = outlineSize * 2;
+
+        Vector2 newPosition =
+            new Vector2(
+                position.X + outlineSize,
+                position.Y + outlineSize
+            );
+
+        Vector2 newSize =
+            new Vector2(
+                size.X - totalOutlineSize,
+                size.Y - totalOutlineSize
+            );
+
+        DrawCustomRectangle(newPosition, newSize, radius, boolVector4, rectangleColor);
+    }
 }

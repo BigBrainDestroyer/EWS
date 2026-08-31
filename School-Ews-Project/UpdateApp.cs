@@ -9,6 +9,7 @@ public class UpdateApp
     private readonly MazeGenerator _mazeGenerator;
     private readonly UpdateMazeLayout _mazeLayout;
     private readonly UpdateArchiveLayout _archiveLayout;
+    private readonly UpdateArchiveCore _archiveCore;
 
     public UpdateApp(AppState state)
     {
@@ -18,6 +19,7 @@ public class UpdateApp
         _mazeGenerator = new MazeGenerator(_state);
         _mazeLayout = new UpdateMazeLayout(_state);
         _archiveLayout = new UpdateArchiveLayout(_state);
+        _archiveCore = new UpdateArchiveCore(_state);
     }
     
     public void App()
@@ -34,5 +36,7 @@ public class UpdateApp
         _mazeLayout.MazeLayout();
 
         _archiveLayout.UpdateArchive();
+
+        _archiveCore.ArchiveCore();
     }
 }
