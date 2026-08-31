@@ -56,11 +56,18 @@ public class UpdateFunctionBox
             CalculateSearchBarPixelPosition(
                 _layout.ArchiveFunctionBarBoxPosition
             );
+
+        _layout.AddOnButtonPixelPosition =
+            CalculateAddOnButtonPosition(
+                _layout.SearchBarPixelPosition, 
+                _layout.SearchBarPixelLengths.X, 
+                _layout.ArchiveFunctionBarFunctionsPixelWhiteSpace
+            );
     }
 
     private float CalculateArchiveFunctionBarBoxWhiteSpace(Vector2 parentBoxLengths, float percentageWhiteSpace)
     {
-        float newArchiveFunctionBarBoxWhiteSpace = (parentBoxLengths.X < parentBoxLengths.Y) ? parentBoxLengths.Y * (percentageWhiteSpace/100f) : parentBoxLengths.Y * (percentageWhiteSpace/100f);
+        float newArchiveFunctionBarBoxWhiteSpace = (parentBoxLengths.X < parentBoxLengths.Y) ? parentBoxLengths.X * (percentageWhiteSpace/100f) : parentBoxLengths.Y * (percentageWhiteSpace/100f);
 
         return newArchiveFunctionBarBoxWhiteSpace;
     }
@@ -111,7 +118,7 @@ public class UpdateFunctionBox
     {
         Vector2 newSearchBarPixelLengths =
             new Vector2(
-                parentBoxLengths.X - addOnButtonLength.X -pixelWhiteSpace,
+                parentBoxLengths.X - addOnButtonLength.X - pixelWhiteSpace,
                 parentBoxLengths.Y
             );
 
@@ -123,12 +130,12 @@ public class UpdateFunctionBox
         return parentBoxPosition;
     }
 
-    private Vector2 CalculateAddOnButtonPosition(Vector2 searchBarPosition, float searchBarWidth, float pixelWhiteSpace)
+    private Vector2 CalculateAddOnButtonPosition(Vector2 searchBarPixelPosition, float searchBarWidth, float pixelWhiteSpace)
     {
         Vector2 newAddOnButtonPosition =
             new Vector2(
-                searchBarPosition.X + searchBarWidth + pixelWhiteSpace,
-                searchBarPosition.Y
+                searchBarPixelPosition.X + searchBarWidth + pixelWhiteSpace,
+                searchBarPixelPosition.Y
             );
 
         return newAddOnButtonPosition;

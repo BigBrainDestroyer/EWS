@@ -90,6 +90,4 @@ public class MainBoxesState
     public float MainBoxesPercentageSpacing { get; set; } = 1.35f;
 
     public float MainBoxesPixelSpacing { get; set; }
-
-    
 }

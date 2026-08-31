@@ -19,6 +19,8 @@ public class EditorTextPanelLayoutState
     public float[] GridColumnPositions { get; set; } = new float[0];
     public float[] GridRowPositions { get; set; } = new float[0];
 
+    public BoolVector4 textRowNumberBoxCornerStates { get; set; } = new BoolVector4(true, false, false, true);
+
     public Vector2 WriteOverBoxPositionHorizontalText { get; set; } = new Vector2();
     public Vector2 WriteOverBoxPositionVerticalText { get; set; } = new Vector2();
     public Vector2 WriteOverBoxLengthsHorizontalText { get; set; } = new Vector2();

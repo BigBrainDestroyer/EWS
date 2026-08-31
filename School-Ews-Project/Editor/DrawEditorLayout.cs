@@ -41,9 +41,11 @@ public class DrawEditorLayout
     {
         var _boxes = _state.common.boxes;
 
-        Raylib.DrawRectangleV(
-            _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
-            _boxes.MainBoxPixelLengts[MainBoxNames.Editor],
+        Custom.DrawCustomRectangle(
+            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor], 
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Editor],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Editor],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Editor],
             _state.editor.layout.textPanel.TextPanelBackgroundColor
         );
     }
@@ -90,9 +92,11 @@ public class DrawEditorLayout
 
     private void DrawTextRowNumbersBox()
     {
-        Raylib.DrawRectangleV(
+        Custom.DrawCustomRectangle(
             _state.editor.layout.textPanel.TextRowNumberBoxPositions,
             _state.editor.layout.textPanel.TextRowNumberBoxLengths,
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _state.editor.layout.textPanel.textRowNumberBoxCornerStates,
             _state.editor.layout.textPanel.TerminalBackgroundColor
         );
     }

@@ -33,9 +33,11 @@ public class DrawMazeLayout
     {
         var _boxes = _state.maze.layout.boxes;
 
-        Raylib.DrawRectangleV(
-            _boxes.BoxPixelPositions[MazeViewBoxNames.Background],
+        Custom.DrawCustomRectangle(
+            _boxes.BoxPixelPositions[MazeViewBoxNames.Background], 
             _boxes.BoxPixelLengths[MazeViewBoxNames.Background],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Maze],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Maze],
             _boxes.BackgroundColor
         );
     }

@@ -15,6 +15,8 @@ public class DrawArchive
     public void Archive()
     {
         DrawArchiveBackground();
+
+        DrawArchiveFunctionBar();
     }
 
     private void DrawArchiveBackground()
@@ -22,10 +24,33 @@ public class DrawArchive
         var _boxes = _state.common.boxes;
         var _layout = _state.archive.layout;
 
-        Raylib.DrawRectangleV(
-            _boxes.MainBoxPixelPositions[MainBoxNames.Archive],
-            _boxes.MainBoxPixelLengts[MainBoxNames.Archive],
+        Custom.DrawCustomRectangle(
+            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive], 
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
             _layout.BackgroundColor
+        );
+    }
+
+    private void DrawArchiveFunctionBar()
+    {
+        var _layout = _state.archive.layout;
+
+        Custom.DrawCustomRectangle(
+            _layout.SearchBarPixelPosition,
+            _layout.SearchBarPixelLengths,
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
+            Color.Red
+        );
+
+        Custom.DrawCustomRectangle(
+            _layout.AddOnButtonPixelPosition,
+            _layout.AddOnButtonPixelLengths,
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
+            Color.Blue
         );
     }
 }

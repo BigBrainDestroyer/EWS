@@ -22,7 +22,7 @@ public class ArchiveLayoutState
 
     public Dictionary<ArchiveBoxesNames, Vector2> ArchiveBoxPixelPercentages { get; } =
         new Dictionary<ArchiveBoxesNames, Vector2>{
-            { ArchiveBoxesNames.Header, new Vector2(100f, 15f)},
+            { ArchiveBoxesNames.Header, new Vector2(100f, 10f)},
             { ArchiveBoxesNames.Archive, new Vector2(100f, 75f)},
             { ArchiveBoxesNames.Edit, new Vector2(90f, 10f)}
         };
@@ -40,20 +40,20 @@ public class ArchiveLayoutState
             { ArchiveBoxesNames.Archive, new Vector2()},
             { ArchiveBoxesNames.Edit, new Vector2()}
         };
-        
 
-    public Vector2 ArchiveFunctionBarBoxPixelLengths { get; set; }
-    public Vector2 ArchiveFunctionBarBoxPosition { get; set; }
 
-    public Vector2 SearchBarPixelLengths { get; set; }
-    public Vector2 SearchBarPixelPosition { get; set; }
+    public Vector2 ArchiveFunctionBarBoxPixelLengths { get; set; } = new Vector2();
+    public Vector2 ArchiveFunctionBarBoxPosition { get; set; } = new Vector2();
 
-    public Vector2 AddOnButtonPixelLengths { get; set; }
-    public Vector2 AddOnButtonPixelPosition { get; set; }
+    public Vector2 SearchBarPixelLengths { get; set; } = new Vector2();
+    public Vector2 SearchBarPixelPosition { get; set; } = new Vector2();
 
-    public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 10f;
+    public Vector2 AddOnButtonPixelLengths { get; set; } = new Vector2();
+    public Vector2 AddOnButtonPixelPosition { get; set; } = new Vector2();
+
+    public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 27f;
     public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }
 
-    public float ArchiveFunctionBarFunctionsPercentageWhiteSpace { get; } = 5f;
+    public float ArchiveFunctionBarFunctionsPercentageWhiteSpace { get; } = 10f;
     public float ArchiveFunctionBarFunctionsPixelWhiteSpace { get; set; }
 }

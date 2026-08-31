@@ -21,18 +21,22 @@ public class DrawDiagnostics
     
     private void DrawMainBoxes()
     {
-        Raylib.DrawRectangleV(
+        Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive], 
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
             Color.Yellow
         );
 
-        Raylib.DrawRectangleV(
+        Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Maze], 
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Maze],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Maze],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Maze],
             Color.DarkGray
         );
-
+    
         Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Statistics], 
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Statistics],
@@ -41,9 +45,11 @@ public class DrawDiagnostics
             Color.DarkBlue
         );
 
-        Raylib.DrawRectangleV(
+        Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor], 
             _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Editor],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Editor],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Editor],
             Color.Red
         );
     }
