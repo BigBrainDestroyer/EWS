@@ -17,7 +17,7 @@ public class Initialize
         const int screenHeight  = 600; 
 
         Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
-        //Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
+        Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
         Raylib.InitWindow(screenWidth, screenHeight, "EWS");
 
         Raylib.SetTargetFPS(240);

@@ -40,17 +40,20 @@ public class ArchiveLayoutState
             { ArchiveBoxesNames.Archive, new Vector2()},
             { ArchiveBoxesNames.Edit, new Vector2()}
         };
-    public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 10f;
-    public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }
+        
+
     public Vector2 ArchiveFunctionBarBoxPixelLengths { get; set; }
     public Vector2 ArchiveFunctionBarBoxPosition { get; set; }
-
-    public float ArchiveFunctionBarFunctionsPercentageWhiteSpace { get; } = 5f;
-    public float ArchiveFunctionBarFunctionsPixelWhiteSpace { get; set; }
 
     public Vector2 SearchBarPixelLengths { get; set; }
     public Vector2 SearchBarPixelPosition { get; set; }
 
     public Vector2 AddOnButtonPixelLengths { get; set; }
     public Vector2 AddOnButtonPixelPosition { get; set; }
+
+    public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 10f;
+    public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }
+
+    public float ArchiveFunctionBarFunctionsPercentageWhiteSpace { get; } = 5f;
+    public float ArchiveFunctionBarFunctionsPixelWhiteSpace { get; set; }
 }

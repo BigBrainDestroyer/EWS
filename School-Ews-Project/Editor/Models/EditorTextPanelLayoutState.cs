@@ -48,6 +48,6 @@ public class EditorTextPanelLayoutState
     public int TextVerticalPixelOffSet { get; set; } = 0;
 
     public int CursorWidth { get; set; }
-    public int TextSize { get; set; } = 60;
+    public int TextSize { get; set; } = 25;
     public int CharSpacing { get; set; } = 0;
 }

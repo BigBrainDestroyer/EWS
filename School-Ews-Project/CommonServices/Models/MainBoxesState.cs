@@ -65,6 +65,24 @@ public class MainBoxesState
         {MainBoxNames.Terminal  , new Vector2(0,0)}
     };
 
+    public Dictionary<MainBoxNames, BoolVector4> MainBoxesCornerStates { get; set; } =
+    new Dictionary<MainBoxNames, BoolVector4>{
+        {MainBoxNames.Archive   , new BoolVector4(true, true, true, true)},
+        {MainBoxNames.Maze      , new BoolVector4(true, true, true, true)},
+        {MainBoxNames.Statistics, new BoolVector4(true, true, true, true)},
+        {MainBoxNames.Editor    , new BoolVector4(true, true, true, true)},
+        {MainBoxNames.Terminal  , new BoolVector4(true, true, true, true)}
+    };
+
+    public Dictionary<MainBoxNames, float> MainBoxesCornerRadius { get; set; } =
+    new Dictionary<MainBoxNames, float>{
+        {MainBoxNames.Archive   , 5f},
+        {MainBoxNames.Maze      , 5f},
+        {MainBoxNames.Statistics, 5f},
+        {MainBoxNames.Editor    , 5f},
+        {MainBoxNames.Terminal  , 5f}
+    };
+
     public Vector2 HeaderPercentages { get; set; } = new Vector2(100f, 6f);
     public Vector2 HeaderPixelLengths { get; set;}= new Vector2();
     public Vector2 HeaderPixelPosition = new Vector2(0,0);
@@ -72,4 +90,6 @@ public class MainBoxesState
     public float MainBoxesPercentageSpacing { get; set; } = 1.35f;
 
     public float MainBoxesPixelSpacing { get; set; }
+
+    
 }
