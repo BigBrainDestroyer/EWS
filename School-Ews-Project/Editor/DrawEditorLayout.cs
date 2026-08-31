@@ -18,6 +18,8 @@ public class DrawEditorLayout
     {
         DrawEditorTextPanel();
 
+        DrawWriteOverTextBoxes();
+        
         DrawEditorTerminal();
     }
 
@@ -32,8 +34,6 @@ public class DrawEditorLayout
         DrawTextRowNumbersBox();
 
         DrawRowNumbers();
-
-        DrawWriteOverTextBoxes();
     }
 
 
@@ -141,16 +141,6 @@ public class DrawEditorLayout
         }
     }
 
-
-    private void DrawEditorTerminal()
-    {
-        Raylib.DrawRectangleV(
-            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
-            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
-            _state.editor.layout.textPanel.TerminalBackgroundColor
-        );
-    }
-
     private void DrawWriteOverTextBoxes()
     {
         var _textPanel = _state.editor.layout.textPanel;
@@ -165,6 +155,17 @@ public class DrawEditorLayout
             _textPanel.WriteOverBoxPositionVerticalText,
             _textPanel.WriteOverBoxLengthsVerticalText,
             _state.common.boxes.MainBoxesBackgroundColor
+        );
+    }
+    
+    private void DrawEditorTerminal()
+    {
+        Custom.DrawCustomRectangle(
+            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
+            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
+            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Terminal],
+            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Terminal],
+            _state.editor.layout.textPanel.TerminalBackgroundColor
         );
     }
 }

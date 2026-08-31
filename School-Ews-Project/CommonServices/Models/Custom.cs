@@ -27,6 +27,12 @@ public static class Custom
 {
     public static void DrawCustomRectangle(Vector2 position, Vector2 size, float radius, BoolVector4 boolVector4, Color color)
     {
+        if(size.X < radius*2 || size.Y < radius*2)
+        {
+            Raylib.DrawRectangleV(position, size, color);
+            return;
+        }
+        
         int counter = 0;
 
         Vector2 childBoxSize = new Vector2();
@@ -78,8 +84,6 @@ public static class Custom
                         childBoxSize = new Vector2(radius, mainBoxSize.Y);
                         break;
                 }
-
-                Console.WriteLine(counter);
 
                 Raylib.DrawRectangleV(currentRectanglePosition, childBoxSize, color);
                 Raylib.DrawCircleV(currentCirclePosition, radius, color);
