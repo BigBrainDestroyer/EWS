@@ -108,7 +108,6 @@ public class UpdateMazeLayoutBoxes
                 _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.ParentBox].Y + (lengthDifference.Y/2)
             );
         
-
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.CommonData] =
             new Vector2(
                 _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Maze].X + _mazeBoxes.BoxPixelLengths[MazeViewBoxNames.Maze].X + (MathF.Round(_mazeView.LineThick/2)), 

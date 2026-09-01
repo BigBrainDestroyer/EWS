@@ -16,9 +16,51 @@ public enum ArchiveFunctionNames
     AddButton
 }
 
+public struct ArchiveDataTypeBox
+{
+    public Vector2 Percentages;
+    public Vector2 Position;
+    public Vector2 Length;
+    public ArchiveStorageNames DataType;
+    public string Name;
+
+    public ArchiveDataTypeBox(Vector2 position, Vector2 length, ArchiveStorageNames dataType, string name)
+    {
+        Percentages = new Vector2(100f, 3f);
+        Position = position;
+        Length = length;
+        DataType = dataType;
+        Name = name;
+    }
+}
+
+public struct ArchiveAddDataTypeMenu
+{
+    public ArchiveStorageNames[] AddLegalDataTypeToStorage;
+    public Image[] Svg; 
+    public string[] Text;
+    public Vector2 SvgPosition;
+    public Vector2 SvgSize;
+    public float FontSize;
+
+    public ArchiveAddDataTypeMenu(ArchiveStorageNames[] addLegalDataTypeStorage, Image[] svg, Vector2 svgPosition, Vector2 svgSize, float fontSize)
+    {
+        AddLegalDataTypeToStorage = addLegalDataTypeStorage;
+        Svg = svg;
+        Text = new string[] {"ProjectFolder", "Folder", "File"};
+        SvgPosition = svgPosition;
+        SvgSize = svgSize;
+        FontSize = fontSize;
+    }
+}
+
 public class ArchiveLayoutState
 {
     public Color BackgroundColor { get; set; } = new Color(51, 59, 67, 255);
+
+    public Image[] AddDataTypeSvg { get; set; } = new Image[3]; 
+    
+    public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();
 
     public Dictionary<ArchiveBoxesNames, Vector2> ArchiveBoxPixelPercentages { get; } =
         new Dictionary<ArchiveBoxesNames, Vector2>{

@@ -12,20 +12,19 @@ public enum ArchiveStorageNames
 
 public struct ArchiveStorage
 {
-    public ArchiveStorageNames DataType;
-
-    public string Name;
-
-    public string DataLocation;
-
     public Dictionary<string[], ArchiveStorage>? FolderStorage;
+    public ArchiveStorageNames DataType;
+    public string Name;
+    public string DataLocation;
+    public bool ViewFolderStorage;
 
-    public ArchiveStorage(ArchiveStorageNames dataType, string name, string dataLocation, Dictionary<string[], ArchiveStorage>? folderStorage)
+    public ArchiveStorage(Dictionary<string[], ArchiveStorage>? folderStorage, ArchiveStorageNames dataType, string name, string dataLocation, bool viewFolderStorage)
     {
+        FolderStorage = folderStorage;
         DataType = dataType;
         Name = name;
         DataLocation = dataLocation;
-        FolderStorage = folderStorage;
+        ViewFolderStorage = viewFolderStorage; 
     }
 }
 

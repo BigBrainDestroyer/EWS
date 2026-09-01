@@ -7,12 +7,14 @@ public class UpdateArchiveLayout
     private readonly AppState _state;
     private readonly UpdateFunctionBox _functionBox;
     private readonly UpdateArchiveLayoutBoxes _archiveBoxes;
+    private readonly UpdateArchiveDataTypeLayoutBoxes _dataBoxes;
 
     public UpdateArchiveLayout(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _functionBox = new UpdateFunctionBox(_state);
         _archiveBoxes = new UpdateArchiveLayoutBoxes(_state);
+        _dataBoxes = new UpdateArchiveDataTypeLayoutBoxes(_state);
     }
 
     public void UpdateArchive()
@@ -20,5 +22,7 @@ public class UpdateArchiveLayout
         _archiveBoxes.ArchiveLayoutBoxes();
 
         _functionBox.FunctionBox();
+
+        _dataBoxes.ArchiveDataTypeLayoutBoxes();
     }
 }

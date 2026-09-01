@@ -26,7 +26,7 @@ public class UpdateArchiveCore
         if(CheckField.MouseOnField(_layout.AddOnButtonPixelPosition, _layout.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
             _core.AddLegalDataTypeToStorage = GetLegalDataTypes(_core.CurentStorageDataLocation);
-        }
+        }   
     }
 
     private ArchiveStorageNames[] GetLegalDataTypes(string dataLocation)
@@ -37,11 +37,9 @@ public class UpdateArchiveCore
 
         string[] dataLocationList = newString.ToString().Split('/');
 
-        if(dataLocation == dataLocationList[0])
-        {
-            newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.ProjectFolder] = ArchiveStorageNames.ProjectFolder;
-        }
-        else
+        newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.ProjectFolder] = ArchiveStorageNames.ProjectFolder;
+        
+        if(dataLocation != dataLocationList[0])
         {
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.Folder] = ArchiveStorageNames.Folder;
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.File] = ArchiveStorageNames.File;
