@@ -30,14 +30,23 @@ public class Initialize
 
     
     public void Fonts()
-    {   
-        _state.common.font.EditorPanelText = Raylib.LoadFontEx("Resources/Font/Lilex-Regular.ttf", _state.editor.layout.textPanel.TextSize, null, 0);
-        Raylib.SetTextureFilter(_state.common.font.EditorPanelText.Texture, TextureFilter.Bilinear);
+    {
+        _state.common.font.EditorPanelText = 
+            Load.LoadFontEx(
+                "Resources/Font/Lilex-Regular.ttf",
+                _state.editor.layout.textPanel.TextSize
+            );
 
-        _state.common.font.EditorPanelRowNumbers = Raylib.LoadFontEx("Resources/Font/Lilex-ExtraLight.ttf", _state.editor.layout.textPanel.TextSize, null, 0);
-        Raylib.SetTextureFilter(_state.common.font.EditorPanelRowNumbers.Texture, TextureFilter.Bilinear);
+        _state.common.font.EditorPanelRowNumbers = 
+            Load.LoadFontEx(
+                "Resources/Font/Lilex-ExtraLight.ttf", 
+                _state.editor.layout.textPanel.TextSize
+            );
 
-        _state.common.font.MazeCommonData = Raylib.LoadFontEx("Resources/Font/Lilex-ExtraLight.ttf", (int)_state.maze.layout.mazeView.CommonDataCharHight, null, 0);
-        Raylib.SetTextureFilter(_state.common.font.MazeCommonData.Texture, TextureFilter.Bilinear);
+        _state.common.font.MazeCommonData = 
+            Load.LoadFontEx(
+                "Resources/Font/Lilex-ExtraLight.ttf", 
+                _state.editor.layout.textPanel.TextSize
+            );
     }
 }
