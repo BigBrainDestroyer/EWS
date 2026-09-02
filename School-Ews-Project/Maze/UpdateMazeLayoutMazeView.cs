@@ -91,15 +91,6 @@ public class UpdateMazeLayoutMazeView
     private float CalculatingCommonDataCharHight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing, int amountOfCommonDataBoxes)
     {
         float newCharHight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y)/2;
-
-        if (newCharHight < 7 && amountOfCommonDataBoxes < 6)
-        {
-            newCharHight = 10;
-        }
-        else if(newCharHight < 16 && amountOfCommonDataBoxes < 6)
-        {
-            newCharHight = 16;
-        }
         
         return newCharHight;
     }

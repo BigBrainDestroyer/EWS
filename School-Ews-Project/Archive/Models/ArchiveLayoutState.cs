@@ -16,9 +16,19 @@ public enum ArchiveFunctionNames
     AddButton
 }
 
+public enum ArchiveTexture2DNames
+{
+    ProjectFolder,
+    Folder,
+    File,
+    OpenProjectFolder,
+    OpenFolder,
+    PlusSign
+}
+
 public struct ArchiveDataTypeBox
 {
-    public Vector2 Percentages;
+    public Vector2 Percentages = new Vector2(100f, 3f);
     public Vector2 Position;
     public Vector2 Length;
     public ArchiveStorageNames DataType;
@@ -26,7 +36,6 @@ public struct ArchiveDataTypeBox
 
     public ArchiveDataTypeBox(Vector2 position, Vector2 length, ArchiveStorageNames dataType, string name)
     {
-        Percentages = new Vector2(100f, 3f);
         Position = position;
         Length = length;
         DataType = dataType;
@@ -36,21 +45,34 @@ public struct ArchiveDataTypeBox
 
 public struct ArchiveAddDataTypeMenu
 {
-    public ArchiveStorageNames[] AddLegalDataTypeToStorage;
-    public Image[] Svg; 
-    public string[] Text;
-    public Vector2 SvgPosition;
-    public Vector2 SvgSize;
-    public float FontSize;
+    public ArchiveStorageNames?[] AddLegalDataTypeToStorage;
 
-    public ArchiveAddDataTypeMenu(ArchiveStorageNames[] addLegalDataTypeStorage, Image[] svg, Vector2 svgPosition, Vector2 svgSize, float fontSize)
+    public string[] Text = new string[] {
+        "NewProject", 
+        "NewFolder", 
+        "NewFile"
+    };
+
+    public Vector2 BoxPosition;
+    public Vector2 BoxLengths;
+
+    public Vector2 SingleBoxLengths;
+
+    public Vector2 Texture2DPosition;
+    public Vector2 Texture2DSize;
+    public float FontSize;
+    public int LegalDataTypeCount;
+    public bool IsMenuActive;
+
+    public ArchiveAddDataTypeMenu(ArchiveStorageNames?[] addLegalDataTypeStorage, Vector2 boxPosition, Vector2 boxLengths, Vector2 singleBoxLengths, Vector2 texture2DPosition, Vector2 texture2DSize, bool isMenuActive)
     {
         AddLegalDataTypeToStorage = addLegalDataTypeStorage;
-        Svg = svg;
-        Text = new string[] {"ProjectFolder", "Folder", "File"};
-        SvgPosition = svgPosition;
-        SvgSize = svgSize;
-        FontSize = fontSize;
+        BoxPosition = boxPosition;
+        BoxLengths = boxLengths;
+        SingleBoxLengths = singleBoxLengths;
+        Texture2DPosition = texture2DPosition;
+        Texture2DSize = texture2DSize;
+        IsMenuActive = isMenuActive;
     }
 }
 
@@ -58,8 +80,10 @@ public class ArchiveLayoutState
 {
     public Color BackgroundColor { get; set; } = new Color(51, 59, 67, 255);
 
-    public Image[] AddDataTypeSvg { get; set; } = new Image[3]; 
-    
+    public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
+
+    public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
+
     public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();
 
     public Dictionary<ArchiveBoxesNames, Vector2> ArchiveBoxPixelPercentages { get; } =
@@ -93,6 +117,8 @@ public class ArchiveLayoutState
     public Vector2 AddOnButtonPixelPosition { get; set; } = new Vector2();
 
     public Vector2 ArchiveBoxLengths { get; set; } = new Vector2();
+
+    public Vector2 AddOnButtonTexturePosition { get; set; } = new Vector2();
 
     public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 20f;
     public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }

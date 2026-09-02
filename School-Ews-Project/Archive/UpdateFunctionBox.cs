@@ -14,6 +14,7 @@ public class UpdateFunctionBox
     public void FunctionBox()
     {
         var _layout = _state.archive.layout;
+        var _core = _state.archive.core;
         var _boxes = _state.common.boxes;
 
         _layout.ArchiveFunctionBarBoxPixelWhiteSpace =
@@ -59,8 +60,8 @@ public class UpdateFunctionBox
 
         _layout.AddOnButtonPixelPosition =
             CalculateAddOnButtonPosition(
-                _layout.SearchBarPixelPosition, 
-                _layout.SearchBarPixelLengths.X, 
+                _layout.SearchBarPixelPosition,
+                _layout.SearchBarPixelLengths.X,
                 _layout.ArchiveFunctionBarFunctionsPixelWhiteSpace
             );
     }

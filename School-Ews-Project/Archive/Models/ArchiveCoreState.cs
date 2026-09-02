@@ -12,13 +12,13 @@ public enum ArchiveStorageNames
 
 public struct ArchiveStorage
 {
-    public Dictionary<string[], ArchiveStorage>? FolderStorage;
+    public Dictionary<string, ArchiveStorage>? FolderStorage;
     public ArchiveStorageNames DataType;
     public string Name;
     public string DataLocation;
     public bool ViewFolderStorage;
 
-    public ArchiveStorage(Dictionary<string[], ArchiveStorage>? folderStorage, ArchiveStorageNames dataType, string name, string dataLocation, bool viewFolderStorage)
+    public ArchiveStorage(Dictionary<string, ArchiveStorage>? folderStorage, ArchiveStorageNames dataType, string name, string dataLocation, bool viewFolderStorage)
     {
         FolderStorage = folderStorage;
         DataType = dataType;
@@ -30,7 +30,7 @@ public struct ArchiveStorage
 
 public class ArchiveCoreState
 {
-    public ArchiveStorageNames[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames[3];
+    public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
 
     public Dictionary<string, ArchiveStorage> Storage { get; set; } = new Dictionary<string, ArchiveStorage>();
     

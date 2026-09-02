@@ -49,4 +49,20 @@ public class Initialize
                 _state.editor.layout.textPanel.TextSize
             );
     }
+
+    public void Texture2D()
+    {
+        var _archiveLayout = _state.archive.layout;
+
+        //ArchiveTexture2DNames volgorde
+        _archiveLayout.ArchiveTextures = 
+            new Texture2D[] { 
+                Load.LoadResizableTexture2D("Resources/Png/PlusSign.png"),
+                Load.LoadResizableTexture2D("Resources/Png/ProjectFolder.png"), 
+                Load.LoadResizableTexture2D("Resources/Png/Folder.png"),
+                Load.LoadResizableTexture2D("Resources/Png/File.png"),
+                Load.LoadResizableTexture2D("Resources/Png/OpenProjectFolder.png"),
+                Load.LoadResizableTexture2D("Resources/Png/OpenFolder.png")
+            };
+    }
 }

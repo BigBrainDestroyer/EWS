@@ -14,17 +14,13 @@ public class UpdateArchiveDataTypeLayoutBoxes
     public void ArchiveDataTypeLayoutBoxes()
     {
         var _layout = _state.archive.layout;
-        //Update
+
         _layout.DataTypeBox = 
             UpdateArchiveDataTypeBox(
                 _layout.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
                 _layout.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
                 _layout.ArchiveWhiteSpaceToFunctionBar 
             );
-
-        //Add
-
-
     }
 
     private ArchiveDataTypeBox UpdateArchiveDataTypeBox(Vector2 parentBoxPosition, Vector2 parentBoxPixelLengths, float whiteSpaceToFunctionBar)

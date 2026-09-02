@@ -13,6 +13,8 @@ public class Program
 
         initialize.Fonts();
 
+        initialize.Texture2D();
+
         var game = new ProgramLoop(state);
         game.Loop();
 

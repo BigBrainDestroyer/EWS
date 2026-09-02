@@ -3,7 +3,7 @@ using System.Text;
 using Raylib_cs;
 
 namespace Program;
-
+    
 public class UpdateArchiveCore
 {
     private readonly AppState _state;
@@ -26,12 +26,12 @@ public class UpdateArchiveCore
         if(CheckField.MouseOnField(_layout.AddOnButtonPixelPosition, _layout.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
             _core.AddLegalDataTypeToStorage = GetLegalDataTypes(_core.CurentStorageDataLocation);
-        }   
+        }
     }
 
-    private ArchiveStorageNames[] GetLegalDataTypes(string dataLocation)
+    private ArchiveStorageNames?[] GetLegalDataTypes(string dataLocation)
     {
-        ArchiveStorageNames[] newAddLegalDataTypeToStorage = new ArchiveStorageNames[3];
+        ArchiveStorageNames?[] newAddLegalDataTypeToStorage = new ArchiveStorageNames?[3];
 
         StringBuilder newString = new StringBuilder();
 

@@ -52,5 +52,32 @@ public class DrawArchive
             _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
             Color.Blue
         );
+
+        //test
+        
+        Rectangle sourceRectangle = 
+            new Rectangle(
+                0, 
+                0, 
+                _layout.ArchiveTextures[(int)ArchiveTexture2DNames.PlusSign].Width, 
+                _layout.ArchiveTextures[(int)ArchiveTexture2DNames.PlusSign].Height
+            );
+
+        Rectangle rectangleDrawSize = 
+            new Rectangle(
+                _layout.AddOnButtonPixelPosition.X, 
+                _layout.AddOnButtonPixelPosition.Y, 
+                _layout.AddOnButtonPixelLengths.X, 
+                _layout.AddOnButtonPixelLengths.Y
+            );
+
+        Raylib.DrawTexturePro(
+            _layout.ArchiveTextures[(int)ArchiveTexture2DNames.PlusSign], 
+            sourceRectangle,
+            rectangleDrawSize,
+            new Vector2(0, 0),
+            0f,
+            Color.Black
+        );
     }
 }
