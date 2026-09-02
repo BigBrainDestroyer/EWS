@@ -35,8 +35,8 @@ public class UpdateApp
 
         _mazeLayout.MazeLayout();
 
-        _archiveLayout.UpdateArchive();
-
         _archiveCore.ArchiveCore();
+        
+        _archiveLayout.UpdateArchive();
     }
 }

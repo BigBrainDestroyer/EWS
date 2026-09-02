@@ -62,7 +62,7 @@ public struct ArchiveAddDataTypeMenu
     public Vector2 Texture2DSize;
     public float FontSize;
     public int LegalDataTypeCount;
-    public bool IsMenuActive;
+    public bool IsMenuActive = false;
 
     public ArchiveAddDataTypeMenu(ArchiveStorageNames?[] addLegalDataTypeStorage, Vector2 boxPosition, Vector2 boxLengths, Vector2 singleBoxLengths, Vector2 texture2DPosition, Vector2 texture2DSize, bool isMenuActive)
     {

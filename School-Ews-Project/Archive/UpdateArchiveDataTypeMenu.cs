@@ -14,14 +14,18 @@ public class UpdateArchiveDataTypeMenu
     public void UpdateDataTypeMenu()
     {
         var _layout = _state.archive.layout;
-        var _core = _state.archive.core;
+        
+        if(_layout.AddDataTypeMenu.IsMenuActive)
+        {
+            var _core = _state.archive.core;
 
-        _layout.AddDataTypeMenu =
-            CalculateAddDataTypeMenuBox(
-                _core.AddLegalDataTypeToStorage,
-                _layout.SearchBarPixelPosition,
-                _layout.SearchBarPixelLengths
-            );
+            _layout.AddDataTypeMenu =
+                CalculateAddDataTypeMenuBox(
+                    _core.AddLegalDataTypeToStorage,
+                    _layout.SearchBarPixelPosition,
+                    _layout.SearchBarPixelLengths
+                );
+        }
     }
 
     public ArchiveAddDataTypeMenu UpdateArchiveTypeMenuActiveState(ArchiveAddDataTypeMenu currentAddDataTypeMenu)

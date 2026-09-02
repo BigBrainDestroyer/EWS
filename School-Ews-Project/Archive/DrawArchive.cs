@@ -37,6 +37,71 @@ public class DrawArchive
     {
         var _layout = _state.archive.layout;
 
+        if (_layout.AddDataTypeMenu.IsMenuActive)
+        {
+            DrawAddDataTypeMenu();
+        }
+        else
+        {
+            DrawSearchBar();            
+        }
+
+        DrawAddOnButton();
+    }
+
+    private void DrawAddDataTypeMenu()
+    {
+        var _layout = _state.archive.layout;
+        var _commonBoxes = _state.common.boxes;
+
+        ArchiveAddDataTypeMenu addDataTypeMenu = _layout.AddDataTypeMenu;
+
+        Custom.DrawCustomRectangle(
+            addDataTypeMenu.BoxPosition,
+            addDataTypeMenu.BoxLengths,
+            _commonBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+            _commonBoxes.MainBoxesCornerStates[MainBoxNames.Archive],
+            Color.Blue
+        );
+
+        foreach(ArchiveStorageNames? dataType in addDataTypeMenu.AddLegalDataTypeToStorage)
+        {
+            if(dataType != null)
+            {
+                Rectangle textureRectangleSize = 
+                    new Rectangle(
+                        0, 
+                        0, 
+                        _layout.ArchiveTextures[(int)dataType].Width, 
+                        _layout.ArchiveTextures[(int)dataType].Height
+                    );
+        
+                Rectangle rectangleDrawSize = 
+                    new Rectangle(
+                        addDataTypeMenu.Texture2DPosition.X, 
+                        addDataTypeMenu.Texture2DPosition.Y, 
+                        addDataTypeMenu.Texture2DSize.X, 
+                        addDataTypeMenu.Texture2DSize.Y
+                    );
+                
+                Raylib.DrawTexturePro(
+                    _layout.ArchiveTextures[(int)dataType],
+                    textureRectangleSize,
+                    rectangleDrawSize,
+                    new Vector2(0, 0),
+                    0f,
+                    Color.DarkGray
+                );
+
+                addDataTypeMenu.Texture2DPosition.Y += addDataTypeMenu.SingleBoxLengths.Y;
+            }
+        }
+    }
+
+    private void DrawSearchBar()
+    {
+        var _layout = _state.archive.layout;
+
         Custom.DrawCustomRectangle(
             _layout.SearchBarPixelPosition,
             _layout.SearchBarPixelLengths,
@@ -44,7 +109,12 @@ public class DrawArchive
             _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
             Color.Red
         );
+    }
 
+    private void DrawAddOnButton()
+    {
+        var _layout = _state.archive.layout;
+        
         Custom.DrawCustomRectangle(
             _layout.AddOnButtonPixelPosition,
             _layout.AddOnButtonPixelLengths,

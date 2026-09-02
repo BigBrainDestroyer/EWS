@@ -8,6 +8,7 @@ public class UpdateArchiveLayout
     private readonly UpdateFunctionBox _functionBox;
     private readonly UpdateArchiveLayoutBoxes _archiveBoxes;
     private readonly UpdateArchiveDataTypeLayoutBoxes _dataBoxes;
+    private readonly UpdateArchiveDataTypeMenu _dataTypeMenu;
 
     public UpdateArchiveLayout(AppState state)
     {
@@ -15,6 +16,7 @@ public class UpdateArchiveLayout
         _functionBox = new UpdateFunctionBox(_state);
         _archiveBoxes = new UpdateArchiveLayoutBoxes(_state);
         _dataBoxes = new UpdateArchiveDataTypeLayoutBoxes(_state);
+        _dataTypeMenu = new UpdateArchiveDataTypeMenu(_state);
     }
 
     public void UpdateArchive()
@@ -24,5 +26,7 @@ public class UpdateArchiveLayout
         _functionBox.FunctionBox();
 
         _dataBoxes.ArchiveDataTypeLayoutBoxes();
+
+        _dataTypeMenu.UpdateDataTypeMenu();
     }
 }
