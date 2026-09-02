@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Text;
 using Raylib_cs;
 
@@ -71,7 +70,7 @@ public class UpdateArchiveCore
     {
         ArchiveStorageNames?[] newAddLegalDataTypeToStorage = new ArchiveStorageNames?[3];
 
-        StringBuilder newString = new StringBuilder(dataLocation);
+        StringBuilder newString = new StringBuilder();
 
         string[] dataLocationList = newString.ToString().Split('/');
         

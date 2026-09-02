@@ -56,12 +56,14 @@ public class DrawArchive
 
         ArchiveAddDataTypeMenu addDataTypeMenu = _layout.AddDataTypeMenu;
 
-        Custom.DrawCustomRectangle(
+        Custom.DrawCustomRectangleOutlining(
             addDataTypeMenu.BoxPosition,
             addDataTypeMenu.BoxLengths,
             _commonBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
             _commonBoxes.MainBoxesCornerStates[MainBoxNames.Archive],
-            Color.Blue
+            0.4f,
+            new Color(102, 153, 204),
+            new Color(57, 66, 76)
         );
 
         foreach(ArchiveStorageNames? dataType in addDataTypeMenu.AddLegalDataTypeToStorage)
@@ -90,7 +92,7 @@ public class DrawArchive
                     rectangleDrawSize,
                     new Vector2(0, 0),
                     0f,
-                    Color.DarkGray
+                    new Color(216, 222, 233)
                 );
 
                 addDataTypeMenu.Texture2DPosition.Y += addDataTypeMenu.SingleBoxLengths.Y;
@@ -102,12 +104,14 @@ public class DrawArchive
     {
         var _layout = _state.archive.layout;
 
-        Custom.DrawCustomRectangle(
+        Custom.DrawCustomRectangleOutlining(
             _layout.SearchBarPixelPosition,
             _layout.SearchBarPixelLengths,
             _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
             _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
-            Color.Red
+            0.4f,
+            new Color(102, 153, 204),
+            new Color(57, 66, 76)
         );
     }
 
@@ -115,12 +119,14 @@ public class DrawArchive
     {
         var _layout = _state.archive.layout;
         
-        Custom.DrawCustomRectangle(
+        Custom.DrawCustomRectangleOutlining(
             _layout.AddOnButtonPixelPosition,
             _layout.AddOnButtonPixelLengths,
             _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Archive],
             _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Archive],
-            Color.Blue
+            0.6f,
+            new Color(102, 153, 204),
+            new Color(57, 66, 76)
         );
 
         //test
@@ -147,7 +153,7 @@ public class DrawArchive
             rectangleDrawSize,
             new Vector2(0, 0),
             0f,
-            Color.Black
+            new Color(216, 222, 233)
         );
     }
 }
