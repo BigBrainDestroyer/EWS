@@ -20,25 +20,29 @@ public class UpdateEditorPanelText
     {
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;
-
-        _updateTextView.IsMouseWheelActive();
+        var _commonBoxes = _state.common.boxes;
         
-        if(_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) ||Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
+        if (_commonBoxes.ActiveMainBox == MainBoxNames.Editor)
         {
-            (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput) =
-                UpdatingText(
-                    _textPanel.CursorTextPosition,
-                    _textPanel.PanelText,
-                    _input.KeyboardCharInput,
-                    _textPanel.GridColumnPositions,
-                    _textPanel.GridRowPositions,
-                    _textPanel.TapTextSpaces,
-                    _textPanel.TextGridBoxesOffSetX,
-                    _textPanel.TextGridBoxesOffSetY,
-                    _textPanel.GridBoxesSpaceOffRowNumbers
-                );
+            _updateTextView.IsMouseWheelActive();
+            
+            if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
+            {
+                (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput) =
+                    UpdatingText(
+                        _textPanel.CursorTextPosition,
+                        _textPanel.PanelText,
+                        _input.KeyboardCharInput,
+                        _textPanel.GridColumnPositions,
+                        _textPanel.GridRowPositions,
+                        _textPanel.TapTextSpaces,
+                        _textPanel.TextGridBoxesOffSetX,
+                        _textPanel.TextGridBoxesOffSetY,
+                        _textPanel.GridBoxesSpaceOffRowNumbers
+                    );
 
-            _updateTextView.UpdateView();
+                _updateTextView.UpdateView();
+            }
         }
         
         if(Raylib.IsWindowResized())

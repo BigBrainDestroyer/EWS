@@ -19,6 +19,8 @@ public class UpdateEditorTextPanel
     {
         var _layout = _state.editor.layout;
         var _boxes = _state.common.boxes;
+        
+                _updateEditorPanelText.UpdatingPanelText();
 
         _layout.textPanel.GridBoxesSpaceOffRowNumbers =
             UpdateGridBoxesSpaceOffRowNumbers(
@@ -35,7 +37,7 @@ public class UpdateEditorTextPanel
                 (int)_boxes.MainBoxPixelLengts[MainBoxNames.Editor].Y
             );
 
-        _updateEditorPanelText.UpdatingPanelText();
+
 
         (_layout.textPanel.WriteOverBoxPositionHorizontalText, _layout.textPanel.WriteOverBoxPositionVerticalText) =
             CalculateWriteOverBoxPositions(

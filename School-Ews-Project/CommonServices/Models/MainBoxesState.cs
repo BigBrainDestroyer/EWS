@@ -24,6 +24,8 @@ public class MainBoxesState
     public Color HeaderBackgroundColor { get; set; } = new Color(18, 22, 26, 255);
     public Color MainBoxesBackgroundColor { get; set; } = new Color(43, 46, 49, 255);
 
+    public MainBoxNames ActiveMainBox { get; set; } = MainBoxNames.Editor;
+
     public Dictionary<MainColumnsName, Vector2> MainColumnsPercentage { get; set; } =
         new Dictionary<MainColumnsName, Vector2>{
             {MainColumnsName.Archive, new Vector2(13f, 100f)},

@@ -76,15 +76,46 @@ public struct ArchiveAddDataTypeMenu
     }
 }
 
+public struct ArchiveNamingDataTypeBox
+{
+    public Texture2D Texture;
+    public Vector2 TextureSize;
+    public Vector2 TextPosition;
+    public Vector2 BoxPosition;
+    public Vector2 BoxLengths;
+    public string Name;
+    public float TextSize;
+    public float TextWhiteSpacing = 50f;
+    public int CursorPosition = 0;
+    public bool IsBoxActive = false;
+
+    public ArchiveNamingDataTypeBox(Texture2D texture, Vector2 textureSize, Vector2 boxPosition, Vector2 boxLengths, Vector2 textPosition, string name, float textSize, int cursorPosition, bool isBoxActive)
+    {
+        Texture = texture;
+        TextureSize = textureSize;
+        BoxPosition = boxPosition;
+        BoxLengths = boxLengths;
+        TextPosition = textPosition;
+        Name = name;
+        TextSize = textSize;
+        CursorPosition = cursorPosition;
+        IsBoxActive = isBoxActive;
+    }
+}
+
+
+
 public class ArchiveLayoutState
 {
     public Color BackgroundColor { get; set; } = new Color(51, 59, 67, 255);
 
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
+    public ArchiveNamingDataTypeBox ArchiveNamingDataTypeBox { get; set; } = new ArchiveNamingDataTypeBox();
+
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
 
-    public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();
+    public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();  
 
     public Dictionary<ArchiveBoxesNames, Vector2> ArchiveBoxPixelPercentages { get; } =
         new Dictionary<ArchiveBoxesNames, Vector2>{

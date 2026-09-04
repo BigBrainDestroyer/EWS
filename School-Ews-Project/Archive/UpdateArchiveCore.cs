@@ -46,6 +46,8 @@ public class UpdateArchiveCore
                     Console.WriteLine(dataType);
 
                     _layout.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_layout.AddDataTypeMenu);
+
+                    
                 }
 
                 addDataTypeMenu.BoxPosition.Y += addDataTypeMenu.SingleBoxLengths.Y;

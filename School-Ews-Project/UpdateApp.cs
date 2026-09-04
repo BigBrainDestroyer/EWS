@@ -10,6 +10,8 @@ public class UpdateApp
     private readonly UpdateMazeLayout _mazeLayout;
     private readonly UpdateArchiveLayout _archiveLayout;
     private readonly UpdateArchiveCore _archiveCore;
+    private readonly UpdateActiveMainBox _activeMainBox;
+
 
     public UpdateApp(AppState state)
     {
@@ -20,10 +22,13 @@ public class UpdateApp
         _mazeLayout = new UpdateMazeLayout(_state);
         _archiveLayout = new UpdateArchiveLayout(_state);
         _archiveCore = new UpdateArchiveCore(_state);
+        _activeMainBox = new UpdateActiveMainBox(_state);
     }
     
     public void App()
     {
+        _activeMainBox.ActiveMainBox();
+
         _calculateMainBoxes.UpdateMainBoxes();
 
         _editorLayout.EditorLayout();
