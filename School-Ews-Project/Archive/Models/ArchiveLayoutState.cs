@@ -76,34 +76,42 @@ public struct ArchiveAddDataTypeMenu
     }
 }
 
-public struct ArchiveNamingDataTypeBox
+public struct TextBar
 {
-    public Texture2D Texture;
-    public Vector2 TextureSize;
-    public Vector2 TextPosition;
     public Vector2 BoxPosition;
     public Vector2 BoxLengths;
-    public string Name;
-    public float TextSize;
-    public float TextWhiteSpacing = 50f;
-    public int CursorPosition = 0;
-    public bool IsBoxActive = false;
+    
+    public Texture2D Texture;
+    public Vector2 TextureSize;
 
-    public ArchiveNamingDataTypeBox(Texture2D texture, Vector2 textureSize, Vector2 boxPosition, Vector2 boxLengths, Vector2 textPosition, string name, float textSize, int cursorPosition, bool isBoxActive)
+    public Font TextFont;
+    
+    public string Text;
+
+    public Vector2 ViewTextPixelPosition;
+    public string ViewText;
+    public float TextureToTextWhiteSpace;
+
+    public int CursorTextOffSet;
+    public int CursorTextPosition;
+    public Vector2 CursorPixelPosition;
+    public Vector2 CursorPixelLengths;
+
+    public string BackgroundText;
+
+    public int TextTypingWhiteSpaceRight;
+    public int TextTypingWhiteSpaceLeft;
+    public int CharSpacing;
+
+    public bool IsTextBoxActive;
+
+    public TextBar()
     {
-        Texture = texture;
-        TextureSize = textureSize;
-        BoxPosition = boxPosition;
-        BoxLengths = boxLengths;
-        TextPosition = textPosition;
-        Name = name;
-        TextSize = textSize;
-        CursorPosition = cursorPosition;
-        IsBoxActive = isBoxActive;
+        TextTypingWhiteSpaceRight = 1;
+        TextTypingWhiteSpaceLeft = 1;
+        CharSpacing = 0;
     }
 }
-
-
 
 public class ArchiveLayoutState
 {
@@ -111,7 +119,7 @@ public class ArchiveLayoutState
 
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
-    public ArchiveNamingDataTypeBox ArchiveNamingDataTypeBox { get; set; } = new ArchiveNamingDataTypeBox();
+    public TextBar ArchiveNamingDataTypeBox { get; set; } = new TextBar();
 
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
 

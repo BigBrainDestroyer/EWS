@@ -112,9 +112,9 @@ public class UpdateEditorTextPanel
     }
 
 
-    private (float[], float[]) CalculateTextGrid(Font textFond, float textHeight, float charSpacing, int areaWidth, int areaHeight)
+    private (float[], float[]) CalculateTextGrid(Font textFont, float textHeight, float charSpacing, int areaWidth, int areaHeight)
     {
-        Vector2 charDimensions = Raylib.MeasureTextEx(textFond, "t", textHeight, charSpacing);
+        Vector2 charDimensions = Raylib.MeasureTextEx(textFont, "t", textHeight, charSpacing);
 
         float columnArrayLength = MathF.Ceiling((float)areaWidth / charDimensions.X);
         float[] columnPositions = new float[(int)columnArrayLength];

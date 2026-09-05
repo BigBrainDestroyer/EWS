@@ -61,7 +61,7 @@ public class UpdateEditorPanelText
             (cursorTextPosition, newString, panelText) = 
                 UpdateEnterToText(cursorTextPosition, newString, panelText);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Backspace))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Backspace))//
         {
             (cursorTextPosition, newString, panelText) = 
                 UpdateBackspaceToString(cursorTextPosition, newString, panelText);
@@ -81,18 +81,18 @@ public class UpdateEditorPanelText
             cursorTextPosition = 
                 UpdateDownToText(cursorTextPosition, panelText);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Left))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Left))//
         {
             cursorTextPosition = 
                 UpdateLeftToText(cursorTextPosition, panelText);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Right))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Right))//
         {
             cursorTextPosition =
                 UpdateRightToText(cursorTextPosition, panelText);
         }
         
-        if(chars.Count > 0)
+        if(chars.Count > 0)//
         {
             (cursorTextPosition, panelText, chars) =
                 UpdateCharInputToText(cursorTextPosition, newString, panelText, chars);
