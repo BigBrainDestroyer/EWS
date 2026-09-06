@@ -42,13 +42,20 @@ public class UpdateNamingDataTypeTextBox
     private void CheckForCriticalInput()
     {
         var _archive = _state.archive;
-        
+
+        TextBar newArchiveNamingDataTypeTextBox = _archive.ArchiveNamingDataTypeTextBox;
+
         if(Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
-            Console.WriteLine();
-            Console.WriteLine(_archive.ArchiveNamingDataTypeTextBox.Text);
-            Console.WriteLine(_archive.ArchiveNamingDataTypeTextBox.Texture);
-            Console.WriteLine(_archive.ArchiveNamingDataTypeTextBox.CursorTextPosition);
+            newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
+            _archive.ArchiveNamingDataTypeTextBox = newArchiveNamingDataTypeTextBox;
+            
+            if(_archive.ArchiveNamingDataTypeTextBox.Text.Length == 0)
+            {
+                return;
+            }
+
+            
         }
     }
 }

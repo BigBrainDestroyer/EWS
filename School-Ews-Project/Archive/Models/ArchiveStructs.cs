@@ -25,7 +25,7 @@ public struct ArchiveDataTypeBox
 {
     public ArchiveStorageNames DataType;
     
-    public Vector2 Percentages = new Vector2(100f, 3f);
+    public Vector2 Percentages = new Vector2(100f, 2.4f);
     public Vector2 Position;
     public Vector2 Length;
 

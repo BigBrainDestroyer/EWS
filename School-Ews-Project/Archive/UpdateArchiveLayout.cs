@@ -19,9 +19,7 @@ public class UpdateArchiveLayout
     }
 
     public void UpdateArchive()
-    {
-        
-        
+    {        
         _archiveBoxes.ArchiveLayoutBoxes();
 
         _functionBox.FunctionBox();

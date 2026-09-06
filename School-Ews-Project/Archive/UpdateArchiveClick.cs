@@ -16,7 +16,7 @@ public class UpdateArchiveClicks
         _customTextBar = new UpdateCustomTextBar(_state);
     }
 
-    public void ArchiveCore()
+    public void ArchiveClicks()
     {
         var _archive = _state.archive;
 
