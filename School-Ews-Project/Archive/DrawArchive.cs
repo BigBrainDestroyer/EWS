@@ -17,12 +17,14 @@ public class DrawArchive
         DrawArchiveBackground();
 
         DrawArchiveFunctionBar();
+
+        DrawArchiveNamingDataTypeTextBox();
     }
 
     private void DrawArchiveBackground()
     {
         var _boxes = _state.common.boxes;
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
 
         Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive], 
@@ -35,7 +37,7 @@ public class DrawArchive
 
     private void DrawArchiveFunctionBar()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
 
         if (_layout.AddDataTypeMenu.IsMenuActive)
         {
@@ -51,7 +53,7 @@ public class DrawArchive
 
     private void DrawAddDataTypeMenu()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
         var _commonBoxes = _state.common.boxes;
 
         ArchiveAddDataTypeMenu addDataTypeMenu = _layout.AddDataTypeMenu;
@@ -102,7 +104,7 @@ public class DrawArchive
 
     private void DrawSearchBar()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
 
         Custom.DrawCustomRectangleOutlining(
             _layout.SearchBarPixelPosition,
@@ -117,7 +119,7 @@ public class DrawArchive
 
     private void DrawAddOnButton()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
         
         Custom.DrawCustomRectangleOutlining(
             _layout.AddOnButtonPixelPosition,
@@ -155,5 +157,56 @@ public class DrawArchive
             0f,
             new Color(216, 222, 233)
         );
+    }
+
+    private void DrawArchiveNamingDataTypeTextBox()
+    {
+        var _layout = _state.archive;
+        var _commonBoxes = _state.common.boxes;
+
+        if(_layout.ArchiveNamingDataTypeTextBox.IsTextBoxActive)
+        {
+            Custom.DrawCustomRectangle(
+                _layout.ArchiveNamingDataTypeTextBox.BoxPosition,
+                _layout.ArchiveNamingDataTypeTextBox.BoxLengths,
+                _commonBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+                _layout.ArchiveNamingDataTypeTextBox.CornerStates,
+                _layout.BackgroundColor
+            );
+
+            Raylib.DrawTextEx(
+                _state.common.font.EditorPanelText,
+                _layout.ArchiveNamingDataTypeTextBox.ViewText,
+                _layout.ArchiveNamingDataTypeTextBox.ViewTextPixelPosition,
+                _layout.ArchiveNamingDataTypeTextBox.BoxLengths.Y,
+                _layout.ArchiveNamingDataTypeTextBox.CharSpacing,
+                Color.RayWhite
+            );
+
+            Rectangle sourceRectangle = 
+                new Rectangle(
+                    0, 
+                    0, 
+                    _layout.ArchiveNamingDataTypeTextBox.Texture.Width, 
+                    _layout.ArchiveNamingDataTypeTextBox.Texture.Height
+                );
+    
+            Rectangle rectangleDrawSize = 
+                new Rectangle(
+                    _layout.ArchiveNamingDataTypeTextBox.BoxPosition.X, 
+                    _layout.ArchiveNamingDataTypeTextBox.BoxPosition.Y, 
+                    _layout.ArchiveNamingDataTypeTextBox.TextureSize.X, 
+                    _layout.ArchiveNamingDataTypeTextBox.TextureSize.Y
+                );
+    
+            Raylib.DrawTexturePro(
+                _layout.ArchiveNamingDataTypeTextBox.Texture, 
+                sourceRectangle,
+                rectangleDrawSize,
+                new Vector2(0, 0),
+                0f,
+                new Color(216, 222, 233)
+            );
+        }
     }
 }

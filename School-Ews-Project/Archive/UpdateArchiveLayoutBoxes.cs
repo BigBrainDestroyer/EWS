@@ -13,7 +13,7 @@ public class UpdateArchiveLayoutBoxes
 
     public void ArchiveLayoutBoxes()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
         var _boxes = _state.common.boxes;
 
         _layout.ArchiveBoxPixelLengths = CalculateArchiveLayoutBoxLengths(

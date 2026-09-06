@@ -13,8 +13,7 @@ public class UpdateFunctionBox
 
     public void FunctionBox()
     {
-        var _layout = _state.archive.layout;
-        var _core = _state.archive.core;
+        var _layout = _state.archive;
         var _boxes = _state.common.boxes;
 
         _layout.ArchiveFunctionBarBoxPixelWhiteSpace =

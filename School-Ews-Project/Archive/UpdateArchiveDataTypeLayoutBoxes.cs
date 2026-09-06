@@ -13,7 +13,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
     public void ArchiveDataTypeLayoutBoxes()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
 
         _layout.DataTypeBox = 
             UpdateArchiveDataTypeBox(

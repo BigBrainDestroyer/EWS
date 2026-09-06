@@ -13,11 +13,11 @@ public class UpdateArchiveDataTypeMenu
 
     public void UpdateDataTypeMenu()
     {
-        var _layout = _state.archive.layout;
+        var _layout = _state.archive;
         
         if(_layout.AddDataTypeMenu.IsMenuActive)
         {
-            var _core = _state.archive.core;
+            var _core = _state.archive;
 
             _layout.AddDataTypeMenu =
                 CalculateAddDataTypeMenuBox(

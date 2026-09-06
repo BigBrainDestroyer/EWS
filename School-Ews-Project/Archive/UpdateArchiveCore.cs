@@ -3,22 +3,24 @@ using Raylib_cs;
 
 namespace Program;
     
-public class UpdateArchiveCore
+public class UpdateArchiveClicks
 {
     private readonly AppState _state;
     private readonly UpdateArchiveDataTypeMenu _dataTypeMenu;
+    private readonly UpdateCustomTextBar _customTextBar;
 
-    public UpdateArchiveCore(AppState state)
+    public UpdateArchiveClicks(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _dataTypeMenu = new UpdateArchiveDataTypeMenu(_state);
+        _customTextBar = new UpdateCustomTextBar(_state);
     }
 
     public void ArchiveCore()
     {
-        var _layout = _state.archive.layout;
+        var _archive = _state.archive;
 
-        if(_layout.AddDataTypeMenu.IsMenuActive)
+        if(_archive.AddDataTypeMenu.IsMenuActive)
         {
             AddDataMenuClick();
         }
@@ -28,41 +30,43 @@ public class UpdateArchiveCore
 
     private void AddDataMenuClick()
     {
-        var _layout = _state.archive.layout;
+        var _archive = _state.archive;
+        var _input = _state.common.input;
 
-        if(!CheckField.MouseOnField(_layout.AddDataTypeMenu.BoxPosition, _layout.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) || !Raylib.IsMouseButtonPressed(MouseButton.Left))
+        if(!CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) || !Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
             return;
         }
 
-        ArchiveAddDataTypeMenu addDataTypeMenu = _layout.AddDataTypeMenu;
+        ArchiveAddDataTypeMenu addDataTypeMenu = _archive.AddDataTypeMenu;
 
-        foreach(ArchiveStorageNames? dataType in  _layout.AddDataTypeMenu.AddLegalDataTypeToStorage)
+        foreach(ArchiveStorageNames? dataType in  _archive.AddDataTypeMenu.AddLegalDataTypeToStorage)
         {
             if(dataType != null)
             {
-                if(CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.SingleBoxLengths, Raylib.GetMousePosition()))
+                if (CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.SingleBoxLengths, Raylib.GetMousePosition()))
                 {
                     Console.WriteLine(dataType);
 
-                    _layout.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_layout.AddDataTypeMenu);
+                    _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
+
+                    _archive.ArchiveNamingDataTypeTextBox = GetNewNamingDataTypeBox(_archive.ArchiveTextures, dataType.Value);
                 }
                 
                 addDataTypeMenu.BoxPosition.Y += addDataTypeMenu.SingleBoxLengths.Y;
             }
         }
     }
-
+    
     private void AddOnButtonClick()
     {
-        var _layout = _state.archive.layout;
-        var _core = _state.archive.core;
+        var _archive = _state.archive;
 
-        if(CheckField.MouseOnField(_layout.AddOnButtonPixelPosition, _layout.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
+        if(CheckField.MouseOnField(_archive.AddOnButtonPixelPosition, _archive.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
-            _core.AddLegalDataTypeToStorage = GetLegalDataTypes(_core.CurentStorageDataLocation);
+            _archive.AddLegalDataTypeToStorage = GetLegalDataTypes(_archive.CurentStorageDataLocation);
 
-            _layout.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_layout.AddDataTypeMenu);
+            _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
         }
     }
     
@@ -86,5 +90,18 @@ public class UpdateArchiveCore
         }
 
         return newAddLegalDataTypeToStorage;
+    }
+
+    public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType)
+    {
+        TextBar newTextBar = new TextBar();
+
+        newTextBar.Texture = archiveTextures[(int)dataType];
+
+        newTextBar.IsTextBoxActive = true;
+
+        newTextBar.CornerStates = new BoolVector4(false, false, true, true);
+
+        return newTextBar;
     }
 }

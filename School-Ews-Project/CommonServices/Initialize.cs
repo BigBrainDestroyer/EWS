@@ -53,7 +53,7 @@ public class Initialize
 
     public void Texture2D()
     {
-        var _archiveLayout = _state.archive.layout;
+        var _archiveLayout = _state.archive;
 
         //ArchiveTexture2DNames volgorde
         _archiveLayout.ArchiveTextures = 

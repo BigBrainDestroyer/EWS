@@ -4,8 +4,6 @@ using System.Text;
 
 namespace Program;
 
-
-
 public class UpdateCustomTextBar
 {
     private readonly AppState _state;
@@ -15,31 +13,31 @@ public class UpdateCustomTextBar
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
-    public TextBar UpdateTextBar(TextBar currentTextBar, List<int> chars, Vector2 boxLengths, Vector2 boxPosition)
+    public TextBar UpdateTextBar(TextBar currentTextBar, List<int> chars, Vector2 boxPosition, Vector2 boxLengths)
     {
         TextBar newTextBar = currentTextBar;
 
-        if(!newTextBar.IsTextBoxActive)
+        if(newTextBar.IsTextBoxActive)
         {
             StringBuilder newString = new StringBuilder(newTextBar.Text);
 
             newTextBar.CursorTextPosition = UpdateNavigationKeyBoardInput(newString, newTextBar.CursorTextPosition);
-
-            newString = UpdateBackSpace(newString, newTextBar.CursorTextPosition);
+ 
+            (newString, newTextBar.CursorTextPosition) = UpdateBackSpace(newString, newTextBar.CursorTextPosition);
     
-            newString = UpdateNewCharsToText(chars , newString, newTextBar.CursorTextPosition, newTextBar.IsTextBoxActive);
+            (newString, newTextBar.CursorTextPosition) = UpdateNewCharsToText(chars , newString, newTextBar.CursorTextPosition, newTextBar.IsTextBoxActive);
 
             newTextBar.Text = newString.ToString();
         }
 
-        newTextBar.BoxLengths = boxPosition;
+        newTextBar.BoxPosition = boxPosition;
         newTextBar.BoxLengths = boxLengths;
 
         int textAreaWidth = CalculateTextAreaWidth(newTextBar.BoxLengths, newTextBar.TextureSize, newTextBar.TextureToTextWhiteSpace);
 
         newTextBar.ViewText = 
             UpdateViewText(
-                newTextBar.TextFont, 
+                _state.common.font.EditorPanelText, 
                 newTextBar.Text, 
                 newTextBar.BoxLengths.Y, 
                 newTextBar.CharSpacing, 
@@ -63,32 +61,31 @@ public class UpdateCustomTextBar
 
     private int UpdateNavigationKeyBoardInput(StringBuilder newString, int cursorTextPosition)
     {
-        int newCursorTextPosition = cursorTextPosition;
-
         if(Raylib.IsKeyPressed(KeyboardKey.Left) && cursorTextPosition > 0)
         {
             cursorTextPosition -= 1;
         }
 
-        if((Raylib.IsKeyPressed(KeyboardKey.Left) && cursorTextPosition < newString.Length))
+        if((Raylib.IsKeyPressed(KeyboardKey.Right) && cursorTextPosition < newString.Length))
         {
             cursorTextPosition += 1;
         }
         
-        return newCursorTextPosition;
+        return cursorTextPosition;
     }
 
-    private StringBuilder UpdateBackSpace(StringBuilder newString, int cursorTextPosition)
+    private (StringBuilder, int) UpdateBackSpace(StringBuilder newString, int cursorTextPosition)
     {
         if(Raylib.IsKeyPressed(KeyboardKey.Backspace)  && cursorTextPosition > 0)
         {
+            cursorTextPosition -= 1;
             newString.Remove(cursorTextPosition, 1);
         }
 
-        return newString;
+        return (newString, cursorTextPosition);
     }
     
-    private StringBuilder UpdateNewCharsToText(List<int> chars, StringBuilder newString,  int cursorTextPosition, bool isTextBoxActive)
+    private (StringBuilder, int) UpdateNewCharsToText(List<int> chars, StringBuilder newString,  int cursorTextPosition, bool isTextBoxActive)
     {
         foreach(int character in chars)
         {
@@ -96,7 +93,7 @@ public class UpdateCustomTextBar
             cursorTextPosition += 1;
         }
 
-        return newString;
+        return (newString, cursorTextPosition);
     }
 
     private int CalculateTextAreaWidth(Vector2 boxLengths, Vector2 textureSize, float textureToTextWhiteSpace)
@@ -118,23 +115,33 @@ public class UpdateCustomTextBar
         {
             cursorTextOffSet = (int)MathF.Abs(charColumnLength - 1 - textTypingWhiteSpaceRight - cursorTextPosition);
         }
-        else if((int)cursorTextPosition <= cursorTextOffSet + textTypingWhiteSpaceLeft && (int)cursorTextPosition >= textTypingWhiteSpaceLeft)
+        else if(cursorTextPosition <= cursorTextOffSet + textTypingWhiteSpaceLeft && (int)cursorTextPosition >= textTypingWhiteSpaceLeft)
         {
             cursorTextOffSet = cursorTextPosition - textTypingWhiteSpaceLeft;
         }
-        else if((int)cursorTextPosition <= cursorTextOffSet)
+        else if(cursorTextPosition <= cursorTextOffSet)
         {
             cursorTextOffSet = cursorTextPosition;
         }
 
+        Console.WriteLine(charColumnLength);
+        Console.WriteLine(cursorTextOffSet);
+        Console.WriteLine(cursorTextPosition);
+        Console.WriteLine(newViewText.Length);
         
+
         if(newViewText.Length >= cursorTextOffSet)
         {
             newViewText.Remove(0, cursorTextOffSet);
 
-            if(newViewText.Length >= charColumnLength + cursorTextOffSet && charColumnLength <= 0)
+            Console.WriteLine();
+            Console.WriteLine(newViewText.Length);
+            Console.WriteLine((int)charColumnLength);
+            Console.WriteLine(cursorTextOffSet);
+            
+            if(newViewText.Length >= (int)charColumnLength + cursorTextOffSet)
             {
-                newViewText.Length = cursorTextOffSet;
+                newViewText.Length = (int)charColumnLength;
             }
         }
         else
