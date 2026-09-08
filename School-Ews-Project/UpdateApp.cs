@@ -11,7 +11,7 @@ public class UpdateApp
     private readonly UpdateArchiveLayout _archiveLayout;
     private readonly UpdateArchiveClicks _archiveClicks;
     private readonly UpdateActiveMainBox _activeMainBox;
-
+    private readonly UpdateNamingDataTypeTextBox _namingDataTypeBox;
 
     public UpdateApp(AppState state)
     {
@@ -23,6 +23,7 @@ public class UpdateApp
         _archiveLayout = new UpdateArchiveLayout(_state);
         _archiveClicks = new UpdateArchiveClicks(_state);
         _activeMainBox = new UpdateActiveMainBox(_state);
+        _namingDataTypeBox = new UpdateNamingDataTypeTextBox(_state);
     }
     
     public void App()
@@ -41,7 +42,9 @@ public class UpdateApp
         _mazeLayout.MazeLayout();
 
         _archiveClicks.ArchiveClicks();
-        
+
+        _namingDataTypeBox.NamingDataTypeTextBox();
+
         _archiveLayout.UpdateArchive();
     }
 }
