@@ -18,7 +18,7 @@ public class UpdateDataTypeBoxes
         
     }
 
-    public void AddNewDataType()
+public void AddNewDataType()
     {
         
     }
