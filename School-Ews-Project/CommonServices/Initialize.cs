@@ -5,10 +5,12 @@ namespace Program;
 public class Initialize
 {
     private readonly AppState _state;
+    private readonly UpdateArchiveStorage _archiveStorage;
 
     public Initialize(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+        _archiveStorage = new UpdateArchiveStorage(_state);
     }
     
     public void Window()
@@ -53,10 +55,10 @@ public class Initialize
 
     public void Texture2D()
     {
-        var _archiveLayout = _state.archive;
+        var _archive = _state.archive;
 
         //ArchiveTexture2DNames volgorde
-        _archiveLayout.ArchiveTextures = 
+        _archive.ArchiveTextures = 
             new Texture2D[] { 
                 Load.LoadResizableTexture2D("Resources/Png/ProjectFolder.png"), 
                 Load.LoadResizableTexture2D("Resources/Png/Folder.png"),
@@ -65,5 +67,12 @@ public class Initialize
                 Load.LoadResizableTexture2D("Resources/Png/OpenFolder.png"),
                 Load.LoadResizableTexture2D("Resources/Png/PlusSign.png")
             };
+    }
+
+    public void LoadStorage()
+    {
+        var _archive = _state.archive;
+
+        _archive.Storage = _archiveStorage.LoadStorage(_archive.CurentStorageDataLocation);
     }
 }

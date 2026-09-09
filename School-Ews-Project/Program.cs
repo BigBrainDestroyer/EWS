@@ -15,6 +15,8 @@ public class Program
 
         initialize.Texture2D();
 
+        initialize.LoadStorage();
+
         var game = new ProgramLoop(state);
         game.Loop();
 
