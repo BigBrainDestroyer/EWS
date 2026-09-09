@@ -124,20 +124,21 @@ public class UpdateCustomTextBar
             cursorTextOffSet = cursorTextPosition;
         }
 
-        Console.WriteLine(charColumnLength);
-        Console.WriteLine(cursorTextOffSet);
-        Console.WriteLine(cursorTextPosition);
-        Console.WriteLine(newViewText.Length);
+        //Console.WriteLine(charColumnLength);
+        //Console.WriteLine(cursorTextOffSet);
+        //Console.WriteLine(cursorTextPosition);
+        //Console.WriteLine(newViewText.Length);
         
 
         if(newViewText.Length >= cursorTextOffSet)
         {
             newViewText.Remove(0, cursorTextOffSet);
 
-            Console.WriteLine();
-            Console.WriteLine(newViewText.Length);
-            Console.WriteLine((int)charColumnLength);
-            Console.WriteLine(cursorTextOffSet);
+            //Console.WriteLine();
+            //Console.WriteLine(newViewText.Length);
+            //Console.WriteLine((int)charColumnLength);
+            //Console.WriteLine(cursorTextOffSet);
+            //Console.WriteLine(cursorTextOffSet);
             
             if(newViewText.Length >= (int)charColumnLength + cursorTextOffSet)
             {

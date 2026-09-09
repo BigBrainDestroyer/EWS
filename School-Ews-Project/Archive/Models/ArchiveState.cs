@@ -1,5 +1,6 @@
 using Raylib_cs;
 using System.Numerics;
+using System.IO;
 
 namespace Program;
 
@@ -9,13 +10,15 @@ public class ArchiveState
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
     public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();  
     public TextBar ArchiveNamingDataTypeTextBox { get; set; } = new TextBar();
+    public ArchiveStorageNames TemporarilyData;
+
 
     public Color BackgroundColor { get; set; } = new Color(51, 59, 67, 255);
     
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
     public Dictionary<string, ArchiveStorage> Storage { get; set; } = new Dictionary<string, ArchiveStorage>();
-    
+
     public Dictionary<ArchiveBoxesNames, Vector2> ArchiveBoxPixelPercentages { get; } =
         new Dictionary<ArchiveBoxesNames, Vector2>{
             { ArchiveBoxesNames.Header, new Vector2(100f, 7f)},

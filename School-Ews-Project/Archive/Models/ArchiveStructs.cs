@@ -2,21 +2,17 @@ using Raylib_cs;
 using System.Numerics;
 
 namespace Program;
-
+ 
 public struct ArchiveStorage
 {
-    public Dictionary<string, ArchiveStorage>? FolderStorage;
+    public List<string> FolderStorage;
     public ArchiveStorageNames DataType;
-    public string Name;
-    public string DataLocation;
     public bool ViewFolderStorage;
 
-    public ArchiveStorage(Dictionary<string, ArchiveStorage>? folderStorage, ArchiveStorageNames dataType, string name, string dataLocation, bool viewFolderStorage)
+    public ArchiveStorage(List<string> folderStorage, ArchiveStorageNames dataType, bool viewFolderStorage)
     {
         FolderStorage = folderStorage;
         DataType = dataType;
-        Name = name;
-        DataLocation = dataLocation;
         ViewFolderStorage = viewFolderStorage; 
     }
 }

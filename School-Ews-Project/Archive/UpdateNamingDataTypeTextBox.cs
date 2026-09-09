@@ -6,12 +6,13 @@ public class UpdateNamingDataTypeTextBox
 {
     private readonly AppState _state;
     private readonly UpdateCustomTextBar _customTextBar;
-
+    private readonly UpdateArchiveStorage _archiveStorage;
 
     public UpdateNamingDataTypeTextBox(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _customTextBar = new UpdateCustomTextBar(_state);
+        _archiveStorage = new UpdateArchiveStorage(_state);
     }
 
     public void NamingDataTypeTextBox()
@@ -47,13 +48,17 @@ public class UpdateNamingDataTypeTextBox
 
         if(Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
+            (_archive.Storage, _archive.CurentStorageDataLocation) =
+                _archiveStorage.UpdateAddDataType(
+                    _archive.Storage,
+                    _archive.TemporarilyData,
+                    _archive.CurentStorageDataLocation,
+                    _archive.ArchiveNamingDataTypeTextBox.Text
+                );
+
             newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
-            _archive.ArchiveNamingDataTypeTextBox = newArchiveNamingDataTypeTextBox;
-            
-            if(_archive.ArchiveNamingDataTypeTextBox.Text.Length == 0)
-            {
-                return;
-            }
         }
+
+        _archive.ArchiveNamingDataTypeTextBox = newArchiveNamingDataTypeTextBox;
     }
 }

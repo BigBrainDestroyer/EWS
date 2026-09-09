@@ -1,4 +1,3 @@
-using System.Text;
 using Raylib_cs;
 
 namespace Program;
@@ -8,12 +7,14 @@ public class UpdateArchiveClicks
     private readonly AppState _state;
     private readonly UpdateArchiveDataTypeMenu _dataTypeMenu;
     private readonly UpdateCustomTextBar _customTextBar;
+    private readonly UpdateArchiveStorage _archiveStorage;
 
     public UpdateArchiveClicks(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _dataTypeMenu = new UpdateArchiveDataTypeMenu(_state);
         _customTextBar = new UpdateCustomTextBar(_state);
+        _archiveStorage = new UpdateArchiveStorage(_state);
     }
 
     public void ArchiveClicks()
@@ -46,11 +47,11 @@ public class UpdateArchiveClicks
             {
                 if (CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.SingleBoxLengths, Raylib.GetMousePosition()))
                 {
-                    Console.WriteLine(dataType);
-
                     _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
 
                     _archive.ArchiveNamingDataTypeTextBox = GetNewNamingDataTypeBox(_archive.ArchiveTextures, dataType.Value);
+
+                    _archive.TemporarilyData = dataType.Value;
                 }
                 
                 addDataTypeMenu.BoxPosition.Y += addDataTypeMenu.SingleBoxLengths.Y;
@@ -74,19 +75,14 @@ public class UpdateArchiveClicks
     {
         ArchiveStorageNames?[] newAddLegalDataTypeToStorage = new ArchiveStorageNames?[3];
 
-        StringBuilder newString = new StringBuilder();
+        string[] dataLocationList = dataLocation.Split('/');
 
-        string[] dataLocationList = newString.ToString().Split('/');
-        
         newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.ProjectFolder] = ArchiveStorageNames.ProjectFolder;
         
         if(dataLocation != dataLocationList[0])
         {
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.Folder] = ArchiveStorageNames.Folder;
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.File] = ArchiveStorageNames.File;
-
-            Console.WriteLine(dataLocationList[0]);
-            Console.WriteLine(dataLocation);
         }
 
         return newAddLegalDataTypeToStorage;
