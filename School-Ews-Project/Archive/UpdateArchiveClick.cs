@@ -65,24 +65,24 @@ public class UpdateArchiveClicks
 
         if(CheckField.MouseOnField(_archive.AddOnButtonPixelPosition, _archive.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
-            _archive.AddLegalDataTypeToStorage = GetLegalDataTypes(_archive.CurentStorageDataLocation);
+            _archive.AddLegalDataTypeToStorage = GetLegalDataTypes(_archive.CurentStorageDataLocation, _archive.ProjectsDataLocation, _archive.PathSyntax);
 
             _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
         }
     }
     
-    private ArchiveStorageNames?[] GetLegalDataTypes(string dataLocation)
+    private ArchiveStorageNames?[] GetLegalDataTypes(string dataLocation, string projectDataLocation, string pathSyntax)
     {
         ArchiveStorageNames?[] newAddLegalDataTypeToStorage = new ArchiveStorageNames?[3];
 
-        string[] dataLocationList = dataLocation.Split('/');
-
-        newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.ProjectFolder] = ArchiveStorageNames.ProjectFolder;
-        
-        if(dataLocation != dataLocationList[0])
+        if(dataLocation != projectDataLocation)
         {
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.Folder] = ArchiveStorageNames.Folder;
             newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.File] = ArchiveStorageNames.File;
+        }
+        else
+        {
+            newAddLegalDataTypeToStorage[(int)ArchiveStorageNames.ProjectFolder] = ArchiveStorageNames.ProjectFolder;
         }
 
         return newAddLegalDataTypeToStorage;

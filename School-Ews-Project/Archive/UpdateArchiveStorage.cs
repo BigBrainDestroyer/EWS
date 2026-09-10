@@ -11,37 +11,30 @@ public class UpdateArchiveStorage
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
-    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataLocation, string name)
+    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
     {
         if (dataType != ArchiveStorageNames.File && name.Length > 0)
         {
-            currentStorage.Add(
-                    dataLocation + "/" + name,
-                    new ArchiveStorage(
-                    new List<string>(),
-                    dataType,
-                    false
-                ));
-
             string directory = Directory.GetCurrentDirectory();
 
-            if(Path.Exists(Path.Combine(directory, dataLocation)))
+            if(Path.Exists(Path.Combine(dataLocation)))
             {
+                currentStorage.Add(
+                        dataLocation + pathSyntax + name,
+                        new ArchiveStorage(
+                        new List<string>(),
+                        dataType,
+                        true
+                    ));
+                
                 directory = Path.Combine(directory, dataLocation, name);
                 Directory.CreateDirectory(directory);
 
-                dataLocation = dataLocation + "/" + name;
-
-                Console.WriteLine(directory);
-                Console.WriteLine(dataLocation);
-                Console.WriteLine("Ja werkt");
+                dataLocation = dataLocation + pathSyntax + name;
             }
             else
             {
-                Console.WriteLine(directory);
-                Console.WriteLine(dataLocation);
-                Console.WriteLine("Oeps Ging Greatly WRONG");
-                //Update Hole Directory
+                dataLocation = projectDataLocation;
             }
         }
         else if (name.Length > 0)
@@ -50,7 +43,7 @@ public class UpdateArchiveStorage
 
             newStorage.FolderStorage.Add(name);
 
-            File.WriteAllText(dataLocation + "/" + name, "");
+            File.WriteAllText(dataLocation + pathSyntax + name, "");
 
             currentStorage[dataLocation] = newStorage;
         }
@@ -62,27 +55,38 @@ public class UpdateArchiveStorage
         return (currentStorage, dataLocation);
     }
 
-    public Dictionary<string, ArchiveStorage> LoadStorage(string dataLocation)
+    public Dictionary<string, ArchiveStorage> LoadStorage(Dictionary<string, ArchiveStorage> currentStorage, string projectDataLocation)
     {
         Dictionary<string, ArchiveStorage> newStorage = new Dictionary<string, ArchiveStorage>();
 
-        string[] dataLocationList = dataLocation.Split("/");
+        string[] ProjectFolders = Directory.GetDirectories(projectDataLocation);
 
-        string directory = Directory.GetCurrentDirectory();
-
-        string[] ProjectFolders = Directory.GetDirectories(directory + "/" + dataLocationList[0]);
+        Array.Sort(ProjectFolders);
 
         foreach(string ProjectFolder in ProjectFolders)
         {
-            newStorage.Add(
-                ProjectFolder,
-                new ArchiveStorage(
-                Directory.GetFiles(ProjectFolder).ToList(),
-                ArchiveStorageNames.ProjectFolder,
-                false
-            ));
+            if(currentStorage.ContainsKey(ProjectFolder))
+            {
+                newStorage.Add(
+                    ProjectFolder,
+                    new ArchiveStorage(
+                    Directory.GetFiles(ProjectFolder).ToList(),
+                    ArchiveStorageNames.ProjectFolder,
+                    currentStorage[ProjectFolder].ViewFolderStorage
+                ));
+            }
+            else
+            {
+                newStorage.Add(
+                    ProjectFolder,
+                    new ArchiveStorage(
+                    Directory.GetFiles(ProjectFolder).ToList(),
+                    ArchiveStorageNames.ProjectFolder,
+                    false
+                ));
+            }
 
-            newStorage = FolderLoop(newStorage, ProjectFolder);
+            newStorage = FolderLoop(currentStorage, newStorage,ProjectFolder);
         }
 
         foreach(string key in newStorage.Keys)
@@ -93,28 +97,55 @@ public class UpdateArchiveStorage
                 Console.WriteLine(file);
             }
         }
+        
+        return newStorage;
+    }
+
+    public Dictionary<string, ArchiveStorage> FolderLoop(Dictionary<string, ArchiveStorage> currentStorage, Dictionary<string, ArchiveStorage> newStorage, string directory)
+    {
+        string[] folders = Directory.GetDirectories(directory);
+
+        Array.Sort(folders);
+
+        foreach(string folder in folders)
+        {
+            if (currentStorage.ContainsKey(folder))
+            {
+                newStorage.Add(
+                    folder,
+                    new ArchiveStorage(
+                    Directory.GetFiles(folder).ToList(),
+                    ArchiveStorageNames.Folder,
+                    currentStorage[folder].ViewFolderStorage
+                ));
+            }
+            else
+            {
+                newStorage.Add(
+                    folder,
+                    new ArchiveStorage(
+                    Directory.GetFiles(folder).ToList(),
+                    ArchiveStorageNames.Folder,
+                    false
+                ));
+            }
+
+            FolderLoop(currentStorage, newStorage, folder);
+        }
 
         return newStorage;
     }
 
-    public Dictionary<string, ArchiveStorage> FolderLoop(Dictionary<string, ArchiveStorage> newStorage, string directory)
+    public void UpdateProjectsFolder()
     {
-        string[] folders = Directory.GetDirectories(directory);
+        var _archive = _state.archive;
 
-        foreach(string folder in folders)
+        if(_archive.ProjectsFolderHasChanged)
         {
-            newStorage.Add(
-                folder,
-                new ArchiveStorage(
-                Directory.GetFiles(folder).ToList(),
-                ArchiveStorageNames.Folder,
-                false
-            ));
+            _archive.ProjectsFolderHasChanged = false;
 
-            newStorage = FolderLoop(newStorage, folder);
+            _archive.Storage = LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
         }
-
-        return newStorage;
     }
 }
 

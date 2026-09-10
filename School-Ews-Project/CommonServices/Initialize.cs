@@ -1,4 +1,5 @@
 using Raylib_cs;
+using System.Runtime.InteropServices;
 
 namespace Program;
 
@@ -73,6 +74,31 @@ public class Initialize
     {
         var _archive = _state.archive;
 
-        _archive.Storage = _archiveStorage.LoadStorage(_archive.CurentStorageDataLocation);
+        _archive.Storage = _archiveStorage.LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
+    }
+
+    public void OsPlatform()
+    {
+        var _archive = _state.archive;
+
+        if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            _archive.PathSyntax = _archive.LinuxPathSyntax;
+        }
+        else if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            _archive.PathSyntax = _archive.WindowsPathSyntax;
+        }
+    }
+
+    public void FileWatcher()
+    {
+        var _archive = _state.archive;
+
+        FileSystemWatcher watcher = new FileSystemWatcher(_archive.ProjectsDataLocation);
+
+        watcher.Changed += (a, b) => _archive.ProjectsFolderHasChanged = true;
+
+        watcher.EnableRaisingEvents = true;
     }
 }

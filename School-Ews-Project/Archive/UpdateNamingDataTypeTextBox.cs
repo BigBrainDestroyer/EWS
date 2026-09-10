@@ -53,7 +53,9 @@ public class UpdateNamingDataTypeTextBox
                     _archive.Storage,
                     _archive.TemporarilyData,
                     _archive.CurentStorageDataLocation,
-                    _archive.ArchiveNamingDataTypeTextBox.Text
+                    _archive.ProjectsDataLocation,
+                    _archive.ArchiveNamingDataTypeTextBox.Text,
+                    _archive.PathSyntax
                 );
 
             newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;

@@ -53,8 +53,12 @@ public class ArchiveState
 
     public Vector2 AddOnButtonTexturePosition { get; set; } = new Vector2();
 
-    public string CurentStorageDataLocation { get; set; } = "AppProjects";
-    
+    public string CurentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
+    public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
+    public string PathSyntax { get; set; } = "";
+    public string LinuxPathSyntax { get; } = "/";
+    public string WindowsPathSyntax { get; } = "\\";
+
     public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 20f;
     public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }
 
@@ -62,4 +66,6 @@ public class ArchiveState
     public float ArchiveFunctionBarFunctionsPixelWhiteSpace { get; set; }
 
     public float ArchiveWhiteSpaceToFunctionBar { get; set; } = 4f;
+
+    public bool ProjectsFolderHasChanged { get; set; }
 }
