@@ -19,16 +19,16 @@ public struct ArchiveStorage
 
 public struct ArchiveDataTypeBox
 {
+    public Texture2D Texture;
     public ArchiveStorageNames DataType;
-    
     public Vector2 Percentages = new Vector2(100f, 2.4f);
     public Vector2 Position;
     public Vector2 Length;
-
     public string Name;
     
-    public ArchiveDataTypeBox(Vector2 position, Vector2 length, ArchiveStorageNames dataType, string name)
+    public ArchiveDataTypeBox(Texture2D texture, Vector2 position, Vector2 length, ArchiveStorageNames dataType, string name)
     {
+        Texture = texture;
         Position = position;
         Length = length;
         DataType = dataType;

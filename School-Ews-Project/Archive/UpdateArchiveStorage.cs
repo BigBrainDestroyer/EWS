@@ -150,8 +150,10 @@ public class UpdateArchiveStorage
 }
 
 //Updates
-// directory weeten up te daten [X] smal universal update alles moet hele directory krijgen dat is denk ik handiger
-// bestanden weeten te tekenen
+// directory weeten up te daten [X] 
+// smal universal update alles moet hele directory krijgen dat is denk ik handiger [X]
+// bestanden weeten te tekenen 
 // user input te mengen 
 // files schrijven
+// EditorCombineren Met Maze
 // cancel manier files of bestanden 

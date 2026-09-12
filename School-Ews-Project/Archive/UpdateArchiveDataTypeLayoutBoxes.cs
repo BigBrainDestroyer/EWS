@@ -1,3 +1,4 @@
+using Raylib_cs;
 using System.Numerics;
 
 namespace Program;
@@ -13,14 +14,23 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
     public void ArchiveDataTypeLayoutBoxes()
     {
-        var _layout = _state.archive;
+        var _archive = _state.archive;
 
-        _layout.DataTypeBox = 
+        _archive.SingleDataTypeBox = 
             UpdateArchiveDataTypeBox(
-                _layout.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
-                _layout.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
-                _layout.ArchiveWhiteSpaceToFunctionBar 
+                _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
+                _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
+                _archive.ArchiveWhiteSpaceToFunctionBar 
             );
+
+
+        //_archive.DataTypeBoxes =
+           //UpdateDataTypeBoxes(
+           //    _archive.Storage,
+           //    _archive.ArchiveTextures,
+           //    _archive.SingleDataTypeBox,
+           //    _archive.PathSyntax
+           //);
     }
 
     private ArchiveDataTypeBox UpdateArchiveDataTypeBox(Vector2 parentBoxPosition, Vector2 parentBoxPixelLengths, float whiteSpaceToFunctionBar)
@@ -63,5 +73,36 @@ public class UpdateArchiveDataTypeLayoutBoxes
             );
 
         return newDataTypePosition;
+    }
+
+    private ArchiveDataTypeBox[] UpdateDataTypeBoxes(Dictionary<string, ArchiveStorage> currentStorage, Texture2D[] archiveTextures, ArchiveDataTypeBox singleArchiveDataTypeBox, string pathSyntax)
+    {
+        ArchiveDataTypeBox[] newArchiveDataTypeBoxes = new ArchiveDataTypeBox[currentStorage.Count];
+        int counter = 0;
+
+        //UpdateNogOpenFoldersErbij
+        foreach(string key in currentStorage.Keys)
+        {
+            string name = key.Split(pathSyntax).Last();
+
+            newArchiveDataTypeBoxes[counter] = singleArchiveDataTypeBox;
+            newArchiveDataTypeBoxes[counter].Texture = archiveTextures[(int)currentStorage[key].DataType];
+            newArchiveDataTypeBoxes[counter].Name = name;
+
+            counter++;
+            
+            foreach(string filePaths in currentStorage[key].FolderStorage)
+            {
+                name = filePaths.Split(pathSyntax).Last();
+
+                newArchiveDataTypeBoxes[counter] = singleArchiveDataTypeBox;
+                newArchiveDataTypeBoxes[counter].Texture = archiveTextures[(int)ArchiveStorageNames.File];
+                newArchiveDataTypeBoxes[counter].Name = name;
+                
+                counter++;
+            }
+        }
+
+        return newArchiveDataTypeBoxes;
     }
 }

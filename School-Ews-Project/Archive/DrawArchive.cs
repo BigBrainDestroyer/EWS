@@ -18,6 +18,8 @@ public class DrawArchive
 
         DrawArchiveFunctionBar();
 
+        //DrawArchiveDataTypeBoxes();
+
         DrawArchiveNamingDataTypeTextBox();
     }
 
@@ -50,6 +52,18 @@ public class DrawArchive
 
         DrawAddOnButton();
     }
+
+    //private void DrawArchiveDataTypeBoxes()
+    //{
+    //    var _archive = _state.archive;
+    //
+    //    float positionIncrementY = 0;
+    //
+    //    foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
+    //    {
+    //        
+    //    }
+    //}
 
     private void DrawAddDataTypeMenu()
     {

@@ -8,7 +8,8 @@ public class ArchiveState
 {
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
-    public ArchiveDataTypeBox DataTypeBox { get; set; } = new ArchiveDataTypeBox();  
+    public ArchiveDataTypeBox[] DataTypeBoxes { get; set; } = new ArchiveDataTypeBox[0];  
+    public ArchiveDataTypeBox SingleDataTypeBox { get; set; } = new ArchiveDataTypeBox();  
     public TextBar ArchiveNamingDataTypeTextBox { get; set; } = new TextBar();
     public ArchiveStorageNames TemporarilyData;
 
