@@ -39,7 +39,7 @@ public class MazeGenerator
                     MakeMaze(
                         _generator.MazeSize,
                         _generator.MazeSeedBach[i]
-                    );
+                    );     
             });
 
             _generator.ReadingAllMazes = true;
@@ -153,32 +153,34 @@ public class MazeGenerator
         bool currentIncrementIsX = true;
 
         int EndForLoop = (int)mazeSize.X * (int)mazeSize.Y;
-        int currentIncrement = 1;
+        int currentIncrement = 0;
         int varyingIncrement = 0;
         int index = -1;
 
         for (int i = 0; i < EndForLoop; i++)
         {
-            currentIncrement += (i % 2 == 1) ? 1 : 0;
+            currentIncrement += 1;
             historyIncrement.Add(currentIncrement);
 
-            if(!searchDistantCorners)
-            {
-                (currentNavigatorSlotOptions, currentIncrementIsX , varyingIncrement) = SearchDistantSlots(navigator, newMaze, mazeSize, historyIncrement, searchDistantCorners, currentIncrement);
-            }
-            else
-            {
-                (currentNavigatorSlotOptions, currentIncrementIsX , varyingIncrement) = SearchDistantSlots(navigator, newMaze, mazeSize, historyIncrement, searchDistantCorners, currentIncrement);
-            }
+            searchDistantCorners = false;
 
+            (currentNavigatorSlotOptions, currentIncrementIsX , varyingIncrement) = SearchDistantSlots(navigator, newMaze, mazeSize, historyIncrement, searchDistantCorners, currentIncrement);
             index = Array.IndexOf(currentNavigatorSlotOptions, true);
 
             if(index != -1)
             {
                 break;
             }
+            
+            searchDistantCorners = true;
 
-            searchDistantCorners =!searchDistantCorners;
+            (currentNavigatorSlotOptions, currentIncrementIsX , varyingIncrement) = SearchDistantSlots(navigator, newMaze, mazeSize, historyIncrement, searchDistantCorners, currentIncrement);
+            index = Array.IndexOf(currentNavigatorSlotOptions, true);
+
+            if(index != -1)
+            {
+                break;
+            }
         }
 
         int currentSeedNumber = seed[seedPosition];
