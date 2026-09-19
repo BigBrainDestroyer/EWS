@@ -21,7 +21,7 @@ public enum ArchiveFunctionNames
     AddButton
 }
 
-public enum ArchiveTexture2DNames
+public enum ArchiveTexture2DNames //eerste 5 moeten in overeen komen met ArchiveStorageNames
 {
     ProjectFolder,
     Folder,

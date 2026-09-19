@@ -32,7 +32,7 @@ public class MazeLayoutMazeViewState
             {CommonDataNames.CoreProcessorUsagePercentage, "CPU Usage"},
             {CommonDataNames.GPU, "GPU Usage"},
             {CommonDataNames.RamTotalUsage, "RAM Usage"},
-            {CommonDataNames.SlotSearched, "SlotSearched"},
+            {CommonDataNames.SlotSearched, "SearchSlots"},
             {CommonDataNames.Time, "Time"}
         };
 
