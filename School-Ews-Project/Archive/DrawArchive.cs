@@ -53,17 +53,30 @@ public class DrawArchive
         DrawAddOnButton();
     }
 
-    //private void DrawArchiveDataTypeBoxes()
-    //{
-    //    var _archive = _state.archive;
-    //
-    //    float positionIncrementY = 0;
-    //
-    //    foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
-    //    {
-    //        
-    //    }
-    //}
+    private void DrawArchiveDataTypeBoxes()
+    {
+        var _archive = _state.archive;
+    
+        float positionIncrementY = 0;
+    
+        foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
+        {
+            Raylib.DrawRectangleV(
+                dataTypeBox.Box.PixelPosition,
+                dataTypeBox.Box.PixelLengths,
+                dataTypeBox.BoxColor
+            );
+            
+            Raylib.DrawTexturePro(
+                dataTypeBox.Texture.Texture,
+                dataTypeBox.Texture.TextureUsage,
+                dataTypeBox.Texture.TextureSize,
+                new Vector2(0,0),
+                0f,
+                Color.RayWhite
+            );
+        }
+    }
 
     private void DrawAddDataTypeMenu()
     {

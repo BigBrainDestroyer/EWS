@@ -60,7 +60,7 @@ public class DrawMazeLayout
         {
             foreach (WallState wallState in _mazeView.CurrentMaze.UsingYToGetRightArray[i])
             {
-                if ((int)wallState == 1)
+                if ( wallState == WallState.Closed)
                 {
                     Raylib.DrawLineEx(
                         new Vector2(

@@ -60,8 +60,6 @@ public class ArchiveState
     public Vector2 AddOnButtonPixelLengths { get; set; } = new Vector2();
     public Vector2 AddOnButtonPixelPosition { get; set; } = new Vector2();
 
-    public Vector2 ArchiveBoxLengths { get; set; } = new Vector2();
-
     public Vector2 AddOnButtonTexturePosition { get; set; } = new Vector2();
 
     public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";

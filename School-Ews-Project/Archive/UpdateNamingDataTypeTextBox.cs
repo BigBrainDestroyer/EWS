@@ -48,11 +48,11 @@ public class UpdateNamingDataTypeTextBox
 
         if(Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
-            (_archive.Storage, _archive.CurentStorageDataLocation) =
+            (_archive.Storage, _archive.CurrentStorageDataLocation) =
                 _archiveStorage.UpdateAddDataType(
                     _archive.Storage,
                     _archive.TemporarilyData,
-                    _archive.CurentStorageDataLocation,
+                    _archive.CurrentStorageDataLocation,
                     _archive.ProjectsDataLocation,
                     _archive.ArchiveNamingDataTypeTextBox.Text,
                     _archive.PathSyntax

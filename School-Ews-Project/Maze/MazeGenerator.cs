@@ -602,15 +602,15 @@ public class MazeGenerator
         {
             bool result = array[i];
 
-            if (result == true && counter < currentSeedNumber)
+            if (result == true)
             {
-                counter += 1;
-
                 if (counter == currentSeedNumber)
                 {
                     index = i;
                     break;
-                }
+                }   
+
+                counter += 1;
             }
 
             if (i == array.Length - 1)
