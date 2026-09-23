@@ -1,3 +1,0 @@
-[x] Werkende clean MainBoxes Visueel (kantekening nog niet visueel)
-[ ] Een goed scale baar Maze algoritme maken
-[ ] Het Dolholf Visueel Maken

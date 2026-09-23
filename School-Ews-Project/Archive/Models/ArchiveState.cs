@@ -11,7 +11,8 @@ public class ArchiveState
     public ArchiveDataTypeBox SingleArchiveDataTypeBox { get; set; } = 
         new ArchiveDataTypeBox(
             new Color(51, 59, 67, 255), 
-            Color.RayWhite, 
+            new Color(145, 155, 165, 255), 
+            new Color(220, 223, 228, 255),
             new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()),
             "",
             new RaylibText(),
@@ -21,9 +22,13 @@ public class ArchiveState
     public TextBar ArchiveNamingDataTypeTextBox { get; set; } = new TextBar();
     public ArchiveStorageNames TemporarilyData;
 
-    
-    public Color BackgroundColor { get; set; } = new Color(51, 59, 67, 255);
-    
+    //Colors
+    public Color BackgroundColor { get; } = new Color(51, 59, 67, 255);
+    public Color DataTypeBoxesTextColor { get; } = new Color(220, 223, 228, 255);
+    public Color DataTypeBoxesTextureColor { get; } = new Color(145, 155, 165, 255);
+    public Color DataTypeBoxesSelectedBoxTextureColor { get; } = new Color(220, 223, 228, 255);
+
+
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
     public Dictionary<string, ArchiveStorage> Storage { get; set; } = new Dictionary<string, ArchiveStorage>();
@@ -62,6 +67,8 @@ public class ArchiveState
 
     public Vector2 AddOnButtonTexturePosition { get; set; } = new Vector2();
 
+    public Vector2 DataTypeBoxPercentage { get; } = new Vector2(100f, 2.5f);
+
     public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
     public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
     public string PathSyntax { get; set; } = "";
@@ -77,8 +84,12 @@ public class ArchiveState
     public float ArchiveWhiteSpaceToFunctionBar { get; set; } = 4f;
 
     public float ArchiveDataTypeBoxTextSpacing { get; } = 0;
-    
-    public int ArchiveDataTypeBoxYOffSet { get; set; } = 0;
+
+    public float DataTypeBoxTextureTextPercentageOffSet { get; set; } = 4f;
+
+    public float DataTypeBoxCharLoadFontSize { get; set; } = 25f;
+
+    public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0;
 
     public bool ProjectsFolderHasChanged { get; set; }
 }

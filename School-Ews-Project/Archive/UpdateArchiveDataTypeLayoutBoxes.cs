@@ -16,17 +16,26 @@ public class UpdateArchiveDataTypeLayoutBoxes
     {
         var _archive = _state.archive;
         var _font = _state.common.font;
-
-        UpdateArchiveDataTypeBox(
+        
+        _archive.DataTypeBoxes = UpdateArchiveDataTypeBox(
             _font.ArchiveDataBoxType,
             _archive.Storage,
             _archive.ArchiveTextures,
             _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
             _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
+            _archive.DataTypeBoxPercentage,
+            _archive.PathSyntax,
+            _archive.ArchiveWhiteSpaceToFunctionBar,
+            _archive.ArchiveDataTypeBoxTextSpacing,
+            _archive.DataTypeBoxTextureTextPercentageOffSet,
+            _archive.ArchiveDataTypeBoxRowOffSet,
+            _archive.BackgroundColor,
+            _archive.DataTypeBoxesTextureColor,
+            _archive.DataTypeBoxesTextColor
         );
     }
 
-    private ArchiveDataTypeBox[] UpdateArchiveDataTypeBox(Font textFont, Dictionary<string, ArchiveStorage> storage, Texture2D[] archiveTextures, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, string pathSyntax, float whiteSpaceToFunctionBar, float textSpacing, float textureTextOffSet, int archiveDataTypeBoxYOffSet, Color boxColor, Color textureColor, Color textColor)
+    private ArchiveDataTypeBox[] UpdateArchiveDataTypeBox(Font textFont, Dictionary<string, ArchiveStorage> storage, Texture2D[] archiveTextures, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, string pathSyntax, float whiteSpaceToFunctionBar, float textSpacing, float textureTextPercentageOffSet, int archiveDataTypeBoxRowOffSet, Color boxColor, Color textureColor, Color textColor)
     {
         ArchiveDataTypeBox newSingleDataTypeBox =
             new ArchiveDataTypeBox(
@@ -64,13 +73,13 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 newSingleDataTypeBox.Text,
                 textFont,
                 newTextureSize,
-                textureTextOffSet
+                textureTextPercentageOffSet
             );
 
         int newDataViewBoxesCount =
             CalculateNewDataViewBoxesCount(
-                parentBoxPixelLengths.X,
-                newSingleDataTypeBox.Box.PixelLengths.X,
+                parentBoxPixelLengths.Y,
+                newSingleDataTypeBox.Box.PixelLengths.Y,
                 whiteSpaceToFunctionBar
             );
 
@@ -84,17 +93,17 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 newTextureSize, 
                 pathSyntax,  
                 newCharSpace,
-                archiveDataTypeBoxYOffSet, 
+                archiveDataTypeBoxRowOffSet, 
                 newDataViewBoxesCount
             );
 
         return newViewArchiveDataTypeBoxes;
     }
 
-    private Box CalculateBox(Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, float whiteSpaceToFunctionBar)
+    private Box CalculateBox(Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, float whitePercentageSpaceToFunctionBar)
     {
         return new Box(
-            CalculateDataTypeBoxPosition(parentBoxPixelPosition, parentBoxPixelLengths, whiteSpaceToFunctionBar),
+            CalculateDataTypeBoxPosition(parentBoxPixelPosition, whitePercentageSpaceToFunctionBar),
             CalculateDataTypeBoxLengths(parentBoxPixelLengths, percentages)
         );
     }
@@ -117,21 +126,28 @@ public class UpdateArchiveDataTypeLayoutBoxes
         new Vector2(dataBoxSize.PixelLengths.Y, dataBoxSize.PixelLengths.Y);
     }
 
-    private Vector2 CalculateDataTypeBoxPosition(Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, float whiteSpaceToFunctionBar)
+    private Vector2 CalculateDataTypeBoxPosition(Vector2 parentBoxPixelPosition, float whitePercentageSpaceToFunctionBar)
     {
         Vector2 newDataTypePosition =
             new Vector2(
                 parentBoxPixelPosition.X,
-                parentBoxPixelLengths.Y * (whiteSpaceToFunctionBar / 100f)
+                parentBoxPixelPosition.Y + (whitePercentageSpaceToFunctionBar / 100f)
             );
 
         return newDataTypePosition;
     }
 
-    private int CalculateNewCharSpace(Box newSingleDataTypeBox, RaylibText text, Font textFont, Vector2 newTextureSize, float textureTextOffSet)
+    private int CalculateNewCharSpace(Box newSingleDataTypeBox, RaylibText text, Font textFont, Vector2 newTextureSize, float textureTextPercentageOffSet)
     {
-        return ((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - textureTextOffSet) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X > 0) ? 0 :
-        (int)((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - textureTextOffSet) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X);
+        //Console.WriteLine($"newSingleDataTypeBox.PixelLengths.X {newSingleDataTypeBox.PixelLengths.X}");
+        //Console.WriteLine($"newTextureSize.X {newTextureSize.X}");
+        //Console.WriteLine($"textureTextPercentageOffSet {textureTextPercentageOffSet}");
+        //Console.WriteLine($"Raylib.MeasureTextEx(textFont, t, text.TextSize, text.TextSpacing).X {Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X}");
+
+        //Als de textFont niet geladen is kan is Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X gelijk aan 0 dus int is maximaal
+        
+        return ((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - (textureTextPercentageOffSet / 100f * newSingleDataTypeBox.PixelLengths.X)) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X <= 0 ) ? 0 :
+            (int)((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - ((textureTextPercentageOffSet/100f)*newSingleDataTypeBox.PixelLengths.X)) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X);
     }
 
     private RaylibText CalculateText(float boxHight, float textSpacing)
@@ -139,12 +155,12 @@ public class UpdateArchiveDataTypeLayoutBoxes
         return new RaylibText("", boxHight, textSpacing);
     }
 
-    private int CalculateNewDataViewBoxesCount(float parentBoxPixelLengthX, float newSingleDataTypeBoxLengthX, float whiteSpaceToFunctionBar)
+    private int CalculateNewDataViewBoxesCount(float parentBoxPixelLengthY, float newSingleDataTypeBoxLengthY, float whiteSpaceToFunctionBar)
     {
-        return (int)((parentBoxPixelLengthX - whiteSpaceToFunctionBar) / newSingleDataTypeBoxLengthX);
+        return (int)((parentBoxPixelLengthY - whiteSpaceToFunctionBar) / newSingleDataTypeBoxLengthY);
     }
 
-    private ArchiveDataTypeBox[] CalculateViewArchiveDataTypeBoxes(RaylibText text, Font textFont, Dictionary<string, ArchiveStorage> storage, ArchiveDataTypeBox singleArchiveDataTypeBox, Texture2D[] archiveTextures, Vector2 textureSize, string pathSyntax, int charSpace, int archiveDataTypeBoxYOffSet, int dataViewBoxesCount)
+    private ArchiveDataTypeBox[] CalculateViewArchiveDataTypeBoxes(RaylibText text, Font textFont, Dictionary<string, ArchiveStorage> storage, ArchiveDataTypeBox singleArchiveDataTypeBox, Texture2D[] archiveTextures, Vector2 textureSize, string pathSyntax, int charSpace, int archiveDataTypeBoxRowOffSet, int dataViewBoxesCount)
     {
         List<ArchiveDataTypeBox> newArchiveDataBoxes = new List<ArchiveDataTypeBox>();
 
@@ -199,31 +215,46 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
         storageKeys.Sort();
 
+        //foreach(string storagekey in storageKeys)
+        //{
+        //    Console.WriteLine(storagekey);
+        //}
+        //storageKeyNames worden goed geinitialiseerd
+        
         string viewText = "";
 
         int counter = 0;
 
+        
         foreach (string folderName in storageKeys)
         {
-            if (counter >= archiveDataTypeBoxYOffSet)
+            if (counter >= archiveDataTypeBoxRowOffSet)
             {
                 break;
             }
+
+            //Console.WriteLine($"counter: {counter}"); // Verwijderd volgens mij goed 
 
             viewStorage.Remove(folderName);
         }
 
         storageKeys = viewStorage.Keys.ToArray();
-
+        
         storageKeys.Sort();
 
         foreach (string folderName in storageKeys)
         {
+            if (dataViewBoxesCount <= 0) break;
+            
             int ArchiveStorageTexturePosition = (viewStorage[folderName].DataType == ArchiveStorageNames.ProjectFolder) ? (int)ArchiveStorageNames.ProjectFolder : (int)ArchiveStorageNames.Folder;
             ArchiveStorageTexturePosition += (viewStorage[folderName].ViewFolderStorage) ? 3 : 0;
 
             viewText = folderName.Split(pathSyntax).Last();
+
             viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
+
+            //Console.WriteLine(folderName);
+            //Console.WriteLine(viewText);
 
             newArchiveDataBoxes.Add(
                 new ArchiveDataTypeBox(
@@ -231,7 +262,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                     singleArchiveDataTypeBox.TextureColor,
                     singleArchiveDataTypeBox.TextColor,
                     new RaylibTexture(archiveTextures[ArchiveStorageTexturePosition],
-                        new Rectangle(0, 0, 100, 100),
+                        new Rectangle(0, 0, archiveTextures[ArchiveStorageTexturePosition].Width, archiveTextures[ArchiveStorageTexturePosition].Height),
                         new Rectangle(
                             singleArchiveDataTypeBox.Box.PixelPosition.X,
                             singleArchiveDataTypeBox.Box.PixelPosition.Y,
@@ -250,6 +281,9 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
             foreach (string fileName in viewStorage[folderName].FolderStorage)
             {
+                //Console.WriteLine(folderName);
+                //Console.WriteLine(fileName.Split(pathSyntax).Last());
+
                 viewText = fileName.Split(pathSyntax).Last();
                 viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
 
@@ -259,7 +293,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                         singleArchiveDataTypeBox.TextureColor,
                         singleArchiveDataTypeBox.TextColor,
                         new RaylibTexture(archiveTextures[(int)ArchiveTexture2DNames.File],
-                            new Rectangle(0, 0, 100, 100),
+                            new Rectangle(0, 0, archiveTextures[(int)ArchiveTexture2DNames.File].Width, archiveTextures[(int)ArchiveTexture2DNames.File].Height),
                             new Rectangle(
                                 singleArchiveDataTypeBox.Box.PixelPosition.X,
                                 singleArchiveDataTypeBox.Box.PixelPosition.Y,

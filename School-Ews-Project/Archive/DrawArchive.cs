@@ -18,7 +18,7 @@ public class DrawArchive
 
         DrawArchiveFunctionBar();
 
-        //DrawArchiveDataTypeBoxes();
+        DrawArchiveDataTypeBoxes();
 
         DrawArchiveNamingDataTypeTextBox();
     }
@@ -56,25 +56,52 @@ public class DrawArchive
     private void DrawArchiveDataTypeBoxes()
     {
         var _archive = _state.archive;
-    
-        float positionIncrementY = 0;
-    
+        var _font = _state.common.font;
+
+        float heightIncrement = 0;
+
         foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
         {
-            Raylib.DrawRectangleV(
-                dataTypeBox.Box.PixelPosition,
-                dataTypeBox.Box.PixelLengths,
-                dataTypeBox.BoxColor
-            );
-            
+            //Raylib.DrawRectangleV(
+            //    new Vector2(dataTypeBox.Box.PixelPosition.X, dataTypeBox.Box.PixelPosition.Y + heightIncrement),
+            //    dataTypeBox.Box.PixelLengths,
+            //    Color.Red
+            //);
+
+            Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.X);
+            Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.Y);
+
+            Console.WriteLine(dataTypeBox.Texture.Texture);
+
             Raylib.DrawTexturePro(
                 dataTypeBox.Texture.Texture,
                 dataTypeBox.Texture.TextureUsage,
-                dataTypeBox.Texture.TextureSize,
+                new Rectangle(
+                    dataTypeBox.Box.PixelPosition.X,
+                    dataTypeBox.Box.PixelPosition.Y + heightIncrement,
+                    dataTypeBox.Texture.TextureSize.Width,
+                    dataTypeBox.Texture.TextureSize.Height
+                ),
                 new Vector2(0,0),
                 0f,
-                Color.RayWhite
+                dataTypeBox.TextureColor
             );
+
+            Console.WriteLine(dataTypeBox.ViewText);
+
+            Raylib.DrawTextEx(
+                _font.EditorPanelRowNumbers,
+                dataTypeBox.ViewText,
+                new Vector2(
+                    dataTypeBox.Texture.TextureSize.Position.X + dataTypeBox.Texture.TextureSize.Width, 
+                    dataTypeBox.Texture.TextureSize.Position.Y + heightIncrement
+                ),
+                dataTypeBox.Text.TextSize,
+                dataTypeBox.Text.TextSpacing,
+                dataTypeBox.TextColor
+            );
+
+            heightIncrement += dataTypeBox.Box.PixelLengths.Y;
         }
     }
 

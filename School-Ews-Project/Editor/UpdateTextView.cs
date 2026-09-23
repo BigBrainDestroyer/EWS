@@ -141,7 +141,7 @@ public class UpdateTextView
         int newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
         int wheelMovement = (int)Raylib.GetMouseWheelMove();
 
-        Console.WriteLine(wheelMovement);
+        //Console.WriteLine(wheelMovement);
 
         if (wheelMovement != 0)
         {
@@ -153,7 +153,7 @@ public class UpdateTextView
             }
         }
 
-        Console.WriteLine(newTextGridBoxesOffSetY);
+        //Console.WriteLine(newTextGridBoxesOffSetY);
         
         return newTextGridBoxesOffSetY;
     }

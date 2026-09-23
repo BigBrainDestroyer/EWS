@@ -33,7 +33,7 @@ public class UpdateMazeLayoutMazeView
                 CalculatingCommonDataBoxLengthsPixelSpacing(_layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData], _layout.mazeView.CommonDataBoxPercentageSpacing);
 
 
-    _layout.mazeView.CommonDataCharHight =
+        _layout.mazeView.CommonDataCharHight =
             CalculatingCommonDataCharHight(_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.CommonDataBoxPercentageSpacing, _layout.mazeView.AmountOfCommonDataBoxes);
     }
 
