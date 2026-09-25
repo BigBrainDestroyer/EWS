@@ -33,7 +33,7 @@ public class GenerateMazeSeed
 
             for (int i = 0; i < seedLength; i++)
             {
-                newSeedBach[x][i] = Random.Shared.Next(0, 5);
+                newSeedBach[x][i] = Random.Shared.Next(0, 4);
             }
         }
 

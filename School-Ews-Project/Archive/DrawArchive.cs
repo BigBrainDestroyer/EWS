@@ -68,10 +68,10 @@ public class DrawArchive
             //    Color.Red
             //);
 
-            Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.X);
-            Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.Y);
+            //Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.X);
+            //Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.Y);
 
-            Console.WriteLine(dataTypeBox.Texture.Texture);
+            //Console.WriteLine(dataTypeBox.Texture.Texture);
 
             Raylib.DrawTexturePro(
                 dataTypeBox.Texture.Texture,
@@ -87,7 +87,7 @@ public class DrawArchive
                 dataTypeBox.TextureColor
             );
 
-            Console.WriteLine(dataTypeBox.ViewText);
+            //Console.WriteLine(dataTypeBox.ViewText);
 
             Raylib.DrawTextEx(
                 _font.EditorPanelRowNumbers,

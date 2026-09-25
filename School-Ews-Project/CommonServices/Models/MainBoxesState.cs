@@ -43,10 +43,10 @@ public class MainBoxesState
     public Dictionary<MainBoxNames, Vector2> MainBoxPercentages { get; set; } =
         new Dictionary<MainBoxNames, Vector2>{
             {MainBoxNames.Archive   , new Vector2(100f, 100f)},
-            {MainBoxNames.Maze      , new Vector2(100f, 65f)},
-            {MainBoxNames.Statistics, new Vector2(100f, 35f)},
-            {MainBoxNames.Editor    , new Vector2(100f, 65f)},
-            {MainBoxNames.Terminal  , new Vector2(100f, 35f)}
+            {MainBoxNames.Maze      , new Vector2(100f, 100f)},
+            {MainBoxNames.Statistics, new Vector2(100f, 0f)},
+            {MainBoxNames.Editor    , new Vector2(100f, 100f)},
+            {MainBoxNames.Terminal  , new Vector2(100f, 0f)}
         };
 
     public Dictionary<MainBoxNames, Vector2> MainBoxPixelLengts { get; set; } =

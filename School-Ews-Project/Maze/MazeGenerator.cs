@@ -2,7 +2,6 @@ using System.Numerics;
 
 namespace Program;
 
-
 public class MazeGenerator
 {
     private readonly AppState _state;
@@ -603,8 +602,8 @@ public class MazeGenerator
             bool result = array[i];
 
             if (result == true)
-            {
-                if (counter == currentSeedNumber)
+            {   
+                if (i == currentSeedNumber)
                 {
                     index = i;
                     break;
@@ -615,7 +614,7 @@ public class MazeGenerator
 
             if (i == array.Length - 1)
             {
-                index = Array.LastIndexOf(array, true);
+                index = (currentSeedNumber < 2) ? Array.IndexOf(array, true) : Array.LastIndexOf(array, true);
             }
         }
 
