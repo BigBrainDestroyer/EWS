@@ -1,4 +1,5 @@
 using Raylib_cs;
+using System.Numerics;
 
 namespace Program;
     
@@ -24,6 +25,10 @@ public class UpdateArchiveClicks
         if(_archive.AddDataTypeMenu.IsMenuActive)
         {
             AddDataMenuClick();
+        }
+        else
+        {
+            () DataTypeBoxesClick();
         }
         
         AddOnButtonClick();
@@ -88,6 +93,37 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, Color mouseOnBoxColor)
+    {
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation);
+
+        foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
+        {
+            if(CheckField.MouseOnField(dataTypeBox.Box.PixelPosition, dataTypeBox.Box.PixelLengths, Raylib.GetMousePosition()))
+            {
+                if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+                {
+                    //als file sla current geopende file op als laad nieuwe file zet selected file dataLocation
+                    currentStorageDataLocation = dataTypeBox.Location;
+                    
+                    currentStorage[currentStorageDataLocation] = 
+                    new ArchiveStorage(
+                        currentStorage[currentStorageDataLocation].FolderStorage,
+                        currentStorage[currentStorageDataLocation].DataType,
+                        !currentStorage[currentStorageDataLocation].ViewFolderStorage
+                    );
+                }
+                else
+                {
+                    dataTypeBox.BoxColor = mouseOnBoxColor;
+                }
+            }
+        }
+        
+        return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation);
+    }
+    
+    //nog een goede plek
     public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType)
     {
         TextBar newTextBar = new TextBar();

@@ -12,43 +12,46 @@ public class UpdateArchiveStorage
 
     public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
     {
-        if (dataType != ArchiveStorageNames.File && name.Length > 0)
+        if (name.Length > 0)
         {
-            string directory = Directory.GetCurrentDirectory();
-
-            if(Path.Exists(Path.Combine(dataLocation)))
+            if (dataType != ArchiveStorageNames.File && name.Length > 0)
             {
-                currentStorage.Add(
-                        dataLocation + pathSyntax + name,
-                        new ArchiveStorage(
-                        new List<string>(),
-                        dataType,
-                        true
-                    ));
-                
-                directory = Path.Combine(directory, dataLocation, name);
-                Directory.CreateDirectory(directory);
+                string directory = Directory.GetCurrentDirectory();
 
-                dataLocation = dataLocation + pathSyntax + name;
+                if (Path.Exists(Path.Combine(dataLocation)))
+                {
+                    currentStorage.Add(
+                            dataLocation + pathSyntax + name,
+                            new ArchiveStorage(
+                            new List<string>(),
+                            dataType,
+                            true
+                        ));
+
+                    directory = Path.Combine(directory, dataLocation, name);
+                    Directory.CreateDirectory(directory);
+
+                    dataLocation = dataLocation + pathSyntax + name;
+                }
+                else
+                {
+                    dataLocation = projectDataLocation;
+                }
             }
-            else
+            else if (name.Length > 0)
             {
-                dataLocation = projectDataLocation;
+                ArchiveStorage newStorage = currentStorage[dataLocation];
+
+                newStorage.FolderStorage.Add(name);
+
+                File.WriteAllText(dataLocation + pathSyntax + name, "");
+
+                currentStorage[dataLocation] = newStorage;
             }
-        }
-        else if (name.Length > 0)
-        {
-            ArchiveStorage newStorage = currentStorage[dataLocation];
-
-            newStorage.FolderStorage.Add(name);
-
-            File.WriteAllText(dataLocation + pathSyntax + name, "");
-
-            currentStorage[dataLocation] = newStorage;
-        }
-        else if(dataType != ArchiveStorageNames.File)
-        {
-            currentStorage.Remove(dataLocation);
+            else if (dataType != ArchiveStorageNames.File)
+            {
+                currentStorage.Remove(dataLocation);
+            }
         }
 
         return (currentStorage, dataLocation);

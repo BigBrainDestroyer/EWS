@@ -15,12 +15,13 @@ public class ArchiveState
             new Color(220, 223, 228, 255),
             new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()),
             "",
+            "",
             new RaylibText(),
             new Box()
         );
         
     public TextBar ArchiveNamingDataTypeTextBox { get; set; } = new TextBar();
-    public ArchiveStorageNames TemporarilyData;
+    public ArchiveStorageNames TemporarilyData { get; set; }
 
     //Colors
     public Color BackgroundColor { get; } = new Color(51, 59, 67, 255);
@@ -70,7 +71,9 @@ public class ArchiveState
     public Vector2 DataTypeBoxPercentage { get; } = new Vector2(100f, 2.5f);
 
     public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
-    public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
+    public string CurrentEditDirectory { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
+    public string LoadedFileDirectory { get; set; } = "";
+    public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects"; //Base
     public string PathSyntax { get; set; } = "";
     public string LinuxPathSyntax { get; } = "/";
     public string WindowsPathSyntax { get; } = "\\";

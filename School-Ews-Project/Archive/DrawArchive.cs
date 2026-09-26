@@ -58,8 +58,6 @@ public class DrawArchive
         var _archive = _state.archive;
         var _font = _state.common.font;
 
-        float heightIncrement = 0;
-
         foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
         {
             //Raylib.DrawRectangleV(
@@ -76,12 +74,7 @@ public class DrawArchive
             Raylib.DrawTexturePro(
                 dataTypeBox.Texture.Texture,
                 dataTypeBox.Texture.TextureUsage,
-                new Rectangle(
-                    dataTypeBox.Box.PixelPosition.X,
-                    dataTypeBox.Box.PixelPosition.Y + heightIncrement,
-                    dataTypeBox.Texture.TextureSize.Width,
-                    dataTypeBox.Texture.TextureSize.Height
-                ),
+                dataTypeBox.Texture.TextureSize,
                 new Vector2(0,0),
                 0f,
                 dataTypeBox.TextureColor
@@ -94,14 +87,12 @@ public class DrawArchive
                 dataTypeBox.ViewText,
                 new Vector2(
                     dataTypeBox.Texture.TextureSize.Position.X + dataTypeBox.Texture.TextureSize.Width, 
-                    dataTypeBox.Texture.TextureSize.Position.Y + heightIncrement
+                    dataTypeBox.Texture.TextureSize.Position.Y
                 ),
                 dataTypeBox.Text.TextSize,
                 dataTypeBox.Text.TextSpacing,
                 dataTypeBox.TextColor
             );
-
-            heightIncrement += dataTypeBox.Box.PixelLengths.Y;
         }
     }
 

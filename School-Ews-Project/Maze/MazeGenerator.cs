@@ -605,17 +605,40 @@ public class MazeGenerator
             {   
                 if (i == currentSeedNumber)
                 {
-                    index = i;
-                    break;
+                    return i;
                 }   
 
                 counter += 1;
             }
 
+            //Random Paden
             if (i == array.Length - 1)
             {
-                index = (currentSeedNumber < 2) ? Array.IndexOf(array, true) : Array.LastIndexOf(array, true);
+                int randomIndex = Random.Shared.Next(0, counter);
+                int randomIndexCounter = 0;
+                counter = 0;
+
+                foreach(bool wallState in array)
+                {
+                    if(wallState == true)
+                    {
+                        if(randomIndexCounter == randomIndex)
+                        {
+                            return counter;  
+                        }
+
+                        randomIndexCounter++;
+                    }
+
+                    counter++;
+                }
             }
+
+            // Diagornale paden 
+            //if(i == array.Length - 1)
+            //{
+            //    return (currentSeedNumber < 2) ? Array.IndexOf(array, true) : Array.LastIndexOf(array, true);
+            //}
         }
 
         return index;
