@@ -26,10 +26,6 @@ public class UpdateArchiveClicks
         {
             AddDataMenuClick();
         }
-        else
-        {
-            () DataTypeBoxesClick();
-        }
         
         AddOnButtonClick();
     }
@@ -93,25 +89,38 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes,Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentEditDirectory, string loadedFileDirectory, Color mouseOnBoxColor)
     {
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation);
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentEditDirectory, loadedFileDirectory);
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {
             if(CheckField.MouseOnField(dataTypeBox.Box.PixelPosition, dataTypeBox.Box.PixelLengths, Raylib.GetMousePosition()))
             {
-                if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+                if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
                 {
                     //als file sla current geopende file op als laad nieuwe file zet selected file dataLocation
                     currentStorageDataLocation = dataTypeBox.Location;
-                    
-                    currentStorage[currentStorageDataLocation] = 
+                    //Console.WriteLine("test");
+
+                    currentStorage[dataTypeBox.Location] = 
                     new ArchiveStorage(
-                        currentStorage[currentStorageDataLocation].FolderStorage,
-                        currentStorage[currentStorageDataLocation].DataType,
-                        !currentStorage[currentStorageDataLocation].ViewFolderStorage
+                        currentStorage[dataTypeBox.Location].FolderStorage,
+                        currentStorage[dataTypeBox.Location].DataType,
+                        !currentStorage[dataTypeBox.Location].ViewFolderStorage
                     );
+                }
+                else if(Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
+                {
+                    currentEditDirectory = dataTypeBox.Location;
+                }
+                else if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName == ArchiveStorageNames.File)
+                {
+                    loadedFileDirectory = dataTypeBox.Location + dataTypeBox.Text;
+                }
+                else if((Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName == ArchiveStorageNames.File))
+                {
+                    currentEditDirectory = dataTypeBox.Location + dataTypeBox.Text;
                 }
                 else
                 {
@@ -120,7 +129,7 @@ public class UpdateArchiveClicks
             }
         }
         
-        return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation);
+        return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentEditDirectory, loadedFileDirectory);
     }
     
     //nog een goede plek

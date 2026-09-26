@@ -9,17 +9,19 @@ public class ArchiveDataTypeBox
     public Color TextColor { get; set; }
     public string ViewText { get; set; }
     public string Location { get; set; }
+    public ArchiveStorageNames DataTypeName { get; set; }
     public RaylibTexture Texture { get; set; }
     public RaylibText Text { get; set; }
     public Box Box { get; set; }
 
-    public ArchiveDataTypeBox(Color boxColor, Color textureColor, Color textColor, RaylibTexture texture, string viewText, string location, RaylibText text, Box box)
+    public ArchiveDataTypeBox(Color boxColor, Color textureColor, Color textColor, RaylibTexture texture, string viewText, string location, ArchiveStorageNames dataTypeName, RaylibText text, Box box)
     {
         BoxColor = boxColor;
         TextureColor = textureColor;
         TextColor = textColor;
         ViewText = viewText;
         Location = location;
+        DataTypeName = dataTypeName;
         Texture = texture;
         Text = text;
         Box = box;

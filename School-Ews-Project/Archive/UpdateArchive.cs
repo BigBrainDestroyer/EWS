@@ -26,10 +26,8 @@ public class UpdateArchive
         
         _namingDataTypeBox.NamingDataTypeTextBox();
         
-        _archiveLayout.UpdateArchive();
-
         _archiveStorage.UpdateProjectsFolder();
 
-        _dataTypeLayoutBoxes.ArchiveDataTypeLayoutBoxes();
+        _archiveLayout.UpdateArchive();
     }
 }

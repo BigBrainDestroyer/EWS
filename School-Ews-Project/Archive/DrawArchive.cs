@@ -59,17 +59,12 @@ public class DrawArchive
         var _font = _state.common.font;
 
         foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
-        {
-            //Raylib.DrawRectangleV(
-            //    new Vector2(dataTypeBox.Box.PixelPosition.X, dataTypeBox.Box.PixelPosition.Y + heightIncrement),
-            //    dataTypeBox.Box.PixelLengths,
-            //    Color.Red
-            //);
-
-            //Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.X);
-            //Console.WriteLine(dataTypeBox.Texture.TextureSize.Position.Y);
-
-            //Console.WriteLine(dataTypeBox.Texture.Texture);
+        {   
+            Raylib.DrawRectangleV(
+                dataTypeBox.Box.PixelPosition,
+                dataTypeBox.Box.PixelLengths,
+                dataTypeBox.BoxColor
+            );
 
             Raylib.DrawTexturePro(
                 dataTypeBox.Texture.Texture,

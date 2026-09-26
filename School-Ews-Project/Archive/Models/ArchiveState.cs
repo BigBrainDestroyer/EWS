@@ -16,6 +16,7 @@ public class ArchiveState
             new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()),
             "",
             "",
+            ArchiveStorageNames.Folder,
             new RaylibText(),
             new Box()
         );
@@ -28,6 +29,7 @@ public class ArchiveState
     public Color DataTypeBoxesTextColor { get; } = new Color(220, 223, 228, 255);
     public Color DataTypeBoxesTextureColor { get; } = new Color(145, 155, 165, 255);
     public Color DataTypeBoxesSelectedBoxTextureColor { get; } = new Color(220, 223, 228, 255);
+    public Color DataTypeBoxesMouseOnBoxColor { get; set; } = Color.Red;
 
 
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
