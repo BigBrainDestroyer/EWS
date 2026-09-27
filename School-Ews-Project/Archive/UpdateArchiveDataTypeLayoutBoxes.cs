@@ -247,23 +247,9 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
         storageKeys.Sort();
 
-        int totalViewStorageCount = viewStorage.Count;
-
         string viewText = "";
 
-        int counter = 0;
-
-        foreach (string folderName in storageKeys)
-        {
-            if (counter >= archiveDataTypeBoxRowOffSet)
-            {
-                break;
-            }
-            
-            viewStorage.Remove(folderName);
-
-            counter++;
-        }
+        int totalViewStorageCount = archiveDataTypeBoxRowOffSet;
 
         storageKeys = viewStorage.Keys.ToArray();
         
@@ -274,88 +260,107 @@ public class UpdateArchiveDataTypeLayoutBoxes
         foreach (string folderLocation in storageKeys)
         {
             if (dataViewBoxesCount <= 0) break;
-            
-            int ArchiveStorageTexturePosition = (viewStorage[folderLocation].DataType == ArchiveStorageNames.ProjectFolder) ? (int)ArchiveStorageNames.ProjectFolder : (int)ArchiveStorageNames.Folder;
-            
-            ArchiveStorageTexturePosition += (viewStorage[folderLocation].ViewFolderStorage) ? 3 : 0;
 
-            viewText = folderLocation.Split(pathSyntax).Last();
+            if(archiveDataTypeBoxRowOffSet <= 0)
+            {
+                int ArchiveStorageTexturePosition = (viewStorage[folderLocation].DataType == ArchiveStorageNames.ProjectFolder) ? (int)ArchiveStorageNames.ProjectFolder : (int)ArchiveStorageNames.Folder;
 
-            viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
+                ArchiveStorageTexturePosition += (viewStorage[folderLocation].ViewFolderStorage) ? 3 : 0;
 
-            newArchiveDataBoxes.Add(
-                new ArchiveDataTypeBox(
-                    singleArchiveDataTypeBox.BoxColor,
-                    singleArchiveDataTypeBox.TextureColor,
-                    singleArchiveDataTypeBox.TextColor,
-                    new RaylibTexture(archiveTextures[ArchiveStorageTexturePosition],
-                        new Rectangle(0, 0, archiveTextures[ArchiveStorageTexturePosition].Width, archiveTextures[ArchiveStorageTexturePosition].Height),
-                        new Rectangle(
-                            singleArchiveDataTypeBox.Box.PixelPosition.X,
-                            singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement,
-                            textureSize.X,
-                            textureSize.Y)
-                    ),
-                    viewText,
-                    folderLocation,
-                    (viewStorage[folderLocation].DataType == ArchiveStorageNames.ProjectFolder) ? ArchiveStorageNames.ProjectFolder : ArchiveStorageNames.Folder,
-                    new RaylibText(folderLocation.Split(pathSyntax).Last(), text.TextSize, text.TextSpacing),
-                    new Box(
-                        new Vector2(
-                            singleArchiveDataTypeBox.Box.PixelPosition.X,
-                            singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement
+                viewText = folderLocation.Split(pathSyntax).Last();
+
+                viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
+
+                newArchiveDataBoxes.Add(
+                    new ArchiveDataTypeBox(
+                        singleArchiveDataTypeBox.BoxColor,
+                        singleArchiveDataTypeBox.TextureColor,
+                        singleArchiveDataTypeBox.TextColor,
+                        new RaylibTexture(archiveTextures[ArchiveStorageTexturePosition],
+                            new Rectangle(0, 0, archiveTextures[ArchiveStorageTexturePosition].Width, archiveTextures[ArchiveStorageTexturePosition].Height),
+                            new Rectangle(
+                                singleArchiveDataTypeBox.Box.PixelPosition.X,
+                                singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement,
+                                textureSize.X,
+                                textureSize.Y)
                         ),
-                        singleArchiveDataTypeBox.Box.PixelLengths
+                        viewText,
+                        folderLocation,
+                        (viewStorage[folderLocation].DataType == ArchiveStorageNames.ProjectFolder) ? ArchiveStorageNames.ProjectFolder : ArchiveStorageNames.Folder,
+                        new RaylibText(folderLocation.Split(pathSyntax).Last(), text.TextSize, text.TextSpacing),
+                        new Box(
+                            new Vector2(
+                                singleArchiveDataTypeBox.Box.PixelPosition.X,
+                                singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement
+                            ),
+                            singleArchiveDataTypeBox.Box.PixelLengths
+                        )
                     )
-                )
-            );
-            
-            dataViewBoxesCount--;
-            if (dataViewBoxesCount <= 0) break;
-            
-            heightIncrement += singleArchiveDataTypeBox.Box.PixelLengths.Y;
+                );
 
-            
+                dataViewBoxesCount--;
+                if (dataViewBoxesCount <= 0) break;
+
+                heightIncrement += singleArchiveDataTypeBox.Box.PixelLengths.Y;
+
+                totalViewStorageCount++;
+            }
+            else
+            {
+                archiveDataTypeBoxRowOffSet--;
+            }
+
             if (viewStorage[folderLocation].ViewFolderStorage)
             {
                 foreach (string fileName in viewStorage[folderLocation].FolderStorage)
                 {
-                    viewText = fileName.Split(pathSyntax).Last();
-                    viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
+                    if (archiveDataTypeBoxRowOffSet <= 0)
+                    {
+                        viewText = fileName.Split(pathSyntax).Last();
+                        viewText = (viewText.Length > charSpace) ? viewText.Substring(0, (int)charSpace) : viewText;
 
-                    newArchiveDataBoxes.Add(
-                        new ArchiveDataTypeBox(
-                            singleArchiveDataTypeBox.BoxColor,
-                            singleArchiveDataTypeBox.TextureColor,
-                            singleArchiveDataTypeBox.TextColor,
-                            new RaylibTexture(archiveTextures[(int)ArchiveTexture2DNames.File],
-                                new Rectangle(0, 0, archiveTextures[(int)ArchiveTexture2DNames.File].Width, archiveTextures[(int)ArchiveTexture2DNames.File].Height),
-                                new Rectangle(
-                                    singleArchiveDataTypeBox.Box.PixelPosition.X,
-                                    singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement,
-                                    textureSize.X,
-                                    textureSize.Y)
-                            ),
-                            viewText,
-                            folderLocation,
-                            ArchiveStorageNames.File,
-                            new RaylibText(fileName.Split(pathSyntax).Last(), text.TextSize, text.TextSpacing),
-                            new Box(
-                                new Vector2(
-                                    singleArchiveDataTypeBox.Box.PixelPosition.X,
-                                    singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement
+                        newArchiveDataBoxes.Add(
+                            new ArchiveDataTypeBox(
+                                singleArchiveDataTypeBox.BoxColor,
+                                singleArchiveDataTypeBox.TextureColor,
+                                singleArchiveDataTypeBox.TextColor,
+                                new RaylibTexture(archiveTextures[(int)ArchiveTexture2DNames.File],
+                                    new Rectangle(0, 0, archiveTextures[(int)ArchiveTexture2DNames.File].Width, archiveTextures[(int)ArchiveTexture2DNames.File].Height),
+                                    new Rectangle(
+                                        singleArchiveDataTypeBox.Box.PixelPosition.X,
+                                        singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement,
+                                        textureSize.X,
+                                        textureSize.Y)
                                 ),
-                                singleArchiveDataTypeBox.Box.PixelLengths
+                                viewText,
+                                folderLocation,
+                                ArchiveStorageNames.File,
+                                new RaylibText(fileName.Split(pathSyntax).Last(), text.TextSize, text.TextSpacing),
+                                new Box(
+                                    new Vector2(
+                                        singleArchiveDataTypeBox.Box.PixelPosition.X,
+                                        singleArchiveDataTypeBox.Box.PixelPosition.Y + heightIncrement
+                                    ),
+                                    singleArchiveDataTypeBox.Box.PixelLengths
+                                )
                             )
-                        )
-                    );
-                    dataViewBoxesCount--;
-                    if (dataViewBoxesCount <= 0) break;
+                        );
+                        dataViewBoxesCount--;
+                        if (dataViewBoxesCount <= 0) break;
 
-                    heightIncrement += singleArchiveDataTypeBox.Box.PixelLengths.Y;
+                        heightIncrement += singleArchiveDataTypeBox.Box.PixelLengths.Y;
+
+                        totalViewStorageCount++;
+                    }
+                    else
+                    {
+                        archiveDataTypeBoxRowOffSet--;
+                    }
                 }
             }
         }
+
+        Console.WriteLine(totalViewStorageCount);
 
         return (newArchiveDataBoxes.ToArray(), totalViewStorageCount);
     }
