@@ -60,6 +60,13 @@ public class UpdateNamingDataTypeTextBox
 
             newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
         }
+        else if(newArchiveNamingDataTypeTextBox.IsTextBoxActive == true)
+        {
+            if ((Raylib.IsKeyPressed(KeyboardKey.Escape) || Raylib.IsMouseButtonPressed(MouseButton.Left) && !CheckField.MouseOnField(newArchiveNamingDataTypeTextBox.BoxPosition, newArchiveNamingDataTypeTextBox.BoxLengths, Raylib.GetMousePosition()) && !CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition())|| Raylib.IsMouseButtonPressed(MouseButton.Right)))
+            {
+                newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
+            }
+        }
 
         _archive.ArchiveNamingDataTypeTextBox = newArchiveNamingDataTypeTextBox;
     }

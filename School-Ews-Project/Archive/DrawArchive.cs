@@ -16,9 +16,9 @@ public class DrawArchive
     {
         DrawArchiveBackground();
 
-        DrawArchiveFunctionBar();
-
         DrawArchiveDataTypeBoxes();
+        
+        DrawArchiveFunctionBar();
 
         DrawArchiveNamingDataTypeTextBox();
     }

@@ -26,6 +26,8 @@ public class Initialize
 
         Raylib.SetWindowMonitor(0);
 
+        Raylib.SetExitKey(KeyboardKey.Null);
+
         Raylib.SetTargetFPS(240);
         Raylib.MaximizeWindow();
 

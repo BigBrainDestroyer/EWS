@@ -89,9 +89,9 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes,Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {

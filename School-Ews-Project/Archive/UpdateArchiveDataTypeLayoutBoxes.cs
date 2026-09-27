@@ -41,6 +41,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             _archiveClick.DataTypeBoxClick(
                 _archive.Storage, 
                 _archive.DataTypeBoxes, 
+                _archive.AddDataTypeMenu,
                 _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
                 _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
                 _archive.CurrentStorageDataLocation, 
