@@ -10,6 +10,7 @@ public class UpdateArchive
     private readonly UpdateArchiveStorage _archiveStorage;
     private readonly UpdateArchiveDataTypeLayoutBoxes _dataTypeLayoutBoxes;
     private readonly UpdateLoadFile _loadFile;
+    private readonly ArchiveUpdateScrollInput _archiveScrollInput;
 
     public UpdateArchive(AppState state)
     {
@@ -20,12 +21,15 @@ public class UpdateArchive
         _archiveStorage = new UpdateArchiveStorage(_state);
         _dataTypeLayoutBoxes = new UpdateArchiveDataTypeLayoutBoxes(_state);
         _loadFile = new UpdateLoadFile(_state);
+        _archiveScrollInput = new ArchiveUpdateScrollInput(_state);
     }
 
     public void Archive()
     {
         _archiveClicks.ArchiveClicks();
-        
+
+        _archiveScrollInput.ScrollInput();
+
         _namingDataTypeBox.NamingDataTypeTextBox();
         
         _archiveStorage.UpdateProjectsFolder();

@@ -19,7 +19,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
         var _archive = _state.archive;
         var _font = _state.common.font;
         
-        _archive.DataTypeBoxes = UpdateArchiveDataTypeBox(
+        (_archive.DataTypeBoxes, _archive.TotalViewStorageCount) = UpdateArchiveDataTypeBox(
             _font.ArchiveDataBoxType,
             _archive.Storage,
             _archive.ArchiveTextures,
@@ -65,7 +65,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             );
     }
 
-    private ArchiveDataTypeBox[] UpdateArchiveDataTypeBox(Font textFont, Dictionary<string, ArchiveStorage> storage, Texture2D[] archiveTextures, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, string pathSyntax, float whiteSpaceToFunctionBar, float textSpacing, float textureTextPercentageOffSet, int archiveDataTypeBoxRowOffSet, Color boxColor, Color textureColor, Color textColor)
+    private (ArchiveDataTypeBox[], int) UpdateArchiveDataTypeBox(Font textFont, Dictionary<string, ArchiveStorage> storage, Texture2D[] archiveTextures, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, string pathSyntax, float whiteSpaceToFunctionBar, float textSpacing, float textureTextPercentageOffSet, int archiveDataTypeBoxRowOffSet, Color boxColor, Color textureColor, Color textColor)
     {
         ArchiveDataTypeBox newSingleDataTypeBox =
             new ArchiveDataTypeBox(
@@ -115,7 +115,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 whiteSpaceToFunctionBar
             );
 
-        ArchiveDataTypeBox[] newViewArchiveDataTypeBoxes =
+        (ArchiveDataTypeBox[] newViewArchiveDataTypeBoxes, int totalViewStorageCount) =
             CalculateViewArchiveDataTypeBoxes(
                 newSingleDataTypeBox.Text, 
                 textFont, 
@@ -129,7 +129,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 newDataViewBoxesCount
             );
 
-        return newViewArchiveDataTypeBoxes;
+        return (newViewArchiveDataTypeBoxes, totalViewStorageCount);
     }
 
     private Box CalculateBox(Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Vector2 percentages, float whitePercentageSpaceToFunctionBar)
@@ -192,7 +192,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
         return (int)((parentBoxPixelLengthY - whiteSpaceToFunctionBar) / newSingleDataTypeBoxLengthY);
     }
 
-    private ArchiveDataTypeBox[] CalculateViewArchiveDataTypeBoxes(RaylibText text, Font textFont, Dictionary<string, ArchiveStorage> storage, ArchiveDataTypeBox singleArchiveDataTypeBox, Texture2D[] archiveTextures, Vector2 textureSize, string pathSyntax, int charSpace, int archiveDataTypeBoxRowOffSet, int dataViewBoxesCount)
+    private (ArchiveDataTypeBox[], int) CalculateViewArchiveDataTypeBoxes(RaylibText text, Font textFont, Dictionary<string, ArchiveStorage> storage, ArchiveDataTypeBox singleArchiveDataTypeBox, Texture2D[] archiveTextures, Vector2 textureSize, string pathSyntax, int charSpace, int archiveDataTypeBoxRowOffSet, int dataViewBoxesCount)
     {
         List<ArchiveDataTypeBox> newArchiveDataBoxes = new List<ArchiveDataTypeBox>();
 
@@ -247,27 +247,22 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
         storageKeys.Sort();
 
-        //foreach(string storagekey in storageKeys)
-        //{
-        //    Console.WriteLine(storagekey);
-        //}
-        //storageKeyNames worden goed geinitialiseerd
-        
+        int totalViewStorageCount = viewStorage.Count;
+
         string viewText = "";
 
         int counter = 0;
 
-        
         foreach (string folderName in storageKeys)
         {
             if (counter >= archiveDataTypeBoxRowOffSet)
             {
                 break;
             }
-
-            //Console.WriteLine($"counter: {counter}"); // Verwijderd volgens mij goed 
-
+            
             viewStorage.Remove(folderName);
+
+            counter++;
         }
 
         storageKeys = viewStorage.Keys.ToArray();
@@ -362,7 +357,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             }
         }
 
-        return newArchiveDataBoxes.ToArray();
+        return (newArchiveDataBoxes.ToArray(), totalViewStorageCount);
     }
 
     private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)

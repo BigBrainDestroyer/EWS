@@ -98,6 +98,7 @@ public class ArchiveState
 
     public float DataTypeBoxCharLoadFontSize { get; set; } = 25f;
 
+    public int TotalViewStorageCount { get; set; } = 0;
     public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0; //broken
 
     public bool ProjectsFolderHasChanged { get; set; }

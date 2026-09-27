@@ -139,13 +139,12 @@ public class UpdateTextView
         var _textPanel = _state.editor.layout.textPanel;
         
         int newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
-        int wheelMovement = (int)Raylib.GetMouseWheelMove();
 
         //Console.WriteLine(wheelMovement);
 
-        if (wheelMovement != 0)
+        if (_input.MouseWheelInput != 0)
         {
-            newTextGridBoxesOffSetY -= wheelMovement;
+            newTextGridBoxesOffSetY -= (int)_input.MouseWheelInput;
 
             if (newTextGridBoxesOffSetY < 0 || newTextGridBoxesOffSetY >= panelText.Count)
             {
