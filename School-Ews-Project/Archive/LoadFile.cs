@@ -1,3 +1,4 @@
+using System.Numerics;
 
 namespace Program;
 
@@ -21,6 +22,8 @@ public class UpdateLoadFile
         {
             _textPanel.PanelText = LoadNewFile(_archive.LoadedFileDirectory);
 
+            (_textPanel.CursorTextPosition, _textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY) = ResetAllPanelTextViewParameters();
+
             _textView.UpdateView();
 
             _textPanel.CurrentLoadedFile = _archive.LoadedFileDirectory;
@@ -42,5 +45,10 @@ public class UpdateLoadFile
         }
 
         return newEditorText;
+    }
+
+    private (Vector2, int, int) ResetAllPanelTextViewParameters()
+    {
+        return (new Vector2(0, 0), 0, 0);
     }
 }
