@@ -46,6 +46,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 _archive.CurrentStorageDataLocation, 
                 _archive.CurrentEditDirectory, 
                 _archive.LoadedFileDirectory,
+                _archive.PathSyntax,
                 _archive.DataTypeBoxesMouseOnBoxColor
             );
     }
@@ -350,16 +351,31 @@ public class UpdateArchiveDataTypeLayoutBoxes
         return newArchiveDataBoxes.ToArray();
     }
 
-    private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, string loaded)
-    {
-        foreach(ArchiveDataTypeBox dataTypeBox in currentArchiveDataTypeBoxes)
-        {
-            if(dataTypeBox.DataTypeName == ArchiveStorageNames.File)
-            {
-                
-            }
-        }
-        
-        return currentArchiveDataTypeBoxes;
-    }
+    //private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, DataTypeEditState dataTypeEditState ,string currentStorageDataLocation, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)
+    //{
+    //    foreach (ArchiveDataTypeBox dataTypeBox in currentArchiveDataTypeBoxes)
+    //    {
+
+    //        if (dataTypeBox.DataTypeName == ArchiveStorageNames.File)
+    //        {
+    //            if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text == loadedFileDirectory)
+    //            {
+    //                dataTypeBox.BoxColor = loadedFileColor;
+    //            }
+    //            if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text == currentEditDirectory)
+    //            {
+    //                dataTypeBox.BoxColor = editDataTypeColor;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if(dataTypeBox.Location == currentStorageDataLocation)
+    //            {
+    //                dataTypeBox.BoxColor = currentStorageLocationColor;
+    //            }
+    //        }
+    //    }
+    //    
+    //    return currentArchiveDataTypeBoxes;
+    //}
 }

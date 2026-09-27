@@ -89,7 +89,7 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes,Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentEditDirectory, string loadedFileDirectory, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes,Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
         if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentEditDirectory, loadedFileDirectory);
 
@@ -116,11 +116,12 @@ public class UpdateArchiveClicks
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName == ArchiveStorageNames.File)
                 {
-                    loadedFileDirectory = dataTypeBox.Location + dataTypeBox.Text;
+                    currentStorageDataLocation = dataTypeBox.Location;
+                    loadedFileDirectory = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
                 }
                 else if((Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName == ArchiveStorageNames.File))
                 {
-                    currentEditDirectory = dataTypeBox.Location + dataTypeBox.Text;
+                    currentEditDirectory = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
                 }
                 else
                 {

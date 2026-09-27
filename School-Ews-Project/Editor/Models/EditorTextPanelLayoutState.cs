@@ -16,6 +16,8 @@ public class EditorTextPanelLayoutState
     public List<string> PanelText { get; set; } = new List<string>() {""};
     public List<string> ViewText { get; set; } = new List<string>() {""};
 
+    public string CurrentLoadedFile { get; set; } = "";
+
     public float[] GridColumnPositions { get; set; } = new float[0];
     public float[] GridRowPositions { get; set; } = new float[0];
 
