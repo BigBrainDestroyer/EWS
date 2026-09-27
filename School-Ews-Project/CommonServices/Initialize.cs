@@ -104,7 +104,10 @@ public class Initialize
         FileSystemWatcher watcher = new FileSystemWatcher(_archive.ProjectsDataLocation);
 
         watcher.Changed += (a, b) => _archive.ProjectsFolderHasChanged = true;
-
+        watcher.Created += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        watcher.Deleted += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        watcher.Renamed += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        
         watcher.EnableRaisingEvents = true;
     }
 }

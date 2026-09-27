@@ -2,6 +2,8 @@
 
 namespace Program;
 
+//flatpak run dev.zed.Zed -n "/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project"
+
 public class Program
 {
     public static void Main()

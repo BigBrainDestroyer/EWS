@@ -17,11 +17,6 @@ public struct ArchiveStorage
     }
 }
 
-public struct DataTypeEditState
-{
-    ArchiveStorageNames DataType { get; set; }
-}
-
 public struct ArchiveAddDataTypeMenu
 {
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage;

@@ -37,17 +37,31 @@ public class UpdateArchiveDataTypeLayoutBoxes
         );
         
         //check archive mouse interactions
-        (_archive.Storage, _archive.DataTypeBoxes, _archive.CurrentStorageDataLocation, _archive.CurrentEditDirectory, _archive.LoadedFileDirectory) =
+        (_archive.Storage, _archive.DataTypeBoxes, _archive.CurrentStorageDataLocation, _archive.CurrentFolderEditDirectory, _archive.CurrentFileEditDirectory, _archive.LoadedFileDirectory) =
             _archiveClick.DataTypeBoxClick(
                 _archive.Storage, 
                 _archive.DataTypeBoxes, 
                 _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
                 _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
                 _archive.CurrentStorageDataLocation, 
-                _archive.CurrentEditDirectory, 
+                _archive.CurrentFolderEditDirectory, 
+                _archive.CurrentFileEditDirectory,
                 _archive.LoadedFileDirectory,
                 _archive.PathSyntax,
                 _archive.DataTypeBoxesMouseOnBoxColor
+            );
+            
+        _archive.DataTypeBoxes = 
+            UpdateNewArchiveDataTypeBoxColors(
+                _archive.DataTypeBoxes,
+                _archive.CurrentStorageDataLocation, 
+                _archive.CurrentFolderEditDirectory, 
+                _archive.CurrentFileEditDirectory,
+                _archive.LoadedFileDirectory,
+                _archive.PathSyntax,
+                _archive.DataTypeBoxesLoadedFileColor,
+                _archive.DataTypeBoxesEditDataTypeColor,
+                _archive.DataTypeBoxesCurrentStorageLocationColor
             );
     }
 
@@ -351,31 +365,24 @@ public class UpdateArchiveDataTypeLayoutBoxes
         return newArchiveDataBoxes.ToArray();
     }
 
-    //private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, DataTypeEditState dataTypeEditState ,string currentStorageDataLocation, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)
-    //{
-    //    foreach (ArchiveDataTypeBox dataTypeBox in currentArchiveDataTypeBoxes)
-    //    {
+    private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)
+    {
+        foreach (ArchiveDataTypeBox dataTypeBox in currentArchiveDataTypeBoxes)
+        {
+            if (dataTypeBox.DataTypeName == ArchiveStorageNames.File)
+            {
+                if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text == loadedFileDirectory) dataTypeBox.BoxColor = loadedFileColor;
 
-    //        if (dataTypeBox.DataTypeName == ArchiveStorageNames.File)
-    //        {
-    //            if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text == loadedFileDirectory)
-    //            {
-    //                dataTypeBox.BoxColor = loadedFileColor;
-    //            }
-    //            if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text == currentEditDirectory)
-    //            {
-    //                dataTypeBox.BoxColor = editDataTypeColor;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if(dataTypeBox.Location == currentStorageDataLocation)
-    //            {
-    //                dataTypeBox.BoxColor = currentStorageLocationColor;
-    //            }
-    //        }
-    //    }
-    //    
-    //    return currentArchiveDataTypeBoxes;
-    //}
+                if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text == currentFileEditDirectory) dataTypeBox.BoxColor = editDataTypeColor;
+            }
+            else
+            {
+                if(dataTypeBox.Location == currentStorageDataLocation) dataTypeBox.BoxColor = currentStorageLocationColor;
+
+                if(dataTypeBox.Location == currentFolderEditDirectory) dataTypeBox.BoxColor = editDataTypeColor;
+            }
+        }
+        
+        return currentArchiveDataTypeBoxes;
+    }
 }

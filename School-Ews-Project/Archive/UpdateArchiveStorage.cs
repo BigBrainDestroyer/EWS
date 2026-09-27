@@ -54,6 +54,8 @@ public class UpdateArchiveStorage
             }
         }
 
+        currentStorage = LoadStorage(currentStorage, projectDataLocation);
+        
         return (currentStorage, dataLocation);
     }
 

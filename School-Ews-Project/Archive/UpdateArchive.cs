@@ -33,5 +33,7 @@ public class UpdateArchive
         _archiveLayout.UpdateArchive();
 
         _loadFile.CheckLoadFileState();
+
+        _archiveStorage.UpdateProjectsFolder();
     }
 }
