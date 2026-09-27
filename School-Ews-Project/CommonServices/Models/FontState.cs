@@ -8,4 +8,5 @@ public class FontState
     public Font EditorPanelRowNumbers { get; set; }
     public Font MazeCommonData { get; set; } 
     public Font ArchiveDataBoxType { get; set; }
+    public Font ArchiveEdit { get; set; }
 }

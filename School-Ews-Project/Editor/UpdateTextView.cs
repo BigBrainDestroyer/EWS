@@ -151,8 +151,6 @@ public class UpdateTextView
                 return newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
             }
         }
-
-        //Console.WriteLine(newTextGridBoxesOffSetY);
         
         return newTextGridBoxesOffSetY;
     }

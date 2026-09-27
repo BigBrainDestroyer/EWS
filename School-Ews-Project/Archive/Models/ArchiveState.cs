@@ -97,7 +97,7 @@ public class ArchiveState
     public float DataTypeBoxTextureTextPercentageOffSet { get; set; } = 4f;
 
     public float DataTypeBoxCharLoadFontSize { get; set; } = 25f;
-
+    
     public int TotalViewStorageCount { get; set; } = 0;
     public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0; //broken
 

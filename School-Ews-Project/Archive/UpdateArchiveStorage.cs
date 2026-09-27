@@ -151,13 +151,4 @@ public class UpdateArchiveStorage
             _archive.Storage = LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
         }
     }
-}
-
-//Updates
-// directory weeten up te daten [X] 
-// smal universal update alles moet hele directory krijgen dat is denk ik handiger [X]
-// bestanden weeten te tekenen 
-// user input te mengen 
-// files schrijven
-// EditorCombineren Met Maze
-// cancel manier files of bestanden 
+} 

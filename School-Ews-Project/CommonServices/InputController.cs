@@ -20,7 +20,6 @@ public class InputController
         _input.MouseWheelInput = GetMouseWheelInput();
     }
 
-    
     public List<int> GetKeyboardInput()
     {
         int Char = Raylib.GetCharPressed();
