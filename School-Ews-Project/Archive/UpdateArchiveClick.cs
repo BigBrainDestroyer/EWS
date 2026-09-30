@@ -28,8 +28,6 @@ public class UpdateArchiveClicks
         }
         
         AddOnButtonClick();
-
-        //EditDataTypeActionClick();
     }
 
     private void AddDataMenuClick()
@@ -148,7 +146,7 @@ public class UpdateArchiveClicks
         return newTextBar;
     }
 
-    private ArchiveEditDataType EditDataTypeActionClick(ArchiveEditDataType archiveEditDataType, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Color highLightBoxColor, Color highLightDeleteColor, Color highLightRenamingColor)
+    public ArchiveEditDataType EditDataTypeActionClick(ArchiveEditDataType archiveEditDataType, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Color highLightBoxColor, Color highLightDeleteColor, Color highLightRenamingColor)
     {
         //Canceld
         if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left) || Raylib.IsKeyPressed(KeyboardKey.Escape) || archiveEditDataType.DataTypePath.Length == 0)

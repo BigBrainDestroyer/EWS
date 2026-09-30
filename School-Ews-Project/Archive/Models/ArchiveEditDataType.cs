@@ -26,11 +26,15 @@ public class ArchiveEditDataType
     public string DeleteText { get; } = "Delete";
     public string RenameText { get; } = "Rename";
 
+    public string FontPath { get; } = "Resources/Font/Lilex-Regular.ttf";
+
     public float WhiteSpacePercentageBetweenText { get; } = 20f;
     public float WhiteSpacePixelLengthBetweenText { get; set; }
-    public float CharHeight { get; set; }
     public float CharSpacing { get; set; }
-    
+
+    public int CharHeight { get; set; }
+    public int MaxFontHeightOffSet { get; } = 2;
+
     public bool IsEditBoxActive { get; set; }
     public bool DeleteActive { get; set; }
     public bool RenamingActive { get; set; }

@@ -54,9 +54,9 @@ public class UpdateArchiveDataTypeLayoutBoxes
         _archive.DataTypeBoxes = 
             UpdateNewArchiveDataTypeBoxColors(
                 _archive.DataTypeBoxes,
+                _archive.ArchiveEditDataType.DataType,
                 _archive.CurrentStorageDataLocation, 
-                _archive.CurrentFolderEditDirectory, 
-                _archive.CurrentFileEditDirectory,
+                _archive.ArchiveEditDataType.DataTypePath,
                 _archive.LoadedFileDirectory,
                 _archive.PathSyntax,
                 _archive.DataTypeBoxesLoadedFileColor,
@@ -365,7 +365,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
         return (newArchiveDataBoxes.ToArray(), totalViewStorageCount);
     }
 
-    private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)
+    private ArchiveDataTypeBox[] UpdateNewArchiveDataTypeBoxColors(ArchiveDataTypeBox[] currentArchiveDataTypeBoxes, ArchiveStorageNames currentEditDataType, string currentStorageDataLocation, string currentEditDirectory, string loadedFileDirectory, string pathSyntax, Color loadedFileColor, Color editDataTypeColor, Color currentStorageLocationColor)
     {
         foreach (ArchiveDataTypeBox dataTypeBox in currentArchiveDataTypeBoxes)
         {
@@ -373,13 +373,13 @@ public class UpdateArchiveDataTypeLayoutBoxes
             {
                 if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text == loadedFileDirectory) dataTypeBox.BoxColor = loadedFileColor;
 
-                if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text == currentFileEditDirectory) dataTypeBox.BoxColor = editDataTypeColor;
+                if (dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text == currentEditDirectory && currentEditDataType == ArchiveStorageNames.File) dataTypeBox.BoxColor = editDataTypeColor;
             }
             else
             {
                 if(dataTypeBox.Location == currentStorageDataLocation) dataTypeBox.BoxColor = currentStorageLocationColor;
 
-                if(dataTypeBox.Location == currentFolderEditDirectory) dataTypeBox.BoxColor = editDataTypeColor;
+                if(dataTypeBox.Location == currentEditDirectory && currentEditDataType != ArchiveStorageNames.File) dataTypeBox.BoxColor = editDataTypeColor;
             }
         }
         

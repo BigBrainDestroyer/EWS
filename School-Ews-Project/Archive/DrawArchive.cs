@@ -212,7 +212,48 @@ public class DrawArchive
         
         if(!_archive.ArchiveEditDataType.IsEditBoxActive) return;
 
-        
+        Custom.DrawCustomRectangle(
+            _archive.ArchiveEditDataType.DeleteClickField.PixelPosition,
+            _archive.ArchiveEditDataType.DeleteClickField.PixelLengths,
+            _archive.ArchiveEditDataType.DeleteClickField.Radius,
+            _archive.ArchiveEditDataType.DeleteClickField.CornerStates,
+            _archive.ArchiveEditDataType.DeleteBoxColor
+        );
+
+        Custom.DrawCustomRectangle(
+            _archive.ArchiveEditDataType.RenameClickField.PixelPosition,
+            _archive.ArchiveEditDataType.RenameClickField.PixelLengths,
+            _archive.ArchiveEditDataType.RenameClickField.Radius,
+            _archive.ArchiveEditDataType.RenameClickField.CornerStates,
+            _archive.ArchiveEditDataType.RenameBoxColor
+        );
+
+        Raylib.DrawTextEx(
+            _archive.ArchiveEditDataType.TextFont,
+            _archive.ArchiveEditDataType.DeleteText,
+            _archive.ArchiveEditDataType.DrawTextPixelPosition,
+            _archive.ArchiveEditDataType.CharHeight,
+            _archive.ArchiveEditDataType.CharSpacing,
+            _archive.ArchiveEditDataType.DeleteTextColor
+        );
+
+        Raylib.DrawTextEx(
+            _archive.ArchiveEditDataType.TextFont,
+            _archive.ArchiveEditDataType.RenameText,
+            new Vector2(
+                _archive.ArchiveEditDataType.DrawTextPixelPosition.X + 
+                Raylib.MeasureTextEx(
+                    _archive.ArchiveEditDataType.TextFont, 
+                    _archive.ArchiveEditDataType.DeleteText, 
+                    _archive.ArchiveEditDataType.CharHeight, 
+                    _archive.ArchiveEditDataType.CharSpacing).X + 
+                _archive.ArchiveEditDataType.WhiteSpacePixelLengthBetweenText, 
+                _archive.ArchiveEditDataType.DrawTextPixelPosition.Y
+            ),
+            _archive.ArchiveEditDataType.CharHeight,
+            _archive.ArchiveEditDataType.CharSpacing,
+            _archive.ArchiveEditDataType.RenameTextColor
+        );
     }
     
     private void DrawArchiveNamingDataTypeTextBox()

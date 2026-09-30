@@ -32,15 +32,16 @@ public class ArchiveState
     public Color DataTypeBoxesTextureColor { get; } = new Color(145, 155, 165, 255);
     
     //public Color DataTypeBoxesSelectedBoxTextureColor { get; } = new Color(220, 223, 228, 255);
-    public Color DataTypeBoxesMouseOnBoxColor { get; set; } = Color.Red;
-    public Color DataTypeBoxesLoadedFileColor { get; set; } = Color.Blue;
-    public Color DataTypeBoxesEditDataTypeColor { get; set; } = Color.Yellow;
-    public Color DataTypeBoxesCurrentStorageLocationColor { get; set; } = Color.SkyBlue;
+    public Color DataTypeBoxesMouseOnBoxColor { get; } = Color.Red;
+    public Color DataTypeBoxesLoadedFileColor { get; } = Color.Blue;
+    public Color DataTypeBoxesEditDataTypeColor { get; } = Color.Yellow;
+    public Color DataTypeBoxesCurrentStorageLocationColor { get; } = Color.SkyBlue;
 
     //EditColors
-    public Color EditDataTypesTextColor { get; set; } = new Color(220, 223, 228, 255);
-    public Color RenameHighLightTextColor { get; set; } = Color.Red;
-    public Color DeleteHighLightTextColor { get; set; } = Color.Red;
+    public Color EditDataTypesTextColor { get; } = new Color(220, 223, 228, 255);
+    public Color EditDataHighLightBoxColor { get; } = Color.LightGray;
+    public Color DeleteHighLightTextColor { get; } = Color.Red;
+    public Color RenameHighLightTextColor { get; } = Color.Yellow;
 
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
@@ -83,8 +84,6 @@ public class ArchiveState
     public Vector2 DataTypeBoxPercentage { get; } = new Vector2(100f, 2.5f);
 
     public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
-    public string CurrentFolderEditDirectory { get; set; } = "";
-    public string CurrentFileEditDirectory { get; set; } = "";
     public string LoadedFileDirectory { get; set; } = "";
     public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects"; //Base
     public string PathSyntax { get; set; } = "";
