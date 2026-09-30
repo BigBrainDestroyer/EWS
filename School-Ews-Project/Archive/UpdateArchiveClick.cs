@@ -29,7 +29,7 @@ public class UpdateArchiveClicks
         
         AddOnButtonClick();
 
-        EditDataTypeActionClick();
+        //EditDataTypeActionClick();
     }
 
     private void AddDataMenuClick()
@@ -91,9 +91,9 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], ArchiveEditDataType, string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveEditDataType currentArchiveEditDataType, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {
@@ -112,7 +112,10 @@ public class UpdateArchiveClicks
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
                 {
+                    currentFileEditDirectory = "";
                     currentFolderEditDirectory = dataTypeBox.Location;
+                    currentArchiveEditDataType.IsEditBoxActive = true;
+
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName == ArchiveStorageNames.File)
                 {
@@ -121,7 +124,10 @@ public class UpdateArchiveClicks
                 }
                 else if((Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName == ArchiveStorageNames.File))
                 {
+                    currentFolderEditDirectory = "";
                     currentFileEditDirectory = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
+                    currentArchiveEditDataType.DataTypePath = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
+                    currentArchiveEditDataType.IsEditBoxActive = true;
                 }
                 else
                 {
@@ -130,7 +136,7 @@ public class UpdateArchiveClicks
             }
         }
         
-        return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
     }
     
     //nog een goede plek
@@ -147,8 +153,58 @@ public class UpdateArchiveClicks
         return newTextBar;
     }
 
-    private void EditDataTypeActionClick()
+    private ArchiveEditDataType EditDataTypeActionClick(ArchiveEditDataType archiveEditDataType, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string editDataTypePath, Color highLightBoxColor, Color highLightDeleteColor, Color highLightRenamingColor)
     {
-        
+        //Canceld
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left) || Raylib.IsKeyPressed(KeyboardKey.Escape) || editDataTypePath.Length == 0)
+        {
+            archiveEditDataType.DataTypePath = "";
+            archiveEditDataType.IsEditBoxActive = false;
+            archiveEditDataType.RenamingActive = false;
+            archiveEditDataType.DeleteActive = false;
+
+            return archiveEditDataType;
+        }
+
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || !archiveEditDataType.IsEditBoxActive) return archiveEditDataType;
+
+        if(CheckField.MouseOnField(archiveEditDataType.DeleteClickField.PixelPosition, archiveEditDataType.DeleteClickField.PixelLengths, Raylib.GetMousePosition()))
+        {
+            if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+            {
+                archiveEditDataType.DeleteActive = true;
+                archiveEditDataType.IsEditBoxActive = false;
+                archiveEditDataType.DataTypePath = editDataTypePath;
+
+                return archiveEditDataType;
+            }
+            else
+            {
+                archiveEditDataType.DeleteTextColor = highLightDeleteColor;
+                archiveEditDataType.DeleteBoxColor = highLightBoxColor;
+                
+                return archiveEditDataType;
+            }
+        }
+        else if(CheckField.MouseOnField(archiveEditDataType.RenameClickField.PixelPosition, archiveEditDataType.RenameClickField.PixelLengths, Raylib.GetMousePosition()))
+        {
+            if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+            {
+                archiveEditDataType.RenamingActive = true;
+                archiveEditDataType.IsEditBoxActive = false;
+                archiveEditDataType.DataTypePath = editDataTypePath;
+
+                return archiveEditDataType;
+            }
+            else
+            {
+                archiveEditDataType.RenameTextColor = highLightRenamingColor;
+                archiveEditDataType.RenameBoxColor = highLightBoxColor;
+
+                return archiveEditDataType;
+            }
+        }
+
+        return archiveEditDataType;
     }
 }
