@@ -110,7 +110,7 @@ public class UpdateArchiveClicks
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
                 {
                     currentArchiveEditDataType.DataTypePath = dataTypeBox.Location;
-                    currentArchiveEditDataType.DataType = ArchiveStorageNames.Folder;
+                    currentArchiveEditDataType.DataType = dataTypeBox.DataTypeName;
                     currentArchiveEditDataType.IsEditBoxActive = true;
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName == ArchiveStorageNames.File)
@@ -121,7 +121,7 @@ public class UpdateArchiveClicks
                 else if((Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName == ArchiveStorageNames.File))
                 {
                     currentArchiveEditDataType.DataTypePath = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
-                    currentArchiveEditDataType.DataType = ArchiveStorageNames.File;
+                    currentArchiveEditDataType.DataType = dataTypeBox.DataTypeName;
                     currentArchiveEditDataType.IsEditBoxActive = true;
                 }
                 else

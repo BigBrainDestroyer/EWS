@@ -20,7 +20,7 @@ public class DrawArchive
         
         DrawArchiveFunctionBar();
 
-        DrawArchiveNamingDataTypeTextBox();
+        DrawArchiveEditDataTypeBox();
     }
 
     private void DrawArchiveBackground()
@@ -199,6 +199,22 @@ public class DrawArchive
         );
     }
 
+    private void DrawArchiveEditDataTypeBox()
+    {
+        DrawEditDataTypeBox();
+
+        DrawArchiveNamingDataTypeTextBox();
+    }
+
+    private void DrawEditDataTypeBox()
+    {
+        var _archive = _state.archive;
+        
+        if(!_archive.ArchiveEditDataType.IsEditBoxActive) return;
+
+        
+    }
+    
     private void DrawArchiveNamingDataTypeTextBox()
     {
         var _layout = _state.archive;
