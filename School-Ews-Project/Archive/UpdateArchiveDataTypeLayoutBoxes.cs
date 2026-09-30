@@ -183,9 +183,9 @@ public class UpdateArchiveDataTypeLayoutBoxes
             (int)((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - ((textureTextPercentageOffSet/100f)*newSingleDataTypeBox.PixelLengths.X)) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X);
     }
 
-    private RaylibText CalculateText(float boxHight, float textSpacing)
+    private RaylibText CalculateText(float boxHeight, float textSpacing)
     {
-        return new RaylibText("", boxHight, textSpacing);
+        return new RaylibText("", boxHeight, textSpacing);
     }
 
     private int CalculateNewDataViewBoxesCount(float parentBoxPixelLengthY, float newSingleDataTypeBoxLengthY, float whiteSpaceToFunctionBar)

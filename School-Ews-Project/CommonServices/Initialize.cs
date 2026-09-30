@@ -52,7 +52,7 @@ public class Initialize
         _state.common.font.MazeCommonData = 
             Load.LoadFontEx(
                 "Resources/Font/Lilex-ExtraLight.ttf", 
-                _state.maze.layout.mazeView.CommonDataCharHight
+                _state.maze.layout.mazeView.CommonDataCharHeight
             );
 
         _state.common.font.ArchiveDataBoxType = 

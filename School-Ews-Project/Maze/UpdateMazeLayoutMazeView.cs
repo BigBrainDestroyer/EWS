@@ -33,8 +33,8 @@ public class UpdateMazeLayoutMazeView
                 CalculatingCommonDataBoxLengthsPixelSpacing(_layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData], _layout.mazeView.CommonDataBoxPercentageSpacing);
 
 
-        _layout.mazeView.CommonDataCharHight =
-            CalculatingCommonDataCharHight(_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.CommonDataBoxPercentageSpacing, _layout.mazeView.AmountOfCommonDataBoxes);
+        _layout.mazeView.CommonDataCharHeight =
+            CalculatingCommonDataCharHeight(_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.CommonDataBoxPercentageSpacing, _layout.mazeView.AmountOfCommonDataBoxes);
     }
 
     private Maze UpdateCurrentMaze(Maze[] allMazes, int allMazePosition)
@@ -88,10 +88,10 @@ public class UpdateMazeLayoutMazeView
         return newCommonDataBoxPixelSpacing;
     }
     
-    private float CalculatingCommonDataCharHight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing, int amountOfCommonDataBoxes)
+    private float CalculatingCommonDataCharHeight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing, int amountOfCommonDataBoxes)
     {
-        float newCharHight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y)/2;
+        float newCharHeight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y)/2;
         
-        return newCharHight;
+        return newCharHeight;
     }
 }

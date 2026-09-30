@@ -92,14 +92,14 @@ public class UpdateMazeLayoutBoxes
         var _commonBoxes = _state.common.boxes;
 
         int whiteWidthSpace = ((int)_commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze].X - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].X)/2;
-        int whiteHightSpace = ((int)_commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y)/2;
+        int whiteHeightSpace = ((int)_commonBoxes.MainBoxPixelLengts[MainBoxNames.Maze].Y - (int)_mazeBoxes.BoxPixelLengths[MazeViewBoxNames.ParentBox].Y)/2;
 
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Background] = _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze];
         
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.ParentBox] =
             new Vector2(
                 _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze].X + whiteWidthSpace,
-                _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze].Y + whiteHightSpace
+                _commonBoxes.MainBoxPixelPositions[MainBoxNames.Maze].Y + whiteHeightSpace
             );
 
         _mazeBoxes.BoxPixelPositions[MazeViewBoxNames.Maze] =

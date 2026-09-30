@@ -56,7 +56,7 @@ public class MazeLayoutMazeViewState
 
     public float LineThick { get; set; } = 3;
 
-    public float CommonDataCharHight { get; set; } = 10;
+    public float CommonDataCharHeight { get; set; } = 10;
 
     public float CommonDataCharSpacing { get; set; } = 0;
 

@@ -28,6 +28,8 @@ public class UpdateArchiveClicks
         }
         
         AddOnButtonClick();
+
+        EditDataTypeActionClick();
     }
 
     private void AddDataMenuClick()
@@ -91,7 +93,7 @@ public class UpdateArchiveClicks
 
     public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition())) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {
@@ -99,7 +101,6 @@ public class UpdateArchiveClicks
             {
                 if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
                 {
-                    //als file sla current geopende file op als laad nieuwe file zet selected file dataLocation
                     currentStorageDataLocation = dataTypeBox.Location;
 
                     currentStorage[dataTypeBox.Location] = 
@@ -144,5 +145,10 @@ public class UpdateArchiveClicks
         newTextBar.CornerStates = new BoolVector4(false, false, true, true);
 
         return newTextBar;
+    }
+
+    private void EditDataTypeActionClick()
+    {
+        
     }
 }

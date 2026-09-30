@@ -23,7 +23,7 @@ public class DrawMazeLayout
 
         DrawMaze();
 
-        if(_state.maze.layout.mazeView.CommonDataCharHight > 0)
+        if(_state.maze.layout.mazeView.CommonDataCharHeight > 0)
         {
             DrawCommonData();
         }
@@ -138,23 +138,23 @@ public class DrawMazeLayout
                     _font.EditorPanelText,
                     _layout.mazeView.CommonDataTitle[boxName],
                     textPosition,
-                    _layout.mazeView.CommonDataCharHight,
+                    _layout.mazeView.CommonDataCharHeight,
                     _layout.mazeView.CommonDataCharSpacing,
                     Color.RayWhite
                 );
 
-                textPosition.Y += _layout.mazeView.CommonDataCharHight;
+                textPosition.Y += _layout.mazeView.CommonDataCharHeight;
 
                 Raylib.DrawTextEx(
                     _font.EditorPanelText,
                     _layout.mazeView.CommonDataInformation[boxName],
                     textPosition,
-                    _layout.mazeView.CommonDataCharHight,
+                    _layout.mazeView.CommonDataCharHeight,
                     _layout.mazeView.CommonDataCharSpacing,
                     Color.Gray
                 );
 
-                textPosition.Y +=_layout.mazeView.CommonDataSingleBoxLengths.Y - _layout.mazeView.CommonDataCharHight;
+                textPosition.Y +=_layout.mazeView.CommonDataSingleBoxLengths.Y - _layout.mazeView.CommonDataCharHeight;
             }
         }
     }

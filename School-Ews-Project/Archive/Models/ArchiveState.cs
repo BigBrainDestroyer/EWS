@@ -8,6 +8,8 @@ public class ArchiveState
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
     public ArchiveDataTypeBox[] DataTypeBoxes { get; set; } = new ArchiveDataTypeBox[0];
+    public ArchiveEditDataType ArchiveEditDataType { get; set; } = new ArchiveEditDataType();
+
     public ArchiveDataTypeBox SingleArchiveDataTypeBox { get; set; } = 
         new ArchiveDataTypeBox(
             new Color(51, 59, 67, 255), 
@@ -28,12 +30,17 @@ public class ArchiveState
     public Color BackgroundColor { get; } = new Color(51, 59, 67, 255);
     public Color DataTypeBoxesTextColor { get; } = new Color(220, 223, 228, 255);
     public Color DataTypeBoxesTextureColor { get; } = new Color(145, 155, 165, 255);
+    
     //public Color DataTypeBoxesSelectedBoxTextureColor { get; } = new Color(220, 223, 228, 255);
     public Color DataTypeBoxesMouseOnBoxColor { get; set; } = Color.Red;
     public Color DataTypeBoxesLoadedFileColor { get; set; } = Color.Blue;
     public Color DataTypeBoxesEditDataTypeColor { get; set; } = Color.Yellow;
     public Color DataTypeBoxesCurrentStorageLocationColor { get; set; } = Color.SkyBlue;
 
+    //EditColors
+    public Color EditDataTypesTextColor { get; set; } = new Color(220, 223, 228, 255);
+    public Color RenameHighLightTextColor { get; set; } = Color.Red;
+    public Color DeleteHighLightTextColor { get; set; } = Color.Red;
 
     public Texture2D[] ArchiveTextures { get; set; } = new Texture2D[0];
 
@@ -99,7 +106,7 @@ public class ArchiveState
     public float DataTypeBoxCharLoadFontSize { get; set; } = 25f;
     
     public int TotalViewStorageCount { get; set; } = 0;
-    public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0; //broken
+    public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0;
 
     public bool ProjectsFolderHasChanged { get; set; }
 }
