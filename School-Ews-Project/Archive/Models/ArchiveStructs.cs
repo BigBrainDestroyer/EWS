@@ -51,42 +51,42 @@ public struct ArchiveAddDataTypeMenu
     }
 }
 
-public struct TextBar
-{
-    public BoolVector4 CornerStates ;
-    public Font TextFont;
-    public Color TextColor;
-    public Texture2D Texture;
-    
-    public Vector2 BoxPosition;
-    public Vector2 BoxLengths;
-    public Vector2 TextureSize;
-    public Vector2 ViewTextPixelPosition;
-    public Vector2 CursorPixelLengths;
-    public Vector2 CursorPixelPosition;
-    
-    public string Text;
-    public string ViewText;
-    public string BackgroundText;
-    
-    public float TextureToTextWhiteSpace;
-    
-    public int CursorTextPosition;
-    public int CursorTextOffSet;
-    public int TextTypingWhiteSpaceRight;
-    public int TextTypingWhiteSpaceLeft;
-    public int CharSpacing;
-    
-    public bool IsTextBoxActive;
-
-    public TextBar()
-    {
-        TextColor = Color.RayWhite;
-        Text = "";
-        ViewText = "";
-        BackgroundText = "";
-        TextTypingWhiteSpaceRight = 0;
-        TextTypingWhiteSpaceLeft = 0;
-        CharSpacing = 0;
-    }
-}
+//public struct TextBar
+//{
+//    public BoolVector4 CornerStates ;
+//    public Font TextFont;
+//    public Color TextColor;
+//    public Texture2D Texture;
+//    
+//    public Vector2 BoxPosition;
+//    public Vector2 BoxLengths;
+//    public Vector2 TextureSize;
+//    public Vector2 ViewTextPixelPosition;
+//    public Vector2 CursorPixelLengths;
+//    public Vector2 CursorPixelPosition;
+//    
+//    public string Text;
+//    public string ViewText;
+//    public string BackgroundText;
+//    
+//    public float TextureToTextWhiteSpace;
+//    
+//    public int CursorTextPosition;
+//    public int CursorTextOffSet;
+//    public int TextTypingWhiteSpaceRight;
+//    public int TextTypingWhiteSpaceLeft;
+//    public int CharSpacing;
+//    
+//    public bool IsTextBoxActive;
+//
+//    public TextBar()
+//    {
+//        TextColor = Color.RayWhite;
+//        Text = "";
+//        ViewText = "";
+//        BackgroundText = "";
+//        TextTypingWhiteSpaceRight = 0;
+//        TextTypingWhiteSpaceLeft = 0;
+//        CharSpacing = 0;
+//    }
+//}

@@ -24,6 +24,8 @@ public class ArchiveState
         );
         
     public TextBar ArchiveNamingDataTypeTextBox { get; set; } = new TextBar();
+    public BoolVector4 ArchiveNamingDataTypeTextBoxCornerStates { get; } = new BoolVector4(false, false, true, true);
+
     public ArchiveStorageNames TemporarilyData { get; set; }
 
     //Colors
@@ -36,6 +38,12 @@ public class ArchiveState
     public Color DataTypeBoxesLoadedFileColor { get; } = Color.Blue;
     public Color DataTypeBoxesEditDataTypeColor { get; } = Color.Yellow;
     public Color DataTypeBoxesCurrentStorageLocationColor { get; } = Color.SkyBlue;
+
+    //NamingDataTypeColors
+    public Color NamingDataTypeBackgroundColor { get; } = new Color(76, 84, 92, 255);
+    public Color NamingDataTypeCursorColor { get; }  = new Color(95, 179, 179, 255);
+    public Color NamingDataTypeTextColor { get; } = new Color(220, 223, 228, 255);
+    public Color NamingDataTypeTextureColor { get; } = new Color(145, 155, 165, 255);
 
     //EditColors
     public Color EditDataTypesTextColor { get; } = new Color(220, 223, 228, 255);

@@ -258,51 +258,44 @@ public class DrawArchive
     
     private void DrawArchiveNamingDataTypeTextBox()
     {
-        var _layout = _state.archive;
+        var _archive = _state.archive;
         var _commonBoxes = _state.common.boxes;
 
-        if(_layout.ArchiveNamingDataTypeTextBox.IsTextBoxActive)
+        if(_archive.ArchiveNamingDataTypeTextBox.IsBoxActive)
         {
             Custom.DrawCustomRectangle(
-                _layout.ArchiveNamingDataTypeTextBox.BoxPosition,
-                _layout.ArchiveNamingDataTypeTextBox.BoxLengths,
-                _commonBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
-                _layout.ArchiveNamingDataTypeTextBox.CornerStates,
-                _layout.BackgroundColor
+                _archive.ArchiveNamingDataTypeTextBox.Box.PixelPosition,
+                _archive.ArchiveNamingDataTypeTextBox.Box.PixelLengths,
+                _archive.ArchiveNamingDataTypeTextBox.Box.Radius,
+                _archive.ArchiveNamingDataTypeTextBox.Box.CornerStates,
+                _archive.ArchiveNamingDataTypeTextBox.BackgroundColor
             );
+
+            if(_archive.ArchiveNamingDataTypeTextBox.IsCursorVisible)
+            {
+                Raylib.DrawRectangleV(
+                    _archive.ArchiveNamingDataTypeTextBox.CursorBox.PixelPosition,
+                    _archive.ArchiveNamingDataTypeTextBox.CursorBox.PixelLengths,
+                    _archive.ArchiveNamingDataTypeTextBox.CursorColor
+                );
+            }
 
             Raylib.DrawTextEx(
                 _state.common.font.EditorPanelText,
-                _layout.ArchiveNamingDataTypeTextBox.ViewText,
-                _layout.ArchiveNamingDataTypeTextBox.ViewTextPixelPosition,
-                _layout.ArchiveNamingDataTypeTextBox.BoxLengths.Y,
-                _layout.ArchiveNamingDataTypeTextBox.CharSpacing,
-                Color.RayWhite
+                _archive.ArchiveNamingDataTypeTextBox.ViewText,
+                _archive.ArchiveNamingDataTypeTextBox.ViewTextPixelPosition,
+                _archive.ArchiveNamingDataTypeTextBox.Text.TextSize,
+                _archive.ArchiveNamingDataTypeTextBox.Text.TextSpacing,
+                _archive.ArchiveNamingDataTypeTextBox.TextColor
             );
-
-            Rectangle sourceRectangle = 
-                new Rectangle(
-                    0, 
-                    0, 
-                    _layout.ArchiveNamingDataTypeTextBox.Texture.Width, 
-                    _layout.ArchiveNamingDataTypeTextBox.Texture.Height
-                );
-    
-            Rectangle rectangleDrawSize = 
-                new Rectangle(
-                    _layout.ArchiveNamingDataTypeTextBox.BoxPosition.X, 
-                    _layout.ArchiveNamingDataTypeTextBox.BoxPosition.Y, 
-                    _layout.ArchiveNamingDataTypeTextBox.TextureSize.X, 
-                    _layout.ArchiveNamingDataTypeTextBox.TextureSize.Y
-                );
     
             Raylib.DrawTexturePro(
-                _layout.ArchiveNamingDataTypeTextBox.Texture, 
-                sourceRectangle,
-                rectangleDrawSize,
+                _archive.ArchiveNamingDataTypeTextBox.Texture2D.Texture, 
+                _archive.ArchiveNamingDataTypeTextBox.Texture2D.TextureUsage,
+                _archive.ArchiveNamingDataTypeTextBox.Texture2D.TextureSize,
                 new Vector2(0, 0),
                 0f,
-                new Color(216, 222, 233)
+                _archive.ArchiveNamingDataTypeTextBox.TextureColor
             );
         }
     }

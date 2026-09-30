@@ -33,6 +33,7 @@ public class UpdateArchiveClicks
     private void AddDataMenuClick()
     {
         var _archive = _state.archive;
+        var _mainBoxes = _state.common.boxes;
         var _input = _state.common.input;
 
         if(!CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) || !Raylib.IsMouseButtonPressed(MouseButton.Left)) return;
@@ -47,7 +48,17 @@ public class UpdateArchiveClicks
                 {
                     _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
 
-                    _archive.ArchiveNamingDataTypeTextBox = GetNewNamingDataTypeBox(_archive.ArchiveTextures, dataType.Value);
+                    _archive.ArchiveNamingDataTypeTextBox = 
+                        GetNewNamingDataTypeBox(
+                            _archive.ArchiveTextures, 
+                            dataType.Value, 
+                            _archive.ArchiveNamingDataTypeTextBoxCornerStates, 
+                            _mainBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+                            _archive.NamingDataTypeBackgroundColor,
+                            _archive.NamingDataTypeTextureColor,
+                            _archive.NamingDataTypeCursorColor,
+                            _archive.NamingDataTypeTextColor
+                        );
 
                     _archive.TemporarilyData = dataType.Value;
                 }
@@ -133,15 +144,20 @@ public class UpdateArchiveClicks
     }
     
     //nog een goede plek vinden
-    public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType)
+    public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType, BoolVector4 cornerStates, float cornerRadius, Color backgroundColor, Color textureColor, Color cursorColor, Color textColor)
     {
         TextBar newTextBar = new TextBar();
 
-        newTextBar.Texture = archiveTextures[(int)dataType];
+        newTextBar.Texture2D = new RaylibTexture(archiveTextures[(int)dataType], new Rectangle(), new Rectangle());
 
-        newTextBar.IsTextBoxActive = true;
+        newTextBar.IsBoxActive = true;
 
-        newTextBar.CornerStates = new BoolVector4(false, false, true, true);
+        newTextBar.Box = new CustomBox(cornerStates, new Vector2(0,0), new Vector2(0,0), cornerRadius);
+
+        newTextBar.BackgroundColor = backgroundColor;
+        newTextBar.TextureColor = textureColor;
+        newTextBar.CursorColor = cursorColor;
+        newTextBar.TextColor = textColor;
 
         return newTextBar;
     }

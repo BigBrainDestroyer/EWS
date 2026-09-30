@@ -19,7 +19,7 @@ public class UpdateNamingDataTypeTextBox
     {
         var _archive = _state.archive;
 
-        if(_archive.ArchiveNamingDataTypeTextBox.IsTextBoxActive)
+        if(_archive.ArchiveNamingDataTypeTextBox.IsBoxActive)
         {
             UpdateNamingDataTypeTextBoxLayout();
             CheckForCriticalInput();
@@ -29,6 +29,7 @@ public class UpdateNamingDataTypeTextBox
     private void UpdateNamingDataTypeTextBoxLayout()
     {
         var _archive = _state.archive;
+        var _mainBoxes = _state.common.boxes;
         var _input = _state.common.input;
 
         _archive.ArchiveNamingDataTypeTextBox =
@@ -54,17 +55,17 @@ public class UpdateNamingDataTypeTextBox
                     _archive.TemporarilyData,
                     _archive.CurrentStorageDataLocation,
                     _archive.ProjectsDataLocation,
-                    _archive.ArchiveNamingDataTypeTextBox.Text,
+                    _archive.ArchiveNamingDataTypeTextBox.Text.Text,
                     _archive.PathSyntax
                 );
 
-            newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
+            newArchiveNamingDataTypeTextBox.IsBoxActive = false;
         }
-        else if(newArchiveNamingDataTypeTextBox.IsTextBoxActive == true)
+        else if(newArchiveNamingDataTypeTextBox.IsBoxActive == true)
         {
-            if ((Raylib.IsKeyPressed(KeyboardKey.Escape) || Raylib.IsMouseButtonPressed(MouseButton.Left) && !CheckField.MouseOnField(newArchiveNamingDataTypeTextBox.BoxPosition, newArchiveNamingDataTypeTextBox.BoxLengths, Raylib.GetMousePosition()) && !CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition())|| Raylib.IsMouseButtonPressed(MouseButton.Right)))
+            if ((Raylib.IsKeyPressed(KeyboardKey.Escape) || Raylib.IsMouseButtonPressed(MouseButton.Left) && !CheckField.MouseOnField(newArchiveNamingDataTypeTextBox.Box.PixelPosition, newArchiveNamingDataTypeTextBox.Box.PixelLengths, Raylib.GetMousePosition()) && !CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition())|| Raylib.IsMouseButtonPressed(MouseButton.Right)))
             {
-                newArchiveNamingDataTypeTextBox.IsTextBoxActive = false;
+                newArchiveNamingDataTypeTextBox.IsBoxActive = false;
             }
         }
 

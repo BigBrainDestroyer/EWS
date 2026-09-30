@@ -360,7 +360,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             }
         }
 
-        Console.WriteLine(totalViewStorageCount);
+        //Console.WriteLine(totalViewStorageCount);
 
         return (newArchiveDataBoxes.ToArray(), totalViewStorageCount);
     }
