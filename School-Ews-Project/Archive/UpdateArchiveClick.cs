@@ -37,10 +37,7 @@ public class UpdateArchiveClicks
         var _archive = _state.archive;
         var _input = _state.common.input;
 
-        if(!CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) || !Raylib.IsMouseButtonPressed(MouseButton.Left))
-        {
-            return;
-        }
+        if(!CheckField.MouseOnField(_archive.AddDataTypeMenu.BoxPosition, _archive.AddDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) || !Raylib.IsMouseButtonPressed(MouseButton.Left)) return;
 
         ArchiveAddDataTypeMenu addDataTypeMenu = _archive.AddDataTypeMenu;
 
@@ -73,7 +70,7 @@ public class UpdateArchiveClicks
             _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
         }
     }
-    
+
     private ArchiveStorageNames?[] GetLegalDataTypes(string dataLocation, string projectDataLocation, string pathSyntax)
     {
         ArchiveStorageNames?[] newAddLegalDataTypeToStorage = new ArchiveStorageNames?[3];
@@ -91,9 +88,9 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], ArchiveEditDataType, string, string, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveEditDataType currentArchiveEditDataType, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string currentFolderEditDirectory, string currentFileEditDirectory, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], ArchiveEditDataType, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveEditDataType currentArchiveEditDataType, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, loadedFileDirectory);
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {
@@ -112,10 +109,9 @@ public class UpdateArchiveClicks
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName != ArchiveStorageNames.File)
                 {
-                    currentFileEditDirectory = "";
-                    currentFolderEditDirectory = dataTypeBox.Location;
+                    currentArchiveEditDataType.DataTypePath = dataTypeBox.Location;
+                    currentArchiveEditDataType.DataType = ArchiveStorageNames.Folder;
                     currentArchiveEditDataType.IsEditBoxActive = true;
-
                 }
                 else if(Raylib.IsMouseButtonPressed(MouseButton.Left) && dataTypeBox.DataTypeName == ArchiveStorageNames.File)
                 {
@@ -124,9 +120,8 @@ public class UpdateArchiveClicks
                 }
                 else if((Raylib.IsMouseButtonPressed(MouseButton.Right) && dataTypeBox.DataTypeName == ArchiveStorageNames.File))
                 {
-                    currentFolderEditDirectory = "";
-                    currentFileEditDirectory = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
                     currentArchiveEditDataType.DataTypePath = dataTypeBox.Location + pathSyntax + dataTypeBox.Text.Text;
+                    currentArchiveEditDataType.DataType = ArchiveStorageNames.File;
                     currentArchiveEditDataType.IsEditBoxActive = true;
                 }
                 else
@@ -136,10 +131,10 @@ public class UpdateArchiveClicks
             }
         }
         
-        return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, currentFolderEditDirectory, currentFileEditDirectory, loadedFileDirectory);
+        return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, loadedFileDirectory);
     }
     
-    //nog een goede plek
+    //nog een goede plek vinden
     public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType)
     {
         TextBar newTextBar = new TextBar();
@@ -153,10 +148,10 @@ public class UpdateArchiveClicks
         return newTextBar;
     }
 
-    private ArchiveEditDataType EditDataTypeActionClick(ArchiveEditDataType archiveEditDataType, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string editDataTypePath, Color highLightBoxColor, Color highLightDeleteColor, Color highLightRenamingColor)
+    private ArchiveEditDataType EditDataTypeActionClick(ArchiveEditDataType archiveEditDataType, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, Color highLightBoxColor, Color highLightDeleteColor, Color highLightRenamingColor)
     {
         //Canceld
-        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left) || Raylib.IsKeyPressed(KeyboardKey.Escape) || editDataTypePath.Length == 0)
+        if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left) || Raylib.IsKeyPressed(KeyboardKey.Escape) || archiveEditDataType.DataTypePath.Length == 0)
         {
             archiveEditDataType.DataTypePath = "";
             archiveEditDataType.IsEditBoxActive = false;
@@ -174,7 +169,6 @@ public class UpdateArchiveClicks
             {
                 archiveEditDataType.DeleteActive = true;
                 archiveEditDataType.IsEditBoxActive = false;
-                archiveEditDataType.DataTypePath = editDataTypePath;
 
                 return archiveEditDataType;
             }
@@ -192,7 +186,6 @@ public class UpdateArchiveClicks
             {
                 archiveEditDataType.RenamingActive = true;
                 archiveEditDataType.IsEditBoxActive = false;
-                archiveEditDataType.DataTypePath = editDataTypePath;
 
                 return archiveEditDataType;
             }

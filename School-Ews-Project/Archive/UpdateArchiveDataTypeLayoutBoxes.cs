@@ -35,18 +35,17 @@ public class UpdateArchiveDataTypeLayoutBoxes
             _archive.DataTypeBoxesTextureColor,
             _archive.DataTypeBoxesTextColor
         );
-        
+
         //check archive mouse interactions
-        (_archive.Storage, _archive.DataTypeBoxes, _archive.CurrentStorageDataLocation, _archive.CurrentFolderEditDirectory, _archive.CurrentFileEditDirectory, _archive.LoadedFileDirectory) =
+        (_archive.Storage, _archive.DataTypeBoxes, _archive.ArchiveEditDataType, _archive.CurrentStorageDataLocation, _archive.LoadedFileDirectory) =
             _archiveClick.DataTypeBoxClick(
-                _archive.Storage, 
-                _archive.DataTypeBoxes, 
+                _archive.Storage,
+                _archive.DataTypeBoxes,
+                _archive.ArchiveEditDataType,
                 _archive.AddDataTypeMenu,
                 _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
                 _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
                 _archive.CurrentStorageDataLocation, 
-                _archive.CurrentFolderEditDirectory, 
-                _archive.CurrentFileEditDirectory,
                 _archive.LoadedFileDirectory,
                 _archive.PathSyntax,
                 _archive.DataTypeBoxesMouseOnBoxColor
