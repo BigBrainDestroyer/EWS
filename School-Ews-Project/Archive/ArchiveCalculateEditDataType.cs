@@ -30,6 +30,21 @@ public class ArchiveCalculateEditDataType
             _archive.DeleteHighLightTextColor, 
             _archive.RenameHighLightTextColor
         );
+
+        if(_archive.ArchiveEditDataType.DeleteActive)
+        {
+            _archive.Storage = 
+                DeletingDataTypeAction(
+                    _archive.Storage,
+                    _archive.ArchiveEditDataType.DataType,
+                    _archive.ArchiveEditDataType.DataTypePath,
+                    _archive.ProjectsDataLocation
+                );
+
+            _archive.ArchiveEditDataType.DataTypePath = "";
+
+            _archive.ArchiveEditDataType.DeleteActive = false;
+        }
     }
 
     private void CalculateEditLayout()
@@ -154,16 +169,24 @@ public class ArchiveCalculateEditDataType
         );
     }
 
+    public Dictionary<string, ArchiveStorage> DeletingDataTypeAction(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataTypeCurrentPath, string projectDataLocation)
+    {
+        if(dataType != ArchiveStorageNames.File && Directory.Exists(dataTypeCurrentPath))
+        {
+            Directory.Delete(dataTypeCurrentPath, true);
+        }
+        else if(File.Exists(dataTypeCurrentPath))
+        {
+            File.Delete(dataTypeCurrentPath);
+        }
+
+        currentStorage = _archiveStorage.LoadStorage(currentStorage, projectDataLocation);
+
+        return currentStorage;
+    }
+    
     public Dictionary<string, ArchiveStorage> RenameDataTypeAction(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataTypeCurrentPath, string newName, string pathSyntax, string projectDataLocation)
     {
-
-        Console.WriteLine();
-        Console.WriteLine(dataTypeCurrentPath);
-        Console.WriteLine();
-        Console.WriteLine(newName);
-        Console.WriteLine(dataTypeCurrentPath.Substring(0, dataTypeCurrentPath.Length - dataTypeCurrentPath.Split(pathSyntax).Last().Length) + newName);
-        Console.WriteLine();
-
         currentStorage = _archiveStorage.LoadStorage(currentStorage, projectDataLocation);
 
         string newPath = dataTypeCurrentPath.Substring(0, dataTypeCurrentPath.Length - dataTypeCurrentPath.Split(pathSyntax).Last().Length) + newName;

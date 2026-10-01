@@ -75,6 +75,8 @@ public class UpdateNamingDataTypeTextBox
                         _archive.ProjectsDataLocation
                     );
 
+                _archive.ArchiveEditDataType.DataTypePath = "";
+                    
                 _archive.ArchiveEditDataType.RenamingActive = false;
             }
 
