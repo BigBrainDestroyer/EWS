@@ -47,7 +47,7 @@ public class UpdateNamingDataTypeTextBox
 
         TextBar newArchiveNamingDataTypeTextBox = _archive.ArchiveNamingDataTypeTextBox;
 
-        if(Raylib.IsKeyPressed(KeyboardKey.Enter))
+        if(Raylib.IsKeyPressed(KeyboardKey.Enter) && newArchiveNamingDataTypeTextBox.IsBoxActive == true)
         {
             (_archive.Storage, _archive.CurrentStorageDataLocation) =
                 _archiveStorage.UpdateAddDataType(
