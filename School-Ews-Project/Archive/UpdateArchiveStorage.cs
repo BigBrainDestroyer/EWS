@@ -59,6 +59,11 @@ public class UpdateArchiveStorage
     {
         Dictionary<string, ArchiveStorage> newStorage = new Dictionary<string, ArchiveStorage>();
 
+        if(!Directory.Exists(projectDataLocation))
+        {
+            Directory.CreateDirectory(projectDataLocation);
+        }
+        
         string[] ProjectFolders = Directory.GetDirectories(projectDataLocation);
 
         Array.Sort(ProjectFolders);

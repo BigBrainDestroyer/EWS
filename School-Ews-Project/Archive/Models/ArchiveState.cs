@@ -5,11 +5,15 @@ namespace Program;
 
 public class ArchiveState
 {
+    public OsSystem OsSystem { get; set; }
+
+    public FileSystemWatcher ProjectsFolderWatcher { get; set; } = new FileSystemWatcher();
+
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
     public ArchiveDataTypeBox[] DataTypeBoxes { get; set; } = new ArchiveDataTypeBox[0];
     public ArchiveEditDataType ArchiveEditDataType { get; set; } = new ArchiveEditDataType();
-
+    
     public ArchiveDataTypeBox SingleArchiveDataTypeBox { get; set; } = 
         new ArchiveDataTypeBox(
             new Color(51, 59, 67, 255), 
@@ -94,7 +98,7 @@ public class ArchiveState
 
     public Vector2 DataTypeBoxPercentage { get; } = new Vector2(100f, 2.5f);
 
-    public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
+    public string CurrentStorageDataLocation { get; set; } = "";
     public string LoadedFileDirectory { get; set; } = "";
     public string ProjectsDataLocation { get; set; } = ""; //Base
     public string ProjectFolderName { get; } = "AppProjects";

@@ -83,10 +83,12 @@ public class Initialize
 
         if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
+            _archive.OsSystem = OsSystem.Linux;
             _archive.PathSyntax = _archive.LinuxPathSyntax;
         }
         else if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
+            _archive.OsSystem = OsSystem.Windows;
             _archive.PathSyntax = _archive.WindowsPathSyntax;
         }
     }
@@ -121,13 +123,13 @@ public class Initialize
     {
         var _archive = _state.archive;
 
-        FileSystemWatcher watcher = new FileSystemWatcher(_archive.ProjectsDataLocation);
+        _archive.ProjectsFolderWatcher = new FileSystemWatcher(_archive.ProjectsDataLocation);
 
-        watcher.Changed += (a, b) => _archive.ProjectsFolderHasChanged = true;
-        watcher.Created += (a, b) => _archive.ProjectsFolderHasChanged = true;
-        watcher.Deleted += (a, b) => _archive.ProjectsFolderHasChanged = true;
-        watcher.Renamed += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        _archive.ProjectsFolderWatcher.Changed += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        _archive.ProjectsFolderWatcher.Created += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        _archive.ProjectsFolderWatcher.Deleted += (a, b) => _archive.ProjectsFolderHasChanged = true;
+        _archive.ProjectsFolderWatcher.Renamed += (a, b) => _archive.ProjectsFolderHasChanged = true;
         
-        watcher.EnableRaisingEvents = true;
+        _archive.ProjectsFolderWatcher.EnableRaisingEvents = true;
     }
 }
