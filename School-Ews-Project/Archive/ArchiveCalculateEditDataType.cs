@@ -7,11 +7,13 @@ public class ArchiveCalculateEditDataType
 {
     private readonly AppState _state;
     private readonly UpdateArchiveClicks _archiveClick;
+    private readonly UpdateArchiveStorage _archiveStorage;
 
     public ArchiveCalculateEditDataType(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _archiveClick = new UpdateArchiveClicks(_state);
+        _archiveStorage = new UpdateArchiveStorage(_state);
     }
 
     public void EditDataType()
@@ -20,7 +22,6 @@ public class ArchiveCalculateEditDataType
 
         CalculateEditLayout();
 
-        
         _archiveClick.EditDataTypeActionClick(
             _archive.ArchiveEditDataType,
             _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Edit],
@@ -153,5 +154,39 @@ public class ArchiveCalculateEditDataType
         );
     }
 
-    
+    public Dictionary<string, ArchiveStorage> RenameDataTypeAction(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataTypeCurrentPath, string newName, string pathSyntax, string projectDataLocation)
+    {
+
+        Console.WriteLine();
+        Console.WriteLine(dataTypeCurrentPath);
+        Console.WriteLine();
+        Console.WriteLine(newName);
+        Console.WriteLine(dataTypeCurrentPath.Substring(0, dataTypeCurrentPath.Length - dataTypeCurrentPath.Split(pathSyntax).Last().Length) + newName);
+        Console.WriteLine();
+
+        currentStorage = _archiveStorage.LoadStorage(currentStorage, projectDataLocation);
+
+        string newPath = dataTypeCurrentPath.Substring(0, dataTypeCurrentPath.Length - dataTypeCurrentPath.Split(pathSyntax).Last().Length) + newName;
+
+        if(dataType != ArchiveStorageNames.File && Directory.Exists(dataTypeCurrentPath) && !Directory.Exists(newPath))
+        {
+            ArchiveStorage archiveDataTypeState = currentStorage[dataTypeCurrentPath];
+
+            currentStorage.Remove(dataTypeCurrentPath);
+            currentStorage.Add(
+                newPath,
+                archiveDataTypeState
+            );
+
+            Directory.Move(dataTypeCurrentPath, newPath);
+        }
+        else if(File.Exists(dataTypeCurrentPath) && !File.Exists(newPath))
+        {
+            File.Move(dataTypeCurrentPath, newPath);
+        }
+
+        currentStorage = _archiveStorage.LoadStorage(currentStorage, projectDataLocation);
+
+        return currentStorage;
+    }
 }

@@ -45,6 +45,9 @@ public class ArchiveState
     public Color NamingDataTypeTextColor { get; } = new Color(220, 223, 228, 255);
     public Color NamingDataTypeTextureColor { get; } = new Color(145, 155, 165, 255);
 
+    public Color RenamingDataTypeTextureColor { get; } = Color.Yellow;
+    public Color RenamingDataTypeTextColor { get; } = Color.Yellow;
+
     //EditColors
     public Color EditDataTypesTextColor { get; } = new Color(220, 223, 228, 255);
     public Color EditDataHighLightBoxColor { get; } = Color.LightGray;

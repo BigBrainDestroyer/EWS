@@ -7,12 +7,14 @@ public class UpdateNamingDataTypeTextBox
     private readonly AppState _state;
     private readonly UpdateCustomTextBar _customTextBar;
     private readonly UpdateArchiveStorage _archiveStorage;
+    private readonly ArchiveCalculateEditDataType _editDataType;
 
     public UpdateNamingDataTypeTextBox(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _customTextBar = new UpdateCustomTextBar(_state);
         _archiveStorage = new UpdateArchiveStorage(_state);
+        _editDataType = new ArchiveCalculateEditDataType(_state);
     }
 
     public void NamingDataTypeTextBox()
@@ -47,17 +49,34 @@ public class UpdateNamingDataTypeTextBox
 
         TextBar newArchiveNamingDataTypeTextBox = _archive.ArchiveNamingDataTypeTextBox;
 
-        if(Raylib.IsKeyPressed(KeyboardKey.Enter) && newArchiveNamingDataTypeTextBox.IsBoxActive == true)
+        if (Raylib.IsKeyPressed(KeyboardKey.Enter) && newArchiveNamingDataTypeTextBox.IsBoxActive == true)
         {
-            (_archive.Storage, _archive.CurrentStorageDataLocation) =
-                _archiveStorage.UpdateAddDataType(
-                    _archive.Storage,
-                    _archive.TemporarilyData,
-                    _archive.CurrentStorageDataLocation,
-                    _archive.ProjectsDataLocation,
-                    _archive.ArchiveNamingDataTypeTextBox.Text.Text,
-                    _archive.PathSyntax
-                );
+            if(!_archive.ArchiveEditDataType.RenamingActive)
+            {
+                (_archive.Storage, _archive.CurrentStorageDataLocation) =
+                    _archiveStorage.UpdateAddDataType(
+                        _archive.Storage,
+                        _archive.TemporarilyData,
+                        _archive.CurrentStorageDataLocation,
+                        _archive.ProjectsDataLocation,
+                        _archive.ArchiveNamingDataTypeTextBox.Text.Text,
+                        _archive.PathSyntax
+                    );
+            }
+            else
+            {
+                _archive.Storage = 
+                    _editDataType.RenameDataTypeAction(
+                        _archive.Storage,
+                        _archive.ArchiveEditDataType.DataType,
+                        _archive.ArchiveEditDataType.DataTypePath,
+                        _archive.ArchiveNamingDataTypeTextBox.Text.Text,
+                        _archive.PathSyntax,
+                        _archive.ProjectsDataLocation
+                    );
+
+                _archive.ArchiveEditDataType.RenamingActive = false;
+            }
 
             newArchiveNamingDataTypeTextBox.IsBoxActive = false;
         }

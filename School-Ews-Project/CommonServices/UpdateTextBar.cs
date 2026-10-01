@@ -169,7 +169,6 @@ public class UpdateCustomTextBar
 
     private Box CalculateCursorBox(Font textFont, RaylibText text, Vector2 textPosition, int viewTextLength, int cursorTextPosition, int cursorOffSet)
     {
-        Console.WriteLine(cursorTextPosition - cursorOffSet);
         return new Box(
             new Vector2(
                 textPosition.X + (Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X * (cursorTextPosition - cursorOffSet)),

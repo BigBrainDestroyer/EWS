@@ -210,6 +210,22 @@ public class UpdateArchiveClicks
                 archiveEditDataType.RenamingActive = true;
                 archiveEditDataType.IsEditBoxActive = false;
 
+                //Uitzondering 
+                var _archive = _state.archive;
+                var _mainBoxes = _state.common.boxes;
+
+                _archive.ArchiveNamingDataTypeTextBox = 
+                    GetNewNamingDataTypeBox(
+                        _archive.ArchiveTextures,
+                        archiveEditDataType.DataType,//dataType.Value, 
+                        _archive.ArchiveNamingDataTypeTextBoxCornerStates,
+                        _mainBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
+                        _archive.NamingDataTypeBackgroundColor,
+                        _archive.RenamingDataTypeTextureColor,
+                        _archive.NamingDataTypeCursorColor,
+                        _archive.RenamingDataTypeTextColor
+                    );
+                
                 return archiveEditDataType;
             }
             else
@@ -223,4 +239,6 @@ public class UpdateArchiveClicks
 
         return archiveEditDataType;
     }
+
+    
 }
