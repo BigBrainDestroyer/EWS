@@ -97,9 +97,11 @@ public class UpdateArchiveClicks
         return newAddLegalDataTypeToStorage;
     }
 
-    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], ArchiveEditDataType, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveEditDataType currentArchiveEditDataType, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string currentStorageDataLocation, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
+    public (Dictionary<string, ArchiveStorage>, ArchiveDataTypeBox[], ArchiveEditDataType, string, string) DataTypeBoxClick(Dictionary<string, ArchiveStorage> currentStorage, ArchiveDataTypeBox[] archiveDataTypeBoxes, ArchiveEditDataType currentArchiveEditDataType, ArchiveAddDataTypeMenu addDataTypeMenu, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths, string projectsDataLocation, string currentStorageDataLocation, string loadedFileDirectory, string pathSyntax, Color mouseOnBoxColor)
     {
         if(!CheckField.MouseOnField(parentBoxPixelPosition, parentBoxPixelLengths, Raylib.GetMousePosition()) || CheckField.MouseOnField(addDataTypeMenu.BoxPosition, addDataTypeMenu.BoxLengths, Raylib.GetMousePosition()) && addDataTypeMenu.IsMenuActive) return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, loadedFileDirectory);
+
+        bool mouseIsOnDataBox = false;
 
         foreach(ArchiveDataTypeBox dataTypeBox in archiveDataTypeBoxes)
         {
@@ -137,7 +139,14 @@ public class UpdateArchiveClicks
                 {
                     dataTypeBox.BoxColor = mouseOnBoxColor;
                 }
+
+                mouseIsOnDataBox = true;
             }
+        }
+
+        if(!mouseIsOnDataBox && Raylib.IsMouseButtonPressed(MouseButton.Left))
+        {
+            currentStorageDataLocation = projectsDataLocation;
         }
         
         return (currentStorage, archiveDataTypeBoxes, currentArchiveEditDataType, currentStorageDataLocation, loadedFileDirectory);

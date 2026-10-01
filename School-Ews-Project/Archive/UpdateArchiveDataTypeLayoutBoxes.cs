@@ -45,6 +45,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 _archive.AddDataTypeMenu,
                 _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
                 _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
+                _archive.ProjectsDataLocation,
                 _archive.CurrentStorageDataLocation, 
                 _archive.LoadedFileDirectory,
                 _archive.PathSyntax,
