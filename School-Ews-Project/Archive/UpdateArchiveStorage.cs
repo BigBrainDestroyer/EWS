@@ -14,7 +14,7 @@ public class UpdateArchiveStorage
     {
         if (name.Length > 0)
         {
-            if (dataType != ArchiveStorageNames.File && name.Length > 0)
+            if (dataType != ArchiveStorageNames.File && !currentStorage.ContainsKey(dataLocation + pathSyntax + name))
             {
                 string directory = Directory.GetCurrentDirectory();
 
@@ -38,19 +38,15 @@ public class UpdateArchiveStorage
                     dataLocation = projectDataLocation;
                 }
             }
-            else if (name.Length > 0)
-            {
+            else if (currentStorage.ContainsKey(dataLocation) && !currentStorage[dataLocation].FolderStorage.Contains(dataLocation + pathSyntax + name))
+            {   
                 ArchiveStorage newStorage = currentStorage[dataLocation];
 
-                newStorage.FolderStorage.Add(name);
+                newStorage.FolderStorage.Add(dataLocation + pathSyntax + name);
 
                 File.WriteAllText(dataLocation + pathSyntax + name, "");
 
                 currentStorage[dataLocation] = newStorage;
-            }
-            else if (dataType != ArchiveStorageNames.File)
-            {
-                currentStorage.Remove(dataLocation);
             }
         }
 
