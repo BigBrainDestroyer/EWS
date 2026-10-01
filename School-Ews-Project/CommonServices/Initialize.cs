@@ -34,7 +34,6 @@ public class Initialize
         Raylib.SetWindowMinSize(_state.common.settings.MinimalScreenWidth, _state.common.settings.MinimalScreenHeight);
     }
 
-    
     public void Fonts()
     {
         _state.common.font.EditorPanelText = 
@@ -78,13 +77,6 @@ public class Initialize
             };
     }
 
-    public void LoadStorage()
-    {
-        var _archive = _state.archive;
-
-        _archive.Storage = _archiveStorage.LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
-    }
-
     public void OsPlatform()
     {
         var _archive = _state.archive;
@@ -97,6 +89,32 @@ public class Initialize
         {
             _archive.PathSyntax = _archive.WindowsPathSyntax;
         }
+    }
+
+    public void InitializeProjectsDataLocation()
+    {
+        var _archive = _state.archive;
+
+        string baseProjectPath =
+        Directory.GetCurrentDirectory().Substring(
+            0,
+            Directory.GetCurrentDirectory().Length - Directory.GetCurrentDirectory().Split(_archive.PathSyntax).Last().Length - _archive.PathSyntax.Length
+        ) + _archive.PathSyntax + _archive.ProjectFolderName;       
+    
+        if(!Directory.Exists(baseProjectPath))
+        {
+            Directory.CreateDirectory(baseProjectPath);
+        }
+
+        _archive.ProjectsDataLocation = baseProjectPath;
+        _archive.CurrentStorageDataLocation = baseProjectPath;
+    }
+
+    public void LoadStorage()
+    {
+        var _archive = _state.archive;
+
+        _archive.Storage = _archiveStorage.LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
     }
 
     public void FileWatcher()

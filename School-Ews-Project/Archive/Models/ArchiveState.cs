@@ -96,7 +96,8 @@ public class ArchiveState
 
     public string CurrentStorageDataLocation { get; set; } = Directory.GetCurrentDirectory() + "/" + "AppProjects";
     public string LoadedFileDirectory { get; set; } = "";
-    public string ProjectsDataLocation { get; } = Directory.GetCurrentDirectory() + "/" + "AppProjects"; //Base
+    public string ProjectsDataLocation { get; set; } = ""; //Base
+    public string ProjectFolderName { get; } = "AppProjects";
     public string PathSyntax { get; set; } = "";
     public string LinuxPathSyntax { get; } = "/";
     public string WindowsPathSyntax { get; } = "\\";
