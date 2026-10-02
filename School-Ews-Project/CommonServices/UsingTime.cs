@@ -18,8 +18,6 @@ public static class CalculateUsingTime
                 else
                 {
                     currentKeyboardKeyTimeDown[key] = new KeyboardKeyTimeDown(currentKeyboardKeyTimeDown[key].StartDownTime, currentStopwatch.Elapsed.TotalSeconds - currentKeyboardKeyTimeDown[key].StartDownTime);
-
-                    Console.WriteLine(currentKeyboardKeyTimeDown[key].TotalDownTime);
                 }
             }
             else if(currentKeyboardKeyTimeDown[key].StartDownTime != 0)

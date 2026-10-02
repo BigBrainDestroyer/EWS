@@ -37,8 +37,6 @@ public class UpdateEditorTextPanel
                 (int)_boxes.MainBoxPixelLengts[MainBoxNames.Editor].Y
             );
 
-
-
         (_layout.textPanel.WriteOverBoxPositionHorizontalText, _layout.textPanel.WriteOverBoxPositionVerticalText) =
             CalculateWriteOverBoxPositions(
                 _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
@@ -77,10 +75,7 @@ public class UpdateEditorTextPanel
                 (int)_boxes.MainBoxPixelPositions[MainBoxNames.Editor].Y
             );
 
-        _layout.textPanel.CursorWidth =
-            CalculateTextPanelCursorWidth(
-                _layout.textPanel.CursorTextPosition
-            );
+        _layout.textPanel.CursorWidth = CalculateTextPanelCursorWidth();
 
         _layout.textPanel.CursorPosition =
             UpdateCursorPosition(
@@ -89,6 +84,24 @@ public class UpdateEditorTextPanel
                 _layout.textPanel.GridRowPositions,
                 _layout.textPanel.CursorPosition,
                 _layout.textPanel.CursorTextPosition,
+                _layout.textPanel.TextRowNumberBoxLengths,
+                _layout.textPanel.TextGridBoxesOffSetX,
+                _layout.textPanel.TextGridBoxesOffSetY
+            );
+
+        (_layout.textPanel.MouseCursorBox, _layout.textPanel.CursorTextPosition) = 
+            UpdateMouseCursorBox(
+                _layout.textPanel.PanelText,
+                _layout.textPanel.MouseCursorBox,
+                _layout.textPanel.CursorTextPosition,
+                new Vector2(
+                    _layout.textPanel.CursorWidth,
+                    _layout.textPanel.TextSize
+                ),
+                _layout.textPanel.GridColumnPositions,
+                _layout.textPanel.GridRowPositions,
+                _boxes.MainBoxPixelPositions[MainBoxNames.Editor],
+                _boxes.MainBoxPixelLengts[MainBoxNames.Editor],
                 _layout.textPanel.TextRowNumberBoxLengths,
                 _layout.textPanel.TextGridBoxesOffSetX,
                 _layout.textPanel.TextGridBoxesOffSetY
@@ -237,7 +250,7 @@ public class UpdateEditorTextPanel
         return newNumberPosition;
     }
 
-    private int CalculateTextPanelCursorWidth(Vector2 cursorTextPosition)
+    private int CalculateTextPanelCursorWidth()
     {
         Vector2 newCursorWidth =
             Raylib.MeasureTextEx(
@@ -257,7 +270,7 @@ public class UpdateEditorTextPanel
     {
         if(cursorTextPosition.X - textGridBoxesOffSetX >= gridColumnPositions.Length || cursorTextPosition.Y - textGridBoxesOffSetY>= gridRowPositions.Length || cursorTextPosition.Y < textGridBoxesOffSetY || cursorTextPosition.X < textGridBoxesOffSetX)
         {
-            return new Vector2(-1,-1);
+            return new Vector2(-1, -1);
         }
 
         int cursorColumnPosition = (int)cursorTextPosition.X - textGridBoxesOffSetX;
@@ -270,5 +283,82 @@ public class UpdateEditorTextPanel
             );
 
         return cursorPosition;
+    }
+
+    private (float, int) CalculateMouseCursorBoxPosition(float[] grid, float mousePosition, float boxPosition)
+    {
+        int counter = 0;
+        int pastCounter = 0;
+        float pastCell = 0;
+        
+        foreach(float cell in grid)
+        {
+            if(boxPosition + cell > mousePosition)
+            {
+                boxPosition += pastCell;
+                break;
+            }
+
+            pastCounter = counter;
+            pastCell = cell;
+
+            counter++;
+        }
+
+        return (boxPosition, pastCounter);
+    }
+
+    private (MouseCursorBox, Vector2) UpdateMouseCursorBox(List<string> panelText, MouseCursorBox currentMouseCursorBox, Vector2 currentCursorTextPosition, Vector2 currentCursorWidth, float[] gridColumnPositions, float[] gridRowPositions, Vector2 parentBoxPosition, Vector2 parentBoxLengths, Vector2 textRowNumberBoxLengths, int textGridBoxesOffSetX, int textGridBoxesOffSetY)
+    {
+        if(!CheckField.MouseOnField(new Vector2(parentBoxPosition.X + textRowNumberBoxLengths.X, parentBoxPosition.Y), new Vector2(parentBoxLengths.X - textRowNumberBoxLengths.X, parentBoxLengths.Y), Raylib.GetMousePosition())) 
+        {
+            currentMouseCursorBox.IsCursorBoxActive = false;
+
+            Raylib.ShowCursor();
+
+            return (currentMouseCursorBox, currentCursorTextPosition);
+        }
+        
+        currentMouseCursorBox.IsCursorBoxActive = true;
+        
+        
+        (float boxXPixelPosition, int mouseCursorGridColumnCellPosition) = CalculateMouseCursorBoxPosition(gridColumnPositions, Raylib.GetMousePosition().X, parentBoxPosition.X + textRowNumberBoxLengths.X);
+        (float boxYPixelPosition, int mouseCursorGridRowCellPosition) = CalculateMouseCursorBoxPosition(gridRowPositions, Raylib.GetMousePosition().Y, parentBoxPosition.Y);
+
+        currentMouseCursorBox.CursorBox = 
+            new Box(
+                new Vector2(boxXPixelPosition, boxYPixelPosition),
+                currentCursorWidth
+            );
+
+        int mouseCursorTextColumnPosition = mouseCursorGridColumnCellPosition + textGridBoxesOffSetX;
+        int mouseCursorTextRowPosition = mouseCursorGridRowCellPosition + textGridBoxesOffSetY;
+
+        if(mouseCursorTextRowPosition >= panelText.Count())
+        {
+            currentMouseCursorBox.IsCursorBoxActive = false;
+            Raylib.ShowCursor();
+        }
+        else if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+        {
+            if(panelText[mouseCursorTextRowPosition].Length >= mouseCursorTextColumnPosition)
+            {
+                currentCursorTextPosition.X = mouseCursorTextColumnPosition;
+                currentCursorTextPosition.Y = mouseCursorTextRowPosition;
+            }
+            else
+            {
+                currentCursorTextPosition.X = panelText[mouseCursorTextRowPosition].Length;
+                currentCursorTextPosition.Y = mouseCursorTextRowPosition;
+            }
+            
+            Raylib.HideCursor();
+        }
+        else
+        {
+            Raylib.HideCursor();
+        }
+        
+        return (currentMouseCursorBox, currentCursorTextPosition);
     }
 }

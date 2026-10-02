@@ -26,6 +26,8 @@ public class EditorTextPanelLayoutState
     public Color RowNumberColor { get; set; } = new Color(145, 155, 165, 255);
     public Color ActiveRowNumberColor { get; set; } = new Color(220, 223, 228, 255);
 
+    public MouseCursorBox MouseCursorBox { get; set; } = new MouseCursorBox(new Box(), false, Color.Red);
+
     public Dictionary<KeyboardKey, KeyboardKeyDownSettings> KeyboardKeyDownSettings =
         new Dictionary<KeyboardKey, KeyboardKeyDownSettings>{
             {KeyboardKey.Backspace, new KeyboardKeyDownSettings(0, 0.05)},

@@ -1,6 +1,3 @@
-using Raylib_cs;
-using System.Numerics;
-using System.IO;
 
 namespace Program;
 

@@ -29,6 +29,8 @@ public class DrawEditorLayout
 
         DrawTextPanelCursor();
 
+        DrawTextMouseCursor();
+
         DrawPanelText();
 
         DrawTextRowNumbersBox();
@@ -61,6 +63,22 @@ public class DrawEditorLayout
                 _state.editor.layout.textPanel.CursorWidth,
                 _state.editor.layout.textPanel.TextSize,
                 _state.editor.layout.textPanel.CursorColor
+            );
+        }
+    }
+
+    private void DrawTextMouseCursor()
+    {
+        var _layout = _state.editor.layout.textPanel;
+
+        if (_layout.MouseCursorBox.IsCursorBoxActive)
+        {
+            Raylib.DrawRectangle(
+                (int)_layout.MouseCursorBox.CursorBox.PixelPosition.X,
+                (int)_layout.MouseCursorBox.CursorBox.PixelPosition.Y,
+                (int)_layout.MouseCursorBox.CursorBox.PixelLengths.X,
+                (int)_layout.MouseCursorBox.CursorBox.PixelLengths.Y,
+                _layout.MouseCursorBox.CursorBoxColor
             );
         }
     }
