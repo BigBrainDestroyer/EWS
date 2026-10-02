@@ -3,6 +3,19 @@ using Raylib_cs;
 
 namespace Program;
 
+public struct KeyboardKeyDownSettings
+{
+    public double LastReactionTime;
+    public double ReactionInterval;
+    
+
+    public KeyboardKeyDownSettings(double lastReactionTime, double reactionInterval)
+    {
+        LastReactionTime = lastReactionTime;
+        ReactionInterval = reactionInterval;
+    }
+}
+
 public class EditorTextPanelLayoutState
 {
     public Color TextPanelBackgroundColor { get; set; } = new Color(51, 59, 67, 255);
@@ -13,6 +26,16 @@ public class EditorTextPanelLayoutState
     public Color RowNumberColor { get; set; } = new Color(145, 155, 165, 255);
     public Color ActiveRowNumberColor { get; set; } = new Color(220, 223, 228, 255);
 
+    public Dictionary<KeyboardKey, KeyboardKeyDownSettings> KeyboardKeyDownSettings =
+        new Dictionary<KeyboardKey, KeyboardKeyDownSettings>{
+            {KeyboardKey.Backspace, new KeyboardKeyDownSettings(0, 0.05)},
+            {KeyboardKey.Enter, new KeyboardKeyDownSettings(0, 0.05)},
+            {KeyboardKey.Up, new KeyboardKeyDownSettings(0, 0.05)},
+            {KeyboardKey.Right, new KeyboardKeyDownSettings(0, 0.05)},
+            {KeyboardKey.Down, new KeyboardKeyDownSettings(0, 0.05)},
+            {KeyboardKey.Left, new KeyboardKeyDownSettings(0, 0.05)}
+        };
+    
     public List<string> PanelText { get; set; } = new List<string>() {""};
     public List<string> ViewText { get; set; } = new List<string>() {""};
 
@@ -36,6 +59,8 @@ public class EditorTextPanelLayoutState
     public Vector2 CursorTextPosition { get; set; } = new Vector2(0,0);
     
     public string TapTextSpaces { get; set; } = "    ";//4
+
+    public double KeyboardKeyDownTimeDuration { get; } = 0.5;
 
     public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 0;
     public int GridBoxesSpaceOffRowNumbers { get; set; } = 3;

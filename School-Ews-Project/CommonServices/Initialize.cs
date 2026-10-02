@@ -34,6 +34,11 @@ public class Initialize
         Raylib.SetWindowMinSize(_state.common.settings.MinimalScreenWidth, _state.common.settings.MinimalScreenHeight);
     }
 
+    public void StartStopwatch()
+    {
+        _state.common.time.Stopwatch.Start();
+    }
+
     public void Fonts()
     {
         _state.common.font.EditorPanelText = 

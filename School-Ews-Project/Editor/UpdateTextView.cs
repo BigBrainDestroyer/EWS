@@ -20,7 +20,7 @@ public class UpdateTextView
         
         if(_input.MouseWheelInput != 0)
         {
-            _textPanel.TextGridBoxesOffSetY = UpdateScrollWheelOffSet(_textPanel.PanelText, _textPanel.TextGridBoxesOffSetY);
+            (_textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY) = UpdateScrollWheelOffSet(_textPanel.PanelText, _textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY);
 
             _textPanel.ViewText = 
                 UpdateViewText(
@@ -133,25 +133,45 @@ public class UpdateTextView
         return (cursorTextPosition, newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
     }
 
-    public int UpdateScrollWheelOffSet(List<string> panelText, int currentTextGridBoxesOffSetY)
+    public (int, int) UpdateScrollWheelOffSet(List<string> panelText, int currentTextGridBoxesOffSetX, int currentTextGridBoxesOffSetY)
     {
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;
-        
-        int newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
 
-        //Console.WriteLine(wheelMovement);
+        int newTextGridBoxesOffSet;
 
         if (_input.MouseWheelInput != 0)
         {
-            newTextGridBoxesOffSetY -= (int)_input.MouseWheelInput;
-
-            if (newTextGridBoxesOffSetY < 0 || newTextGridBoxesOffSetY >= panelText.Count)
+            if(Raylib.IsKeyDown(KeyboardKey.LeftShift))
             {
-                return newTextGridBoxesOffSetY = currentTextGridBoxesOffSetY;
+                newTextGridBoxesOffSet = currentTextGridBoxesOffSetX;
+                newTextGridBoxesOffSet -= (int)_input.MouseWheelInput;
+
+                if(newTextGridBoxesOffSet < 0 || newTextGridBoxesOffSet >= panelText.Max(String => String.Length))
+                {
+                    return (currentTextGridBoxesOffSetX, currentTextGridBoxesOffSetY);
+                }
+                else
+                {
+                    return (newTextGridBoxesOffSet, currentTextGridBoxesOffSetY);
+                }
             }
+            else
+            {
+                newTextGridBoxesOffSet = currentTextGridBoxesOffSetY;
+                newTextGridBoxesOffSet -= (int)_input.MouseWheelInput;
+
+                if (newTextGridBoxesOffSet < 0 || newTextGridBoxesOffSet >= panelText.Count)
+                {
+                    return (currentTextGridBoxesOffSetX, currentTextGridBoxesOffSetY);
+                }
+                else
+                {
+                    return (currentTextGridBoxesOffSetX, newTextGridBoxesOffSet);
+                }
+            } 
         }
-        
-        return newTextGridBoxesOffSetY;
+
+        return (currentTextGridBoxesOffSetX, currentTextGridBoxesOffSetY);
     }
 }

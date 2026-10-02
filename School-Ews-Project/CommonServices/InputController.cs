@@ -14,10 +14,13 @@ public class InputController
     public void GetInput()
     {
         var _input = _state.common.input;
+        var _time = _state.common.time;
 
         _input.KeyboardCharInput = GetKeyboardInput();
 
         _input.MouseWheelInput = GetMouseWheelInput();
+
+        _input.KeyboardKeyTimeDown = CalculateUsingTime.UpdateKeyboardKeyTimeDown(_input.KeyboardKeyTimeDown, _time.Stopwatch);
     }
 
     public List<int> GetKeyboardInput()

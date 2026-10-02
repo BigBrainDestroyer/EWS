@@ -13,6 +13,8 @@ public class Program
         
         initialize.Window();
 
+        initialize.StartStopwatch();
+
         initialize.OsPlatform();
 
         initialize.InitializeProjectsDataLocation();

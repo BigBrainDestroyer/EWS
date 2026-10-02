@@ -26,10 +26,13 @@ public class UpdateEditorPanelText
         {
             _updateTextView.IsMouseWheelActive();
             
-            if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right))
+            if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right) || _input.KeyboardKeyTimeDown.Values.Any(time => time.StartDownTime >= _textPanel.KeyboardKeyDownTimeDuration))
             {
                 (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput) =
                     UpdatingText(
+                        _input.KeyboardKeyTimeDown,
+                        _textPanel.KeyboardKeyDownSettings,
+                        _textPanel.KeyboardKeyDownTimeDuration,
                         _textPanel.CursorTextPosition,
                         _textPanel.PanelText,
                         _input.KeyboardCharInput,
@@ -52,44 +55,64 @@ public class UpdateEditorPanelText
     }
 
     
-    private (Vector2, List<string>, List<int>) UpdatingText(Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions, string tapTextSpaces, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
+    private (Vector2, List<string>, List<int>) UpdatingText(Dictionary<KeyboardKey, KeyboardKeyTimeDown> keyboardKeyTimeDown, Dictionary<KeyboardKey, KeyboardKeyDownSettings> keyboardKeyDownSettings, double keyboardDownDuration, Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions, string tapTextSpaces, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
         StringBuilder newString = new StringBuilder(panelText[(int)cursorTextPosition.Y]);
 
-        if(Raylib.IsKeyPressed(KeyboardKey.Enter))
+        if(Raylib.IsKeyPressed(KeyboardKey.Enter) || keyboardKeyTimeDown[KeyboardKey.Enter].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Enter].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Enter].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Enter].ReactionInterval)
         {
             (cursorTextPosition, newString, panelText) = 
                 UpdateEnterToText(cursorTextPosition, newString, panelText);
+
+            keyboardKeyDownSettings[KeyboardKey.Enter] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Enter].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Enter].ReactionInterval);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Backspace))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Backspace)|| keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Backspace].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Backspace].ReactionInterval)
         {
             (cursorTextPosition, newString, panelText) = 
                 UpdateBackspaceToString(cursorTextPosition, newString, panelText);
+
+            keyboardKeyDownSettings[KeyboardKey.Backspace] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Backspace].ReactionInterval);
         }
         else if(Raylib.IsKeyPressed(KeyboardKey.Tab))
         {
             (cursorTextPosition, newString, panelText) =
                 UpdateTabToString(cursorTextPosition, newString, panelText, tapTextSpaces);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Up))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Up) || keyboardKeyTimeDown[KeyboardKey.Up].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Up].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Up].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Up].ReactionInterval)
         {
             cursorTextPosition = 
                 UpdateUpToText(cursorTextPosition, panelText);
+                
+            keyboardKeyDownSettings[KeyboardKey.Up] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Up].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Up].ReactionInterval);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Down))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Down) || keyboardKeyTimeDown[KeyboardKey.Down].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Down].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Down].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Down].ReactionInterval)
         {
             cursorTextPosition = 
                 UpdateDownToText(cursorTextPosition, panelText);
+                
+            keyboardKeyDownSettings[KeyboardKey.Down] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Down].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Down].ReactionInterval);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Left))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Left) || keyboardKeyTimeDown[KeyboardKey.Left].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Left].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Left].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Left].ReactionInterval)
         {
             cursorTextPosition = 
                 UpdateLeftToText(cursorTextPosition, panelText);
+                
+            keyboardKeyDownSettings[KeyboardKey.Left] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Left].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Left].ReactionInterval);
         }
-        else if(Raylib.IsKeyPressed(KeyboardKey.Right))
+        else if(Raylib.IsKeyPressed(KeyboardKey.Right) || keyboardKeyTimeDown[KeyboardKey.Right].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Right].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Right].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Right].ReactionInterval)
         {
             cursorTextPosition =
                 UpdateRightToText(cursorTextPosition, panelText);
+                
+            keyboardKeyDownSettings[KeyboardKey.Right] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Right].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Right].ReactionInterval);
+        }
+
+        foreach(KeyboardKey key in keyboardKeyDownSettings.Keys)
+        {
+            if(!Raylib.IsKeyDown(key) && keyboardKeyDownSettings[key].LastReactionTime != 0)
+            {
+                keyboardKeyDownSettings[key] = new KeyboardKeyDownSettings(0, keyboardKeyDownSettings[key].ReactionInterval);
+            }
         }
         
         if(chars.Count > 0)
