@@ -123,5 +123,5 @@ public class ArchiveState
     public int TotalViewStorageCount { get; set; } = 0;
     public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0;
 
-    public bool ProjectsFolderHasChanged { get; set; }
+    public volatile bool ProjectsFolderHasChanged;
 }

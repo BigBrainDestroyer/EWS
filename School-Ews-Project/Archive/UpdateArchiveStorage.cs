@@ -4,13 +4,15 @@ namespace Program;
 public class UpdateArchiveStorage
 {
     private readonly AppState _state;
+    private readonly OutsideTerminal _terminal;
 
     public UpdateArchiveStorage(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+        _terminal = new OutsideTerminal(_state);
     }
 
-    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
+    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, OsSystem osSystem,ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
     {
         if (name.Length > 0)
         {
@@ -32,6 +34,11 @@ public class UpdateArchiveStorage
                     Directory.CreateDirectory(directory);
 
                     dataLocation = dataLocation + pathSyntax + name;
+
+                    if(dataType == ArchiveStorageNames.ProjectFolder)
+                    {
+                        _terminal.MakeProjectInNewProjectFolder(osSystem, dataLocation);
+                    }
                 }
                 else
                 {

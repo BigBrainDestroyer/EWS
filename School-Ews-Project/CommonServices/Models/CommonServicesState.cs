@@ -8,4 +8,5 @@ public class CommonServicesState
     public InputState input { get; set; } = new InputState();
     public FontState font { get; set; } = new FontState();
     public TimeState time { get; set; } = new TimeState();
+    public TerminalState terminal { get; set; } = new TerminalState();
 }

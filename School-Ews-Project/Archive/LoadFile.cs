@@ -26,7 +26,6 @@ public class UpdateLoadFile
 
         if(_textPanel.CurrentLoadedFile != _archive.LoadedFileDirectory)
         {
-            Console.WriteLine("JA hij komt hier");
             Console.WriteLine(_archive.LoadedFileDirectory);
 
             (_input.FileChangeTimer, _textPanel.CurrentLoadedFile) = UpdateFileText(_textPanel.PanelText, _input.FileChangeTimer, _textPanel.CurrentLoadedFile);
@@ -40,8 +39,6 @@ public class UpdateLoadFile
             _updateEditorTextPanel.UpdateTextPanel();
             _textView.UpdateView();
 
-            Console.WriteLine("crazy shit");
-            Console.WriteLine(_archive.LoadedFileDirectory);
             _textPanel.CurrentLoadedFile = _archive.LoadedFileDirectory;
         }
 

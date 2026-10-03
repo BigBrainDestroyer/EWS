@@ -134,7 +134,8 @@ public class Initialize
         _archive.ProjectsFolderWatcher.Created += (a, b) => _archive.ProjectsFolderHasChanged = true;
         _archive.ProjectsFolderWatcher.Deleted += (a, b) => _archive.ProjectsFolderHasChanged = true;
         _archive.ProjectsFolderWatcher.Renamed += (a, b) => _archive.ProjectsFolderHasChanged = true;
-        
+
+        _archive.ProjectsFolderWatcher.IncludeSubdirectories = true;
         _archive.ProjectsFolderWatcher.EnableRaisingEvents = true;
     }
 }
