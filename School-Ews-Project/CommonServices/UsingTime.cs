@@ -28,4 +28,40 @@ public static class CalculateUsingTime
         
         return currentKeyboardKeyTimeDown;
     }
+
+    public static FileChangeTimer UpdateFileChangeTimer(FileChangeTimer currentFileChangeTimer, Stopwatch currentStopwatch, bool fileHasChanged)
+    {
+        if (currentFileChangeTimer.StartTime == 0 && fileHasChanged)
+        {
+            currentFileChangeTimer = 
+                new FileChangeTimer(
+                    currentStopwatch.Elapsed.TotalSeconds, 
+                    0, 
+                    currentFileChangeTimer.ReactionTime, 
+                    fileHasChanged
+                );
+        }
+        else if (currentFileChangeTimer.StartTime != 0 && fileHasChanged)
+        {
+            currentFileChangeTimer = 
+                new FileChangeTimer(
+                    currentFileChangeTimer.StartTime, 
+                    currentStopwatch.Elapsed.TotalSeconds - currentFileChangeTimer.StartTime, 
+                    currentFileChangeTimer.ReactionTime, 
+                    fileHasChanged
+                );
+        }
+        else if(currentFileChangeTimer.StartTime != 0)
+        {
+            currentFileChangeTimer = 
+                new FileChangeTimer(
+                    0,
+                    0,
+                    currentFileChangeTimer.ReactionTime, 
+                    fileHasChanged
+                );
+        }
+
+        return currentFileChangeTimer;
+    }
 }

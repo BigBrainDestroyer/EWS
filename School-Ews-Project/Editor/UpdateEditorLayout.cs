@@ -14,6 +14,9 @@ public class UpdateEditorLayout
 
     public void EditorLayout()
     {
-        _updateEditorTextPanel.UpdateTextPanel();
+        if (_state.editor.layout.textPanel.CurrentLoadedFile.Length > 0)
+        {   
+            _updateEditorTextPanel.UpdateTextPanel();
+        }
     }
 }

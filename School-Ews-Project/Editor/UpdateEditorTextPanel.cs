@@ -20,7 +20,7 @@ public class UpdateEditorTextPanel
         var _layout = _state.editor.layout;
         var _boxes = _state.common.boxes;
         
-                _updateEditorPanelText.UpdatingPanelText();
+        _updateEditorPanelText.UpdatingPanelText();
 
         _layout.textPanel.GridBoxesSpaceOffRowNumbers =
             UpdateGridBoxesSpaceOffRowNumbers(

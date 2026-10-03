@@ -24,6 +24,22 @@ public struct KeyboardKeyTimeDown
     }
 }
 
+public struct FileChangeTimer
+{
+    public double StartTime;
+    public double TotalTime;
+    public double ReactionTime;
+    public bool FileHasChanged;
+
+    public FileChangeTimer(double startTime, double totalTime, double reactionTime, bool fileHasChanged)
+    {
+        StartTime = startTime;
+        TotalTime = totalTime;
+        ReactionTime = reactionTime;
+        FileHasChanged = fileHasChanged;
+    }
+}
+
 public class InputState
 {
     public List<int> KeyboardCharInput { get; set; } = new List<int>();
@@ -38,4 +54,6 @@ public class InputState
             {KeyboardKey.Down, new KeyboardKeyTimeDown()},
             {KeyboardKey.Left, new KeyboardKeyTimeDown()}
         };
+
+    public FileChangeTimer FileChangeTimer { get; set; } = new FileChangeTimer(0, 0, 0.65, false);
 }

@@ -16,17 +16,24 @@ public class DrawEditorLayout
 
     public void DrawEditor()
     {
-        DrawEditorTextPanel();
-
-        DrawWriteOverTextBoxes();
+        DrawEditorTextPanelBackRound();
         
-        DrawEditorTerminal();
+        if (_state.editor.layout.textPanel.CurrentLoadedFile.Length > 0)
+        {
+            DrawEditorTextPanel();
+
+            DrawWriteOverTextBoxes();
+        }
+        else 
+        { 
+            //meschien LOADFILE OFZO
+        }
+
+        //DrawEditorTerminal();
     }
 
     private void DrawEditorTextPanel()
     {
-        DrawEditorTextPanelBackRound();
-
         DrawTextPanelCursor();
 
         DrawTextMouseCursor();
