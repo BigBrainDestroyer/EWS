@@ -68,6 +68,11 @@ public class UpdateEditorPanelText
                 UpdateEnterToText(cursorTextPosition, newString, panelText);
 
             keyboardKeyDownSettings[KeyboardKey.Enter] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Enter].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Enter].ReactionInterval);
+
+            if (fileChangeTimer.StartTime == 0)
+            {
+                fileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(fileChangeTimer, stopwatch,  true);
+            }
         }
         else if (Raylib.IsKeyPressed(KeyboardKey.Backspace) || keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Backspace].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Backspace].ReactionInterval)
         {
@@ -75,11 +80,21 @@ public class UpdateEditorPanelText
                 UpdateBackspaceToString(cursorTextPosition, newString, panelText);
 
             keyboardKeyDownSettings[KeyboardKey.Backspace] = new KeyboardKeyDownSettings(keyboardKeyTimeDown[KeyboardKey.Backspace].TotalDownTime, keyboardKeyDownSettings[KeyboardKey.Backspace].ReactionInterval);
+        
+            if (fileChangeTimer.StartTime == 0)
+            {
+                fileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(fileChangeTimer, stopwatch,  true);
+            }
         }
         else if (Raylib.IsKeyPressed(KeyboardKey.Tab))
         {
             (cursorTextPosition, newString, panelText) =
                 UpdateTabToString(cursorTextPosition, newString, panelText, tapTextSpaces);
+
+            if (fileChangeTimer.StartTime == 0)
+            {
+                fileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(fileChangeTimer, stopwatch,  true);
+            }
         }
         else if (Raylib.IsKeyPressed(KeyboardKey.Up) || keyboardKeyTimeDown[KeyboardKey.Up].TotalDownTime > keyboardDownDuration && keyboardKeyTimeDown[KeyboardKey.Up].TotalDownTime - keyboardKeyDownSettings[KeyboardKey.Up].LastReactionTime >= keyboardKeyDownSettings[KeyboardKey.Up].ReactionInterval)
         {
