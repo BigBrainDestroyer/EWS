@@ -10,6 +10,7 @@ public class UpdateApp
     private readonly MazeGenerator _mazeGenerator;
     private readonly UpdateMazeLayout _mazeLayout;
     private readonly UpdateArchive _archive;
+    private readonly AlgoConnectorController _connectorController;
 
     public UpdateApp(AppState state)
     {
@@ -20,6 +21,7 @@ public class UpdateApp
         _mazeGenerator = new MazeGenerator(_state);
         _mazeLayout = new UpdateMazeLayout(_state);
         _archive = new UpdateArchive(_state);
+        _connectorController = new AlgoConnectorController(_state);
     }
     
     public void App()
@@ -36,6 +38,8 @@ public class UpdateApp
         {
             _mazeGenerator.Generator();
         }
+
+        _connectorController.Controller();
 
         _mazeLayout.MazeLayout();
     }

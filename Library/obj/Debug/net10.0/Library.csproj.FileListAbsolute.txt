@@ -1,0 +1,12 @@
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/bin/Debug/net10.0/Library.deps.json
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/bin/Debug/net10.0/Library.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/bin/Debug/net10.0/Library.pdb
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.GeneratedMSBuildEditorConfig.editorconfig
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.AssemblyInfoInputs.cache
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.AssemblyInfo.cs
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.csproj.CoreCompileInputs.cache
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.sourcelink.json
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/refint/Library.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/Library.pdb
+/home/bigbraindestroyer/Documents/GitHub/EWS/Library/obj/Debug/net10.0/ref/Library.dll

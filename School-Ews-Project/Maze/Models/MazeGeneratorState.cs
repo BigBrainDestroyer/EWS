@@ -41,18 +41,19 @@ public struct WallStates
     public WallState Y;
 }
 
-
 public class MazeGeneratorState
 {
     public Maze[] AllMazes { get; set; } = new Maze[0];
 
     public int[][] MazeSeedBach { get; set; } = new int[0][];
-    
+
+    Vector2[] MazeEndPoints { get; set; } = new Vector2[0];
+
     public Vector2 MazeSize = new Vector2(20, 20);
 
-    public bool ReadingAllMazes { get; set; } = false;
+    public volatile bool ReadingAllMazes = false;
 
     public int MazeMakers { get; set; } = 1;
     
-    public int MazeBachSize { get; set; } = 1;
+    public int MazeBachSize { get; set; } = 1;   
 }

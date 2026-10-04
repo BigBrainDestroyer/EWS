@@ -43,3 +43,5 @@
 /home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Debug/net10.0/School-Ews-Project.genruntimeconfig.cache
 /home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Debug/net10.0/ref/School-Ews-Project.dll
 /home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Debug/net10.0/School-Ews-Project.sourcelink.json
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Debug/net10.0/Library.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Debug/net10.0/Library.pdb
