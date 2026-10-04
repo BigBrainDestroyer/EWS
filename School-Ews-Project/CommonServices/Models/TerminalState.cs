@@ -17,4 +17,10 @@ public class TerminalState
     public string CommandCloseTerminal { get; } = "exit";
     public string CommandRequestedPath { get; } = "cd";
     public string CommandNewConsole { get; } = "dotnet new console";
+    public string CommandNewReference { get; } = "dotnet add reference";
+
+
+    public string ProjectsDllReferenceFileLocation { get; set; } = "";
+    public string DllProjectFolderName { get; } = "Library";
+    public string DllProjectReferenceFileName { get; } = "Library.csproj";
 }

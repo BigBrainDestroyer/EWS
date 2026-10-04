@@ -25,3 +25,15 @@ public struct IVector2
         Y = y;
     }
 }
+
+public struct MazeNavigator
+{
+    public int X;
+    public int Y;
+}
+
+public struct WallStates
+{
+    public WallState X;
+    public WallState Y;
+}

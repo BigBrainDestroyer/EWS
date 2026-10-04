@@ -117,6 +117,19 @@ public class Initialize
         _archive.CurrentStorageDataLocation = baseProjectPath;
     }
 
+    public void InitializeProjectsDllLocation()
+    {
+        var _archive = _state.archive;
+        var _terminal = _state.common.terminal;
+
+        _terminal.ProjectsDllReferenceFileLocation =
+            _archive.ProjectsDataLocation.Substring(
+                0,
+                _archive.ProjectsDataLocation.Length -
+                _archive.ProjectsDataLocation.Split(_archive.PathSyntax).Last().Length
+            ) + _terminal.DllProjectFolderName + _archive.PathSyntax + _terminal.DllProjectReferenceFileName ;
+    }
+
     public void LoadStorage()
     {
         var _archive = _state.archive;

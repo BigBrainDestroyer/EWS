@@ -18,6 +18,8 @@ public class Program
         initialize.OsPlatform();
 
         initialize.InitializeProjectsDataLocation();
+
+        initialize.InitializeProjectsDllLocation();
         
         initialize.FileWatcher();
 

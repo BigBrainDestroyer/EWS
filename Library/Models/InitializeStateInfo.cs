@@ -1,4 +1,5 @@
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Runtime.InteropServices;
 
 namespace ShareData;
@@ -38,7 +39,7 @@ internal static class Initialize
         string sharedDataFolderPath = Directory.GetCurrentDirectory().Substring(
             0,
             Directory.GetCurrentDirectory().Length - 
-            Directory.GetCurrentDirectory().Split(State.pathSyntax).Last().Length 
+            Directory.GetCurrentDirectory().Split(State.PathSyntax).Last().Length 
         ) + State.ShareDataFolderName;
 
         if(!Directory.Exists(sharedDataFolderPath))
@@ -52,7 +53,7 @@ internal static class Initialize
     public static string ShareMazeDataFilePath()
     {
 
-        string filePath = SharedDataFolderPath() + State.pathSyntax + State.ShareMazeDataFileName;
+        string filePath = SharedDataFolderPath() + State.PathSyntax + State.ShareMazeDataFileName;
 
         if(!File.Exists(filePath))
         {
@@ -60,5 +61,17 @@ internal static class Initialize
         }
 
         return  filePath;
+    }
+
+    public static JsonSerializerOptions JsonSerializeSettings()
+    {
+        JsonSerializerOptions jsonSerializeSettings = new JsonSerializerOptions();
+
+        //Settings
+        jsonSerializeSettings.Converters.Add(new JsonStringEnumConverter());
+        jsonSerializeSettings.WriteIndented = true;
+        jsonSerializeSettings.PropertyNameCaseInsensitive = true;
+
+        return jsonSerializeSettings;
     }
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using ShareData;
 
 namespace Program;
 
@@ -35,6 +36,7 @@ public class OutsideTerminal
             terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath);
             terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath + " " + requestedFolderPath);
             terminal.StandardInput.WriteLine(_terminal.CommandNewConsole);
+            terminal.StandardInput.WriteLine(_terminal.CommandNewReference + " " + _terminal.ProjectsDllReferenceFileLocation);
             terminal.StandardInput.WriteLine(_terminal.CommandCloseTerminal);
             terminal.Dispose();
         }

@@ -27,18 +27,11 @@ public class AlgoConnectorController
         {
             var ShareObj = new ShareMazeData();
 
-            ShareObj.AllMazes = new ShareData.Maze[1];
-
-            var JsonSettings = new JsonSerializerOptions();
-            
-            JsonSettings.Converters.Add(new JsonStringEnumConverter());
-
-            JsonSettings.WriteIndented = true;
-            JsonSettings.PropertyNameCaseInsensitive = true;
+            ShareObj.AllMazes = _state.maze.generator.AllMazes;
 
             File.WriteAllText(
                 ShareData.DirectoryInfo.ShareMazeDataFilePath(),
-                JsonSerializer.Serialize(ShareObj, JsonSettings)
+                JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
             );
         }
     }

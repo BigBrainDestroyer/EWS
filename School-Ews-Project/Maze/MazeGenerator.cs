@@ -1,3 +1,4 @@
+using ShareData;
 using System.Numerics;
 
 namespace Program;
