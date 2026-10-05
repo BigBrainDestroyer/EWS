@@ -12,8 +12,6 @@ public class Program
         var state = new AppState();
         var initialize = new Initialize(state);
 
-        ShareData.CommonData.StartCommonDataWatcher();
-
         initialize.Window();
 
         initialize.StartStopwatch();

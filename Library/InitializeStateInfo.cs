@@ -71,6 +71,18 @@ internal static class Initialize
         return  filePath;
     }
 
+    public static string ShareAlgoDataFilePath()
+    {
+        string filePath = SharedDataFolderPath() + State.PathSyntax + State.ShareAlgoDataFileName;
+
+        if(!File.Exists(filePath))
+        {
+            File.Create(filePath).Close();
+        }
+
+        return  filePath;
+    }
+
     public static JsonSerializerOptions JsonSerializeSettings()
     {
         JsonSerializerOptions jsonSerializeSettings = new JsonSerializerOptions();

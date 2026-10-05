@@ -1,7 +1,7 @@
 
 namespace ShareData;
 
-public enum OsSystem
+internal enum OsSystem
 {
     Linux,
     Windows

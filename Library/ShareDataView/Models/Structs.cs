@@ -1,10 +1,26 @@
 
 namespace ShareData;
 
+public struct CommonUsageDataHistory
+{
+    public DVector2 StopWatchTime       { get; set; }
+    public double UsagePercentageCpu    { get; set; }
+    public double UsagePercentageRamMb  { get; set; }
+    public double UsagePercentageGpu    { get; set; }
+
+    public CommonUsageDataHistory(DVector2 stopWatchTime, double usagePercentageCpu, double usagePercentageRamMb, double usagePercentageGpu)
+    {
+        StopWatchTime = stopWatchTime;
+        UsagePercentageCpu = usagePercentageCpu;
+        UsagePercentageRamMb = usagePercentageRamMb;
+        UsagePercentageGpu = usagePercentageGpu;
+    }
+}
+
 public struct DVector2
 {
-    double X { get; set; }
-    double Y { get; set; }
+    public double X { get; set; }
+    public double Y { get; set; }
 
     public DVector2(double x, double y)
     {
@@ -35,8 +51,8 @@ public struct BoolVector4
 
 public struct SlotSearchedWithTime
 {
-    double Time { get; set; }
-    IVector2 SlotCoordinates { get; set; }
+    public double Time { get; set; }
+    public IVector2 SlotCoordinates { get; set; }
 
     public SlotSearchedWithTime(double time, IVector2 slotCoordinates)
     {
@@ -55,6 +71,18 @@ public struct SlotDataVariables
     {
         SlotSearchedWithTime = slotSearchedWithTime;
         RepeatedSlotSearched = repeatedSlotSearched;
+        MazeNumber = mazeNumber;
+    }
+}
+
+public struct MazeFinalPath
+{
+    public IVector2[] SlotFinalPathCoordinates { get; set; }
+    public int MazeNumber { get; set; }
+
+    public MazeFinalPath(IVector2[] slotFinalPathCoordinates, int mazeNumber)
+    {
+        SlotFinalPathCoordinates = slotFinalPathCoordinates;
         MazeNumber = mazeNumber;
     }
 }

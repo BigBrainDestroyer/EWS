@@ -4,11 +4,59 @@ namespace ShareData;
 
 public static class NavigatorHelper
 {
-    public static WallState[] GetSlotWallDataState(Maze currentMaze, IVector2 currentNavigatorCoordinates)
-    {
-        AddNewSearchedSlot(currentMaze, currentNavigatorCoordinates);
+    //Je kan Doel einde van de maze krijgen 
+    //Nieuwe positie aanvragen als legaal door
+    //Je omgeving data krijgen 
 
-        return CheckGivenSlotWalls(currentMaze, currentNavigatorCoordinates);
+    public static IVector2 CurrentMazeEndPoint()
+    {
+        return App.runningMaze.currentMazeEndPoint;
+    }
+
+    public static IVector2 RequestNewNavigatorPosition(Directions requestedDirection)
+    {
+        if(CheckGivenSlotWalls(App.runningMaze.currentMaze, App.runningMaze.CurrentNavigatorCoordinates)[(int)requestedDirection] == WallState.Open)
+        {
+            switch(requestedDirection)
+            {
+                case Directions.Up: return 
+                    new IVector2(
+                        App.runningMaze.CurrentNavigatorCoordinates.X, 
+                        App.runningMaze.CurrentNavigatorCoordinates.Y - 1
+                    ); 
+
+                case Directions.Right: return 
+                    new IVector2(
+                        App.runningMaze.CurrentNavigatorCoordinates.X + 1, 
+                        App.runningMaze.CurrentNavigatorCoordinates.Y
+                    ); 
+
+                case Directions.Down: return 
+                    new IVector2(
+                        App.runningMaze.CurrentNavigatorCoordinates.X, 
+                        App.runningMaze.CurrentNavigatorCoordinates.Y + 1
+                    ); 
+
+                case Directions.Left: return 
+                    new IVector2(
+                        App.runningMaze.CurrentNavigatorCoordinates.X - 1, 
+                        App.runningMaze.CurrentNavigatorCoordinates.Y
+                    ); 
+            }
+
+            return App.runningMaze.CurrentNavigatorCoordinates;
+        }
+        else
+        {
+            return App.runningMaze.CurrentNavigatorCoordinates;
+        }
+    }
+    
+    public static WallState[] GetSlotWallsData()
+    {
+        AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.currentMazeNumber);
+
+        return CheckGivenSlotWalls(App.runningMaze.currentMaze, App.runningMaze.CurrentNavigatorCoordinates);
     }
 
     private static WallState[] CheckGivenSlotWalls(Maze currentMaze, IVector2 currentNavigatorCoordinates)

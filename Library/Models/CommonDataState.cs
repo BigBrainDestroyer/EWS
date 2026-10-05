@@ -8,7 +8,7 @@ internal class CommonDataState
 
     public volatile Stopwatch ProjectStopWatch = new Stopwatch();
 
-    public volatile CommonDataHistory CommonDataHistory = new CommonDataHistory();
+    public volatile List<CommonUsageDataHistory> CommonUsageDataHistory = new List<CommonUsageDataHistory>();
 
     public volatile List<SlotDataVariables> SlotSearchedHistory = new List<SlotDataVariables>();
 }

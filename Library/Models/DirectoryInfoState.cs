@@ -10,4 +10,6 @@ internal class DirectoryInfoState
     public string SharedDataFolderPath { get; } = Initialize.SharedDataFolderPath();
 
     public string ShareMazeDataFilePath { get; } = Initialize.ShareMazeDataFilePath();
+
+    public string ShareAlgoDataFilePath { get; } = Initialize.ShareAlgoDataFilePath();
 }

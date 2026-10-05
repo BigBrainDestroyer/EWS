@@ -13,8 +13,8 @@ public static class DirectoryInfo
         return App.directoryInfo.ShareMazeDataFilePath;
     }
 
-    public static string Test()
+    public static string ShareAlgoDataFilePath()
     {
-        return Directory.GetCurrentDirectory();
+        return App.directoryInfo.ShareAlgoDataFilePath;
     }
 }
