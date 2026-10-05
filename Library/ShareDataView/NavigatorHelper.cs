@@ -1,4 +1,3 @@
-using System.Numerics;
 
 namespace ShareData;
 
@@ -8,14 +7,33 @@ public static class NavigatorHelper
     //Nieuwe positie aanvragen als legaal door
     //Je omgeving data krijgen 
 
+    public static void GiveCurrentMazeFinalPath(MazeFinalPath finalPath)
+    {
+        App.commonData.MazeFinalPaths.Add(finalPath);
+
+        AlgoSandbox.UpdateRunningMazeVariables();
+    }
+    
+    public static bool IsCurrentMazeSolved()
+    {
+        if(App.runningMaze.CurrentMazeEndPoint.X == App.runningMaze.CurrentNavigatorCoordinates.X && App.runningMaze.CurrentMazeEndPoint.Y == App.runningMaze.CurrentNavigatorCoordinates.Y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     public static IVector2 CurrentMazeEndPoint()
     {
-        return App.runningMaze.currentMazeEndPoint;
+        return App.runningMaze.CurrentMazeEndPoint;
     }
 
     public static IVector2 RequestNewNavigatorPosition(Directions requestedDirection)
     {
-        if(CheckGivenSlotWalls(App.runningMaze.currentMaze, App.runningMaze.CurrentNavigatorCoordinates)[(int)requestedDirection] == WallState.Open)
+        if(CheckGivenSlotWalls(App.runningMaze.CurrentMaze, App.runningMaze.CurrentNavigatorCoordinates)[(int)requestedDirection] == WallState.Open)
         {
             switch(requestedDirection)
             {
@@ -54,9 +72,9 @@ public static class NavigatorHelper
     
     public static WallState[] GetSlotWallsData()
     {
-        AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.currentMazeNumber);
+        AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
 
-        return CheckGivenSlotWalls(App.runningMaze.currentMaze, App.runningMaze.CurrentNavigatorCoordinates);
+        return CheckGivenSlotWalls(App.runningMaze.CurrentMaze, App.runningMaze.CurrentNavigatorCoordinates);
     }
 
     private static WallState[] CheckGivenSlotWalls(Maze currentMaze, IVector2 currentNavigatorCoordinates)
@@ -117,7 +135,7 @@ public static class NavigatorHelper
                 currentMazeNumber
             );
         
-        if(App.commonData.SlotSearchedHistory.Contains(slotData))
+        if(App.commonData.SlotSearchedHistory.Any(maze => maze.SlotSearchedWithTime.SlotCoordinates.X == slotData.SlotSearchedWithTime.SlotCoordinates.X && maze.SlotSearchedWithTime.SlotCoordinates.Y == slotData.SlotSearchedWithTime.SlotCoordinates.Y && maze.MazeNumber == slotData.MazeNumber))
         {
             slotData.RepeatedSlotSearched = true;
 

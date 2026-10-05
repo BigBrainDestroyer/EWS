@@ -7,5 +7,5 @@ public class ShareMazeData
 
     public IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
 
-    public int MazeCount { get; set; }
+    public IVector2[] MazeBeginPoints { get; set; } = new IVector2[0];
 }

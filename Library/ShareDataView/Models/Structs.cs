@@ -3,10 +3,10 @@ namespace ShareData;
 
 public struct CommonUsageDataHistory
 {
-    public DVector2 StopWatchTime       { get; set; }
-    public double UsagePercentageCpu    { get; set; }
-    public double UsagePercentageRamMb  { get; set; }
-    public double UsagePercentageGpu    { get; set; }
+    public DVector2 StopWatchTime { get; set; }
+    public double UsagePercentageCpu { get; set; }
+    public double UsagePercentageRamMb { get; set; }
+    public double UsagePercentageGpu { get; set; }
 
     public CommonUsageDataHistory(DVector2 stopWatchTime, double usagePercentageCpu, double usagePercentageRamMb, double usagePercentageGpu)
     {
