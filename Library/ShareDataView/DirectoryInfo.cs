@@ -12,4 +12,9 @@ public static class DirectoryInfo
     {
         return App.directoryInfo.ShareMazeDataFilePath;
     }
+
+    public static string Test()
+    {
+        return Directory.GetCurrentDirectory();
+    }
 }

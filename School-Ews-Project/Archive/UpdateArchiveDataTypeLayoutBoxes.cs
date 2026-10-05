@@ -173,11 +173,6 @@ public class UpdateArchiveDataTypeLayoutBoxes
 
     private int CalculateNewCharSpace(Box newSingleDataTypeBox, RaylibText text, Font textFont, Vector2 newTextureSize, float textureTextPercentageOffSet)
     {
-        //Console.WriteLine($"newSingleDataTypeBox.PixelLengths.X {newSingleDataTypeBox.PixelLengths.X}");
-        //Console.WriteLine($"newTextureSize.X {newTextureSize.X}");
-        //Console.WriteLine($"textureTextPercentageOffSet {textureTextPercentageOffSet}");
-        //Console.WriteLine($"Raylib.MeasureTextEx(textFont, t, text.TextSize, text.TextSpacing).X {Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X}");
-
         //Als de textFont niet geladen is kan is Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X gelijk aan 0 dus int is maximaal
         
         return ((newSingleDataTypeBox.PixelLengths.X - newTextureSize.X - (textureTextPercentageOffSet / 100f * newSingleDataTypeBox.PixelLengths.X)) / Raylib.MeasureTextEx(textFont, "t", text.TextSize, text.TextSpacing).X <= 0 ) ? 0 :
@@ -205,7 +200,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
         string parentFolder;
         int lastPathNameLength;
 
-        storageKeys.Sort();
+        storageKeys.Sort(StringComparer.Ordinal);
 
         foreach (string folderName in storageKeys)
         {
@@ -246,16 +241,12 @@ public class UpdateArchiveDataTypeLayoutBoxes
         }
 
         storageKeys = viewStorage.Keys.ToArray();
-
-        storageKeys.Sort();
-
+        
+        storageKeys.Sort(StringComparer.Ordinal);
+        
         string viewText = "";
 
         int totalViewStorageCount = archiveDataTypeBoxRowOffSet;
-
-        storageKeys = viewStorage.Keys.ToArray();
-        
-        storageKeys.Sort();
 
         float heightIncrement = 0;
         
@@ -361,8 +352,6 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 }
             }
         }
-
-        //Console.WriteLine(totalViewStorageCount);
 
         return (newArchiveDataBoxes.ToArray(), totalViewStorageCount);
     }

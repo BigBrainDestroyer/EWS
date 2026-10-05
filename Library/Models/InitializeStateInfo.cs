@@ -36,6 +36,14 @@ internal static class Initialize
     
     public static string SharedDataFolderPath()
     {
+        string ewsFolderPath = Directory.GetCurrentDirectory();
+        string[] currentDirectoryArray = Directory.GetCurrentDirectory().Split(State.PathSyntax);
+
+        for (int i = Directory.GetCurrentDirectory().Split(State.PathSyntax).Length - 1; i > 0; i--)
+        {
+            ewsFolderPath = ewsFolderPath.Substring(0, ewsFolderPath.Length - currentDirectoryArray[i].Length);
+        }
+
         string sharedDataFolderPath = Directory.GetCurrentDirectory().Substring(
             0,
             Directory.GetCurrentDirectory().Length - 

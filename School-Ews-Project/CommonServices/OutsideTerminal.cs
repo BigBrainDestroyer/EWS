@@ -30,9 +30,6 @@ public class OutsideTerminal
 
         if(terminal != null)
         {
-
-            Console.WriteLine("test");
-            
             terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath);
             terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath + " " + requestedFolderPath);
             terminal.StandardInput.WriteLine(_terminal.CommandNewConsole);

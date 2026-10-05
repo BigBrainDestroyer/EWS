@@ -11,7 +11,7 @@ public class MazeGeneratorState
 
     IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
 
-    public Vector2 MazeSize = new Vector2(20, 20);
+    public Vector2 MazeSize = new Vector2(4, 4);
 
     public volatile bool ReadingAllMazes = false;
 

@@ -1,6 +1,49 @@
 
 namespace ShareData;
 
+public struct DVector2
+{
+    double X { get; set; }
+    double Y { get; set; }
+
+    public DVector2(double x, double y)
+    {
+        X = x;
+        Y = y;
+    }
+}
+
+public struct BoolVector4
+{
+    public bool X;
+    public bool Y;
+    public bool Z;
+    public bool W;
+
+    public bool[] Array;
+
+    public BoolVector4(bool x, bool y, bool z, bool w)
+    {
+        X = x;
+        Y = y;
+        Z = z;
+        W = w;
+
+        Array = new bool[4] {x, y, z, w};
+    }
+}
+
+public struct SlotSearchedWithTime
+{
+    double Time { get; set; }
+    IVector2 SlotCoordinates { get; set; }
+
+    public SlotSearchedWithTime(double time, IVector2 slotCoordinates)
+    {
+        Time = time;
+        SlotCoordinates = slotCoordinates;
+    }
+}
 
 public struct Maze
 {

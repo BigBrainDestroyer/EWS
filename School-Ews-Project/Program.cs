@@ -1,4 +1,5 @@
-﻿using Raylib_cs;
+﻿using ShareData;
+using Raylib_cs;
 
 namespace Program;
 
@@ -10,7 +11,9 @@ public class Program
     {
         var state = new AppState();
         var initialize = new Initialize(state);
-        
+
+        ShareData.CommonData.StartCommonDataWatcher();
+
         initialize.Window();
 
         initialize.StartStopwatch();

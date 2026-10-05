@@ -117,7 +117,7 @@ public class UpdateArchiveStorage
     {
         string[] folders = Directory.GetDirectories(directory);
 
-        Array.Sort(folders);
+        folders.Sort(StringComparer.Ordinal);
 
         foreach(string folder in folders)
         {
