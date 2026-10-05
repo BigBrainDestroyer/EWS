@@ -8,7 +8,7 @@ public class DrawUi
     private readonly DrawDiagnostics _diagnostics;
     private readonly DrawEditorLayout _drawEditorLayout;
     private readonly DrawMazeLayout _drawMazeLayout;
-    private readonly DrawCommonHeader _drawCommonHeader;
+    private readonly DrawHeaderLayout _drawHeader;
     private readonly DrawArchive _drawArchive;
 
     public DrawUi(AppState state)
@@ -18,7 +18,7 @@ public class DrawUi
         _diagnostics = new DrawDiagnostics(_state);
         _drawEditorLayout = new DrawEditorLayout(_state);
         _drawMazeLayout = new DrawMazeLayout(_state);
-        _drawCommonHeader = new DrawCommonHeader(_state);
+        _drawHeader = new DrawHeaderLayout(_state);
         _drawArchive = new DrawArchive(_state);
     }
  
@@ -27,7 +27,7 @@ public class DrawUi
         Raylib.BeginDrawing();
         Raylib.ClearBackground(_state.common.boxes.MainBoxesBackgroundColor);
 
-        _drawCommonHeader.CommonHeader();
+        _drawHeader.Draw();
 
         _diagnostics.Draw();
         

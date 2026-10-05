@@ -7,10 +7,9 @@ public class UpdateApp
     private readonly UpdateActiveMainBox _activeMainBox;
     private readonly CalculateMainBoxes _calculateMainBoxes;
     private readonly UpdateEditorLayout _editorLayout;
-    private readonly MazeGenerator _mazeGenerator;
-    private readonly UpdateMazeLayout _mazeLayout;
     private readonly UpdateArchive _archive;
     private readonly AlgoConnectorController _connectorController;
+    private readonly MazeController _mazeController;
 
     public UpdateApp(AppState state)
     {
@@ -18,8 +17,7 @@ public class UpdateApp
         _activeMainBox = new UpdateActiveMainBox(_state);
         _calculateMainBoxes = new CalculateMainBoxes(_state);
         _editorLayout = new UpdateEditorLayout(_state);
-        _mazeGenerator = new MazeGenerator(_state);
-        _mazeLayout = new UpdateMazeLayout(_state);
+        _mazeController = new MazeController(_state);
         _archive = new UpdateArchive(_state);
         _connectorController = new AlgoConnectorController(_state);
     }
@@ -34,13 +32,8 @@ public class UpdateApp
 
         _editorLayout.EditorLayout();
 
-        if(_state.maze.generator.AllMazes.Length < 1)
-        {
-            _mazeGenerator.Generator();
-        }
-
         _connectorController.Controller();
 
-        _mazeLayout.MazeLayout();
+        _mazeController.Controller();
     }
 }

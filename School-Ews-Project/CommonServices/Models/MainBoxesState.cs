@@ -21,7 +21,6 @@ public enum MainBoxNames
 
 public class MainBoxesState
 {
-    public Color HeaderBackgroundColor { get; set; } = new Color(18, 22, 26, 255);
     public Color MainBoxesBackgroundColor { get; set; } = new Color(43, 46, 49, 255);
 
     public MainBoxNames ActiveMainBox { get; set; } = MainBoxNames.Editor;

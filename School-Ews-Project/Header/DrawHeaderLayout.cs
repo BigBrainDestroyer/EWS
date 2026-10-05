@@ -2,28 +2,29 @@ using Raylib_cs;
 
 namespace Program;
 
-public class DrawCommonHeader
+public class DrawHeaderLayout
 {
     private readonly AppState _state;
 
-    public DrawCommonHeader(AppState state)
+    public DrawHeaderLayout(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
-    public void CommonHeader()
+    public void Draw()
     {
-        DrawHeader();
+        DrawHeaderBackground();
     }
 
-    private void DrawHeader()
+    public void DrawHeaderBackground()
     {
         var _boxes = _state.common.boxes;
+        var _header = _state.HeaderState;
 
         Raylib.DrawRectangleV(
             _boxes.HeaderPixelPosition,
             _boxes.HeaderPixelLengths,
-           _boxes.HeaderBackgroundColor 
+            _header.HeaderBackgroundColor
         );
-    }  
+    }
 }

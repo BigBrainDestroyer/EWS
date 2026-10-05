@@ -73,8 +73,7 @@ public static class AlgoSandbox
             App.runningMaze.CurrentNavigatorCoordinates = App.shareMazeData.MazeBeginPoints[App.runningMaze.CurrentMazeNumber];
             App.runningMaze.CurrentMazeEndPoint = App.shareMazeData.MazeEndPoints[App.runningMaze.CurrentMazeNumber];
         }
-
-        if(App.runningMaze.CurrentMazeNumber + 1 < App.shareMazeData.AllMazes.Count())
+        else if(App.runningMaze.CurrentMazeNumber + 1 < App.shareMazeData.AllMazes.Count())
         {
             App.runningMaze.CurrentMazeNumber += 1;
             App.runningMaze.CurrentMaze = App.shareMazeData.AllMazes[App.runningMaze.CurrentMazeNumber];

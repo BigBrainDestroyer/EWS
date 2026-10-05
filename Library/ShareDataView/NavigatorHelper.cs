@@ -31,42 +31,36 @@ public static class NavigatorHelper
         return App.runningMaze.CurrentMazeEndPoint;
     }
 
-    public static IVector2 RequestNewNavigatorPosition(Directions requestedDirection)
+    public static void RequestNewNavigatorPosition(Directions requestedDirection)
     {
         if(CheckGivenSlotWalls(App.runningMaze.CurrentMaze, App.runningMaze.CurrentNavigatorCoordinates)[(int)requestedDirection] == WallState.Open)
         {
             switch(requestedDirection)
             {
-                case Directions.Up: return 
+                case Directions.Up: App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y - 1
-                    ); 
+                    ); break;
 
-                case Directions.Right: return 
+                case Directions.Right: App.runningMaze.CurrentNavigatorCoordinates = 
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X + 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
-                    ); 
+                    ) ; break; 
 
-                case Directions.Down: return 
+                case Directions.Down: App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y + 1
-                    ); 
+                    ); break;
 
-                case Directions.Left: return 
+                case Directions.Left: App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X - 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
-                    ); 
+                    ); break;
             }
-
-            return App.runningMaze.CurrentNavigatorCoordinates;
-        }
-        else
-        {
-            return App.runningMaze.CurrentNavigatorCoordinates;
         }
     }
     

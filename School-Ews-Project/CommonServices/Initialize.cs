@@ -121,7 +121,7 @@ public class Initialize
     {
         var _archive = _state.archive;
         var _terminal = _state.common.terminal;
-
+        
         _terminal.ProjectsDllReferenceFileLocation =
             _archive.ProjectsDataLocation.Substring(
                 0,
