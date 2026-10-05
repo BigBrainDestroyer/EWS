@@ -4,7 +4,7 @@ namespace ShareData;
 
 public static class CommonData
 {
-    public static void StartCommonDataWatcher()
+    public static void CommonDataWatcher()
     {
         Task.Run(() =>
         {
@@ -41,35 +41,26 @@ public static class CommonData
             App.commonData.ProjectStopWatch.Stop();
 
             //eindig laatste van progama
-            
+            WriteAlgoShareData();
+
             Environment.Exit(0);
         });
 
         while(!App.commonData.ProjectStopWatch.IsRunning)
         {
-            Thread.Sleep(50);
+            Thread.Sleep(5);
         }
     }
 
-    public static void AddNewSearchedSlot(IVector2 newDiscovertSlotCoordinates)
+    private static void WriteAlgoShareData()
     {
-        App.commonData.SlotSearchedHistoryWithTime.Add(
-            new SlotSearchedWithTime(
-                App.commonData.ProjectStopWatch.Elapsed.TotalSeconds,
-                newDiscovertSlotCoordinates
-            )
+        var ShareObj = new ShareAlgoData();
+
+        ShareObj. = _state.maze.generator.AllMazes;
+
+        File.WriteAllText(
+            ShareData.DirectoryInfo.ShareMazeDataFilePath(),
+            JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
         );
-    }
-
-    public static void AllSlotSearchedCoordinates(IVector2 requestedSlot)
-    {
-        if(App.commonData.AllSlotSearchedCoordinates.Contains(requestedSlot))
-        {
-            return;
-        }
-        else
-        {
-            App.commonData.AllSlotSearchedCoordinates.Add(requestedSlot);
-        }
     }
 }

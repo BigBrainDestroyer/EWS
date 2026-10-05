@@ -4,8 +4,10 @@ namespace ShareData;
 
 public static class NavigatorHelper
 {
-    public static WallState[] AvailableSlots(Maze currentMaze, IVector2 currentNavigatorCoordinates)
+    public static WallState[] GetSlotWallDataState(Maze currentMaze, IVector2 currentNavigatorCoordinates)
     {
+        AddNewSearchedSlot(currentMaze, currentNavigatorCoordinates);
+
         return CheckGivenSlotWalls(currentMaze, currentNavigatorCoordinates);
     }
 
@@ -53,5 +55,29 @@ public static class NavigatorHelper
         }
 
         return newWallState;
+    }
+
+    private static void AddNewSearchedSlot(IVector2 newDiscovertSlotCoordinates, int currentMazeNumber)
+    {
+        SlotDataVariables slotData =
+            new SlotDataVariables(
+                new SlotSearchedWithTime(
+                        App.commonData.ProjectStopWatch.Elapsed.TotalSeconds,
+                        newDiscovertSlotCoordinates
+                    ),
+                false,
+                currentMazeNumber
+            );
+        
+        if(App.commonData.SlotSearchedHistory.Contains(slotData))
+        {
+            slotData.RepeatedSlotSearched = true;
+
+            App.commonData.SlotSearchedHistory.Add(slotData);
+        }
+        else
+        {
+            App.commonData.SlotSearchedHistory.Add(slotData);
+        }
     }
 }

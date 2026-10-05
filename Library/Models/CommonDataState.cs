@@ -10,7 +10,5 @@ internal class CommonDataState
 
     public volatile CommonDataHistory CommonDataHistory = new CommonDataHistory();
 
-    public volatile List<SlotSearchedWithTime> SlotSearchedHistoryWithTime = new List<SlotSearchedWithTime>();
-
-    public volatile List<IVector2> AllSlotSearchedCoordinates = new List<IVector2>();
+    public volatile List<SlotDataVariables> SlotSearchedHistory = new List<SlotDataVariables>();
 }

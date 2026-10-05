@@ -45,6 +45,20 @@ public struct SlotSearchedWithTime
     }
 }
 
+public struct SlotDataVariables
+{
+    public SlotSearchedWithTime SlotSearchedWithTime { get; set; }
+    public bool RepeatedSlotSearched { get; set; }
+    public int MazeNumber { get; set; }
+
+    public SlotDataVariables(SlotSearchedWithTime slotSearchedWithTime, bool repeatedSlotSearched, int mazeNumber)
+    {
+        SlotSearchedWithTime = slotSearchedWithTime;
+        RepeatedSlotSearched = repeatedSlotSearched;
+        MazeNumber = mazeNumber;
+    }
+}
+
 public struct Maze
 {
     public WallState[][] UsingXToGetRightArray { get; set; }
