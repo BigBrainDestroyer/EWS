@@ -23,7 +23,11 @@ public class HeaderState
     public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
         new Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables>(){
             {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
-            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(9f, 1)}
+            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
+            {DrawHeaderObjectNames.MazeSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
+            {DrawHeaderObjectNames.BatchSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
+            {DrawHeaderObjectNames.PlayBackSpeed, new HeaderObjectPercentageWidthVariables(9f, 1)},
+            {DrawHeaderObjectNames.RunFolderName, new HeaderObjectPercentageWidthVariables(16f, 1)},
         };
 
     public Dictionary<DrawHeaderObjectNames, Box> HeaderObjectBoxes { get; set; } =
@@ -126,6 +130,186 @@ public class HeaderState
                 StaticVariablesInitialize.TextureArrowUp,
                 StaticVariablesInitialize.TextureArrowDown,
                 42.5f,
+                Color.Red, //textureUpColor
+                Color.Blue, //textureDownColor
+                Color.Red, //textureUpBackgroundClickFieldColor
+                Color.Red //textureDownBackgroundClickFieldColor
+            )},
+
+            {DrawHeaderObjectNames.BatchSize, new StringSlider(
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
+                
+                new CustomBox( //counterUpClickField
+                    new BoolVector4(false, true, false, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CustomBox( //counterDownClickField
+                    new BoolVector4(false, false, true, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CenterTextInBox( //titleBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(true, false, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("MazeSize", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,7),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                
+                new CenterTextInBox( //counterBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(false, false, false, true),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("counter", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,4),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                StaticVariablesInitialize.TextureArrowUp,
+                StaticVariablesInitialize.TextureArrowDown,
+                42.5f,
+                Color.Red, //textureUpColor
+                Color.Blue, //textureDownColor
+                Color.Red, //textureUpBackgroundClickFieldColor
+                Color.Red //textureDownBackgroundClickFieldColor
+            )},
+
+            {DrawHeaderObjectNames.BatchSize, new StringSlider(
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
+                
+                new CustomBox( //counterUpClickField
+                    new BoolVector4(false, true, false, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CustomBox( //counterDownClickField
+                    new BoolVector4(false, false, true, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CenterTextInBox( //titleBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(true, false, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("MazeSize", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,7),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                
+                new CenterTextInBox( //counterBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(false, false, false, true),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("counter", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,4),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                StaticVariablesInitialize.TextureArrowUp,
+                StaticVariablesInitialize.TextureArrowDown,
+                42.5f,
+                Color.Red, //textureUpColor
+                Color.Blue, //textureDownColor
+                Color.Red, //textureUpBackgroundClickFieldColor
+                Color.Red //textureDownBackgroundClickFieldColor
+            )},
+
+            {DrawHeaderObjectNames.RunFolderName, new StringSlider(
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
+                
+                new CustomBox( //counterUpClickField
+                    new BoolVector4(false, true, false, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CustomBox( //counterDownClickField
+                    new BoolVector4(false, false, true, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CenterTextInBox( //titleBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("", 0, 0),
+                    new Vector2(),
+                    new Vector2(),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    false,
+                    Color.Red,
+                    Color.Red
+                ),
+                
+                new CenterTextInBox( //counterBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(true, false, false, true),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,4),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                StaticVariablesInitialize.TextureArrowUp,
+                StaticVariablesInitialize.TextureArrowDown,
+                0,
                 Color.Red, //textureUpColor
                 Color.Blue, //textureDownColor
                 Color.Red, //textureUpBackgroundClickFieldColor

@@ -5,5 +5,6 @@ public enum DrawHeaderObjectNames
     BuildButton,
     MazeSize,
     PlayBackSpeed,
-    BatchSize
+    BatchSize,
+    RunFolderName
 }

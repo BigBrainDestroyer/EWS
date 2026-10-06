@@ -13,48 +13,48 @@ public static class CalculateCenterTextInBox
     // COLORS//
     // CORNERSTATES//
 
-    public static CenterTextInBox Calculate(CenterTextInBox currentButton)
+    public static CenterTextInBox Calculate(CenterTextInBox currentCenterTextInBox)
     {
-        Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentButton.Box.PixelLengths, currentButton.TextBorderWhiteSpacingPercentageLengths);
+        Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentCenterTextInBox.Box.PixelLengths, currentCenterTextInBox.TextBorderWhiteSpacingPercentageLengths);
 
-        if(currentButton.Font.BaseSize == 0) currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, 10, currentButton.MaxFontOffSet);
+        if(currentCenterTextInBox.Font.BaseSize == 0) currentCenterTextInBox.Font = Load.UpdateMonoSpaceFontEx(currentCenterTextInBox.Font, currentCenterTextInBox.FontPath, 10, currentCenterTextInBox.MaxFontOffSet);
         
         Vector2 totalTextSize =
             Raylib.MeasureTextEx(
-                currentButton.Font,
+                currentCenterTextInBox.Font,
                 "t",
-                currentButton.Box.PixelLengths.Y - whiteSpacePixelLengths.Y,
-                currentButton.Text.TextSpacing
+                currentCenterTextInBox.Box.PixelLengths.Y - whiteSpacePixelLengths.Y,
+                currentCenterTextInBox.Text.TextSpacing
             );
 
-        if (totalTextSize.X * currentButton.Text.Text.Length > currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X)
+        if (totalTextSize.X * currentCenterTextInBox.Text.Text.Length > currentCenterTextInBox.Box.PixelLengths.X - whiteSpacePixelLengths.X)
         {
-            int charHeight = (int)((totalTextSize.Y / totalTextSize.X) * ((currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X)/ currentButton.Text.Text.Length));
+            int charHeight = (int)((totalTextSize.Y / totalTextSize.X) * ((currentCenterTextInBox.Box.PixelLengths.X - whiteSpacePixelLengths.X)/ currentCenterTextInBox.Text.Text.Length));
 
-            currentButton.Text = new RaylibText(currentButton.Text.Text, charHeight, currentButton.Text.TextSpacing);
+            currentCenterTextInBox.Text = new RaylibText(currentCenterTextInBox.Text.Text, charHeight, currentCenterTextInBox.Text.TextSpacing);
 
-            currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, (int)currentButton.Text.TextSize, currentButton.MaxFontOffSet);
+            currentCenterTextInBox.Font = Load.UpdateMonoSpaceFontEx(currentCenterTextInBox.Font, currentCenterTextInBox.FontPath, (int)currentCenterTextInBox.Text.TextSize, currentCenterTextInBox.MaxFontOffSet);
             
-            currentButton.TextPosition =
+            currentCenterTextInBox.TextPosition =
                 new Vector2(
-                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X/2),
-                    currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y / 2) + ((currentButton.Box.PixelLengths.Y - whiteSpacePixelLengths.Y - charHeight)/2)
+                    currentCenterTextInBox.Box.PixelPosition.X + (whiteSpacePixelLengths.X/2),
+                    currentCenterTextInBox.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y / 2) + ((currentCenterTextInBox.Box.PixelLengths.Y - whiteSpacePixelLengths.Y - charHeight)/2)
                 );
         }
         else
         {
-            currentButton.Text = new RaylibText(currentButton.Text.Text, totalTextSize.Y, currentButton.Text.TextSpacing);
+            currentCenterTextInBox.Text = new RaylibText(currentCenterTextInBox.Text.Text, totalTextSize.Y, currentCenterTextInBox.Text.TextSpacing);
 
-            currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, (int)currentButton.Text.TextSize, currentButton.MaxFontOffSet);
+            currentCenterTextInBox.Font = Load.UpdateMonoSpaceFontEx(currentCenterTextInBox.Font, currentCenterTextInBox.FontPath, (int)currentCenterTextInBox.Text.TextSize, currentCenterTextInBox.MaxFontOffSet);
 
-            currentButton.TextPosition =
+            currentCenterTextInBox.TextPosition =
                 new Vector2(
-                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + ((currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X - (totalTextSize.X * currentButton.Text.Text.Length))/2),
-                    currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y/2)
+                    currentCenterTextInBox.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + ((currentCenterTextInBox.Box.PixelLengths.X - whiteSpacePixelLengths.X - (totalTextSize.X * currentCenterTextInBox.Text.Text.Length))/2),
+                    currentCenterTextInBox.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y/2)
                 );
         }
 
-        return currentButton;
+        return currentCenterTextInBox;
     }
 
     private static Vector2 CalculateTextBorderWhiteSpacingLengths(Vector2 parentBoxLengths, Vector2 whiteSpacePercentages)

@@ -20,12 +20,12 @@ public class StringSlider
     public CenterTextInBox TitleStringBox { get; set; }
     public CenterTextInBox StringSliderBox { get; set; }
 
-    public string UpTexturePath { get; set; }
+    public string UpTexturePath   { get; set; }
     public string DownTexturePath { get; set; }
 
     public float TitleStringBoxHeightPercentage { get; set; }
     
-    public StringSlider(RaylibTexture upTexture, RaylibTexture downTexture, CustomBox SlideUpClickField, CustomBox counterDownClickField, CenterTextInBox titleStringBox, CenterTextInBox stringSliderBox, string UpTexturePath, string DownTexturePath, float titleStringBoxHeightPercentage, Color textureUpColor, Color textureDownColor, Color textureUpBackgroundClickFieldColor, Color textureDownBackgroundClickFieldColor)
+    public StringSlider(RaylibTexture upTexture, RaylibTexture downTexture, CustomBox SlideUpClickField, CustomBox counterDownClickField, CenterTextInBox titleStringBox, CenterTextInBox stringSliderBox, string upTexturePath, string downTexturePath, float titleStringBoxHeightPercentage, Color textureUpColor, Color textureDownColor, Color textureUpBackgroundClickFieldColor, Color textureDownBackgroundClickFieldColor)
     {
         TextureUpColor = textureUpColor;
         TextureDownColor = textureDownColor;
@@ -38,6 +38,8 @@ public class StringSlider
         CounterDownClickField = counterDownClickField;
         TitleStringBox = titleStringBox;
         StringSliderBox = stringSliderBox;
+        UpTexturePath = upTexturePath;
+        DownTexturePath = downTexturePath;
         TitleStringBoxHeightPercentage = titleStringBoxHeightPercentage;
     }
 }

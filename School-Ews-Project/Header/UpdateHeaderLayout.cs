@@ -19,7 +19,7 @@ public class UpdateHeaderLayout
 
         _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
 
-        _header.HeaderButtons = CalculateHeaderButtons(new Font(), _header.HeaderButtons, _header.HeaderObjectBoxes);
+        _header.HeaderButtons = CalculateHeaderButtons(_header.HeaderButtons, _header.HeaderObjectBoxes);
     }
     
     private Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
@@ -78,10 +78,8 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    private Dictionary<DrawHeaderObjectNames, CenterTextInBox> CalculateHeaderButtons(Font font, Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
+    private Dictionary<DrawHeaderObjectNames, CenterTextInBox> CalculateHeaderButtons(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
     {
-
-        
         foreach(DrawHeaderObjectNames headerButtonName in headerButtons.Keys)
         {
             if(!headerButtons.ContainsKey(headerButtonName)) continue;
