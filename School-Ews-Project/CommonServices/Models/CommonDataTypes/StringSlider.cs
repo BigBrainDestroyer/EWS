@@ -14,8 +14,8 @@ public class StringSlider
     public RaylibTexture UpTexture { get; set; }
     public RaylibTexture DownTexture { get; set; }
     
-    public CustomBox CounterUpClickField { get; set; }//
-    public CustomBox CounterDownClickField { get; set; }//
+    public CustomBox CounterUpClickField { get; set; }
+    public CustomBox CounterDownClickField { get; set; }
     
     public CenterTextInBox TitleStringBox { get; set; }
     public CenterTextInBox StringSliderBox { get; set; }
