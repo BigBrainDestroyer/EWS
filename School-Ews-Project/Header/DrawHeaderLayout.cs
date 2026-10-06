@@ -1,3 +1,4 @@
+using System.Numerics;
 using Raylib_cs;
 
 namespace Program;
@@ -18,7 +19,7 @@ public class DrawHeaderLayout
         DrawHeaderObjects();
     }
 
-    public void DrawHeaderBackground()
+    private void DrawHeaderBackground()
     {
         var _boxes = _state.common.boxes;
         var _header = _state.HeaderState;
@@ -30,14 +31,16 @@ public class DrawHeaderLayout
         );
     }
 
-    public void DrawHeaderObjects()
+    private void DrawHeaderObjects()
     {
         DrawHeaderButtons();
+
+        DrawHeaderCenterTextureInBox();
 
         DrawHeaderStringSlider();
     }
 
-    public void DrawHeaderButtons()
+    private void DrawHeaderButtons()
     {
         var _header = _state.HeaderState;
         
@@ -62,7 +65,32 @@ public class DrawHeaderLayout
         }
     }
 
-    public void DrawHeaderStringSlider()
+    private void DrawHeaderCenterTextureInBox()
+    {
+        var _header = _state.HeaderState;
+        
+        foreach(DrawHeaderObjectNames headerObjectName in _header.HeaderCenterTextureInBox.Keys)
+        {
+            Custom.DrawCustomRectangle(
+                _header.HeaderCenterTextureInBox[headerObjectName].Box.PixelPosition,
+                _header.HeaderCenterTextureInBox[headerObjectName].Box.PixelLengths,
+                _header.HeaderCenterTextureInBox[headerObjectName].Box.Radius,
+                _header.HeaderCenterTextureInBox[headerObjectName].Box.CornerStates,
+                _header.HeaderCenterTextureInBox[headerObjectName].BoxBackgroundColor
+            );
+
+            Raylib.DrawTexturePro(
+                _header.HeaderCenterTextureInBox[headerObjectName].Texture.Texture,
+                _header.HeaderCenterTextureInBox[headerObjectName].Texture.TextureUsage,
+                _header.HeaderCenterTextureInBox[headerObjectName].Texture.TextureSize,
+                new Vector2(),
+                0f,
+                _header.HeaderCenterTextureInBox[headerObjectName].TextureColor
+            );
+        }
+    }
+
+    private void DrawHeaderStringSlider()
     {
         var _header = _state.HeaderState;
 

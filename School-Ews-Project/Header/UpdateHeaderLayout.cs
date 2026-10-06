@@ -19,7 +19,7 @@ public class UpdateHeaderLayout
 
         _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
 
-        (_header.HeaderButtons, _header.HeaderStringSlider) = CalculateObjects(_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderObjectBoxes);
+        (_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox) = CalculateObjects(_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox, _header.HeaderObjectBoxes);
     }
     
     private Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
@@ -76,7 +76,7 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    private (Dictionary<DrawHeaderObjectNames, CenterTextInBox>, Dictionary<DrawHeaderObjectNames, StringSlider>) CalculateObjects(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, StringSlider> headerStringSlider, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
+    private (Dictionary<DrawHeaderObjectNames, CenterTextInBox>, Dictionary<DrawHeaderObjectNames, StringSlider>, Dictionary<DrawHeaderObjectNames, CenterTextureInBox>) CalculateObjects(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, StringSlider> headerStringSlider, Dictionary<DrawHeaderObjectNames, CenterTextureInBox> headerCenterTextureInBox, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
     {
         foreach(DrawHeaderObjectNames headerObjectName in headerObjectBoxes.Keys)
         { 
@@ -102,10 +102,22 @@ public class UpdateHeaderLayout
                         headerStringSlider[headerObjectName].Box.Radius
                     );
                 
-                headerStringSlider[headerObjectName] = CalculateDigitCounter.Calculate(headerStringSlider[headerObjectName]);
+                headerStringSlider[headerObjectName] = CalculateStringSlider.Calculate(headerStringSlider[headerObjectName]);
+            }
+            else if(headerCenterTextureInBox.ContainsKey(headerObjectName))
+            {
+                headerCenterTextureInBox[headerObjectName].Box =
+                    new CustomBox(
+                        headerCenterTextureInBox[headerObjectName].Box.CornerStates,
+                        headerObjectBoxes[headerObjectName].PixelPosition,
+                        headerObjectBoxes[headerObjectName].PixelLengths,
+                        headerCenterTextureInBox[headerObjectName].Box.Radius
+                    );
+                
+                headerCenterTextureInBox[headerObjectName] = CalculateCenterTextureInBox.Calculate(headerCenterTextureInBox[headerObjectName]);
             }
         }
 
-        return (headerButtons, headerStringSlider);
+        return (headerButtons, headerStringSlider, headerCenterTextureInBox);
     }
 }

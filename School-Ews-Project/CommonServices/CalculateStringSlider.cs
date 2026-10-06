@@ -3,7 +3,7 @@ using Raylib_cs;
 
 namespace Program;
 
-public static class CalculateDigitCounter
+public static class CalculateStringSlider
 {
     public static StringSlider Calculate(StringSlider currentDigitCounter)
     {
@@ -65,7 +65,7 @@ public static class CalculateDigitCounter
         currentDigitCounter.UpTexture = 
             new RaylibTexture(
                 currentDigitCounter.UpTexture.Texture,
-                new Rectangle(0, 0, 100, 100),
+                new Rectangle(0, 0, currentDigitCounter.UpTexture.Texture.Width, currentDigitCounter.UpTexture.Texture.Height),
                 new Rectangle(
                     currentDigitCounter.CounterUpClickField.PixelPosition.X,
                     currentDigitCounter.CounterUpClickField.PixelPosition.Y,
@@ -77,7 +77,7 @@ public static class CalculateDigitCounter
         currentDigitCounter.DownTexture = 
             new RaylibTexture(
                 currentDigitCounter.DownTexture.Texture,
-                new Rectangle(0, 0, 100, 100),
+                new Rectangle(0, 0, currentDigitCounter.DownTexture.Texture.Width, currentDigitCounter.DownTexture.Texture.Height),
                 new Rectangle(
                     currentDigitCounter.CounterDownClickField.PixelPosition.X,
                     currentDigitCounter.CounterDownClickField.PixelPosition.Y,

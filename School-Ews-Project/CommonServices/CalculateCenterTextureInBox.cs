@@ -28,7 +28,7 @@ public static class CalculateCenterTextureInBox
         currentCenterTextureInBox.Texture = 
             new RaylibTexture(
                 currentCenterTextureInBox.Texture.Texture,
-                new Rectangle(0, 0, 100, 100),
+                new Rectangle(0, 0, currentCenterTextureInBox.Texture.Texture.Width, currentCenterTextureInBox.Texture.Texture.Height),
                 new Rectangle(
                     texturePixelPosition.X, 
                     texturePixelPosition.Y, 

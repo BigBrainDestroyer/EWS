@@ -75,8 +75,6 @@ public class DrawArchive
                 dataTypeBox.TextureColor
             );
 
-            //Console.WriteLine(dataTypeBox.ViewText);
-
             Raylib.DrawTextEx(
                 _font.EditorPanelRowNumbers,
                 dataTypeBox.ViewText,

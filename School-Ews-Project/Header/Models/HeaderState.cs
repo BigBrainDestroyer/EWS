@@ -15,15 +15,14 @@ public class HeaderState
 
 
 
-    //Buttons
-    public BoolVector4 CornerStates { get; } = new BoolVector4(true, true, true, true);
-
     public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;
 
     public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
         new Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables>(){
             {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
             {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
+            {DrawHeaderObjectNames.TerminalRequest, new HeaderObjectPercentageWidthVariables(4f, 1)},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
             {DrawHeaderObjectNames.MazeSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.BatchSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.PlayBackSpeed, new HeaderObjectPercentageWidthVariables(9f, 1)},
@@ -34,6 +33,8 @@ public class HeaderState
         new Dictionary<DrawHeaderObjectNames, Box>() {
             {DrawHeaderObjectNames.RunButton, new Box()},
             {DrawHeaderObjectNames.BuildButton, new Box()},
+            {DrawHeaderObjectNames.TerminalRequest, new Box()},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, new Box()},
             {DrawHeaderObjectNames.MazeSize, new Box()},
             {DrawHeaderObjectNames.BatchSize, new Box()},
             {DrawHeaderObjectNames.PlayBackSpeed, new Box()},
@@ -73,8 +74,6 @@ public class HeaderState
                 Color.Red
             )}
         };
-
-
 
     public Dictionary<DrawHeaderObjectNames, StringSlider> HeaderStringSlider { get; set; } =
         new Dictionary<DrawHeaderObjectNames, StringSlider>(){
@@ -308,6 +307,42 @@ public class HeaderState
                 Color.Blue, //textureDownColor
                 Color.Red, //textureUpBackgroundClickFieldColor
                 Color.Red //textureDownBackgroundClickFieldColor
+            )}
+        };
+
+    public Dictionary<DrawHeaderObjectNames, CenterTextureInBox> HeaderCenterTextureInBox { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, CenterTextureInBox>() {
+            {DrawHeaderObjectNames.TerminalRequest, new CenterTextureInBox(
+                new CustomBox(
+                    new BoolVector4(true, true, true, true),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                new RaylibTexture(
+                    new Texture2D(),
+                    new Rectangle(),
+                    new Rectangle()
+                ),
+                new Vector2(10,10),
+                Color.Blue,
+                Color.Red
+            )},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, new CenterTextureInBox(
+                new CustomBox(
+                    new BoolVector4(true, true, true, true),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                new RaylibTexture(
+                    new Texture2D(),
+                    new Rectangle(),
+                    new Rectangle()
+                ),
+                new Vector2(40,10),
+                Color.Blue,
+                Color.Red
             )}
         };
 }
