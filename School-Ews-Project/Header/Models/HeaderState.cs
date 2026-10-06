@@ -27,13 +27,17 @@ public class HeaderState
             {DrawHeaderObjectNames.MazeSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.BatchSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.PlayBackSpeed, new HeaderObjectPercentageWidthVariables(9f, 1)},
-            {DrawHeaderObjectNames.RunFolderName, new HeaderObjectPercentageWidthVariables(16f, 1)},
+            {DrawHeaderObjectNames.RunFolderName, new HeaderObjectPercentageWidthVariables(16f, 1)}
         };
 
     public Dictionary<DrawHeaderObjectNames, Box> HeaderObjectBoxes { get; set; } =
         new Dictionary<DrawHeaderObjectNames, Box>() {
             {DrawHeaderObjectNames.RunButton, new Box()},
-            {DrawHeaderObjectNames.BuildButton, new Box()}
+            {DrawHeaderObjectNames.BuildButton, new Box()},
+            {DrawHeaderObjectNames.MazeSize, new Box()},
+            {DrawHeaderObjectNames.BatchSize, new Box()},
+            {DrawHeaderObjectNames.PlayBackSpeed, new Box()},
+            {DrawHeaderObjectNames.RunFolderName, new Box()}
         };
 
     public Dictionary<DrawHeaderObjectNames, CenterTextInBox> HeaderButtons { get; set; } =
@@ -62,7 +66,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibText("", 0, 0),
+                new RaylibText("Build", 0, 0),
                 new Vector2(),
                 new Vector2(10,20),
                 StaticVariablesInitialize.FontLilexBoldPath,
@@ -74,7 +78,7 @@ public class HeaderState
 
 
 
-    public Dictionary<DrawHeaderObjectNames, StringSlider> DigitsCounters { get; set; } =
+    public Dictionary<DrawHeaderObjectNames, StringSlider> HeaderStringSlider { get; set; } =
         new Dictionary<DrawHeaderObjectNames, StringSlider>(){
             {DrawHeaderObjectNames.MazeSize, new StringSlider(
                 new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
@@ -196,7 +200,7 @@ public class HeaderState
                 Color.Red //textureDownBackgroundClickFieldColor
             )},
 
-            {DrawHeaderObjectNames.BatchSize, new StringSlider(
+            {DrawHeaderObjectNames.PlayBackSpeed, new StringSlider(
                 new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
                 new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
                 
@@ -299,7 +303,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("", 0, 0),
+                    new RaylibText("ProjectNaam", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,

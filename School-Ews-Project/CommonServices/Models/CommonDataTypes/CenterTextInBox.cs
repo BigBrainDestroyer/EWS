@@ -5,7 +5,7 @@ namespace Program;
 
 public class CenterTextInBox
 {
-    public Font Font;
+    public Font Font { get; set; }
 
     public Color ButtonBackgroundColor { get; set; }
     public Color ButtonTextColor { get; set; }

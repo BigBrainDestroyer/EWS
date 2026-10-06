@@ -19,7 +19,7 @@ public class UpdateHeaderLayout
 
         _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
 
-        _header.HeaderButtons = CalculateHeaderButtons(_header.HeaderButtons, _header.HeaderObjectBoxes);
+        (_header.HeaderButtons, _header.HeaderStringSlider) = CalculateObjects(_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderObjectBoxes);
     }
     
     private Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
@@ -52,9 +52,7 @@ public class UpdateHeaderLayout
         float totalObjectWidthPixelSpaceIncrement = 0;
 
         foreach(DrawHeaderObjectNames objectName in headerObjectNames)
-        {
-            if(!headerObjectWidthPercentages.ContainsKey(objectName)) continue;
-            
+        {    
             float totalBoxPixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWidthSpace / 100) * parentBoxLength.X);
             float totalBoxWhiteSpacePixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWhiteSpaceWidth / 100) * parentBoxLength.X);
             
@@ -78,23 +76,36 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    private Dictionary<DrawHeaderObjectNames, CenterTextInBox> CalculateHeaderButtons(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
+    private (Dictionary<DrawHeaderObjectNames, CenterTextInBox>, Dictionary<DrawHeaderObjectNames, StringSlider>) CalculateObjects(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, StringSlider> headerStringSlider, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
     {
-        foreach(DrawHeaderObjectNames headerButtonName in headerButtons.Keys)
-        {
-            if(!headerButtons.ContainsKey(headerButtonName)) continue;
-
-            headerButtons[headerButtonName].Box = 
-                new CustomBox(
-                    headerButtons[headerButtonName].Box.CornerStates,
-                    headerObjectBoxes[headerButtonName].PixelPosition,
-                    headerObjectBoxes[headerButtonName].PixelLengths,
-                    headerButtons[headerButtonName].Box.Radius
-                );
+        foreach(DrawHeaderObjectNames headerObjectName in headerObjectBoxes.Keys)
+        { 
+            if(headerButtons.ContainsKey(headerObjectName))
+            {
+                headerButtons[headerObjectName].Box = 
+                    new CustomBox(
+                        headerButtons[headerObjectName].Box.CornerStates,
+                        headerObjectBoxes[headerObjectName].PixelPosition,
+                        headerObjectBoxes[headerObjectName].PixelLengths,
+                        headerButtons[headerObjectName].Box.Radius
+                    );
+                    
+                headerButtons[headerObjectName] = CalculateCenterTextInBox.Calculate(headerButtons[headerObjectName]);
+            }
+            else if(headerStringSlider.ContainsKey(headerObjectName))
+            {
+                headerStringSlider[headerObjectName].Box =
+                    new CustomBox(
+                        headerStringSlider[headerObjectName].Box.CornerStates,
+                        headerObjectBoxes[headerObjectName].PixelPosition,
+                        headerObjectBoxes[headerObjectName].PixelLengths,
+                        headerStringSlider[headerObjectName].Box.Radius
+                    );
                 
-            headerButtons[headerButtonName] = CalculateCenterTextInBox.Calculate(headerButtons[headerButtonName]);
+                headerStringSlider[headerObjectName] = CalculateDigitCounter.Calculate(headerStringSlider[headerObjectName]);
+            }
         }
 
-        return headerButtons;
+        return (headerButtons, headerStringSlider);
     }
 }

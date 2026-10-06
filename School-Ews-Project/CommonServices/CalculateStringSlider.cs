@@ -116,8 +116,8 @@ public static class CalculateDigitCounter
             new CustomBox(
                 currentDigitCounter.StringSliderBox.Box.CornerStates,
                 new Vector2(
-                    currentDigitCounter.TitleStringBox.Box.PixelPosition.X,
-                    currentDigitCounter.TitleStringBox.Box.PixelPosition.Y + currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
+                    currentDigitCounter.Box.PixelPosition.X,
+                    currentDigitCounter.Box.PixelPosition.Y + currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
                 ),
                 ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
                     new Vector2(
