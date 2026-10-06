@@ -5,7 +5,7 @@ namespace Program;
 
 public static class CalculateDigitCounter
 {
-    public static DigitsCounter Calculate(DigitsCounter currentDigitCounter)
+    public static StringSlider Calculate(StringSlider currentDigitCounter)
     {
         currentDigitCounter = CalculateTextureBoxes(currentDigitCounter);
 
@@ -16,7 +16,7 @@ public static class CalculateDigitCounter
         return currentDigitCounter;
     }
 
-    private static DigitsCounter CalculateTextureBoxes(DigitsCounter currentDigitCounter)
+    private static StringSlider CalculateTextureBoxes(StringSlider currentDigitCounter)
     {
         currentDigitCounter.CounterUpClickField =
             new CustomBox(
@@ -86,47 +86,47 @@ public static class CalculateDigitCounter
         return currentDigitCounter;
     }
 
-    private static DigitsCounter CalculateTitleBox(DigitsCounter currentDigitCounter)
+    private static StringSlider CalculateTitleBox(StringSlider currentDigitCounter)
     {
-        currentDigitCounter.TitleBox.Box =
+        currentDigitCounter.TitleStringBox.Box =
             new CustomBox(
-                currentDigitCounter.TitleBox.Box.CornerStates,
+                currentDigitCounter.TitleStringBox.Box.CornerStates,
                 currentDigitCounter.Box.PixelPosition,
                 ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
                     new Vector2(
                         currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.CounterUpClickField.PixelLengths.X,
-                        currentDigitCounter.Box.PixelLengths.X * (currentDigitCounter.TitleBoxHeightPercentage/100)
+                        currentDigitCounter.Box.PixelLengths.Y * (currentDigitCounter.TitleStringBoxHeightPercentage/100f)
                     )
                     :
                     new Vector2(),
-                currentDigitCounter.TitleBox.Box.Radius
+                currentDigitCounter.TitleStringBox.Box.Radius
             );
 
-        currentDigitCounter.TitleBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.TitleBox);
+        currentDigitCounter.TitleStringBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.TitleStringBox);
 
         return currentDigitCounter;
     }
 
-    private static DigitsCounter CalculateCounterBox(DigitsCounter currentDigitCounter)
+    private static StringSlider CalculateCounterBox(StringSlider currentDigitCounter)
     {
-        currentDigitCounter.TitleBox.Box =
+        currentDigitCounter.StringSliderBox.Box =
             new CustomBox(
-                currentDigitCounter.CounterBox.Box.CornerStates,
+                currentDigitCounter.StringSliderBox.Box.CornerStates,
                 new Vector2(
-                    currentDigitCounter.TitleBox.Box.PixelPosition.X,
-                    currentDigitCounter.TitleBox.Box.PixelPosition.Y + currentDigitCounter.TitleBox.Box.PixelLengths.Y
+                    currentDigitCounter.TitleStringBox.Box.PixelPosition.X,
+                    currentDigitCounter.TitleStringBox.Box.PixelPosition.Y + currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
                 ),
                 ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
                     new Vector2(
-                        currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.CounterUpClickField.PixelLengths.X,
-                        currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.TitleBox.Box.PixelLengths.Y
+                        currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.CounterDownClickField.PixelLengths.X,
+                        currentDigitCounter.Box.PixelLengths.Y - currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
                     )
                     :
                     new Vector2(),
-                currentDigitCounter.CounterBox.Box.Radius
+                currentDigitCounter.StringSliderBox.Box.Radius
             );
 
-        currentDigitCounter.CounterBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.TitleBox);
+        currentDigitCounter.StringSliderBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.StringSliderBox);
 
         return currentDigitCounter;
     }

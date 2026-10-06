@@ -10,7 +10,7 @@ public class HeaderState
 
     //BackgroundColors
 
-    
+
     //HighLightColors
 
 
@@ -23,9 +23,9 @@ public class HeaderState
     public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
         new Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables>(){
             {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
-            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)}
+            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(9f, 1)}
         };
-        
+
     public Dictionary<DrawHeaderObjectNames, Box> HeaderObjectBoxes { get; set; } =
         new Dictionary<DrawHeaderObjectNames, Box>() {
             {DrawHeaderObjectNames.RunButton, new Box()},
@@ -33,8 +33,8 @@ public class HeaderState
         };
 
     public Dictionary<DrawHeaderObjectNames, CenterTextInBox> HeaderButtons { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, CenterTextInBox>() { 
-            {DrawHeaderObjectNames.RunButton, new CenterTextInBox( 
+        new Dictionary<DrawHeaderObjectNames, CenterTextInBox>() {
+            {DrawHeaderObjectNames.RunButton, new CenterTextInBox(
                 new Font(),
                 new CustomBox(
                     new BoolVector4(true, true, true, true),
@@ -48,11 +48,9 @@ public class HeaderState
                 StaticVariablesInitialize.FontLilexBoldPath,
                 true,
                 Color.DarkBlue,
-                Color.Red,
-                Color.SkyBlue,
-                Color.Orange
+                Color.Red
             )},
-            {DrawHeaderObjectNames.BuildButton, new CenterTextInBox( 
+            {DrawHeaderObjectNames.BuildButton, new CenterTextInBox(
                 new Font(),
                 new CustomBox(
                     new BoolVector4(true, true, true, true),
@@ -60,17 +58,78 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibText("Build", 0, 0),
+                new RaylibText("", 0, 0),
                 new Vector2(),
                 new Vector2(10,20),
                 StaticVariablesInitialize.FontLilexBoldPath,
                 true,
                 Color.DarkBlue,
-                Color.Red,
-                Color.SkyBlue,
-                Color.Orange
+                Color.Red
             )}
         };
 
-    //public Dictionary<DrawHeaderObjectNames, CenterTextInBox>
+
+
+    public Dictionary<DrawHeaderObjectNames, StringSlider> DigitsCounters { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, StringSlider>(){
+            {DrawHeaderObjectNames.MazeSize, new StringSlider(
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
+                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
+                
+                new CustomBox( //counterUpClickField
+                    new BoolVector4(false, true, false, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CustomBox( //counterDownClickField
+                    new BoolVector4(false, false, true, false),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                
+                new CenterTextInBox( //titleBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(true, false, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("MazeSize", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,7),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                
+                new CenterTextInBox( //counterBox
+                    new Font(),
+                    new CustomBox(
+                        new BoolVector4(false, false, false, true),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibText("counter", 0, 0),
+                    new Vector2(),
+                    new Vector2(10,4),
+                    StaticVariablesInitialize.FontLilexBoldPath,
+                    true,
+                    Color.DarkBlue,
+                    Color.Red
+                ),
+                StaticVariablesInitialize.TextureArrowUp,
+                StaticVariablesInitialize.TextureArrowDown,
+                42.5f,
+                Color.Red, //textureUpColor
+                Color.Blue, //textureDownColor
+                Color.Red, //textureUpBackgroundClickFieldColor
+                Color.Red //textureDownBackgroundClickFieldColor
+            )}
+        };
 }

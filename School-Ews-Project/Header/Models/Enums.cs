@@ -2,5 +2,8 @@
 public enum DrawHeaderObjectNames
 {
     RunButton,
-    BuildButton
+    BuildButton,
+    MazeSize,
+    PlayBackSpeed,
+    BatchSize
 }

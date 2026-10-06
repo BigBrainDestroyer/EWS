@@ -5,11 +5,16 @@ namespace Program;
 
 public static class StaticVariablesInitialize
 {
+    //FontPaths
     public static string FontLilexBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
     public static string FontLilexSemiBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
     public static string FontLilexMediumPath { get; set; } = "Resources/Font/Lilex-Medium.ttf";
     public static string FontLilexRegular { get; set; } = "Resources/Font/Lilex-Regular.ttf";
     public static string FontLilexExtraLightPath { get; set; } = "Resources/Font/Lilex-ExtraLight.ttf";
+
+    //TexturePaths
+    public static string TextureArrowUp { get; set; } = "Resources/Png/ArrowUp.png";
+    public static string TextureArrowDown { get; set; } = "Resources/Png/ArrowDown.png";
 }
 
 public class Initialize

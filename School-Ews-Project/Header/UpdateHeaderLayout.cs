@@ -53,7 +53,8 @@ public class UpdateHeaderLayout
 
         foreach(DrawHeaderObjectNames objectName in headerObjectNames)
         {
-
+            if(!headerObjectWidthPercentages.ContainsKey(objectName)) continue;
+            
             float totalBoxPixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWidthSpace / 100) * parentBoxLength.X);
             float totalBoxWhiteSpacePixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWhiteSpaceWidth / 100) * parentBoxLength.X);
             
@@ -79,8 +80,12 @@ public class UpdateHeaderLayout
 
     private Dictionary<DrawHeaderObjectNames, CenterTextInBox> CalculateHeaderButtons(Font font, Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
     {
+
+        
         foreach(DrawHeaderObjectNames headerButtonName in headerButtons.Keys)
         {
+            if(!headerButtons.ContainsKey(headerButtonName)) continue;
+
             headerButtons[headerButtonName].Box = 
                 new CustomBox(
                     headerButtons[headerButtonName].Box.CornerStates,

@@ -17,6 +17,8 @@ public static class CalculateCenterTextInBox
     {
         Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentButton.Box.PixelLengths, currentButton.TextBorderWhiteSpacingPercentageLengths);
 
+        if(currentButton.Font.BaseSize == 0) currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, 10, currentButton.MaxFontOffSet);
+        
         Vector2 totalTextSize =
             Raylib.MeasureTextEx(
                 currentButton.Font,

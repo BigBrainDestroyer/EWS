@@ -33,6 +33,8 @@ public class DrawHeaderLayout
     public void DrawHeaderObjects()
     {
         DrawHeaderButtons();
+
+        DrawHeaderCounters();
     }
 
     public void DrawHeaderButtons()
@@ -58,5 +60,67 @@ public class DrawHeaderLayout
                 _header.HeaderButtons[buttonName].ButtonTextColor
             );
         }
+    }
+
+    public void DrawHeaderCounters()
+    {
+        var _header = _state.HeaderState;
+
+        _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].Box = _header.HeaderButtons[DrawHeaderObjectNames.BuildButton].Box;
+
+        _header.DigitsCounters[DrawHeaderObjectNames.MazeSize] = CalculateDigitCounter.Calculate(_header.DigitsCounters[DrawHeaderObjectNames.MazeSize]);
+
+
+        Custom.DrawCustomRectangle(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Box.PixelPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Box.PixelLengths,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Box.Radius,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Box.CornerStates,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.ButtonBackgroundColor
+        );
+
+        Raylib.DrawTextEx(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Font,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Text.Text,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.TextPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Text.TextSize,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.Text.TextSpacing,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TitleStringBox.ButtonTextColor
+        );
+
+        Custom.DrawCustomRectangle(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Box.PixelPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Box.PixelLengths,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Box.Radius,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Box.CornerStates,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.ButtonBackgroundColor
+        );
+
+        Raylib.DrawTextEx(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Font,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Text.Text,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.TextPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Text.TextSize,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.Text.TextSpacing,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].StringSliderBox.ButtonTextColor
+        );
+
+        
+        Custom.DrawCustomRectangle(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterUpClickField.PixelPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterUpClickField.PixelLengths,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterUpClickField.Radius,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterUpClickField.CornerStates,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TextureDownBackgroundClickFieldColor
+        );
+
+        Custom.DrawCustomRectangle(
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterDownClickField.PixelPosition,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterDownClickField.PixelLengths,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterDownClickField.Radius,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].CounterDownClickField.CornerStates,
+            _header.DigitsCounters[DrawHeaderObjectNames.MazeSize].TextureUpBackgroundClickFieldColor
+        );
+        
     }
 }
