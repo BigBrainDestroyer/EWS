@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using ShareData;
 
 namespace Program;
 

@@ -14,45 +14,63 @@ public class UpdateHeaderLayout
     public void Update()
     {
         var _header = _state.HeaderState;
+        var _boxes = _state.common.boxes;
 
-        _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes();
+        _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
     }
     
-    public Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, Vector2> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float headerDrawObjectsTotalWhiteSpacePercentage, float headerStartObjectPercentageWidth)
+    public Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
     {
-        Vector2 positionFirstObject = CalculatePositionY(parentBoxPositions, parentBoxLength, headerDrawObjectsTotalWhiteSpacePercentageY);
+        float TotalHeaderObjectVerticalPixelWhiteSpace = CalculatePositionY(parentBoxLength, totalHeaderObjectVerticalPercentageWhiteSpace);
 
         Dictionary<DrawHeaderObjectNames, Box> newHeaderObjectBoxes =
-            CalculateNewHeaderObjectBoxes(headerObjectWidthPercentages);
+            CalculateNewHeaderObjectBoxes(
+                headerObjectWidthPercentages, 
+                parentBoxPositions, 
+                parentBoxLength, 
+                TotalHeaderObjectVerticalPixelWhiteSpace
+            );
 
+        return newHeaderObjectBoxes;
     }
 
-    public float CalculatePositionY(Vector2 parentBoxPositions, Vector2 parentBoxLengths, float headerDrawObjectsTotalWhiteSpacePercentage)
-    {
-        if(parentBoxPositions.Y > parentBoxPositions.X)
-        {
-            return parentBoxPositions.Y + (((headerDrawObjectsTotalWhiteSpacePercentage/100) * parentBoxLengths.Y)/2);
-        }
-        
-        return parentBoxPositions.Y + (((headerDrawObjectsTotalWhiteSpacePercentage/100) * parentBoxLengths.Y)/2);
+    public float CalculatePositionY(Vector2 parentBoxLengths, float TotalHeaderObjectVerticalPercentageWhiteSpace)
+    {        
+        return ((TotalHeaderObjectVerticalPercentageWhiteSpace/100) * parentBoxLengths.Y)/2;
     }
 
-    public Dictionary<DrawHeaderObjectNames, Box> CalculateNewHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, Vector2> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float positionY, float headerStartObjectPercentageWidth)
+    public Dictionary<DrawHeaderObjectNames, Box> CalculateNewHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPixelWhiteSpace)
     {
         Dictionary<DrawHeaderObjectNames, Box> newHeaderObjectBoxes = new Dictionary<DrawHeaderObjectNames, Box>();
 
         DrawHeaderObjectNames[] headerObjectNames = Enum.GetValues<DrawHeaderObjectNames>();
 
+        float objectPositionY = parentBoxPositions.Y + (totalHeaderObjectVerticalPixelWhiteSpace / 2);
+        float totalObjectWidthPixelSpaceIncrement = 0;
+
         foreach(DrawHeaderObjectNames objectName in headerObjectNames)
-        {           
-            
+        {
+
+            float totalBoxPixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWidthSpace / 100) * parentBoxLength.X);
+            float totalBoxWhiteSpacePixelWidth = ((headerObjectWidthPercentages[objectName].TotalObjectWhiteSpaceWidth / 100) * parentBoxLength.X);
             
             newHeaderObjectBoxes.Add(
                 objectName,
                 new Box(
-                    
+                    new Vector2(
+                        parentBoxPositions.X + totalObjectWidthPixelSpaceIncrement + totalBoxWhiteSpacePixelWidth/2,
+                        objectPositionY
+                    ),
+                    new Vector2(
+                        totalBoxPixelWidth - totalBoxWhiteSpacePixelWidth,
+                        parentBoxLength.Y - totalHeaderObjectVerticalPixelWhiteSpace
+                    )
                 )
             );
+
+            totalObjectWidthPixelSpaceIncrement += totalBoxPixelWidth;
         }
+
+        return newHeaderObjectBoxes;
     }
 }

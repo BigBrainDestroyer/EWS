@@ -1,5 +1,4 @@
 using Raylib_cs;
-using System.Numerics;
 
 namespace Program;
 
@@ -12,19 +11,17 @@ public class HeaderState
     public BoolVector4 CornerStates { get; } = new BoolVector4(true, true, true, true);
     public float ButtonCornerRadius { get; } = 10;
 
-    public float HeaderStartObjectPercentageWidth { get; } = 10;
-    public float HeaderDrawObjectsTotalWhiteSpacePercentageY { get; } = 15;
+    public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 10;
 
-    public Dictionary<DrawHeaderObjectNames, float> HeaderObjectWidthPercentages { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, float>(){
-            {DrawHeaderObjectNames.RunButton, },
-            {DrawHeaderObjectNames.BuildButton, float 6)}
+    public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables>(){
+            {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(8, 2)},
+            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(8, 2)}
         };
-
+        
     public Dictionary<DrawHeaderObjectNames, Box> HeaderObjectBoxes { get; set; } =
         new Dictionary<DrawHeaderObjectNames, Box>(){
             {DrawHeaderObjectNames.RunButton, new Box()},
             {DrawHeaderObjectNames.BuildButton, new Box()}
         };
-
 }
