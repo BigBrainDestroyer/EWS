@@ -9,9 +9,71 @@ public class HeaderState
     public Color HeaderBackgroundColor { get; } = new Color(18, 22, 26, 255);
 
     //BackgroundColors
+    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectBackgroundColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, Color>() {
+            {DrawHeaderObjectNames.RunButton, Color.DarkBlue},
+            {DrawHeaderObjectNames.BuildButton, Color.DarkBlue},
+            {DrawHeaderObjectNames.TerminalRequest, Color.DarkBlue},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.DarkBlue},
+            {DrawHeaderObjectNames.BuildMaze, Color.DarkBlue},
+            {DrawHeaderObjectNames.MazeSize, Color.DarkBlue},
+            {DrawHeaderObjectNames.BatchSize, Color.DarkBlue},
+            {DrawHeaderObjectNames.PlayBackSpeed, Color.DarkBlue},
+            {DrawHeaderObjectNames.RunFolderName, Color.DarkBlue}
+        };
 
+    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectSymbolColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, Color>() {
+            {DrawHeaderObjectNames.RunButton, Color.Red},
+            {DrawHeaderObjectNames.BuildButton, Color.Red},
+            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
+            {DrawHeaderObjectNames.BuildMaze, Color.Red},
+            {DrawHeaderObjectNames.MazeSize, Color.Red},
+            {DrawHeaderObjectNames.BatchSize, Color.Red},
+            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
+            {DrawHeaderObjectNames.RunFolderName, Color.Red}
+        };
 
     //HighLightColors
+    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectBackgroundHighLightColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, Color>() {
+            {DrawHeaderObjectNames.RunButton, Color.Red},
+            {DrawHeaderObjectNames.BuildButton, Color.Red},
+            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
+            {DrawHeaderObjectNames.BuildMaze, Color.Red},
+            {DrawHeaderObjectNames.MazeSize, Color.Red},
+            {DrawHeaderObjectNames.BatchSize, Color.Red},
+            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
+            {DrawHeaderObjectNames.RunFolderName, Color.Red}
+        };
+    
+    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectSymbolHighLightColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, Color>() {
+            {DrawHeaderObjectNames.RunButton, Color.Red},
+            {DrawHeaderObjectNames.BuildButton, Color.Red},
+            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
+            {DrawHeaderObjectNames.BuildMaze, Color.Red},
+            {DrawHeaderObjectNames.MazeSize, Color.Red},
+            {DrawHeaderObjectNames.BatchSize, Color.Red},
+            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
+            {DrawHeaderObjectNames.RunFolderName, Color.Red}
+        };
+
+    Dictionary<DrawHeaderObjectNames, bool> IsHighLigthColorVisible { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, bool>() {
+            {DrawHeaderObjectNames.RunButton, false},
+            {DrawHeaderObjectNames.BuildButton, false},
+            {DrawHeaderObjectNames.TerminalRequest, false},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
+            {DrawHeaderObjectNames.BuildMaze, false},
+            {DrawHeaderObjectNames.MazeSize, false},
+            {DrawHeaderObjectNames.BatchSize, false},
+            {DrawHeaderObjectNames.PlayBackSpeed, false},
+            {DrawHeaderObjectNames.RunFolderName, false}
+        };
 
 
     public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;
