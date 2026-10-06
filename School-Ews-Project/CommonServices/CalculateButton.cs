@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Program;
 
-public class CalculateButton
+public static class CalculateButton
 {
     //AANAMEN
     // HEEFT AL EEN BASIS:
@@ -13,7 +13,7 @@ public class CalculateButton
     // COLORS//
     // CORNERSTATES//
 
-    public Button CalculateButtonText(Button currentButton)
+    public static Button CalculateButtonText(Button currentButton)
     {
         Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentButton.Box.PixelLengths, currentButton.TextBorderWhiteSpacingPercentageLengths);
 
@@ -25,7 +25,7 @@ public class CalculateButton
                 currentButton.Text.TextSpacing
             );
 
-        if (totalTextSize.X * currentButton.Text.Text.Length> currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X)
+        if (totalTextSize.X * currentButton.Text.Text.Length > currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X)
         {
             int charHeight = (int)((totalTextSize.Y / totalTextSize.X) * ((currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X)/ currentButton.Text.Text.Length));
 
@@ -43,7 +43,7 @@ public class CalculateButton
             
             currentButton.TextPosition =
                 new Vector2(
-                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + ((currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X + (totalTextSize.X * currentButton.Text.Text.Length))/2),
+                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + (currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X + (totalTextSize.X * currentButton.Text.Text.Length)/2),
                     currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y/2)
                 );
         }
@@ -51,7 +51,7 @@ public class CalculateButton
         return currentButton;
     }
 
-    private Vector2 CalculateTextBorderWhiteSpacingLengths(Vector2 parentBoxLengths, Vector2 whiteSpacePercentages)
+    private static Vector2 CalculateTextBorderWhiteSpacingLengths(Vector2 parentBoxLengths, Vector2 whiteSpacePercentages)
     {
         return new Vector2(
             (whiteSpacePercentages.X/100f) * parentBoxLengths.X,

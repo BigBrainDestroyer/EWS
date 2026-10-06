@@ -10,6 +10,7 @@ public class UpdateApp
     private readonly UpdateArchive _archive;
     private readonly AlgoConnectorController _connectorController;
     private readonly MazeController _mazeController;
+    private readonly HeaderController _headerController;
 
     public UpdateApp(AppState state)
     {
@@ -20,13 +21,16 @@ public class UpdateApp
         _mazeController = new MazeController(_state);
         _archive = new UpdateArchive(_state);
         _connectorController = new AlgoConnectorController(_state);
+        _headerController = new HeaderController(_state);
     }
     
     public void App()
     {
         _activeMainBox.ActiveMainBox();
-
+        
         _calculateMainBoxes.UpdateMainBoxes();
+
+        _headerController.Controller();
 
         _archive.Archive();
 

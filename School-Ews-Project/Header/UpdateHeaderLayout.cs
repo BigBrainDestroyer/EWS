@@ -1,4 +1,5 @@
 using System.Numerics;
+using Raylib_cs;
 
 namespace Program;
 
@@ -17,9 +18,11 @@ public class UpdateHeaderLayout
         var _boxes = _state.common.boxes;
 
         _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
+
+        _header.HeaderButtons = CalculateHeaderButtons(new Font(), _header.HeaderButtons, _header.HeaderObjectBoxes);
     }
     
-    public Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
+    private Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
     {
         float TotalHeaderObjectVerticalPixelWhiteSpace = CalculatePositionY(parentBoxLength, totalHeaderObjectVerticalPercentageWhiteSpace);
 
@@ -34,12 +37,12 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    public float CalculatePositionY(Vector2 parentBoxLengths, float TotalHeaderObjectVerticalPercentageWhiteSpace)
+    private float CalculatePositionY(Vector2 parentBoxLengths, float TotalHeaderObjectVerticalPercentageWhiteSpace)
     {        
         return ((TotalHeaderObjectVerticalPercentageWhiteSpace/100) * parentBoxLengths.Y)/2;
     }
 
-    public Dictionary<DrawHeaderObjectNames, Box> CalculateNewHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPixelWhiteSpace)
+    private Dictionary<DrawHeaderObjectNames, Box> CalculateNewHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPixelWhiteSpace)
     {
         Dictionary<DrawHeaderObjectNames, Box> newHeaderObjectBoxes = new Dictionary<DrawHeaderObjectNames, Box>();
 
@@ -72,5 +75,25 @@ public class UpdateHeaderLayout
         }
 
         return newHeaderObjectBoxes;
+    }
+
+    private Dictionary<DrawHeaderObjectNames, Button> CalculateHeaderButtons(Font font, Dictionary<DrawHeaderObjectNames, Button> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
+    {
+        foreach(DrawHeaderObjectNames headerButtonName in headerButtons.Keys)
+        {
+            headerButtons[headerButtonName].Font = _state.common.font.ArchiveDataBoxType;
+
+            headerButtons[headerButtonName].Box = 
+                new CustomBox(
+                    headerButtons[headerButtonName].Box.CornerStates,
+                    headerObjectBoxes[headerButtonName].PixelPosition,
+                    headerObjectBoxes[headerButtonName].PixelLengths,
+                    headerButtons[headerButtonName].Box.Radius
+                );
+                
+            headerButtons[headerButtonName] = CalculateButton.CalculateButtonText(headerButtons[headerButtonName]);
+        }
+
+        return headerButtons;
     }
 }

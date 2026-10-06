@@ -14,6 +14,8 @@ public class DrawHeaderLayout
     public void Draw()
     {
         DrawHeaderBackground();
+
+        DrawHeaderObjects();
     }
 
     public void DrawHeaderBackground()
@@ -26,5 +28,35 @@ public class DrawHeaderLayout
             _boxes.HeaderPixelLengths,
             _header.HeaderBackgroundColor
         );
+    }
+
+    public void DrawHeaderObjects()
+    {
+        DrawHeaderButtons();
+    }
+
+    public void DrawHeaderButtons()
+    {
+        var _header = _state.HeaderState;
+
+        foreach(DrawHeaderObjectNames buttonName in _header.HeaderButtons.Keys)
+        {
+            Custom.DrawCustomRectangle(
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.PixelPosition,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.PixelLengths,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.Radius,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.CornerStates,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].ButtonBackgroundColor
+            );
+
+            Raylib.DrawTextEx(
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Font,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.Text,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].TextPosition,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.TextSize,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.TextSpacing,
+                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].ButtonTextColor
+            );
+        }
     }
 }

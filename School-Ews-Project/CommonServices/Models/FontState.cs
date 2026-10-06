@@ -9,4 +9,5 @@ public class FontState
     public Font MazeCommonData { get; set; } 
     public Font ArchiveDataBoxType { get; set; }
     public Font ArchiveEdit { get; set; }
+    public Font HeaderButtons { get; set; }
 }
