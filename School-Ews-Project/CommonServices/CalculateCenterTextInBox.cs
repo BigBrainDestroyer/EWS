@@ -5,14 +5,6 @@ namespace Program;
 
 public static class CalculateCenterTextInBox
 {
-    //AANAMEN
-    // HEEFT AL EEN BASIS:
-    // TEXTSPACING//
-    // CORNERRADUIS//
-    // TEXT//
-    // COLORS//
-    // CORNERSTATES//
-
     public static CenterTextInBox Calculate(CenterTextInBox currentCenterTextInBox)
     {
         Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentCenterTextInBox.Box.PixelLengths, currentCenterTextInBox.TextBorderWhiteSpacingPercentageLengths);

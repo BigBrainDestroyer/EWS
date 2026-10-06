@@ -48,7 +48,7 @@ public class DrawHeaderLayout
                 _header.HeaderButtons[buttonName].Box.PixelLengths,
                 _header.HeaderButtons[buttonName].Box.Radius,
                 _header.HeaderButtons[buttonName].Box.CornerStates,
-                _header.HeaderButtons[buttonName].ButtonBackgroundColor
+                _header.HeaderButtons[buttonName].BoxBackgroundColor
             );
 
             Raylib.DrawTextEx(
@@ -57,7 +57,7 @@ public class DrawHeaderLayout
                 _header.HeaderButtons[buttonName].TextPosition,
                 _header.HeaderButtons[buttonName].Text.TextSize,
                 _header.HeaderButtons[buttonName].Text.TextSpacing,
-                _header.HeaderButtons[buttonName].ButtonTextColor
+                _header.HeaderButtons[buttonName].TextColor
             );
         }
     }
@@ -74,7 +74,7 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.PixelLengths,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.Radius,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.CornerStates,
-                _header.HeaderStringSlider[headerObjectName].TitleStringBox.ButtonBackgroundColor
+                _header.HeaderStringSlider[headerObjectName].TitleStringBox.BoxBackgroundColor
             );
 
             Raylib.DrawTextEx(
@@ -83,7 +83,7 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.TextPosition,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Text.TextSize,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Text.TextSpacing,
-                _header.HeaderStringSlider[headerObjectName].TitleStringBox.ButtonTextColor
+                _header.HeaderStringSlider[headerObjectName].TitleStringBox.TextColor
             );
 
             Custom.DrawCustomRectangle(
@@ -91,7 +91,7 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.PixelLengths,
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.Radius,
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.CornerStates,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.ButtonBackgroundColor
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor
             );
 
             Raylib.DrawTextEx(
@@ -100,7 +100,7 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.TextPosition,
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.Text.TextSize,
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.Text.TextSpacing,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.ButtonTextColor
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.TextColor
             );
 
             Custom.DrawCustomRectangle(

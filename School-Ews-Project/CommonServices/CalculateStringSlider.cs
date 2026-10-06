@@ -9,7 +9,7 @@ public static class CalculateDigitCounter
     {
         currentDigitCounter = CalculateTextureBoxes(currentDigitCounter);
 
-        if(currentDigitCounter.TitleStringBoxHeightPercentage > 0 && currentDigitCounter.TitleStringBox.IsActive)
+        if(currentDigitCounter.TitleStringBoxHeightPercentage > 0)
         {
             currentDigitCounter = CalculateTitleBox(currentDigitCounter);
         }

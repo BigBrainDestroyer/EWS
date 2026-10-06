@@ -7,8 +7,8 @@ public class CenterTextInBox
 {
     public Font Font { get; set; }
 
-    public Color ButtonBackgroundColor { get; set; }
-    public Color ButtonTextColor { get; set; }
+    public Color BoxBackgroundColor { get; set; }
+    public Color TextColor { get; set; }
 
     public CustomBox Box { get; set; }
 
@@ -22,18 +22,15 @@ public class CenterTextInBox
     
     public int MaxFontOffSet { get; } = 2;
 
-    public bool IsActive { get; set; }
-
-    public CenterTextInBox(Font font, CustomBox box, RaylibText text, Vector2 textPosition, Vector2 textBorderWhiteSpacingPercentageLengths, string fontPath, bool isActive, Color buttonBackgroundColor, Color buttonTextColor)
+    public CenterTextInBox(Font font, CustomBox box, RaylibText text, Vector2 textPosition, Vector2 textBorderWhiteSpacingPercentageLengths, string fontPath, Color boxBackgroundColor, Color textColor)
     {
         Font = font;
-        ButtonBackgroundColor = buttonBackgroundColor;
-        ButtonTextColor = buttonTextColor;
+        BoxBackgroundColor = boxBackgroundColor;
+        TextColor = textColor;
         Box = box;
         Text = text;
         TextPosition = textPosition;
         TextBorderWhiteSpacingPercentageLengths = textBorderWhiteSpacingPercentageLengths;
         FontPath = fontPath;
-        IsActive = isActive;
     }
 }

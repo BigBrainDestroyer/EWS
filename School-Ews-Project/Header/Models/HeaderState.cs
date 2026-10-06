@@ -54,7 +54,6 @@ public class HeaderState
                 new Vector2(),
                 new Vector2(34,20),
                 StaticVariablesInitialize.FontLilexBoldPath,
-                true,
                 Color.DarkBlue,
                 Color.Red
             )},
@@ -70,7 +69,6 @@ public class HeaderState
                 new Vector2(),
                 new Vector2(10,20),
                 StaticVariablesInitialize.FontLilexBoldPath,
-                true,
                 Color.DarkBlue,
                 Color.Red
             )}
@@ -110,7 +108,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -127,7 +124,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -170,7 +166,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -187,7 +182,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -230,7 +224,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -247,7 +240,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
@@ -290,7 +282,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    false,
                     Color.Red,
                     Color.Red
                 ),
@@ -307,7 +298,6 @@ public class HeaderState
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    true,
                     Color.DarkBlue,
                     Color.Red
                 ),
