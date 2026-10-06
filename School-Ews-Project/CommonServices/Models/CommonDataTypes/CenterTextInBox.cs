@@ -3,9 +3,9 @@ using System.Numerics;
 
 namespace Program;
 
-public class Button
+public class CenterTextInBox
 {
-    public Font Font { get; set; }
+    public Font Font;
 
     public Color ButtonBackgroundColor { get; set; }
     public Color ButtonTextColor { get; set; }
@@ -20,7 +20,12 @@ public class Button
 
     public Vector2 TextBorderWhiteSpacingPercentageLengths { get; set; }
 
-    public Button(Font font, CustomBox box, RaylibText text, Vector2 textPosition, Vector2 textBorderWhiteSpacingPercentageLengths,Color buttonBackgroundColor, Color buttonTextColor, Color buttonHighLightBackgroundColor, Color buttonHighLightTextColor)
+    public string FontPath { get; set; }
+    public int MaxFontOffSet { get; } = 2;
+
+    public bool IsActive { get; set; }
+
+    public CenterTextInBox(Font font, CustomBox box, RaylibText text, Vector2 textPosition, Vector2 textBorderWhiteSpacingPercentageLengths, string fontPath, bool isActive, Color buttonBackgroundColor, Color buttonTextColor, Color buttonHighLightBackgroundColor, Color buttonHighLightTextColor)
     {
         Font = font;
         ButtonBackgroundColor = buttonBackgroundColor;
@@ -31,6 +36,7 @@ public class Button
         Text = text;
         TextPosition = textPosition;
         TextBorderWhiteSpacingPercentageLengths = textBorderWhiteSpacingPercentageLengths;
-
+        FontPath = fontPath;
+        IsActive = isActive;
     }
 }

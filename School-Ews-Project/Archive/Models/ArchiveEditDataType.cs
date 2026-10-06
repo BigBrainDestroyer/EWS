@@ -10,7 +10,7 @@ public class ArchiveEditDataType
     public Color DeleteBoxColor { get; set; }
     public Color RenameBoxColor { get; set; }
 
-    public Font TextFont { get; set; }
+    public Font TextFont;
 
     public CustomBox DeleteClickField { get; set; } = 
         new CustomBox(new BoolVector4(false, false, false, true), new Vector2(0,0), new Vector2(0,0), 0);

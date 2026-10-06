@@ -140,9 +140,4 @@ public static class Custom
 
         DrawCustomRectangle(newPosition, newSize, radius, boolVector4, rectangleColor);
     }
-
-    public static void DrawCustomTextBar()
-    {
-        
-    }
 }

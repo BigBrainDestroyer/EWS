@@ -3,6 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace Program;
 
+public static class StaticVariablesInitialize
+{
+    public static string FontLilexBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
+    public static string FontLilexSemiBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
+    public static string FontLilexMediumPath { get; set; } = "Resources/Font/Lilex-Medium.ttf";
+    public static string FontLilexRegular { get; set; } = "Resources/Font/Lilex-Regular.ttf";
+    public static string FontLilexExtraLightPath { get; set; } = "Resources/Font/Lilex-ExtraLight.ttf";
+}
+
 public class Initialize
 {
     private readonly AppState _state;
@@ -17,7 +26,7 @@ public class Initialize
     public void Window()
     {
         const int screenWidth = 800;
-        const int screenHeight  = 600; 
+        const int screenHeight = 600; 
 
         Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
         Raylib.SetConfigFlags(ConfigFlags.HighDpiWindow);

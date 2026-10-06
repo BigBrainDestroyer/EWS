@@ -9,30 +9,21 @@ public class HeaderState
     public Color HeaderBackgroundColor { get; } = new Color(18, 22, 26, 255);
 
     //BackgroundColors
-    public Color RunButtonBackgroundColor { get; } = Color.DarkBlue;
-    public Color RunButtonTextColor { get; } = Color.Red;
 
-    public Color BuildButtonBackgroundColor { get; } = Color.DarkBlue;
-    public Color BuildButtonTextColor { get; } = Color.Red;
     
     //HighLightColors
-    public Color RunButtonHighLightBackgroundColor { get; } = Color.SkyBlue;
-    public Color RunButtonHighLightTextColor { get; } = Color.Orange;
 
-    public Color BuildButtonHighLightBackgroundColor { get; } = Color.SkyBlue;
-    public Color BuildButtonHighLightTextColor { get; } = Color.Orange;
 
 
     //Buttons
     public BoolVector4 CornerStates { get; } = new BoolVector4(true, true, true, true);
-    public float ButtonCornerRadius { get; } = 10;
 
-    public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 10;
+    public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;
 
     public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
         new Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables>(){
-            {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(8, 2)},
-            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(8, 2)}
+            {DrawHeaderObjectNames.RunButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
+            {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)}
         };
         
     public Dictionary<DrawHeaderObjectNames, Box> HeaderObjectBoxes { get; set; } =
@@ -41,39 +32,45 @@ public class HeaderState
             {DrawHeaderObjectNames.BuildButton, new Box()}
         };
 
-    public Dictionary<DrawHeaderObjectNames, Button> HeaderButtons { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, Button>() { 
-            {DrawHeaderObjectNames.RunButton, new Button( 
+    public Dictionary<DrawHeaderObjectNames, CenterTextInBox> HeaderButtons { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, CenterTextInBox>() { 
+            {DrawHeaderObjectNames.RunButton, new CenterTextInBox( 
                 new Font(),
                 new CustomBox(
                     new BoolVector4(true, true, true, true),
                     new Vector2(),
                     new Vector2(),
-                    10
+                    8
                 ),
                 new RaylibText("Run", 0, 0),
                 new Vector2(),
-                new Vector2(5,10),
+                new Vector2(34,20),
+                StaticVariablesInitialize.FontLilexBoldPath,
+                true,
                 Color.DarkBlue,
                 Color.Red,
                 Color.SkyBlue,
                 Color.Orange
             )},
-            {DrawHeaderObjectNames.BuildButton, new Button( 
+            {DrawHeaderObjectNames.BuildButton, new CenterTextInBox( 
                 new Font(),
                 new CustomBox(
                     new BoolVector4(true, true, true, true),
                     new Vector2(),
                     new Vector2(),
-                    10
+                    8
                 ),
                 new RaylibText("Build", 0, 0),
                 new Vector2(),
-                new Vector2(5,10),
+                new Vector2(10,20),
+                StaticVariablesInitialize.FontLilexBoldPath,
+                true,
                 Color.DarkBlue,
                 Color.Red,
                 Color.SkyBlue,
                 Color.Orange
             )}
         };
+
+    //public Dictionary<DrawHeaderObjectNames, CenterTextInBox>
 }

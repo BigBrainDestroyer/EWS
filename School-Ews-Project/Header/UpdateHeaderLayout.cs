@@ -39,7 +39,7 @@ public class UpdateHeaderLayout
 
     private float CalculatePositionY(Vector2 parentBoxLengths, float TotalHeaderObjectVerticalPercentageWhiteSpace)
     {        
-        return ((TotalHeaderObjectVerticalPercentageWhiteSpace/100) * parentBoxLengths.Y)/2;
+        return ((TotalHeaderObjectVerticalPercentageWhiteSpace/100) * parentBoxLengths.Y);
     }
 
     private Dictionary<DrawHeaderObjectNames, Box> CalculateNewHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPixelWhiteSpace)
@@ -48,7 +48,7 @@ public class UpdateHeaderLayout
 
         DrawHeaderObjectNames[] headerObjectNames = Enum.GetValues<DrawHeaderObjectNames>();
 
-        float objectPositionY = parentBoxPositions.Y + (totalHeaderObjectVerticalPixelWhiteSpace / 2);
+        float objectPositionY = parentBoxPositions.Y + (totalHeaderObjectVerticalPixelWhiteSpace/2);
         float totalObjectWidthPixelSpaceIncrement = 0;
 
         foreach(DrawHeaderObjectNames objectName in headerObjectNames)
@@ -77,12 +77,10 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    private Dictionary<DrawHeaderObjectNames, Button> CalculateHeaderButtons(Font font, Dictionary<DrawHeaderObjectNames, Button> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
+    private Dictionary<DrawHeaderObjectNames, CenterTextInBox> CalculateHeaderButtons(Font font, Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes)
     {
         foreach(DrawHeaderObjectNames headerButtonName in headerButtons.Keys)
         {
-            headerButtons[headerButtonName].Font = _state.common.font.ArchiveDataBoxType;
-
             headerButtons[headerButtonName].Box = 
                 new CustomBox(
                     headerButtons[headerButtonName].Box.CornerStates,
@@ -91,7 +89,7 @@ public class UpdateHeaderLayout
                     headerButtons[headerButtonName].Box.Radius
                 );
                 
-            headerButtons[headerButtonName] = CalculateButton.CalculateButtonText(headerButtons[headerButtonName]);
+            headerButtons[headerButtonName] = CalculateCenterTextInBox.Calculate(headerButtons[headerButtonName]);
         }
 
         return headerButtons;

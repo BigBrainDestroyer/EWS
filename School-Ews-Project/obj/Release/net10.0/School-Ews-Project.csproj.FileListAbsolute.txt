@@ -1,0 +1,6 @@
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.csproj.AssemblyReference.cache
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.GeneratedMSBuildEditorConfig.editorconfig
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.AssemblyInfoInputs.cache
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.AssemblyInfo.cs
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.csproj.CoreCompileInputs.cache
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/obj/Release/net10.0/School-Ews-Project.sourcelink.json

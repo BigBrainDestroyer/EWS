@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Program;
 
-public static class CalculateButton
+public static class CalculateCenterTextInBox
 {
     //AANAMEN
     // HEEFT AL EEN BASIS:
@@ -13,7 +13,7 @@ public static class CalculateButton
     // COLORS//
     // CORNERSTATES//
 
-    public static Button CalculateButtonText(Button currentButton)
+    public static CenterTextInBox Calculate(CenterTextInBox currentButton)
     {
         Vector2 whiteSpacePixelLengths = CalculateTextBorderWhiteSpacingLengths(currentButton.Box.PixelLengths, currentButton.TextBorderWhiteSpacingPercentageLengths);
 
@@ -31,19 +31,23 @@ public static class CalculateButton
 
             currentButton.Text = new RaylibText(currentButton.Text.Text, charHeight, currentButton.Text.TextSpacing);
 
+            currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, (int)currentButton.Text.TextSize, currentButton.MaxFontOffSet);
+            
             currentButton.TextPosition =
                 new Vector2(
                     currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X/2),
-                    currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y / 2) + ((currentButton.Box.PixelLengths.Y - whiteSpacePixelLengths.Y + charHeight)/2)
+                    currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y / 2) + ((currentButton.Box.PixelLengths.Y - whiteSpacePixelLengths.Y - charHeight)/2)
                 );
         }
         else
         {
             currentButton.Text = new RaylibText(currentButton.Text.Text, totalTextSize.Y, currentButton.Text.TextSpacing);
-            
+
+            currentButton.Font = Load.UpdateMonoSpaceFontEx(currentButton.Font, currentButton.FontPath, (int)currentButton.Text.TextSize, currentButton.MaxFontOffSet);
+
             currentButton.TextPosition =
                 new Vector2(
-                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + (currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X + (totalTextSize.X * currentButton.Text.Text.Length)/2),
+                    currentButton.Box.PixelPosition.X + (whiteSpacePixelLengths.X / 2) + ((currentButton.Box.PixelLengths.X - whiteSpacePixelLengths.X - (totalTextSize.X * currentButton.Text.Text.Length))/2),
                     currentButton.Box.PixelPosition.Y + (whiteSpacePixelLengths.Y/2)
                 );
         }

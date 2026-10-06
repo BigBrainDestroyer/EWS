@@ -38,24 +38,24 @@ public class DrawHeaderLayout
     public void DrawHeaderButtons()
     {
         var _header = _state.HeaderState;
-
+        
         foreach(DrawHeaderObjectNames buttonName in _header.HeaderButtons.Keys)
         {
             Custom.DrawCustomRectangle(
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.PixelPosition,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.PixelLengths,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.Radius,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Box.CornerStates,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].ButtonBackgroundColor
+                _header.HeaderButtons[buttonName].Box.PixelPosition,
+                _header.HeaderButtons[buttonName].Box.PixelLengths,
+                _header.HeaderButtons[buttonName].Box.Radius,
+                _header.HeaderButtons[buttonName].Box.CornerStates,
+                _header.HeaderButtons[buttonName].ButtonBackgroundColor
             );
 
             Raylib.DrawTextEx(
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Font,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.Text,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].TextPosition,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.TextSize,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].Text.TextSpacing,
-                _header.HeaderButtons[DrawHeaderObjectNames.RunButton].ButtonTextColor
+                _header.HeaderButtons[buttonName].Font,
+                _header.HeaderButtons[buttonName].Text.Text,
+                _header.HeaderButtons[buttonName].TextPosition,
+                _header.HeaderButtons[buttonName].Text.TextSize,
+                _header.HeaderButtons[buttonName].Text.TextSpacing,
+                _header.HeaderButtons[buttonName].ButtonTextColor
             );
         }
     }
