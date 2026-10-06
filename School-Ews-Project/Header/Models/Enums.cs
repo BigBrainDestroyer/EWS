@@ -5,6 +5,7 @@ public enum DrawHeaderObjectNames
     BuildButton,
     TerminalRequest,
     StartStopAlgoPlayBack,
+    BuildMaze,
     MazeSize,
     PlayBackSpeed,
     BatchSize,

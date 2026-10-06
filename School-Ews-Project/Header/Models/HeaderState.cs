@@ -14,7 +14,6 @@ public class HeaderState
     //HighLightColors
 
 
-
     public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;
 
     public Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> HeaderObjectWidthPercentages { get; set; } =
@@ -23,6 +22,7 @@ public class HeaderState
             {DrawHeaderObjectNames.BuildButton, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
             {DrawHeaderObjectNames.TerminalRequest, new HeaderObjectPercentageWidthVariables(4f, 1)},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, new HeaderObjectPercentageWidthVariables(6.5f, 1)},
+            {DrawHeaderObjectNames.BuildMaze, new HeaderObjectPercentageWidthVariables(4f, 1)},
             {DrawHeaderObjectNames.MazeSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.BatchSize, new HeaderObjectPercentageWidthVariables(9f, 1)},
             {DrawHeaderObjectNames.PlayBackSpeed, new HeaderObjectPercentageWidthVariables(9f, 1)},
@@ -35,6 +35,7 @@ public class HeaderState
             {DrawHeaderObjectNames.BuildButton, new Box()},
             {DrawHeaderObjectNames.TerminalRequest, new Box()},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, new Box()},
+            {DrawHeaderObjectNames.BuildMaze, new Box()},
             {DrawHeaderObjectNames.MazeSize, new Box()},
             {DrawHeaderObjectNames.BatchSize, new Box()},
             {DrawHeaderObjectNames.PlayBackSpeed, new Box()},
@@ -341,6 +342,22 @@ public class HeaderState
                     new Rectangle()
                 ),
                 new Vector2(40,10),
+                Color.Blue,
+                Color.Red
+            )},
+            {DrawHeaderObjectNames.BuildMaze, new CenterTextureInBox(
+                new CustomBox(
+                    new BoolVector4(true, true, true, true),
+                    new Vector2(),
+                    new Vector2(),
+                    8
+                ),
+                new RaylibTexture(
+                    new Texture2D(),
+                    new Rectangle(),
+                    new Rectangle()
+                ),
+                new Vector2(10,10),
                 Color.Blue,
                 Color.Red
             )}
