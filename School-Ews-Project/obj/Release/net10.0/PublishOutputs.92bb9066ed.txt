@@ -1,0 +1,13 @@
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/School-Ews-Project
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/School-Ews-Project.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/School-Ews-Project.deps.json
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/School-Ews-Project.runtimeconfig.json
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/School-Ews-Project.pdb
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/Raylib-cs.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/runtimes/linux-x64/native/libraylib.so
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/runtimes/osx-arm64/native/libraylib.dylib
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/runtimes/osx-x64/native/libraylib.dylib
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/runtimes/win-x64/native/raylib.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/runtimes/win-x86/native/raylib.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/Library.dll
+/home/bigbraindestroyer/Documents/GitHub/EWS/School-Ews-Project/bin/Release/net10.0/publish/Library.pdb
