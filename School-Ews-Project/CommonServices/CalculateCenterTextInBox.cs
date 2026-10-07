@@ -19,6 +19,8 @@ public static class CalculateCenterTextInBox
                 currentCenterTextInBox.Text.TextSpacing
             );
 
+        //currentCenterTextInBox.Text = new RaylibText("", currentCenterTextInBox.Text.TextSize, currentCenterTextInBox.Text.TextSpacing);
+
         if (totalTextSize.X * currentCenterTextInBox.Text.Text.Length > currentCenterTextInBox.Box.PixelLengths.X - whiteSpacePixelLengths.X)
         {
             int charHeight = (int)((totalTextSize.Y / totalTextSize.X) * ((currentCenterTextInBox.Box.PixelLengths.X - whiteSpacePixelLengths.X)/ currentCenterTextInBox.Text.Text.Length));

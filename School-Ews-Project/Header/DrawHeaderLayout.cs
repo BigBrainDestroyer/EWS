@@ -163,8 +163,6 @@ public class DrawHeaderLayout
                 0f,
                 _header.HeaderStringSlider[headerObjectName].DownTexture.TextureColor
             );
-
-            Console.WriteLine(_header.HeaderStringSlider[headerObjectName].UpTexture);
         }
     }
 }

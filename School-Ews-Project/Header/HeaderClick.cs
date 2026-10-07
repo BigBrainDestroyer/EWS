@@ -5,10 +5,12 @@ namespace Program;
 public class HeaderClick
 {
     private readonly AppState _state;
+    private readonly UpdateRunFolder _runFolder;
 
     public HeaderClick(AppState state)
     {
         _state = state ?? throw new ArgumentNullException();
+        _runFolder = new UpdateRunFolder(_state);
     }
 
     public void Click()
@@ -39,6 +41,11 @@ public class HeaderClick
                     //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
                     //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
                     //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
+
+                    if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+                    {
+                        StringSliderClick(objectName, 1);
+                    }
                 }
                 else if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].DownTexture.Box.PixelPosition, _header.HeaderStringSlider[objectName].DownTexture.Box.PixelLengths, Raylib.GetMousePosition()))
                 {
@@ -50,6 +57,11 @@ public class HeaderClick
                     //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
                     //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
                     //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
+
+                    if(Raylib.IsMouseButtonPressed(MouseButton.Left))
+                    {
+                        StringSliderClick(objectName, -1);
+                    }
                 }
             }
             else if(_header.HeaderButtons.ContainsKey(objectName))
@@ -84,6 +96,26 @@ public class HeaderClick
                     
                 }
             }
+        }
+    }
+
+    private void StringSliderClick(DrawHeaderObjectNames objectName, int addRequest)
+    {
+        if(objectName == DrawHeaderObjectNames.MazeSize)
+        {
+            
+        }
+        else if(objectName == DrawHeaderObjectNames.BatchSize)
+        {
+            
+        }
+        else if(objectName == DrawHeaderObjectNames.PlayBackSpeed)
+        {
+            
+        }
+        else if(objectName == DrawHeaderObjectNames.RunFolderName)
+        {
+            _runFolder.RunFolderNameHeaderObjectClickAction(addRequest);
         }
     }
 }

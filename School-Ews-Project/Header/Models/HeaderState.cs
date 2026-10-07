@@ -375,7 +375,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("ProjectName", 0, 0),
+                    new RaylibText("", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
@@ -426,5 +426,7 @@ public class HeaderState
             )}
         };
 
-    public string[] AllProjectFolderNames { get; set; } = new string[0];
+    //RunProjectFolderVariables
+    public string[] AllProjectFolderNames { get; set; } = new string[0]; //kan 0 length hebben
+    public int AllProjectFolderNamesListPosition { get; set; } = 0;
 }
