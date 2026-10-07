@@ -157,6 +157,8 @@ public class Initialize
         var _archive = _state.archive;
 
         _archive.Storage = _archiveStorage.LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
+
+        _archive.ArchiveProjectFolderPaths = Directory.GetDirectories(_archive.ProjectsDataLocation);
     }
 
     public void FileWatcher()

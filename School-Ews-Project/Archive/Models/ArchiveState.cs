@@ -32,6 +32,8 @@ public class ArchiveState
 
     public ArchiveStorageNames TemporarilyData { get; set; }
 
+    public string[] ArchiveProjectFolderPaths { get; set; } = new string[0];
+
     //Colors
     public Color BackgroundColor { get; } = new Color(51, 59, 67, 255);
     public Color DataTypeBoxesTextColor { get; } = new Color(220, 223, 228, 255);

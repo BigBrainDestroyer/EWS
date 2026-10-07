@@ -425,4 +425,6 @@ public class HeaderState
                 Color.Red
             )}
         };
+
+    public string[] AllProjectFolderNames { get; set; } = new string[0];
 }

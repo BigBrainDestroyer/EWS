@@ -157,6 +157,8 @@ public class UpdateArchiveStorage
             _archive.ProjectsFolderHasChanged = false;
 
             _archive.Storage = LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
+
+            _archive.ArchiveProjectFolderPaths = Directory.GetDirectories(_archive.ProjectsDataLocation);
         }
     }
 } 

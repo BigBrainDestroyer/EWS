@@ -28,13 +28,13 @@ public class UpdateArchive
 
     public void Archive()
     {
+        _archiveStorage.UpdateProjectsFolder();
+        
         _archiveClicks.ArchiveClicks();
 
         _archiveScrollInput.ScrollInput();
 
         _namingDataTypeBox.NamingDataTypeTextBox();
-        
-        _archiveStorage.UpdateProjectsFolder();
 
         _archiveLayout.UpdateArchive();
 
