@@ -96,8 +96,23 @@ public class DrawHeaderLayout
 
         foreach (DrawHeaderObjectNames headerObjectName in _header.HeaderStringSlider.Keys)
         {
+            Custom.DrawCustomRectangle( //UpBackground
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Box.PixelPosition,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Box.PixelLengths,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Box.Radius,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Box.CornerStates,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.BoxBackgroundColor
+            );
 
-            Custom.DrawCustomRectangle(
+            Custom.DrawCustomRectangle( //DownBackground
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Box.PixelPosition,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Box.PixelLengths,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Box.Radius,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Box.CornerStates,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.BoxBackgroundColor
+            );
+
+            Custom.DrawCustomRectangle( //TitleBackground
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.PixelPosition,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.PixelLengths,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Box.Radius,
@@ -105,21 +120,21 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.BoxBackgroundColor
             );
 
-            Raylib.DrawTextEx(
+            Custom.DrawCustomRectangle( //StringSliderBackground
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.PixelPosition,
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.PixelLengths,
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.Radius,
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.CornerStates,
+                _header.HeaderStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor
+            );
+
+            Raylib.DrawTextEx( 
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Font,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Text.Text,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.TextPosition,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Text.TextSize,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.Text.TextSpacing,
                 _header.HeaderStringSlider[headerObjectName].TitleStringBox.TextColor
-            );
-
-            Custom.DrawCustomRectangle(
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.PixelPosition,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.PixelLengths,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.Radius,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.Box.CornerStates,
-                _header.HeaderStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor
             );
 
             Raylib.DrawTextEx(
@@ -131,21 +146,25 @@ public class DrawHeaderLayout
                 _header.HeaderStringSlider[headerObjectName].StringSliderBox.TextColor
             );
 
-            Custom.DrawCustomRectangle(
-                _header.HeaderStringSlider[headerObjectName].CounterUpClickField.PixelPosition,
-                _header.HeaderStringSlider[headerObjectName].CounterUpClickField.PixelLengths,
-                _header.HeaderStringSlider[headerObjectName].CounterUpClickField.Radius,
-                _header.HeaderStringSlider[headerObjectName].CounterUpClickField.CornerStates,
-                _header.HeaderStringSlider[headerObjectName].TextureDownBackgroundClickFieldColor
+            Raylib.DrawTexturePro(
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Texture.Texture,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Texture.TextureUsage,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.Texture.TextureSize,
+                new Vector2(),
+                0f,
+                _header.HeaderStringSlider[headerObjectName].UpTexture.TextureColor
             );
 
-            Custom.DrawCustomRectangle(
-                _header.HeaderStringSlider[headerObjectName].CounterDownClickField.PixelPosition,
-                _header.HeaderStringSlider[headerObjectName].CounterDownClickField.PixelLengths,
-                _header.HeaderStringSlider[headerObjectName].CounterDownClickField.Radius,
-                _header.HeaderStringSlider[headerObjectName].CounterDownClickField.CornerStates,
-                _header.HeaderStringSlider[headerObjectName].TextureUpBackgroundClickFieldColor
+            Raylib.DrawTexturePro(
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Texture.Texture,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Texture.TextureUsage,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.Texture.TextureSize,
+                new Vector2(),
+                0f,
+                _header.HeaderStringSlider[headerObjectName].DownTexture.TextureColor
             );
+
+            Console.WriteLine(_header.HeaderStringSlider[headerObjectName].UpTexture);
         }
     }
 }

@@ -14,8 +14,8 @@ public class HeaderState
             {DrawHeaderObjectNames.MazeSize, new StringSliderColors(
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
@@ -24,8 +24,8 @@ public class HeaderState
             {DrawHeaderObjectNames.BatchSize, new StringSliderColors(
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
@@ -34,8 +34,8 @@ public class HeaderState
             {DrawHeaderObjectNames.PlayBackSpeed, new StringSliderColors(
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
@@ -44,8 +44,8 @@ public class HeaderState
             {DrawHeaderObjectNames.RunFolderName, new StringSliderColors(
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
@@ -141,22 +141,31 @@ public class HeaderState
 
     public Dictionary<DrawHeaderObjectNames, StringSlider> HeaderStringSlider { get; set; } =
         new Dictionary<DrawHeaderObjectNames, StringSlider>(){
-            {DrawHeaderObjectNames.MazeSize, new StringSlider(
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
-                
-                new CustomBox( //counterUpClickField
-                    new BoolVector4(false, true, false, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+            {DrawHeaderObjectNames.MazeSize, new StringSlider(   
+                new CenterTextureInBox(//UpClickField
+                    new CustomBox( 
+                        new BoolVector4(false, true, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                    new Vector2(10, 10),
+                    Color.Red, 
+                    Color.Red
                 ),
-                
-                new CustomBox( //counterDownClickField
-                    new BoolVector4(false, false, true, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+
+                new CenterTextureInBox(//DownpClickField
+                    new CustomBox(
+                        new BoolVector4(false, false, true, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowDown, new Rectangle(), new Rectangle()),
+                    new Vector2(10, 10),
+                    Color.Red, 
+                    Color.Red
                 ),
                 
                 new CenterTextInBox( //titleBox
@@ -175,7 +184,7 @@ public class HeaderState
                     Color.Red
                 ),
                 
-                new CenterTextInBox( //counterBox
+                new CenterTextInBox( //StringSliderBox
                     new Font(),
                     new CustomBox(
                         new BoolVector4(false, false, false, true),
@@ -190,31 +199,34 @@ public class HeaderState
                     Color.DarkBlue,
                     Color.Red
                 ),
-                StaticVariablesInitialize.TextureArrowUp,
-                StaticVariablesInitialize.TextureArrowDown,
-                42.5f,
-                Color.Red, //textureUpColor
-                Color.Blue, //textureDownColor
-                Color.Red, //textureUpBackgroundClickFieldColor
-                Color.Red //textureDownBackgroundClickFieldColor
+                42.5f
             )},
 
-            {DrawHeaderObjectNames.BatchSize, new StringSlider(
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
-                
-                new CustomBox( //counterUpClickField
-                    new BoolVector4(false, true, false, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+            {DrawHeaderObjectNames.BatchSize, new StringSlider(   
+                new CenterTextureInBox(//UpClickField
+                    new CustomBox( 
+                        new BoolVector4(false, true, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
-                
-                new CustomBox( //counterDownClickField
-                    new BoolVector4(false, false, true, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+
+                new CenterTextureInBox(//DownpClickField
+                    new CustomBox(
+                        new BoolVector4(false, false, true, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowDown, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
                 
                 new CenterTextInBox( //titleBox
@@ -233,7 +245,7 @@ public class HeaderState
                     Color.Red
                 ),
                 
-                new CenterTextInBox( //counterBox
+                new CenterTextInBox( //StringSliderBox
                     new Font(),
                     new CustomBox(
                         new BoolVector4(false, false, false, true),
@@ -248,31 +260,34 @@ public class HeaderState
                     Color.DarkBlue,
                     Color.Red
                 ),
-                StaticVariablesInitialize.TextureArrowUp,
-                StaticVariablesInitialize.TextureArrowDown,
-                42.5f,
-                Color.Red, //textureUpColor
-                Color.Blue, //textureDownColor
-                Color.Red, //textureUpBackgroundClickFieldColor
-                Color.Red //textureDownBackgroundClickFieldColor
+                42.5f
             )},
 
-            {DrawHeaderObjectNames.PlayBackSpeed, new StringSlider(
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
-                
-                new CustomBox( //counterUpClickField
-                    new BoolVector4(false, true, false, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+            {DrawHeaderObjectNames.PlayBackSpeed, new StringSlider(   
+                new CenterTextureInBox(//UpClickField
+                    new CustomBox( 
+                        new BoolVector4(false, true, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
-                
-                new CustomBox( //counterDownClickField
-                    new BoolVector4(false, false, true, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+
+                new CenterTextureInBox(//DownpClickField
+                    new CustomBox(
+                        new BoolVector4(false, false, true, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowDown, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
                 
                 new CenterTextInBox( //titleBox
@@ -291,7 +306,7 @@ public class HeaderState
                     Color.Red
                 ),
                 
-                new CenterTextInBox( //counterBox
+                new CenterTextInBox( //StringSliderBox
                     new Font(),
                     new CustomBox(
                         new BoolVector4(false, false, false, true),
@@ -306,50 +321,53 @@ public class HeaderState
                     Color.DarkBlue,
                     Color.Red
                 ),
-                StaticVariablesInitialize.TextureArrowUp,
-                StaticVariablesInitialize.TextureArrowDown,
-                42.5f,
-                Color.Red, //textureUpColor
-                Color.Blue, //textureDownColor
-                Color.Red, //textureUpBackgroundClickFieldColor
-                Color.Red //textureDownBackgroundClickFieldColor
+                42.5f
             )},
 
-            {DrawHeaderObjectNames.RunFolderName, new StringSlider(
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), // UpTexture
-                new RaylibTexture(new Texture2D(), new Rectangle(), new Rectangle()), //DownTexture
-                
-                new CustomBox( //counterUpClickField
-                    new BoolVector4(false, true, false, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+            {DrawHeaderObjectNames.RunFolderName, new StringSlider(   
+                new CenterTextureInBox(//UpClickField
+                    new CustomBox( 
+                        new BoolVector4(false, true, false, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
-                
-                new CustomBox( //counterDownClickField
-                    new BoolVector4(false, false, true, false),
-                    new Vector2(),
-                    new Vector2(),
-                    8
+
+                new CenterTextureInBox(//DownpClickField
+                    new CustomBox(
+                        new BoolVector4(false, false, true, false),
+                        new Vector2(),
+                        new Vector2(),
+                        8
+                    ),
+                    new RaylibTexture(StaticVariablesInitialize.TextureArrowDown, new Rectangle(), new Rectangle()),
+                    new Vector2(10,10),
+                    Color.Red, 
+                    Color.Red
                 ),
                 
                 new CenterTextInBox( //titleBox
                     new Font(),
                     new CustomBox(
-                        new BoolVector4(),
+                        new BoolVector4(false, false, false, false),
                         new Vector2(),
                         new Vector2(),
                         8
                     ),
                     new RaylibText("", 0, 0),
                     new Vector2(),
-                    new Vector2(),
+                    new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
-                    Color.Red,
+                    Color.DarkBlue,
                     Color.Red
                 ),
                 
-                new CenterTextInBox( //counterBox
+                new CenterTextInBox( //StringSliderBox
                     new Font(),
                     new CustomBox(
                         new BoolVector4(true, false, false, true),
@@ -364,14 +382,8 @@ public class HeaderState
                     Color.DarkBlue,
                     Color.Red
                 ),
-                StaticVariablesInitialize.TextureArrowUp,
-                StaticVariablesInitialize.TextureArrowDown,
-                0,
-                Color.Red, //textureUpColor
-                Color.Blue, //textureDownColor
-                Color.Red, //textureUpBackgroundClickFieldColor
-                Color.Red //textureDownBackgroundClickFieldColor
-            )}
+                0
+            )},
         };
 
     public Dictionary<DrawHeaderObjectNames, CenterTextureInBox> HeaderCenterTextureInBox { get; set; } =
@@ -383,11 +395,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(
-                    new Texture2D(),
-                    new Rectangle(),
-                    new Rectangle()
-                ),
+                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
                 new Vector2(10,10),
                 Color.Blue,
                 Color.Red
@@ -399,11 +407,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(
-                    new Texture2D(),
-                    new Rectangle(),
-                    new Rectangle()
-                ),
+                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
                 new Vector2(40,10),
                 Color.Blue,
                 Color.Red
@@ -415,11 +419,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(
-                    new Texture2D(),
-                    new Rectangle(),
-                    new Rectangle()
-                ),
+                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
                 new Vector2(10,10),
                 Color.Blue,
                 Color.Red

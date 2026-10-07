@@ -6,15 +6,43 @@ namespace Program;
 public static class StaticVariablesInitialize
 {
     //FontPaths
-    public static string FontLilexBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
-    public static string FontLilexSemiBoldPath { get; set; } = "Resources/Font/Lilex-Bold.ttf";
-    public static string FontLilexMediumPath { get; set; } = "Resources/Font/Lilex-Medium.ttf";
-    public static string FontLilexRegular { get; set; } = "Resources/Font/Lilex-Regular.ttf";
-    public static string FontLilexExtraLightPath { get; set; } = "Resources/Font/Lilex-ExtraLight.ttf";
+    public static string FontLilexBoldPath { get; } = "Resources/Font/Lilex-Bold.ttf";
+    public static string FontLilexSemiBoldPath { get; } = "Resources/Font/Lilex-Bold.ttf";
+    public static string FontLilexMediumPath { get; } = "Resources/Font/Lilex-Medium.ttf";
+    public static string FontLilexRegular { get; } = "Resources/Font/Lilex-Regular.ttf";
+    public static string FontLilexExtraLightPath { get; } = "Resources/Font/Lilex-ExtraLight.ttf";
 
     //TexturePaths
-    public static string TextureArrowUp { get; set; } = "Resources/Png/ArrowUp.png";
-    public static string TextureArrowDown { get; set; } = "Resources/Png/ArrowDown.png";
+    public static string TextureArrowUpPath { get; } = "Resources/Png/ArrowUp.png";
+    public static string TextureArrowDownPath { get; } = "Resources/Png/ArrowDown.png";
+    public static string TextureProjectFolderPath { get; } = "Resources/Png/ProjectFolder.png";
+    public static string TextureFolderPath { get; } = "Resources/Png/Folder.png";
+    public static string TextureFilePath { get; } = "Resources/Png/File.png";
+    public static string TextureOpenProjectFolderPath { get; } = "Resources/Png/OpenProjectFolder.png";
+    public static string TextureOpenFolderPath { get; } = "Resources/Png/OpenFolder.png";
+    public static string TexturePlusSignPath { get; } = "Resources/Png/PlusSign.png";
+
+    //Textures
+    public static Texture2D TextureArrowUp { get;  private set; }
+    public static Texture2D TextureArrowDown { get;  private set; }
+    public static Texture2D TextureProjectFolder { get;  private set; }
+    public static Texture2D TextureFolder { get;  private set; }
+    public static Texture2D TextureFile { get;  private set; }
+    public static Texture2D TextureOpenProjectFolder { get;  private set; }
+    public static Texture2D TextureOpenFolder { get;  private set; }
+    public static Texture2D TexturePlusSign { get;  private set; }
+
+    public static void Init()
+    {
+        StaticVariablesInitialize.TextureArrowUp = Load.LoadResizableTexture2D(TextureArrowUpPath);
+        StaticVariablesInitialize.TextureArrowDown = Load.LoadResizableTexture2D(TextureArrowDownPath);
+        StaticVariablesInitialize.TextureProjectFolder = Load.LoadResizableTexture2D(TextureProjectFolderPath);
+        StaticVariablesInitialize.TextureFolder = Load.LoadResizableTexture2D(TextureFolderPath);
+        StaticVariablesInitialize.TextureFile = Load.LoadResizableTexture2D(TextureFilePath);
+        StaticVariablesInitialize.TextureOpenProjectFolder = Load.LoadResizableTexture2D(TextureOpenProjectFolderPath);
+        StaticVariablesInitialize.TextureOpenFolder = Load.LoadResizableTexture2D(TextureOpenFolderPath);
+        StaticVariablesInitialize.TexturePlusSign = Load.LoadResizableTexture2D(TexturePlusSignPath);
+    }
 }
 
 public class Initialize
@@ -26,26 +54,6 @@ public class Initialize
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _archiveStorage = new UpdateArchiveStorage(_state);
-    }
-    
-    public void Window()
-    {
-        const int screenWidth = 800;
-        const int screenHeight = 600; 
-
-        Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
-        Raylib.SetConfigFlags(ConfigFlags.HighDpiWindow);
-        Raylib.SetConfigFlags(ConfigFlags.Msaa4xHint);
-        Raylib.InitWindow(screenWidth, screenHeight, "EWS");
-
-        Raylib.SetWindowMonitor(0);
-
-        Raylib.SetExitKey(KeyboardKey.Null);
-
-        Raylib.SetTargetFPS(240);
-        Raylib.MaximizeWindow();
-
-        Raylib.SetWindowMinSize(_state.common.settings.MinimalScreenWidth, _state.common.settings.MinimalScreenHeight);
     }
 
     public void StartStopwatch()
@@ -87,12 +95,12 @@ public class Initialize
         //ArchiveTexture2DNames volgorde
         _archive.ArchiveTextures = 
             new Texture2D[] { 
-                Load.LoadResizableTexture2D("Resources/Png/ProjectFolder.png"), 
-                Load.LoadResizableTexture2D("Resources/Png/Folder.png"),
-                Load.LoadResizableTexture2D("Resources/Png/File.png"),
-                Load.LoadResizableTexture2D("Resources/Png/OpenProjectFolder.png"),
-                Load.LoadResizableTexture2D("Resources/Png/OpenFolder.png"),
-                Load.LoadResizableTexture2D("Resources/Png/PlusSign.png")
+                StaticVariablesInitialize.TextureProjectFolder,
+                StaticVariablesInitialize.TextureFolder,
+                StaticVariablesInitialize.TextureFile,
+                StaticVariablesInitialize.TextureOpenProjectFolder, 
+                StaticVariablesInitialize.TextureOpenFolder,
+                StaticVariablesInitialize.TexturePlusSign 
             };
     }
 

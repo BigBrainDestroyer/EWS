@@ -13,10 +13,10 @@ public class HeaderClick
 
     public void Click()
     {
-        CheckAllHeaderButtons();
+        CheckAllHeaderObjects();
     }
 
-    public void CheckAllHeaderButtons()
+    public void CheckAllHeaderObjects()
     {
         var _boxes = _state.common.boxes;
         var _header = _state.HeaderState;
@@ -29,17 +29,34 @@ public class HeaderClick
 
             if(_header.HeaderStringSlider.ContainsKey(objectName))
             {
-                if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].CounterUpClickField.PixelPosition, _header.HeaderStringSlider[objectName].CounterUpClickField.PixelLengths, Raylib.GetMousePosition()))
+                if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].UpTexture.Box.PixelPosition, _header.HeaderStringSlider[objectName].UpTexture.Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     // IS OP UP ARROW
+                    _header.HeaderStringSlider[objectName].UpTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureUpColors.ReactionColor;
+                    _header.HeaderStringSlider[objectName].UpTexture.TextureColor = _header.HeaderStringSliderColors[objectName].UpClickFieldColors.ReactionColor;
+
+                    //_header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
                 }
-                else if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].CounterDownClickField.PixelPosition, _header.HeaderStringSlider[objectName].CounterDownClickField.PixelLengths, Raylib.GetMousePosition()))
+                else if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].DownTexture.Box.PixelPosition, _header.HeaderStringSlider[objectName].DownTexture.Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     // IS OP ARROW DOWN
+                    _header.HeaderStringSlider[objectName].DownTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureDownColors.ReactionColor;
+                    _header.HeaderStringSlider[objectName].DownTexture.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].DownClickFieldColors.ReactionColor;
+
+                    //_header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
+                    //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
                 }
             }
-            else
+            else if(_header.HeaderButtons.ContainsKey(objectName))
             {
+                _header.HeaderButtons[objectName].TextColor = _header.HeaderButtonColors[objectName].SymbolColors.ReactionColor;
+                _header.HeaderButtons[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.ReactionColor;
+
                 if(objectName == DrawHeaderObjectNames.RunButton && CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     
@@ -48,7 +65,13 @@ public class HeaderClick
                 {
                     
                 }
-                else if(objectName == DrawHeaderObjectNames.TerminalRequest && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
+            }
+            else if(_header.HeaderCenterTextureInBox.ContainsKey(objectName))
+            {
+                _header.HeaderCenterTextureInBox[objectName].TextureColor = _header.HeaderButtonColors[objectName].SymbolColors.ReactionColor;
+                _header.HeaderCenterTextureInBox[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.ReactionColor;
+                
+                if(objectName == DrawHeaderObjectNames.TerminalRequest && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     
                 }

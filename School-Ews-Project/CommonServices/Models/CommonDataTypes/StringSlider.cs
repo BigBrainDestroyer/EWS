@@ -4,42 +4,22 @@ namespace Program;
 
 public class StringSlider
 {
-    public Color TextureUpColor { get; set; }
-    public Color TextureDownColor{ get; set; }
-    public Color TextureUpBackgroundClickFieldColor { get; set; }
-    public Color TextureDownBackgroundClickFieldColor { get; set; }
-
     public CustomBox Box { get; set; }
-    
-    public RaylibTexture UpTexture { get; set; }
-    public RaylibTexture DownTexture { get; set; }
-    
-    public CustomBox CounterUpClickField { get; set; }
-    public CustomBox CounterDownClickField { get; set; }
+
+    public CenterTextureInBox UpTexture { get; set; }
+    public CenterTextureInBox DownTexture { get; set; }
     
     public CenterTextInBox TitleStringBox { get; set; }
     public CenterTextInBox StringSliderBox { get; set; }
 
-    public string UpTexturePath   { get; set; }
-    public string DownTexturePath { get; set; }
-
     public float TitleStringBoxHeightPercentage { get; set; }
     
-    public StringSlider(RaylibTexture upTexture, RaylibTexture downTexture, CustomBox SlideUpClickField, CustomBox counterDownClickField, CenterTextInBox titleStringBox, CenterTextInBox stringSliderBox, string upTexturePath, string downTexturePath, float titleStringBoxHeightPercentage, Color textureUpColor, Color textureDownColor, Color textureUpBackgroundClickFieldColor, Color textureDownBackgroundClickFieldColor)
+    public StringSlider(CenterTextureInBox upTexture, CenterTextureInBox downTexture, CenterTextInBox titleStringBox, CenterTextInBox stringSliderBox, float titleStringBoxHeightPercentage)
     {
-        TextureUpColor = textureUpColor;
-        TextureDownColor = textureDownColor;
-        TextureUpBackgroundClickFieldColor = textureUpBackgroundClickFieldColor;
-        TextureDownBackgroundClickFieldColor = textureDownBackgroundClickFieldColor;
-
         UpTexture = upTexture;
         DownTexture = downTexture;
-        CounterUpClickField = SlideUpClickField;
-        CounterDownClickField = counterDownClickField;
         TitleStringBox = titleStringBox;
         StringSliderBox = stringSliderBox;
-        UpTexturePath = upTexturePath;
-        DownTexturePath = downTexturePath;
         TitleStringBoxHeightPercentage = titleStringBoxHeightPercentage;
     }
 }

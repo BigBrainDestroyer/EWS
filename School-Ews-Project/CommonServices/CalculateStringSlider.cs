@@ -5,132 +5,111 @@ namespace Program;
 
 public static class CalculateStringSlider
 {
-    public static StringSlider Calculate(StringSlider currentDigitCounter)
+    public static StringSlider Calculate(StringSlider currentStringSlider)
     {
-        currentDigitCounter = CalculateTextureBoxes(currentDigitCounter);
+        currentStringSlider = CalculateTextureBoxes(currentStringSlider);
 
-        if(currentDigitCounter.TitleStringBoxHeightPercentage > 0)
+        if(currentStringSlider.TitleStringBoxHeightPercentage > 0)
         {
-            currentDigitCounter = CalculateTitleBox(currentDigitCounter);
+            currentStringSlider = CalculateTitleBox(currentStringSlider);
         }
         
-        currentDigitCounter = CalculateCounterBox(currentDigitCounter);
+        currentStringSlider = CalculateCounterBox(currentStringSlider);
 
-        return currentDigitCounter;
+        return currentStringSlider;
     }
 
-    private static StringSlider CalculateTextureBoxes(StringSlider currentDigitCounter)
+    private static StringSlider CalculateTextureBoxes(StringSlider currentStringSlider)
     {
-        currentDigitCounter.CounterUpClickField =
+        currentStringSlider.UpTexture.Box =
             new CustomBox(
-                currentDigitCounter.CounterUpClickField.CornerStates,
+                currentStringSlider.UpTexture.Box.CornerStates,
                 
-                ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
+                ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
                     new Vector2(
-                        currentDigitCounter.Box.PixelPosition.X + (currentDigitCounter.Box.PixelLengths.X - (currentDigitCounter.Box.PixelLengths.Y / 2)),
-                        currentDigitCounter.Box.PixelPosition.Y
+                        currentStringSlider.Box.PixelPosition.X + (currentStringSlider.Box.PixelLengths.X - (currentStringSlider.Box.PixelLengths.Y / 2)),
+                        currentStringSlider.Box.PixelPosition.Y
                     ) 
                     : 
-                    currentDigitCounter.Box.PixelPosition,
+                    currentStringSlider.Box.PixelPosition,
                     
-                ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
-                    new Vector2((currentDigitCounter.Box.PixelLengths.Y/2), (currentDigitCounter.Box.PixelLengths.Y/2)) : 
-                    new Vector2(currentDigitCounter.Box.PixelLengths.X, (currentDigitCounter.Box.PixelLengths.Y/2)),
+                ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
+                    new Vector2((currentStringSlider.Box.PixelLengths.Y/2), (currentStringSlider.Box.PixelLengths.Y/2)) : 
+                    new Vector2(currentStringSlider.Box.PixelLengths.X, (currentStringSlider.Box.PixelLengths.Y/2)),
                     
-                currentDigitCounter.CounterUpClickField.Radius
+                currentStringSlider.UpTexture.Box.Radius
             );
 
-        currentDigitCounter.CounterDownClickField =
+        currentStringSlider.DownTexture.Box =
             new CustomBox(
-                    currentDigitCounter.CounterDownClickField.CornerStates,
+                    currentStringSlider.DownTexture.Box.CornerStates,
                     
-                    ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
+                    ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
                         new Vector2(
-                            currentDigitCounter.Box.PixelPosition.X + (currentDigitCounter.Box.PixelLengths.X - (currentDigitCounter.Box.PixelLengths.Y / 2)),
-                            currentDigitCounter.Box.PixelPosition.Y + currentDigitCounter.CounterUpClickField.PixelLengths.Y
+                            currentStringSlider.Box.PixelPosition.X + (currentStringSlider.Box.PixelLengths.X - (currentStringSlider.Box.PixelLengths.Y / 2)),
+                            currentStringSlider.Box.PixelPosition.Y + currentStringSlider.DownTexture.Box.PixelLengths.Y
                         ) 
                         : 
                         new Vector2(
-                            currentDigitCounter.Box.PixelPosition.X,
-                            currentDigitCounter.Box.PixelPosition.Y + currentDigitCounter.CounterUpClickField.PixelLengths.Y
+                            currentStringSlider.Box.PixelPosition.X,
+                            currentStringSlider.Box.PixelPosition.Y + currentStringSlider.DownTexture.Box.PixelLengths.Y
                         ),
                         
-                    ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
-                        new Vector2((currentDigitCounter.Box.PixelLengths.Y/2), (currentDigitCounter.Box.PixelLengths.Y/2)) : 
-                        new Vector2(currentDigitCounter.Box.PixelLengths.X, (currentDigitCounter.Box.PixelLengths.Y/2)),
+                    ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
+                        new Vector2((currentStringSlider.Box.PixelLengths.Y/2), (currentStringSlider.Box.PixelLengths.Y/2)) : 
+                        new Vector2(currentStringSlider.Box.PixelLengths.X, (currentStringSlider.Box.PixelLengths.Y/2)),
                         
-                    currentDigitCounter.CounterDownClickField.Radius
+                    currentStringSlider.DownTexture.Box.Radius
                 );
 
-        currentDigitCounter.UpTexture = 
-            new RaylibTexture(
-                currentDigitCounter.UpTexture.Texture,
-                new Rectangle(0, 0, currentDigitCounter.UpTexture.Texture.Width, currentDigitCounter.UpTexture.Texture.Height),
-                new Rectangle(
-                    currentDigitCounter.CounterUpClickField.PixelPosition.X,
-                    currentDigitCounter.CounterUpClickField.PixelPosition.Y,
-                    currentDigitCounter.CounterUpClickField.PixelPosition.X + currentDigitCounter.CounterUpClickField.PixelLengths.X,
-                    currentDigitCounter.CounterUpClickField.PixelPosition.Y + currentDigitCounter.CounterUpClickField.PixelLengths.Y
-                )
-            );
+        currentStringSlider.UpTexture = CalculateCenterTextureInBox.Calculate(currentStringSlider.UpTexture);
+        currentStringSlider.DownTexture = CalculateCenterTextureInBox.Calculate(currentStringSlider.DownTexture);
 
-        currentDigitCounter.DownTexture = 
-            new RaylibTexture(
-                currentDigitCounter.DownTexture.Texture,
-                new Rectangle(0, 0, currentDigitCounter.DownTexture.Texture.Width, currentDigitCounter.DownTexture.Texture.Height),
-                new Rectangle(
-                    currentDigitCounter.CounterDownClickField.PixelPosition.X,
-                    currentDigitCounter.CounterDownClickField.PixelPosition.Y,
-                    currentDigitCounter.CounterDownClickField.PixelPosition.X + currentDigitCounter.CounterUpClickField.PixelLengths.X,
-                    currentDigitCounter.CounterDownClickField.PixelPosition.Y + currentDigitCounter.CounterUpClickField.PixelLengths.Y
-                )
-            );
-
-        return currentDigitCounter;
+        return currentStringSlider;
     }
 
-    private static StringSlider CalculateTitleBox(StringSlider currentDigitCounter)
+    private static StringSlider CalculateTitleBox(StringSlider currentStringSlider)
     {
-        currentDigitCounter.TitleStringBox.Box =
+        currentStringSlider.TitleStringBox.Box =
             new CustomBox(
-                currentDigitCounter.TitleStringBox.Box.CornerStates,
-                currentDigitCounter.Box.PixelPosition,
-                ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
+                currentStringSlider.TitleStringBox.Box.CornerStates,
+                currentStringSlider.Box.PixelPosition,
+                ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
                     new Vector2(
-                        currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.CounterUpClickField.PixelLengths.X,
-                        currentDigitCounter.Box.PixelLengths.Y * (currentDigitCounter.TitleStringBoxHeightPercentage/100f)
+                        currentStringSlider.Box.PixelLengths.X - currentStringSlider.UpTexture.Box.PixelLengths.X,
+                        currentStringSlider.Box.PixelLengths.Y * (currentStringSlider.TitleStringBoxHeightPercentage/100f)
                     )
                     :
                     new Vector2(),
-                currentDigitCounter.TitleStringBox.Box.Radius
+                currentStringSlider.TitleStringBox.Box.Radius
             );
 
-        currentDigitCounter.TitleStringBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.TitleStringBox);
+        currentStringSlider.TitleStringBox = CalculateCenterTextInBox.Calculate(currentStringSlider.TitleStringBox);
 
-        return currentDigitCounter;
+        return currentStringSlider;
     }
 
-    private static StringSlider CalculateCounterBox(StringSlider currentDigitCounter)
+    private static StringSlider CalculateCounterBox(StringSlider currentStringSlider)
     {
-        currentDigitCounter.StringSliderBox.Box =
+        currentStringSlider.StringSliderBox.Box =
             new CustomBox(
-                currentDigitCounter.StringSliderBox.Box.CornerStates,
+                currentStringSlider.StringSliderBox.Box.CornerStates,
                 new Vector2(
-                    currentDigitCounter.Box.PixelPosition.X,
-                    currentDigitCounter.Box.PixelPosition.Y + currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
+                    currentStringSlider.Box.PixelPosition.X,
+                    currentStringSlider.Box.PixelPosition.Y + currentStringSlider.TitleStringBox.Box.PixelLengths.Y
                 ),
-                ((currentDigitCounter.Box.PixelLengths.Y / 2) < currentDigitCounter.Box.PixelLengths.X) ?
+                ((currentStringSlider.Box.PixelLengths.Y / 2) < currentStringSlider.Box.PixelLengths.X) ?
                     new Vector2(
-                        currentDigitCounter.Box.PixelLengths.X - currentDigitCounter.CounterDownClickField.PixelLengths.X,
-                        currentDigitCounter.Box.PixelLengths.Y - currentDigitCounter.TitleStringBox.Box.PixelLengths.Y
+                        currentStringSlider.Box.PixelLengths.X - currentStringSlider.DownTexture.Box.PixelLengths.X,
+                        currentStringSlider.Box.PixelLengths.Y - currentStringSlider.TitleStringBox.Box.PixelLengths.Y
                     )
                     :
                     new Vector2(),
-                currentDigitCounter.StringSliderBox.Box.Radius
+                currentStringSlider.StringSliderBox.Box.Radius
             );
 
-        currentDigitCounter.StringSliderBox = CalculateCenterTextInBox.Calculate(currentDigitCounter.StringSliderBox);
+        currentStringSlider.StringSliderBox = CalculateCenterTextInBox.Calculate(currentStringSlider.StringSliderBox);
 
-        return currentDigitCounter;
+        return currentStringSlider;
     }
 }
