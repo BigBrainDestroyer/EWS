@@ -8,73 +8,74 @@ public class HeaderState
     //Colors
     public Color HeaderBackgroundColor { get; } = new Color(18, 22, 26, 255);
 
-    //BackgroundColors
-    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectBackgroundColors { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, Color>() {
-            {DrawHeaderObjectNames.RunButton, Color.DarkBlue},
-            {DrawHeaderObjectNames.BuildButton, Color.DarkBlue},
-            {DrawHeaderObjectNames.TerminalRequest, Color.DarkBlue},
-            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.DarkBlue},
-            {DrawHeaderObjectNames.BuildMaze, Color.DarkBlue},
-            {DrawHeaderObjectNames.MazeSize, Color.DarkBlue},
-            {DrawHeaderObjectNames.BatchSize, Color.DarkBlue},
-            {DrawHeaderObjectNames.PlayBackSpeed, Color.DarkBlue},
-            {DrawHeaderObjectNames.RunFolderName, Color.DarkBlue}
+    //Colors
+    public Dictionary<DrawHeaderObjectNames, StringSliderColors> HeaderStringSliderColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, StringSliderColors>() {
+            {DrawHeaderObjectNames.MazeSize, new StringSliderColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
+            )},
+            {DrawHeaderObjectNames.BatchSize, new StringSliderColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
+            )},
+            {DrawHeaderObjectNames.PlayBackSpeed, new StringSliderColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
+            )},
+            {DrawHeaderObjectNames.RunFolderName, new StringSliderColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
+            )}
         };
 
-    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectSymbolColors { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, Color>() {
-            {DrawHeaderObjectNames.RunButton, Color.Red},
-            {DrawHeaderObjectNames.BuildButton, Color.Red},
-            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
-            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
-            {DrawHeaderObjectNames.BuildMaze, Color.Red},
-            {DrawHeaderObjectNames.MazeSize, Color.Red},
-            {DrawHeaderObjectNames.BatchSize, Color.Red},
-            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
-            {DrawHeaderObjectNames.RunFolderName, Color.Red}
+    public Dictionary<DrawHeaderObjectNames, ButtonColors> HeaderButtonColors { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, ButtonColors>() {
+            {DrawHeaderObjectNames.RunButton, new ButtonColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+            )},
+            {DrawHeaderObjectNames.BuildButton, new ButtonColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+            )},
+            {DrawHeaderObjectNames.TerminalRequest, new ButtonColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+            )},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, new ButtonColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+            )},
+            {DrawHeaderObjectNames.BuildMaze, new ButtonColors(
+                new ReactionColorCombinations(Color.Red, Color.LightGray),
+                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+            )}
         };
-
-    //HighLightColors
-    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectBackgroundHighLightColors { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, Color>() {
-            {DrawHeaderObjectNames.RunButton, Color.Red},
-            {DrawHeaderObjectNames.BuildButton, Color.Red},
-            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
-            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
-            {DrawHeaderObjectNames.BuildMaze, Color.Red},
-            {DrawHeaderObjectNames.MazeSize, Color.Red},
-            {DrawHeaderObjectNames.BatchSize, Color.Red},
-            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
-            {DrawHeaderObjectNames.RunFolderName, Color.Red}
-        };
-    
-    Dictionary<DrawHeaderObjectNames, Color> HeaderObjectSymbolHighLightColors { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, Color>() {
-            {DrawHeaderObjectNames.RunButton, Color.Red},
-            {DrawHeaderObjectNames.BuildButton, Color.Red},
-            {DrawHeaderObjectNames.TerminalRequest, Color.Red},
-            {DrawHeaderObjectNames.StartStopAlgoPlayBack, Color.Red},
-            {DrawHeaderObjectNames.BuildMaze, Color.Red},
-            {DrawHeaderObjectNames.MazeSize, Color.Red},
-            {DrawHeaderObjectNames.BatchSize, Color.Red},
-            {DrawHeaderObjectNames.PlayBackSpeed, Color.Red},
-            {DrawHeaderObjectNames.RunFolderName, Color.Red}
-        };
-
-    Dictionary<DrawHeaderObjectNames, bool> IsHighLigthColorVisible { get; set; } =
-        new Dictionary<DrawHeaderObjectNames, bool>() {
-            {DrawHeaderObjectNames.RunButton, false},
-            {DrawHeaderObjectNames.BuildButton, false},
-            {DrawHeaderObjectNames.TerminalRequest, false},
-            {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
-            {DrawHeaderObjectNames.BuildMaze, false},
-            {DrawHeaderObjectNames.MazeSize, false},
-            {DrawHeaderObjectNames.BatchSize, false},
-            {DrawHeaderObjectNames.PlayBackSpeed, false},
-            {DrawHeaderObjectNames.RunFolderName, false}
-        };
-
 
     public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;
 
@@ -224,7 +225,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("MazeSize", 0, 0),
+                    new RaylibText("BatchSize", 0, 0),
                     new Vector2(),
                     new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
@@ -282,7 +283,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("MazeSize", 0, 0),
+                    new RaylibText("PlayBackSpeed", 0, 0),
                     new Vector2(),
                     new Vector2(10,7),
                     StaticVariablesInitialize.FontLilexBoldPath,
@@ -356,7 +357,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("ProjectNaam", 0, 0),
+                    new RaylibText("ProjectName", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
