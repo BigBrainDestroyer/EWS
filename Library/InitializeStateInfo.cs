@@ -66,6 +66,7 @@ internal static class Initialize
         if(!File.Exists(filePath))
         {
             File.Create(filePath).Close();
+            File.WriteAllText(filePath, "{}");
         }
 
         return  filePath;
@@ -78,6 +79,7 @@ internal static class Initialize
         if(!File.Exists(filePath))
         {
             File.Create(filePath).Close();
+            File.WriteAllText(filePath, "{}");
         }
 
         return  filePath;

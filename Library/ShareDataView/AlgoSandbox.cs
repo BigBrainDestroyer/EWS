@@ -27,7 +27,23 @@ public static class AlgoSandbox
 
     private static void DeserializeSharedMazeData()
     {
-        string jsonText = File.ReadAllText(App.directoryInfo.ShareMazeDataFilePath);
+        bool stop = false;
+        string jsonText = "";
+
+        while(stop == true)
+        {
+            try
+            {
+                jsonText = File.ReadAllText(App.directoryInfo.ShareMazeDataFilePath);
+
+                stop = true;
+            }
+            catch
+            {
+                Thread.Sleep(100);
+            }
+        }
+            
 
         if(JsonSerializer.Deserialize<ShareMazeData>(jsonText, App.json.JsonSerializeSettings) == null)
         {
@@ -38,6 +54,7 @@ public static class AlgoSandbox
             App.shareMazeData = JsonSerializer.Deserialize<ShareMazeData>(jsonText, App.json.JsonSerializeSettings) ?? throw new ArgumentNullException(nameof(App.shareMazeData));
         }            
     }
+    
     public static void EndProgram()
     {
         lock(_lock)
@@ -52,11 +69,13 @@ public static class AlgoSandbox
     {
         var ShareObj = new ShareAlgoData();
 
+        ShareObj.AllMazes = App.shareMazeData.AllMazes;
+        ShareObj.MazeBeginPoints = App.shareMazeData.MazeBeginPoints;
+        ShareObj.MazeEndPoints = App.shareMazeData.MazeEndPoints;
         ShareObj.CommonDataHistory.CommonUsageDataHistory = App.commonData.CommonUsageDataHistory;
         ShareObj.CommonDataHistory.SlotSearchedHistory = App.commonData.SlotSearchedHistory;
         ShareObj.CommonDataHistory.TotalProjectStopWatchTotalTime = App.commonData.ProjectStopWatch;
         ShareObj.CommonDataHistory.MazeFinalPaths = App.commonData.MazeFinalPaths;
-
 
         File.WriteAllText(
             ShareData.DirectoryInfo.ShareAlgoDataFilePath(),

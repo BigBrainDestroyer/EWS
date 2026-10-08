@@ -16,10 +16,7 @@ public class MazeController
 
     public void Controller()
     {
-        if (_state.maze.generator.AllMazes.Length < 1)
-        {
-            _generator.Generator();
-        }
+        _generator.Generator();   
 
         _mazeLayout.MazeLayout();
     }

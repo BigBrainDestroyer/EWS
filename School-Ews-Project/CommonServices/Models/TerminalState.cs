@@ -16,7 +16,7 @@ public class TerminalState
     //Universal
     public string CommandCloseTerminal { get; } = "exit";
     public string CommandRequestedPath { get; } = "cd";
-    public string CommandNewConsole { get; } = "dotnet new console";
+    public string CommandNewConsole { get; } = "dotnet new console --force";
     public string CommandNewReference { get; } = "dotnet add reference";
 
 

@@ -17,9 +17,18 @@ public class MazeGenerator
     public void Generator() // 0 Up 1 Right 2 Down 3 Left
     {
         var _generator = _state.maze.generator;
+        var _connect = _state.connector;
+
+        if(_generator.BuildingMazes || _connect.RunAlgo)
+        {
+            return;
+        }
 
         _generator.AllMazes = new Maze[_generator.MazeBachSize];
-        _generator.ReadingAllMazes = false;
+        _generator.MazeBeginPoints = new IVector2[_generator.MazeBachSize];
+        _generator.MazeEndPoints = new IVector2[_generator.MazeBachSize];
+        _generator.MazesAreDone = false;
+        _generator.BuildingMazes = true;
 
         Task.Run(() =>
         {
@@ -35,27 +44,29 @@ public class MazeGenerator
                     loop.Break();
                 }
 
-                _generator.AllMazes[i] =
+                (_generator.AllMazes[i], _generator.MazeBeginPoints[i], _generator.MazeEndPoints[i]) =
                     MakeMaze(
                         _generator.MazeSize,
                         _generator.MazeSeedBach[i]
                     );     
             });
 
-            _generator.ReadingAllMazes = true;
+            _generator.MazesAreDone = true;
         });
     }
 
-    private Maze MakeMaze( Vector2 mazeSize, int[] seed)
+    private (Maze, IVector2, IVector2) MakeMaze( Vector2 mazeSize, int[] seed)
     {
-        Maze newMaze;
-
+        Maze newMaze = new Maze();
+        IVector2 newBeginPoints = new IVector2(1,1);
+        IVector2 newEndPoints = new IVector2((int)mazeSize.X - 1, (int)mazeSize.Y -1);
+        
         newMaze.UsingXToGetRightArray = FillArray((int)mazeSize.X, (int)mazeSize.Y);
         newMaze.UsingYToGetRightArray = FillArray((int)mazeSize.Y, (int)mazeSize.X);
 
         newMaze = MazeMaker(newMaze, mazeSize, seed);
 
-        return newMaze;
+        return (newMaze, newBeginPoints, newEndPoints);
     }
 
     private WallState[][] FillArray(int arrayLength, int secondArrayLength)

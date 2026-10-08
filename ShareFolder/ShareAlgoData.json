@@ -1,0 +1,639 @@
+{
+  "CommonDataHistory": {
+    "TotalProjectStopWatchTotalTime": {
+      "IsRunning": false,
+      "Elapsed": "00:00:00",
+      "ElapsedMilliseconds": 0,
+      "ElapsedTicks": 0
+    },
+    "CommonUsageDataHistory": [],
+    "SlotSearchedHistory": [],
+    "MazeFinalPaths": []
+  },
+  "AllMazes": [
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ]
+    }
+  ],
+  "MazeEndPoints": [
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    },
+    {
+      "X": 3,
+      "Y": 3
+    }
+  ],
+  "MazeBeginPoints": [
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    },
+    {
+      "X": 1,
+      "Y": 1
+    }
+  ]
+}

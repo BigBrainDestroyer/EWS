@@ -22,18 +22,19 @@ public class UpdateEditorPanelText
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;
         var _commonBoxes = _state.common.boxes;
-        
+        var _time = _state.common.time;
+
         if (_commonBoxes.ActiveMainBox == MainBoxNames.Editor)
         {
             _updateTextView.IsMouseWheelActive();
             
-            if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right) || _input.KeyboardKeyTimeDown.Values.Any(time => time.StartDownTime >= _textPanel.KeyboardKeyDownTimeDuration))
+            if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right) || _time.KeyboardKeyTimeDown.Values.Any(time => time.StartDownTime >= _textPanel.KeyboardKeyDownTimeDuration))
             {
-                (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput, _textPanel.KeyboardKeyDownSettings, _input.FileChangeTimer) =
+                (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput, _textPanel.KeyboardKeyDownSettings, _time.FileChangeTimer) =
                     UpdatingText(
                         _state.common.time.Stopwatch,
-                        _input.FileChangeTimer,
-                        _input.KeyboardKeyTimeDown,
+                        _time.FileChangeTimer,
+                        _time.KeyboardKeyTimeDown,
                         _textPanel.KeyboardKeyDownSettings,
                         _textPanel.KeyboardKeyDownTimeDuration,
                         _textPanel.CursorTextPosition,

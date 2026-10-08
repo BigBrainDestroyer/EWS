@@ -1,5 +1,7 @@
 using Raylib_cs;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Program;
 
@@ -159,6 +161,48 @@ public class Initialize
         _archive.Storage = _archiveStorage.LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
 
         _archive.ArchiveProjectFolderPaths = Directory.GetDirectories(_archive.ProjectsDataLocation);
+    }
+
+    public void LoadShareAlgoData()
+    {
+        var _shareAlgo = _state.shareAlgoData;
+        var _connect = _state.connector;
+
+        bool stop = false;
+
+        string jsonText = "";
+
+        while(stop == true)
+        {
+            try
+            {
+                jsonText = File.ReadAllText(ShareData.DirectoryInfo.ShareAlgoDataFilePath());
+
+                if(string.IsNullOrWhiteSpace(jsonText))
+                {
+                    jsonText = "";
+                }
+                else
+                {
+                    _shareAlgo = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
+                }
+                
+                stop = true;
+            }
+            catch
+            {
+                Thread.Sleep(100);
+            }
+        }
+
+        if(_shareAlgo != null && _shareAlgo.CommonDataHistory.TotalProjectStopWatchTotalTime.Elapsed.TotalSeconds != 0)
+        {
+            _connect.IsAlgoLoaded = true;
+        }
+        else
+        {
+            _connect.IsAlgoLoaded = false;
+        }
     }
 
     public void FileWatcher()

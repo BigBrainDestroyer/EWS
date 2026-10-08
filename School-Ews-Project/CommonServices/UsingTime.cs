@@ -64,4 +64,47 @@ public static class CalculateUsingTime
 
         return currentFileChangeTimer;
     }
+
+    public static MazeRunStopwatch MazePlaySpeedStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch)
+    {
+        if(currentMazeRunStopwatch.ResetStopwatch)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    0, 
+                    0, 
+                    0, 
+                    currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    false
+                );
+        }
+
+        if(currentMazeRunStopwatch.UpdateStopwatch && currentMazeRunStopwatch.StartTime == 0)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    currentStopwatch.Elapsed.TotalSeconds, 
+                    0, 
+                    0, 
+                    currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    currentMazeRunStopwatch.ResetStopwatch
+                );
+        }
+        else if(currentMazeRunStopwatch.UpdateStopwatch)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    currentMazeRunStopwatch.StartTime, 
+                    currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime, 
+                    (currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime) * currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    currentMazeRunStopwatch.ResetStopwatch
+                );
+        }
+
+        return currentMazeRunStopwatch;
+    }
 }

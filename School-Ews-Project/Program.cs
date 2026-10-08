@@ -31,6 +31,8 @@ public class Program
 
         initialize.LoadStorage();
 
+        initialize.LoadShareAlgoData();
+
         var game = new ProgramLoop(state);
         game.Loop();
 

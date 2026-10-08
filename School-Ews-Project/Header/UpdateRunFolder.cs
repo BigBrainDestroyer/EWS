@@ -33,7 +33,7 @@ public class UpdateRunFolder
         {
             string selectedFolderName = "";
 
-            if(allProjectFolderNamesListPosition < allProjectFolderNames.Length)
+            if(allProjectFolderNamesListPosition < allProjectFolderNames.Length && allProjectFolderNames.Length != 0)
             {
                 selectedFolderName = allProjectFolderNames[allProjectFolderNamesListPosition];
             }

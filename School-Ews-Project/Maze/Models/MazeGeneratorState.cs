@@ -9,13 +9,15 @@ public class MazeGeneratorState
 
     public int[][] MazeSeedBach { get; set; } = new int[0][];
 
-    IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
+    public IVector2[] MazeBeginPoints { get; set; } = new IVector2[0];
 
-    public Vector2 MazeSize = new Vector2(30, 30); // boxes length als 4 dan 3 breed dus -1
+    public IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
 
-    public volatile bool ReadingAllMazes = false;
+    public Vector2 MazeSize = new Vector2(4, 4); // boxes length als 4 dan 3 breed dus -1
 
-    //public int MazeMakers { get; set; } = 1;
-    
     public int MazeBachSize { get; set; } = 10;
+    
+    public volatile bool MazesAreDone = false;
+
+    public volatile bool BuildingMazes = false;
 }

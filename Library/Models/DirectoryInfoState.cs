@@ -7,9 +7,9 @@ internal class DirectoryInfoState
 
     public string PathSyntax { get; } = Initialize.PathSyntax();
 
-    public string SharedDataFolderPath { get; } = Initialize.SharedDataFolderPath();
+    public string SharedDataFolderPath => Initialize.SharedDataFolderPath();
 
-    public string ShareMazeDataFilePath { get; } = Initialize.ShareMazeDataFilePath();
+    public string ShareMazeDataFilePath => Initialize.ShareMazeDataFilePath();
 
-    public string ShareAlgoDataFilePath { get; } = Initialize.ShareAlgoDataFilePath();
+    public string ShareAlgoDataFilePath => Initialize.ShareAlgoDataFilePath();
 }

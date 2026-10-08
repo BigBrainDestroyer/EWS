@@ -7,6 +7,12 @@ namespace ShareData;
 public class ShareAlgoData
 {
     public CommonDataHistory CommonDataHistory { get; set; } = new CommonDataHistory();
+
+    public Maze[] AllMazes { get; set; } = new Maze[0];
+
+    public IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
+
+    public IVector2[] MazeBeginPoints { get; set; } = new IVector2[0];
 }
 
 public class CommonDataHistory

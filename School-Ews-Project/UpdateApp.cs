@@ -11,6 +11,7 @@ public class UpdateApp
     private readonly AlgoConnectorController _connectorController;
     private readonly MazeController _mazeController;
     private readonly HeaderController _headerController;
+    private readonly UpdateStopwatches _updateStopwatches;
 
     public UpdateApp(AppState state)
     {
@@ -22,6 +23,7 @@ public class UpdateApp
         _archive = new UpdateArchive(_state);
         _connectorController = new AlgoConnectorController(_state);
         _headerController = new HeaderController(_state);
+        _updateStopwatches = new UpdateStopwatches(_state);
     }
     
     public void App()
@@ -29,6 +31,8 @@ public class UpdateApp
         _activeMainBox.ActiveMainBox();
         
         _calculateMainBoxes.UpdateMainBoxes();
+
+        _updateStopwatches.Update();
 
         _headerController.Controller();
 

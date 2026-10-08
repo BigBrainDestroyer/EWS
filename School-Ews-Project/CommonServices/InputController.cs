@@ -19,8 +19,6 @@ public class InputController
         _input.KeyboardCharInput = GetKeyboardInput();
 
         _input.MouseWheelInput = GetMouseWheelInput();
-
-        _input.KeyboardKeyTimeDown = CalculateUsingTime.UpdateKeyboardKeyTimeDown(_input.KeyboardKeyTimeDown, _time.Stopwatch);
     }
 
     public List<int> GetKeyboardInput()

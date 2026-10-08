@@ -28,7 +28,7 @@ public class UpdateLoadFile
         {
             Console.WriteLine(_archive.LoadedFileDirectory);
 
-            (_input.FileChangeTimer, _textPanel.CurrentLoadedFile) = UpdateFileText(_textPanel.PanelText, _input.FileChangeTimer, _textPanel.CurrentLoadedFile);
+            (_time.FileChangeTimer, _textPanel.CurrentLoadedFile) = UpdateFileText(_textPanel.PanelText, _time.FileChangeTimer, _textPanel.CurrentLoadedFile);
             
             (_textPanel.PanelText, _archive.LoadedFileDirectory) = LoadNewFile(_archive.LoadedFileDirectory);
 
@@ -42,12 +42,10 @@ public class UpdateLoadFile
             _textPanel.CurrentLoadedFile = _archive.LoadedFileDirectory;
         }
 
-        _input.FileChangeTimer = UpdateFileChangeTimerTimer(_input.FileChangeTimer, _time.Stopwatch);
-
-        if (_input.FileChangeTimer.TotalTime >= _input.FileChangeTimer.ReactionTime && _input.FileChangeTimer.FileHasChanged)
+        if (_time.FileChangeTimer.TotalTime >= _time.FileChangeTimer.ReactionTime && _time.FileChangeTimer.FileHasChanged)
         {
-            (_input.FileChangeTimer, _textPanel.CurrentLoadedFile) = 
-                UpdateFileText(_textPanel.PanelText, _input.FileChangeTimer, _textPanel.CurrentLoadedFile);
+            (_time.FileChangeTimer, _textPanel.CurrentLoadedFile) = 
+                UpdateFileText(_textPanel.PanelText, _time.FileChangeTimer, _textPanel.CurrentLoadedFile);
         }
     }
 
@@ -78,13 +76,6 @@ public class UpdateLoadFile
     private (Vector2, int, int) ResetAllPanelTextViewParameters()
     {
         return (new Vector2(0, 0), 0, 0);
-    }
-
-    private FileChangeTimer UpdateFileChangeTimerTimer(FileChangeTimer fileChangeTimer, Stopwatch stopwatch)
-    {
-        fileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(fileChangeTimer, stopwatch, fileChangeTimer.FileHasChanged);
-
-        return fileChangeTimer;
     }
 
     private (FileChangeTimer, string) UpdateFileText(List<string> panelText, FileChangeTimer fileChangeTimer, string requestedDirectoryDirectory)

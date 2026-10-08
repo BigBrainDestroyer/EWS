@@ -1,3 +1,4 @@
+using ShareData;
 
 namespace Program;
 
@@ -9,4 +10,5 @@ public class AppState
     public MazeState maze { get; set; } = new MazeState();
     public ArchiveState archive { get; set; } = new ArchiveState();
     public AlgoConnectorState connector { get; set; } = new AlgoConnectorState();
+    public ShareData.ShareAlgoData shareAlgoData { get; set; } = new ShareData.ShareAlgoData();
 }
