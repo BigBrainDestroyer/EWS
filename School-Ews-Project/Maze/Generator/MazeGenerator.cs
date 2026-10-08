@@ -17,9 +17,9 @@ public class MazeGenerator
     public void Generator() // 0 Up 1 Right 2 Down 3 Left
     {
         var _generator = _state.maze.generator;
-        var _connect = _state.connector;
+        var _play = _state.playMaze;
 
-        if(_generator.BuildingMazes || _connect.RunAlgo)
+        if(_generator.BuildingMazes || _play.IsAlgoRunning|| !_play.IsAlgoProgramPauzed)
         {
             return;
         }

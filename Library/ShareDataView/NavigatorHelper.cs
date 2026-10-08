@@ -37,25 +37,33 @@ public static class NavigatorHelper
         {
             switch(requestedDirection)
             {
-                case Directions.Up: App.runningMaze.CurrentNavigatorCoordinates =
+                case Directions.Up: 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y - 1
                     ); break;
 
-                case Directions.Right: App.runningMaze.CurrentNavigatorCoordinates = 
+                case Directions.Right: 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                App.runningMaze.CurrentNavigatorCoordinates = 
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X + 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
                     ) ; break; 
 
-                case Directions.Down: App.runningMaze.CurrentNavigatorCoordinates =
+                case Directions.Down: 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y + 1
                     ); break;
 
-                case Directions.Left: App.runningMaze.CurrentNavigatorCoordinates =
+                case Directions.Left: 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X - 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
@@ -66,8 +74,6 @@ public static class NavigatorHelper
     
     public static WallState[] GetSlotWallsData()
     {
-        AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
-
         return CheckGivenSlotWalls(App.runningMaze.CurrentMaze, App.runningMaze.CurrentNavigatorCoordinates);
     }
 

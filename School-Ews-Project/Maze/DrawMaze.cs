@@ -48,7 +48,9 @@ public class DrawMazeLayout
         var _boxes = _state.maze.layout.boxes;
         var _generator = _state.maze.generator;
         var _mazeView = _state.maze.layout.mazeView;
-        
+        var _play = _state.playMaze;
+        var _shareAlgoDate = _state.shareAlgoData;
+
         Raylib.DrawRectangleV(
             _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
             _boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
@@ -56,6 +58,15 @@ public class DrawMazeLayout
         );
 
         Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
+
+        
+        
+        foreach(SlotDataVariables slot in _shareAlgoDate.CommonDataHistory.SlotSearchedHistory)
+        {
+            
+        }
+        
+        startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
         for (int i = 1; i < _mazeView.CurrentMaze.UsingYToGetRightArray.Length; i++)
         {

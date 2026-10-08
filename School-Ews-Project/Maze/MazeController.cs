@@ -16,8 +16,6 @@ public class MazeController
 
     public void Controller()
     {
-        _generator.Generator();   
-
         _mazeLayout.MazeLayout();
     }
 }

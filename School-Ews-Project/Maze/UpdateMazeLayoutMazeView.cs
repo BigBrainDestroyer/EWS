@@ -90,21 +90,37 @@ public class UpdateMazeLayoutMazeView
     {
         var _generator = _state.maze.generator;
         var _layout = _state.maze.layout;
-        var _connector = _state.connector;
+        var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
-        
-        if (_generator.BuildingMazes || _connector.RunAlgo) //en als playcurrentloadedalgoprogram = 0 niet true is dan hoeft hier ook niks geupdate te worden 
+
+        if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPauzed || !_play.IsAlgoLoaded)
         {
             return;
         }
-    
-        _layout.mazeView.CurrentMaze = UpdateCurrentMaze(_shareAlgoData.AllMazes, _layout.mazeView.AllMazePosition);
-        
+
+        if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].X && _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].Y)
+        {
+            NextMaze();
+        }
+
+        _play.SlotHistoryListPosition += 1;
     }
 
-    private Maze UpdateCurrentMaze(Maze[] allMazes, int allMazePosition)
+    private void NextMaze()
     {
-        Maze newCurrentMaze = allMazes[allMazePosition];
+        var _layout = _state.maze.layout;
+        var _play = _state.playMaze;
+        var _shareAlgoData = _state.shareAlgoData;
+
+        _play.MazeListPosition += 1;
+
+        _layout.mazeView.CurrentMaze = UpdateCurrentMaze(_shareAlgoData.AllMazes, _play.MazeListPosition);
+    }
+    
+    private Maze UpdateCurrentMaze(Maze[] allMazes, int mazeListPosition)
+    {
+
+        Maze newCurrentMaze = allMazes[mazeListPosition];
 
         return newCurrentMaze;
     }

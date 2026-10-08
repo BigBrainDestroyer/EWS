@@ -28,40 +28,43 @@ public class AlgoConnectorController
 
         if(_mazeGenerator.MazesAreDone)
         {
-            var ShareObj = new ShareAlgoData();
+            var shareObj = new ShareAlgoData();
 
-            ShareObj.CommonDataHistory = new CommonDataHistory();
-            ShareObj.AllMazes = _mazeGenerator.AllMazes;
-            ShareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
-            ShareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
+            shareObj.CommonDataHistory = new CommonDataHistory();
+            shareObj.AllMazes = _mazeGenerator.AllMazes;
+            shareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
+            shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
 
             File.WriteAllText(
                 ShareData.DirectoryInfo.ShareAlgoDataFilePath(),
-                JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
+                JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
             );
 
-            _shareAlgoData = ShareObj;
+            _shareAlgoData.CommonDataHistory = new CommonDataHistory();
+            _shareAlgoData.AllMazes = shareObj.AllMazes;
+            _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
+            _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
 
+            _mazeGenerator.BuildingMazes = false;
             _mazeGenerator.MazesAreDone = false;
         }
     }
     
     private void RunAlgo()
     {
-        var _connect = _state.connector;
         var _mazeGenerator = _state.maze.generator;
         
         if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))//if(_connect.RunAlgo)
         {
-            var ShareObj = new ShareMazeData();
+            var shareObj = new ShareMazeData();
 
-            ShareObj.AllMazes = _mazeGenerator.AllMazes;
-            ShareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
-            ShareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
+            shareObj.AllMazes = _mazeGenerator.AllMazes;
+            shareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
+            shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
 
             File.WriteAllText(
                 ShareData.DirectoryInfo.ShareMazeDataFilePath(),
-                JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
+                JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
             );
         }
     }

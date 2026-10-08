@@ -1,4 +1,5 @@
 using Raylib_cs;
+using ShareData;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -165,14 +166,14 @@ public class Initialize
 
     public void LoadShareAlgoData()
     {
-        var _shareAlgo = _state.shareAlgoData;
-        var _connect = _state.connector;
+        var _shareAlgoData = _state.shareAlgoData;
+        var _play = _state.playMaze;
 
         bool stop = false;
 
         string jsonText = "";
 
-        while(stop == true)
+        while(stop == false)
         {
             try
             {
@@ -184,7 +185,21 @@ public class Initialize
                 }
                 else
                 {
-                    _shareAlgo = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
+                    var shareObj = new ShareAlgoData();
+
+                    shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
+
+                    if (shareObj != null)
+                    {
+                        _shareAlgoData.CommonDataHistory = new CommonDataHistory();
+                        _shareAlgoData.AllMazes = shareObj.AllMazes;
+                        _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
+                        _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
+                    }
+                    else
+                    {
+                        _shareAlgoData = new ShareAlgoData();
+                    }
                 }
                 
                 stop = true;
@@ -195,13 +210,13 @@ public class Initialize
             }
         }
 
-        if(_shareAlgo != null && _shareAlgo.CommonDataHistory.TotalProjectStopWatchTotalTime.Elapsed.TotalSeconds != 0)
+        if(_shareAlgoData.CommonDataHistory.TotalProjectStopWatchTotalTime.Elapsed.TotalSeconds != 0)
         {
-            _connect.IsAlgoLoaded = true;
+            _play.IsAlgoLoaded = true;
         }
         else
         {
-            _connect.IsAlgoLoaded = false;
+            _play.IsAlgoLoaded = false;
         }
     }
 

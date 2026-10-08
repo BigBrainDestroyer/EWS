@@ -61,7 +61,5 @@ public class MazeLayoutMazeViewState
 
     public float CommonDataCharSpacing { get; set; } = 0;
 
-    public int AllMazePosition { get; set; } = 0;
-
     public int AmountOfCommonDataBoxes { get; set; } = 5;
 } 
