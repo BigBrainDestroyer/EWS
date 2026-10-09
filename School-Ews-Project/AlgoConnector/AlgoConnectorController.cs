@@ -52,9 +52,10 @@ public class AlgoConnectorController
     
     private void RunAlgo()
     {
+        var _play = _state.playMaze;
         var _mazeGenerator = _state.maze.generator;
         
-        if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))//if(_connect.RunAlgo)
+        if(_play.IsAlgoRunning)
         {
             var shareObj = new ShareMazeData();
 
@@ -65,9 +66,7 @@ public class AlgoConnectorController
             File.WriteAllText(
                 ShareData.DirectoryInfo.ShareMazeDataFilePath(),
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
-            );
+            );        
         }
     }
-
-    
 }

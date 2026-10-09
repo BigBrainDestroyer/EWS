@@ -59,13 +59,24 @@ public class DrawMazeLayout
 
         Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
-        
-        
-        foreach(SlotDataVariables slot in _shareAlgoDate.CommonDataHistory.SlotSearchedHistory)
+        for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
         {
-            
+            if(_shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].MazeNumber == _play.MazeListPosition)
+            {
+                Raylib.DrawRectangle(
+                    (int)(startPosition.X + (_mazeView.MazeSlotLengths.X * _shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.X)),
+                    (int)(startPosition.Y + (_mazeView.MazeSlotLengths.Y * _shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.Y)),
+                    (int)_mazeView.MazeSlotLengths.X,
+                    (int)_mazeView.MazeSlotLengths.Y,
+                    Color.Red
+                );
+            }
+            else
+            {
+                break;
+            }
         }
-        
+
         startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
         for (int i = 1; i < _mazeView.CurrentMaze.UsingYToGetRightArray.Length; i++)

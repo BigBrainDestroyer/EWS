@@ -10,6 +10,6 @@ public class PlayMaze
     public bool IsAlgoProgramPauzed { get; set; } = false;
 
     public bool IsAlgoRunning { get; set; } = false;
-
+    
     public bool IsAlgoLoaded { get; set; } = false;
 }

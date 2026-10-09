@@ -92,14 +92,29 @@ public class UpdateMazeLayoutMazeView
         var _layout = _state.maze.layout;
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
+        var _time = _state.common.time;
 
         if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPauzed || !_play.IsAlgoLoaded)
         {
             return;
         }
 
+        if(_play.SlotHistoryListPosition < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())
+        {
+            _play.MazeListPosition = 0;
+
+            _play.SlotHistoryListPosition = 0;
+        }
+        
+        if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.Time)
+        {
+
+        }
+        
         if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].X && _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].Y)
         {
+            _play.MazeListPosition += 1;
+                
             NextMaze();
         }
 
@@ -112,14 +127,11 @@ public class UpdateMazeLayoutMazeView
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
 
-        _play.MazeListPosition += 1;
-
         _layout.mazeView.CurrentMaze = UpdateCurrentMaze(_shareAlgoData.AllMazes, _play.MazeListPosition);
     }
     
     private Maze UpdateCurrentMaze(Maze[] allMazes, int mazeListPosition)
     {
-
         Maze newCurrentMaze = allMazes[mazeListPosition];
 
         return newCurrentMaze;
