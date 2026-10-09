@@ -1,6 +1,8 @@
 
 namespace ShareData;
 
+[EditorBrowsable(EditorBrowsableState.Never)]
+
 public struct CommonUsageDataHistory
 {
     public DVector2 StopWatchTime { get; set; }

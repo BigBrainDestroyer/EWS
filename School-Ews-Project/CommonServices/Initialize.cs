@@ -127,12 +127,9 @@ public class Initialize
     {
         var _archive = _state.archive;
 
-        string baseProjectPath =
-        Directory.GetCurrentDirectory().Substring(
-            0,
-            Directory.GetCurrentDirectory().Length - Directory.GetCurrentDirectory().Split(_archive.PathSyntax).Last().Length - _archive.PathSyntax.Length
-        ) + _archive.PathSyntax + _archive.ProjectFolderName;       
-    
+        string baseProjectPath = ShareData.App.directoryInfo.ProgramStorageFolderPath + _archive.PathSyntax + _archive.ProjectFolderName;
+
+        
         if(!Directory.Exists(baseProjectPath))
         {
             Directory.CreateDirectory(baseProjectPath);
@@ -177,7 +174,7 @@ public class Initialize
         {
             try
             {
-                jsonText = File.ReadAllText(ShareData.DirectoryInfo.ShareAlgoDataFilePath());
+                jsonText = File.ReadAllText(ShareData.App.directoryInfo.ShareAlgoDataFilePath);
 
                 if(string.IsNullOrWhiteSpace(jsonText))
                 {
@@ -185,13 +182,13 @@ public class Initialize
                 }
                 else
                 {
-                    var shareObj = new ShareAlgoData();
-
-                    shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
-
-                    if (shareObj != null)
+                    if (JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings()) != null)
                     {
-                        _shareAlgoData.CommonDataHistory = new CommonDataHistory();
+                        var shareObj = new ShareAlgoData();
+    
+                        shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
+                        
+                        _shareAlgoData.CommonDataHistory = shareObj.CommonDataHistory;
                         _shareAlgoData.AllMazes = shareObj.AllMazes;
                         _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
                         _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
@@ -210,13 +207,18 @@ public class Initialize
             }
         }
 
-        if(_shareAlgoData.CommonDataHistory.TotalProjectStopWatchTotalTime.Elapsed.TotalSeconds != 0)
+        Console.WriteLine("JA;LDFJA;LJDF;LASJDF;LAJSD;FLasdkjfhaslkj fh;alksd jf;lasjdf;ljasd;fljasd;lkfj;alskdjf;l aksdjf;lkasjd;flkjas;dlf");
+        Console.WriteLine(_shareAlgoData.CommonDataHistory.ProjectTotalSeconds);
+
+        if(_shareAlgoData.CommonDataHistory.ProjectTotalSeconds != 0)
         {
             _play.IsAlgoLoaded = true;
+
+            Console.WriteLine("JA;LDFJA;LJDF;LASJDF;LAJSD;FLasdkjfhaslkj fh;alksd jf;lasjdf;ljasd;fljasd;lkfj;alskdjf;l aksdjf;lkasjd;flkjas;dlf");
         }
         else
         {
-            _play.IsAlgoLoaded = false;
+            _play.IsAlgoLoaded = true;
         }
     }
 

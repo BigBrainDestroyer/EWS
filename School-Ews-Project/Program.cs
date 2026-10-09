@@ -9,7 +9,6 @@ public class Program
     public static void Main()
     {
         var program = new Program();
-
         program.Window();
 
         var state = new AppState();
@@ -22,16 +21,16 @@ public class Program
         initialize.InitializeProjectsDataLocation();
 
         initialize.InitializeProjectsDllLocation();
+
+        initialize.LoadStorage();
+
+        initialize.LoadShareAlgoData();
         
         initialize.FileWatcher();
 
         initialize.Fonts();
 
         initialize.Texture2D();
-
-        initialize.LoadStorage();
-
-        initialize.LoadShareAlgoData();
 
         var game = new ProgramLoop(state);
         game.Loop();

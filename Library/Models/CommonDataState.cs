@@ -2,6 +2,8 @@ using System.Diagnostics;
 
 namespace ShareData;
 
+[EditorBrowsable(EditorBrowsableState.Never)]
+
 internal class CommonDataState
 {
     public volatile bool AllMazesSolved = false;

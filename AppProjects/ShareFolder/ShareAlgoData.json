@@ -1,0 +1,16 @@
+{
+  "CommonDataHistory": {
+    "TotalProjectStopWatchTotalTime": {
+      "IsRunning": false,
+      "Elapsed": "00:00:00",
+      "ElapsedMilliseconds": 0,
+      "ElapsedTicks": 0
+    },
+    "CommonUsageDataHistory": [],
+    "SlotSearchedHistory": [],
+    "MazeFinalPaths": []
+  },
+  "AllMazes": [],
+  "MazeEndPoints": [],
+  "MazeBeginPoints": []
+}

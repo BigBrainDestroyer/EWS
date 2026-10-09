@@ -21,13 +21,13 @@
         ],
         [
           "Closed",
-          "Closed",
-          "Closed",
+          "Open",
+          "Open",
           "Closed"
         ],
         [
           "Closed",
-          "Open",
+          "Closed",
           "Open",
           "Closed"
         ],
@@ -47,20 +47,20 @@
         ],
         [
           "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
           "Closed",
           "Open",
-          "Closed",
           "Closed"
         ],
         [
           "Closed",
           "Open",
           "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
           "Closed"
         ]
       ]
@@ -76,67 +76,13 @@
         [
           "Closed",
           "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ]
-      ],
-      "UsingYToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
           "Open",
           "Closed"
         ],
         [
           "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
           "Closed",
           "Open",
-          "Open",
-          "Closed"
-        ]
-      ]
-    },
-    {
-      "UsingXToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
-          "Closed",
           "Closed"
         ],
         [
@@ -155,20 +101,20 @@
         ],
         [
           "Closed",
-          "Open",
           "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
           "Open",
           "Closed"
         ],
         [
           "Closed",
+          "Closed",
           "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
           "Open",
+          "Closed",
           "Closed"
         ]
       ]
@@ -190,13 +136,13 @@
         [
           "Closed",
           "Closed",
-          "Closed",
+          "Open",
           "Closed"
         ],
         [
           "Closed",
           "Open",
-          "Closed",
+          "Open",
           "Closed"
         ]
       ],
@@ -216,66 +162,12 @@
         [
           "Closed",
           "Open",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ]
-      ]
-    },
-    {
-      "UsingXToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
           "Closed",
           "Closed"
         ],
         [
           "Closed",
           "Closed",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
-          "Open",
-          "Closed"
-        ]
-      ],
-      "UsingYToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
           "Open",
           "Closed"
         ]
@@ -352,7 +244,7 @@
         [
           "Closed",
           "Open",
-          "Closed",
+          "Open",
           "Closed"
         ],
         [
@@ -373,6 +265,222 @@
           "Closed",
           "Open",
           "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ]
+      ]
+    },
+    {
+      "UsingXToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Open",
+          "Open",
+          "Closed"
+        ]
+      ],
+      "UsingYToGetRightArray": [
+        [
+          "Closed",
+          "Closed",
+          "Closed",
+          "Closed"
+        ],
+        [
+          "Closed",
+          "Closed",
+          "Open",
           "Closed"
         ],
         [
@@ -400,115 +508,7 @@
         [
           "Closed",
           "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
           "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ]
-      ],
-      "UsingYToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ]
-      ]
-    },
-    {
-      "UsingXToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Open",
-          "Closed"
-        ]
-      ],
-      "UsingYToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Closed",
-          "Open",
-          "Closed"
-        ]
-      ]
-    },
-    {
-      "UsingXToGetRightArray": [
-        [
-          "Closed",
-          "Closed",
-          "Closed",
-          "Closed"
-        ],
-        [
-          "Closed",
-          "Open",
-          "Closed",
           "Closed"
         ],
         [
@@ -533,14 +533,14 @@
         ],
         [
           "Closed",
-          "Open",
           "Closed",
+          "Open",
           "Closed"
         ],
         [
           "Closed",
           "Closed",
-          "Open",
+          "Closed",
           "Closed"
         ],
         [

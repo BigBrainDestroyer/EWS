@@ -2,6 +2,8 @@ using System.Diagnostics;
 
 namespace ShareData;
 
+[EditorBrowsable(EditorBrowsableState.Never)]
+
 internal static class DataWatcher
 {
     public static void Start()

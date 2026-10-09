@@ -17,7 +17,7 @@ public class UpdateMazeLayoutMazeView
         var _generator = _state.maze.generator;
         var _layout = _state.maze.layout;
 
-        UpdateCurrentMazeLayout();
+        UpdateCurrentMazeNavigatorSlots();
 
         _layout.mazeView.MazeSlotLengths = CalculateMazeSlotPixelLength(
                 _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
@@ -86,7 +86,7 @@ public class UpdateMazeLayoutMazeView
         return newCharHeight;
     }
 
-    private void UpdateCurrentMazeLayout()
+    private void UpdateCurrentMazeNavigatorSlots()
     {
         var _generator = _state.maze.generator;
         var _layout = _state.maze.layout;
@@ -94,31 +94,45 @@ public class UpdateMazeLayoutMazeView
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
 
+        Console.WriteLine(_generator.BuildingMazes);
+        Console.WriteLine(_play.IsAlgoRunning);
+        Console.WriteLine(_play.IsAlgoProgramPauzed);
+        Console.WriteLine(!_play.IsAlgoLoaded);
+        Console.WriteLine(_time.MazeRunStopwatch.MazeStopwatch);
+
         if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPauzed || !_play.IsAlgoLoaded)
         {
             return;
         }
 
-        if(_play.SlotHistoryListPosition < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())
+        if(_play.SlotHistoryListPosition - 1 < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())
         {
             _play.MazeListPosition = 0;
 
             _play.SlotHistoryListPosition = 0;
+
+            _time.MazeRunStopwatch =
+                new MazeRunStopwatch(
+                    0,
+                    0,
+                    0,
+                    _time.MazeRunStopwatch.PlaySpeed,
+                    _time.MazeRunStopwatch.UpdateStopwatch,
+                    true
+                );
         }
         
-        if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.Time)
+        if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition + 1].SlotSearchedWithTime.Time)
         {
+             _play.SlotHistoryListPosition += 1;
 
+            if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].X && _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].Y)
+            {
+                 _play.MazeListPosition += 1;
+                     
+                 NextMaze();
+            }
         }
-        
-        if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].X && _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y == _shareAlgoData.MazeEndPoints[_play.SlotHistoryListPosition].Y)
-        {
-            _play.MazeListPosition += 1;
-                
-            NextMaze();
-        }
-
-        _play.SlotHistoryListPosition += 1;
     }
 
     private void NextMaze()

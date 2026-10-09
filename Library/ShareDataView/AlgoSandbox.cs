@@ -1,6 +1,9 @@
 using System.Text.Json;
+using System.Diagnostics;
 
 namespace ShareData;
+
+[EditorBrowsable(EditorBrowsableState.Never)]
 
 public static class AlgoSandbox
 {
@@ -27,39 +30,68 @@ public static class AlgoSandbox
 
     private static void DeserializeSharedMazeData()
     {
+        var shareObj = new ShareMazeData();
         bool stop = false;
         string jsonText = "";
 
-        while(stop == true)
+        while (stop == false)
         {
             try
             {
                 jsonText = File.ReadAllText(App.directoryInfo.ShareMazeDataFilePath);
 
-                stop = true;
+                if(!string.IsNullOrWhiteSpace(jsonText))
+                {
+                    shareObj = JsonSerializer.Deserialize<ShareMazeData>(jsonText, App.json.JsonSerializeSettings) ?? throw new ArgumentNullException(nameof(App.shareMazeData));
+
+                    if(shareObj != null)
+                    {
+                        stop = true;
+                    }
+                    else
+                    {
+                        EndProgram();
+                    }
+                }
+                else
+                { 
+                    EndProgram();
+                }
             }
             catch
             {
                 Thread.Sleep(100);
             }
         }
-            
 
-        if(JsonSerializer.Deserialize<ShareMazeData>(jsonText, App.json.JsonSerializeSettings) == null)
+        if(shareObj.AllMazes.Count() > 0)
         {
-            EndProgram();
+            App.shareMazeData.AllMazes = shareObj.AllMazes;
+            App.shareMazeData.MazeBeginPoints = shareObj.MazeBeginPoints;
+            App.shareMazeData.MazeEndPoints = shareObj.MazeEndPoints;
         }
         else
         {
-            App.shareMazeData = JsonSerializer.Deserialize<ShareMazeData>(jsonText, App.json.JsonSerializeSettings) ?? throw new ArgumentNullException(nameof(App.shareMazeData));
-        }            
+            Console.WriteLine("JA HIJ KOMT DAAR");
+            
+            EndProgram();
+        }
     }
-    
+
     public static void EndProgram()
     {
         lock(_lock)
         {
             WriteAlgoShareData();
+
+            StackTrace stacks = new StackTrace();
+
+            foreach (StackFrame stack in stacks.GetFrames())
+            {
+                var methode = stack.GetMethod();
+
+                Console.WriteLine(methode);
+            }
 
             Environment.Exit(0);
         }
@@ -74,11 +106,11 @@ public static class AlgoSandbox
         ShareObj.MazeEndPoints = App.shareMazeData.MazeEndPoints;
         ShareObj.CommonDataHistory.CommonUsageDataHistory = App.commonData.CommonUsageDataHistory;
         ShareObj.CommonDataHistory.SlotSearchedHistory = App.commonData.SlotSearchedHistory;
-        ShareObj.CommonDataHistory.TotalProjectStopWatchTotalTime = App.commonData.ProjectStopWatch;
+        ShareObj.CommonDataHistory.ProjectTotalSeconds = App.commonData.ProjectStopWatch.Elapsed.TotalSeconds;
         ShareObj.CommonDataHistory.MazeFinalPaths = App.commonData.MazeFinalPaths;
 
         File.WriteAllText(
-            ShareData.DirectoryInfo.ShareAlgoDataFilePath(),
+            App.directoryInfo.ShareAlgoDataFilePath,
             JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
         );
     }

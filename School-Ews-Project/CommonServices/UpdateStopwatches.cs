@@ -18,5 +18,7 @@ public class UpdateStopwatches
         _time.KeyboardKeyTimeDown = CalculateUsingTime.UpdateKeyboardKeyTimeDown(_time.KeyboardKeyTimeDown, _time.Stopwatch);
 
         _time.FileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(_time.FileChangeTimer, _time.Stopwatch, _time.FileChangeTimer.FileHasChanged);
+
+        _time.MazeRunStopwatch = CalculateUsingTime.MazePlaySpeedStopWatch(_time.Stopwatch, _time.MazeRunStopwatch);
     }
 }

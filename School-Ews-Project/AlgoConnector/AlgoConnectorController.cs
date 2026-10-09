@@ -8,10 +8,12 @@ namespace Program;
 public class AlgoConnectorController
 {
     private readonly AppState _state;
+    private readonly MazeGenerator _generate;
 
     public AlgoConnectorController(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
+        _generate = new MazeGenerator(_state);
     }
 
     public void Controller()
@@ -19,6 +21,20 @@ public class AlgoConnectorController
         UpdateNewMazeToShareAlgoFile();
 
         RunAlgo();
+
+        if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
+        {
+            _state.playMaze.IsAlgoProgramPauzed = !_state.playMaze.IsAlgoProgramPauzed;
+            _state.common.time.MazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    _state.common.time.MazeRunStopwatch.StartTime,
+                    _state.common.time.MazeRunStopwatch.TotalTime,
+                    _state.common.time.MazeRunStopwatch.MazeStopwatch,
+                    1,
+                    true,
+                    _state.common.time.MazeRunStopwatch.ResetStopwatch
+                );
+        }
     }
 
     private void UpdateNewMazeToShareAlgoFile()
@@ -36,7 +52,7 @@ public class AlgoConnectorController
             shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
 
             File.WriteAllText(
-                ShareData.DirectoryInfo.ShareAlgoDataFilePath(),
+                ShareData.App.directoryInfo.ShareAlgoDataFilePath,
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
             );
 
@@ -55,7 +71,7 @@ public class AlgoConnectorController
         var _play = _state.playMaze;
         var _mazeGenerator = _state.maze.generator;
         
-        if(_play.IsAlgoRunning)
+        if(_mazeGenerator.MazesAreDone)//net voor runnign algo
         {
             var shareObj = new ShareMazeData();
 
@@ -64,9 +80,9 @@ public class AlgoConnectorController
             shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
 
             File.WriteAllText(
-                ShareData.DirectoryInfo.ShareMazeDataFilePath(),
+                ShareData.App.directoryInfo.ShareMazeDataFilePath,
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
-            );        
+            );  
         }
     }
 }

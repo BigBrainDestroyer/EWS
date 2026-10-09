@@ -1,6 +1,8 @@
 
 namespace ShareData;
 
+[EditorBrowsable(EditorBrowsableState.Never)]
+
 internal class RunningMazeState
 {
     public Maze CurrentMaze { get; set; } = new Maze();
