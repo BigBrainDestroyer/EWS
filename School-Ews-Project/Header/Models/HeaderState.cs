@@ -12,40 +12,40 @@ public class HeaderState
     public Dictionary<DrawHeaderObjectNames, StringSliderColors> HeaderStringSliderColors { get; set; } =
         new Dictionary<DrawHeaderObjectNames, StringSliderColors>() {
             {DrawHeaderObjectNames.MazeSize, new StringSliderColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
             )},
             {DrawHeaderObjectNames.BatchSize, new StringSliderColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
             )},
             {DrawHeaderObjectNames.PlayBackSpeed, new StringSliderColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray)
             )},
             {DrawHeaderObjectNames.RunFolderName, new StringSliderColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
-                new ReactionColorCombinations(Color.DarkGray, Color.DarkBlue),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.Red, Color.LightGray, Color.Brown),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
+                new TripleStateReactionColorCombinations(Color.DarkGray, Color.DarkBlue, Color.SkyBlue),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.Red, Color.LightGray),
                 new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray),
@@ -56,25 +56,38 @@ public class HeaderState
     public Dictionary<DrawHeaderObjectNames, ButtonColors> HeaderButtonColors { get; set; } =
         new Dictionary<DrawHeaderObjectNames, ButtonColors>() {
             {DrawHeaderObjectNames.RunButton, new ButtonColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+                new TripleStateReactionColorCombinations(Color.Gray, Color.Green, Color.LightGray),
+                new TripleStateReactionColorCombinations(Color.DarkBrown, Color.DarkGray, Color.Gray) 
             )},
             {DrawHeaderObjectNames.BuildButton, new ButtonColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+                new TripleStateReactionColorCombinations(Color.Gray, Color.Green, Color.LightGray),
+                new TripleStateReactionColorCombinations(Color.DarkBrown, Color.DarkGray, Color.Gray) 
             )},
             {DrawHeaderObjectNames.TerminalRequest, new ButtonColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+                new TripleStateReactionColorCombinations(Color.Gray, Color.Green, Color.LightGray),
+                new TripleStateReactionColorCombinations(Color.DarkBrown, Color.DarkGray, Color.Gray) 
             )},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, new ButtonColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+                new TripleStateReactionColorCombinations(Color.Gray, Color.Green, Color.LightGray),
+                new TripleStateReactionColorCombinations(Color.DarkBrown, Color.DarkGray, Color.Gray) 
             )},
             {DrawHeaderObjectNames.BuildMaze, new ButtonColors(
-                new ReactionColorCombinations(Color.Red, Color.LightGray),
-                new ReactionColorCombinations(Color.DarkBlue, Color.DarkGray) 
+                new TripleStateReactionColorCombinations(Color.Gray, Color.Green, Color.LightGray),
+                new TripleStateReactionColorCombinations(Color.DarkBrown, Color.DarkGray, Color.Gray) 
             )}
+        };
+
+    public Dictionary<DrawHeaderObjectNames, bool> HeaderObjectAvailable { get; set; } =
+        new Dictionary<DrawHeaderObjectNames, bool>() { 
+            {DrawHeaderObjectNames.RunButton, true},
+            {DrawHeaderObjectNames.BuildButton, false},
+            {DrawHeaderObjectNames.TerminalRequest, false},
+            {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
+            {DrawHeaderObjectNames.BuildMaze, false},
+            {DrawHeaderObjectNames.MazeSize, false},
+            {DrawHeaderObjectNames.BatchSize, true},
+            {DrawHeaderObjectNames.PlayBackSpeed, false},
+            {DrawHeaderObjectNames.RunFolderName, false}  
         };
 
     public float TotalHeaderObjectVerticalPercentageWhiteSpace { get; } = 20;

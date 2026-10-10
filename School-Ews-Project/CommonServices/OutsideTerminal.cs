@@ -30,7 +30,7 @@ public class OutsideTerminal
         terminalParams.FileName = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalAppName : _terminal.WindowsTerminalAppName;
         terminalParams.RedirectStandardInput = true;
 
-        Process terminal = Process.Start(terminalParams);
+        Process terminal = Process.Start(terminalParams) ?? throw new ArgumentNullException(nameof(terminal));
 
         if (terminal != null)
         {
@@ -77,5 +77,10 @@ public class OutsideTerminal
         }
         
         return requestedDllPath;
+    }
+
+    private void RunAlgoProject()
+    {
+        
     }
 }

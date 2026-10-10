@@ -19,7 +19,7 @@ public class UpdateHeaderLayout
 
         _header.HeaderObjectBoxes = CalculateHeaderObjectBoxes(_header.HeaderObjectWidthPercentages, _boxes.HeaderPixelPosition, _boxes.HeaderPixelLengths, _header.TotalHeaderObjectVerticalPercentageWhiteSpace);
 
-        (_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox) = CalculateObjects(_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox, _header.HeaderObjectBoxes, _header.HeaderStringSliderColors, _header.HeaderButtonColors);
+        (_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox) = CalculateObjects(_header.HeaderButtons, _header.HeaderStringSlider, _header.HeaderCenterTextureInBox, _header.HeaderObjectBoxes, _header.HeaderStringSliderColors, _header.HeaderButtonColors, _header.HeaderObjectAvailable);
     }
     
     private Dictionary<DrawHeaderObjectNames, Box> CalculateHeaderObjectBoxes(Dictionary<DrawHeaderObjectNames, HeaderObjectPercentageWidthVariables> headerObjectWidthPercentages, Vector2 parentBoxPositions, Vector2 parentBoxLength, float totalHeaderObjectVerticalPercentageWhiteSpace)
@@ -76,7 +76,7 @@ public class UpdateHeaderLayout
         return newHeaderObjectBoxes;
     }
 
-    private (Dictionary<DrawHeaderObjectNames, CenterTextInBox>, Dictionary<DrawHeaderObjectNames, StringSlider>, Dictionary<DrawHeaderObjectNames, CenterTextureInBox>) CalculateObjects(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, StringSlider> headerStringSlider, Dictionary<DrawHeaderObjectNames, CenterTextureInBox> headerCenterTextureInBox, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes, Dictionary<DrawHeaderObjectNames, StringSliderColors> headerStringSliderColors, Dictionary<DrawHeaderObjectNames, ButtonColors> headerButtonColors)
+    private (Dictionary<DrawHeaderObjectNames, CenterTextInBox>, Dictionary<DrawHeaderObjectNames, StringSlider>, Dictionary<DrawHeaderObjectNames, CenterTextureInBox>) CalculateObjects(Dictionary<DrawHeaderObjectNames, CenterTextInBox> headerButtons, Dictionary<DrawHeaderObjectNames, StringSlider> headerStringSlider, Dictionary<DrawHeaderObjectNames, CenterTextureInBox> headerCenterTextureInBox, Dictionary<DrawHeaderObjectNames, Box> headerObjectBoxes, Dictionary<DrawHeaderObjectNames, StringSliderColors> headerStringSliderColors, Dictionary<DrawHeaderObjectNames, ButtonColors> headerButtonColors, Dictionary<DrawHeaderObjectNames, bool> headerObjectAvailable)
     {
         foreach(DrawHeaderObjectNames headerObjectName in headerObjectBoxes.Keys)
         { 
@@ -90,8 +90,16 @@ public class UpdateHeaderLayout
                         headerButtons[headerObjectName].Box.Radius
                     );
 
-                headerButtons[headerObjectName].TextColor = headerButtonColors[headerObjectName].SymbolColors.NormalColor;
-                headerButtons[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.NormalColor;
+                if(headerObjectAvailable[headerObjectName])
+                {
+                    headerButtons[headerObjectName].TextColor = headerButtonColors[headerObjectName].SymbolColors.X;
+                    headerButtons[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.X;
+                }
+                else
+                {
+                    headerButtons[headerObjectName].TextColor = headerButtonColors[headerObjectName].SymbolColors.Z;
+                    headerButtons[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.Z;
+                }     
                     
                 headerButtons[headerObjectName] = CalculateCenterTextInBox.Calculate(headerButtons[headerObjectName]);
             }
@@ -105,15 +113,29 @@ public class UpdateHeaderLayout
                         headerStringSlider[headerObjectName].Box.Radius
                     );
 
-                headerStringSlider[headerObjectName].UpTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureUpColors.NormalColor;
-                headerStringSlider[headerObjectName].UpTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].UpClickFieldColors.NormalColor;
-                headerStringSlider[headerObjectName].DownTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureDownColors.NormalColor;
-                headerStringSlider[headerObjectName].DownTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].DownClickFieldColors.NormalColor;
-                headerStringSlider[headerObjectName].TitleStringBox.TextColor = headerStringSliderColors[headerObjectName].TitleTextColors.NormalColor;
-                headerStringSlider[headerObjectName].StringSliderBox.TextColor = headerStringSliderColors[headerObjectName].StringSliderTextColors.NormalColor;
-                headerStringSlider[headerObjectName].TitleStringBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].TitleBoxColors.NormalColor;
-                headerStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].StringSliderBoxColors.NormalColor;
-                
+                if(headerObjectAvailable[headerObjectName])
+                {
+                    headerStringSlider[headerObjectName].UpTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureUpColors.X;
+                    headerStringSlider[headerObjectName].UpTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].UpClickFieldColors.X;
+                    headerStringSlider[headerObjectName].DownTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureDownColors.X;
+                    headerStringSlider[headerObjectName].DownTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].DownClickFieldColors.X;
+                    headerStringSlider[headerObjectName].TitleStringBox.TextColor = headerStringSliderColors[headerObjectName].TitleTextColors.X;
+                    headerStringSlider[headerObjectName].StringSliderBox.TextColor = headerStringSliderColors[headerObjectName].StringSliderTextColors.X;
+                    headerStringSlider[headerObjectName].TitleStringBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].TitleBoxColors.X;
+                    headerStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].StringSliderBoxColors.X;
+                }
+                else
+                {
+                    headerStringSlider[headerObjectName].UpTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureUpColors.Z;
+                    headerStringSlider[headerObjectName].UpTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].UpClickFieldColors.Z;
+                    headerStringSlider[headerObjectName].DownTexture.TextureColor = headerStringSliderColors[headerObjectName].TextureDownColors.Z;
+                    headerStringSlider[headerObjectName].DownTexture.BoxBackgroundColor = headerStringSliderColors[headerObjectName].DownClickFieldColors.Z;
+                    headerStringSlider[headerObjectName].TitleStringBox.TextColor = headerStringSliderColors[headerObjectName].TitleTextColors.Y;
+                    headerStringSlider[headerObjectName].StringSliderBox.TextColor = headerStringSliderColors[headerObjectName].StringSliderTextColors.Y;
+                    headerStringSlider[headerObjectName].TitleStringBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].TitleBoxColors.Y;
+                    headerStringSlider[headerObjectName].StringSliderBox.BoxBackgroundColor = headerStringSliderColors[headerObjectName].StringSliderBoxColors.Y;
+                }
+                    
                 headerStringSlider[headerObjectName] = CalculateStringSlider.Calculate(headerStringSlider[headerObjectName]);
             }
             else if(headerCenterTextureInBox.ContainsKey(headerObjectName))
@@ -126,8 +148,16 @@ public class UpdateHeaderLayout
                         headerCenterTextureInBox[headerObjectName].Box.Radius
                     );
 
-                headerCenterTextureInBox[headerObjectName].TextureColor = headerButtonColors[headerObjectName].SymbolColors.NormalColor;
-                headerCenterTextureInBox[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.NormalColor;
+                if(headerObjectAvailable[headerObjectName])
+                {
+                    headerCenterTextureInBox[headerObjectName].TextureColor = headerButtonColors[headerObjectName].SymbolColors.X;
+                    headerCenterTextureInBox[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.X;
+                }
+                else
+                {
+                    headerCenterTextureInBox[headerObjectName].TextureColor = headerButtonColors[headerObjectName].SymbolColors.Z;
+                    headerCenterTextureInBox[headerObjectName].BoxBackgroundColor = headerButtonColors[headerObjectName].BoxColors.Z;
+                }                  
                 
                 headerCenterTextureInBox[headerObjectName] = CalculateCenterTextureInBox.Calculate(headerCenterTextureInBox[headerObjectName]);
             }

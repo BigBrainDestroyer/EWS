@@ -16,28 +16,45 @@ public struct HeaderObjectPercentageWidthVariables
 
 public struct ReactionColorCombinations
 {
-    public Color NormalColor;
-    public Color ReactionColor;
+    public Color X;
+    public Color Y;
 
-    public ReactionColorCombinations(Color normalColor, Color reactionColor)
+    public ReactionColorCombinations(Color x, Color y)
     {
-        NormalColor = normalColor;
-        ReactionColor = reactionColor;
+        X = x;
+        Y = y;
+    }
+}
+
+public struct TripleStateReactionColorCombinations
+{
+    public Color X;
+    public Color Y;
+    public Color Z;
+
+    public TripleStateReactionColorCombinations(Color x, Color y, Color z)
+    {
+        X = x;
+        Y = y;
+        Z = z;
     }
 }
 
 public struct StringSliderColors
 {
-    public ReactionColorCombinations TextureUpColors;
-    public ReactionColorCombinations TextureDownColors;
-    public ReactionColorCombinations UpClickFieldColors;
-    public ReactionColorCombinations DownClickFieldColors;
+    //Buttons
+    public TripleStateReactionColorCombinations TextureUpColors;
+    public TripleStateReactionColorCombinations TextureDownColors;
+    public TripleStateReactionColorCombinations UpClickFieldColors;
+    public TripleStateReactionColorCombinations DownClickFieldColors;
+
+    //Strings
     public ReactionColorCombinations TitleTextColors;
     public ReactionColorCombinations StringSliderTextColors;
     public ReactionColorCombinations TitleBoxColors;
     public ReactionColorCombinations StringSliderBoxColors;
 
-    public StringSliderColors(ReactionColorCombinations textureUpColors, ReactionColorCombinations textureDownColors, ReactionColorCombinations upClickFieldColors, ReactionColorCombinations downClickFieldColors, ReactionColorCombinations titleTextColors, ReactionColorCombinations stringSliderTextColors, ReactionColorCombinations titleBoxColors, ReactionColorCombinations stringSliderBoxColors)
+    public StringSliderColors(TripleStateReactionColorCombinations textureUpColors, TripleStateReactionColorCombinations textureDownColors, TripleStateReactionColorCombinations upClickFieldColors, TripleStateReactionColorCombinations downClickFieldColors, ReactionColorCombinations titleTextColors, ReactionColorCombinations stringSliderTextColors, ReactionColorCombinations titleBoxColors, ReactionColorCombinations stringSliderBoxColors)
     {
         TextureUpColors = textureUpColors;
         TextureDownColors = textureDownColors;
@@ -52,10 +69,10 @@ public struct StringSliderColors
 
 public struct ButtonColors
 {
-    public ReactionColorCombinations SymbolColors;
-    public ReactionColorCombinations BoxColors;
+    public TripleStateReactionColorCombinations SymbolColors;
+    public TripleStateReactionColorCombinations BoxColors;
 
-    public ButtonColors(ReactionColorCombinations symbolColor, ReactionColorCombinations boxColors)
+    public ButtonColors(TripleStateReactionColorCombinations symbolColor, TripleStateReactionColorCombinations boxColors)
     {
         SymbolColors = symbolColor;
         BoxColors = boxColors;

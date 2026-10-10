@@ -34,54 +34,64 @@ public class HeaderClick
                 if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].UpTexture.Box.PixelPosition, _header.HeaderStringSlider[objectName].UpTexture.Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     // IS OP UP ARROW
-                    _header.HeaderStringSlider[objectName].UpTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureUpColors.ReactionColor;
-                    _header.HeaderStringSlider[objectName].UpTexture.TextureColor = _header.HeaderStringSliderColors[objectName].UpClickFieldColors.ReactionColor;
+                    if(_header.HeaderObjectAvailable[objectName])
+                    {
+                        _header.HeaderStringSlider[objectName].UpTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureUpColors.Y;
+                        _header.HeaderStringSlider[objectName].UpTexture.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].UpClickFieldColors.Y;
 
-                    //_header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
+                        _header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.X;
+                        _header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.X;
+                        
+                        _header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.X;
+                        _header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.X;
+                    } 
 
                     if(Raylib.IsMouseButtonPressed(MouseButton.Left))
                     {
-                        StringSliderClick(objectName, 1);
+                        StringSliderClick(objectName, 1, _header.HeaderObjectAvailable[objectName]);
                     }
                 }
                 else if(CheckField.MouseOnField(_header.HeaderStringSlider[objectName].DownTexture.Box.PixelPosition, _header.HeaderStringSlider[objectName].DownTexture.Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     // IS OP ARROW DOWN
-                    _header.HeaderStringSlider[objectName].DownTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureDownColors.ReactionColor;
-                    _header.HeaderStringSlider[objectName].DownTexture.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].DownClickFieldColors.ReactionColor;
+                    if(_header.HeaderObjectAvailable[objectName])
+                    {
+                        _header.HeaderStringSlider[objectName].DownTexture.TextureColor = _header.HeaderStringSliderColors[objectName].TextureDownColors.Y;
+                        _header.HeaderStringSlider[objectName].DownTexture.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].DownClickFieldColors.Y;
 
-                    //_header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.ReactionColor;
-                    //_header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.ReactionColor;
+                        _header.HeaderStringSlider[objectName].TitleStringBox.TextColor = _header.HeaderStringSliderColors[objectName].TitleTextColors.X;
+                        _header.HeaderStringSlider[objectName].TitleStringBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].TitleBoxColors.X;
+                        
+                        _header.HeaderStringSlider[objectName].StringSliderBox.TextColor = _header.HeaderStringSliderColors[objectName].StringSliderTextColors.X;
+                        _header.HeaderStringSlider[objectName].StringSliderBox.BoxBackgroundColor = _header.HeaderStringSliderColors[objectName].StringSliderBoxColors.X;
+                    }
 
                     if(Raylib.IsMouseButtonPressed(MouseButton.Left))
                     {
-                        StringSliderClick(objectName, -1);
+                        StringSliderClick(objectName, -1, _header.HeaderObjectAvailable[objectName]);
                     }
                 }
             }
             else if(_header.HeaderButtons.ContainsKey(objectName))
             {
-                _header.HeaderButtons[objectName].TextColor = _header.HeaderButtonColors[objectName].SymbolColors.ReactionColor;
-                _header.HeaderButtons[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.ReactionColor;
-
-                if(objectName == DrawHeaderObjectNames.RunButton && CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
+                if(_header.HeaderObjectAvailable[objectName])
                 {
-                    
+                    _header.HeaderButtons[objectName].TextColor = _header.HeaderButtonColors[objectName].SymbolColors.Y;
+                    _header.HeaderButtons[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.Y;
                 }
-                else if(objectName == DrawHeaderObjectNames.BuildButton && CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
+
+                if(CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
-                    
+                    HeaderButtonsClick(objectName, _header.HeaderObjectAvailable[objectName]);
                 }
             }
             else if(_header.HeaderCenterTextureInBox.ContainsKey(objectName))
             {
-                _header.HeaderCenterTextureInBox[objectName].TextureColor = _header.HeaderButtonColors[objectName].SymbolColors.ReactionColor;
-                _header.HeaderCenterTextureInBox[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.ReactionColor;
+                if(_header.HeaderObjectAvailable[objectName])
+                {
+                    _header.HeaderCenterTextureInBox[objectName].TextureColor = _header.HeaderButtonColors[objectName].SymbolColors.Y;
+                    _header.HeaderCenterTextureInBox[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.Y;
+                }
                 
                 if(objectName == DrawHeaderObjectNames.TerminalRequest && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
@@ -99,23 +109,35 @@ public class HeaderClick
         }
     }
 
-    private void StringSliderClick(DrawHeaderObjectNames objectName, int addRequest)
+    private void StringSliderClick(DrawHeaderObjectNames objectName, int addRequest, bool isAvailable)
     {
-        if(objectName == DrawHeaderObjectNames.MazeSize)
+        if(objectName == DrawHeaderObjectNames.MazeSize && isAvailable)
         {
             
         }
-        else if(objectName == DrawHeaderObjectNames.BatchSize)
+        else if(objectName == DrawHeaderObjectNames.BatchSize && isAvailable)
         {
             
         }
-        else if(objectName == DrawHeaderObjectNames.PlayBackSpeed)
+        else if(objectName == DrawHeaderObjectNames.PlayBackSpeed && isAvailable)
         {
             
         }
-        else if(objectName == DrawHeaderObjectNames.RunFolderName)
+        else if(objectName == DrawHeaderObjectNames.RunFolderName && isAvailable)
         {
             _runFolder.RunFolderNameHeaderObjectClickAction(addRequest);
+        }
+    }
+
+    private void HeaderButtonsClick(DrawHeaderObjectNames objectName, bool isAvailable)
+    {
+        if(objectName == DrawHeaderObjectNames.RunButton && isAvailable)
+        {
+            
+        }
+        else if(objectName == DrawHeaderObjectNames.BuildButton && isAvailable)
+        {
+            
         }
     }
 }
