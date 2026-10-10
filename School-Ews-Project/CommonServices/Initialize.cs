@@ -109,18 +109,7 @@ public class Initialize
 
     public void OsPlatform()
     {
-        var _archive = _state.archive;
-
-        if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
-            _archive.OsSystem = OsSystem.Linux;
-            _archive.PathSyntax = _archive.LinuxPathSyntax;
-        }
-        else if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            _archive.OsSystem = OsSystem.Windows;
-            _archive.PathSyntax = _archive.WindowsPathSyntax;
-        }
+        var _archive = _state.archive;       
     }
 
     public void InitializeProjectsDataLocation()
@@ -143,13 +132,24 @@ public class Initialize
     {
         var _archive = _state.archive;
         var _terminal = _state.common.terminal;
+
+        string dllFolderPath =
+            App.directoryInfo.ProgramStorageFolderPath +
+            _terminal.DllProjectFolderName;
+
+        if(!Directory.Exists(dllFolderPath))
+        {
+            Directory.CreateDirectory(dllFolderPath);
+        }
+
+        string mainProjectDllPath = App.directoryInfo.DllPath;
+
+        if(!File.Exists(Directory.CreateDirectory(dllFolderPath) + _archive.PathSyntax + mainProjectDllPath.Split(_archive.PathSyntax).Last()))
+        {
+            
+        }
         
-        _terminal.ProjectsDllReferenceFileLocation =
-            _archive.ProjectsDataLocation.Substring(
-                0,
-                _archive.ProjectsDataLocation.Length -
-                _archive.ProjectsDataLocation.Split(_archive.PathSyntax).Last().Length
-            ) + _terminal.DllProjectFolderName + _archive.PathSyntax + _terminal.DllProjectReferenceFileName ;
+        _terminal.ProjectsDllReferenceFileLocation = App.directoryInfo.DllPath;
     }
 
     public void LoadStorage()

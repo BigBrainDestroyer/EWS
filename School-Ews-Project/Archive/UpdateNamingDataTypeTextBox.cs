@@ -56,7 +56,7 @@ public class UpdateNamingDataTypeTextBox
                 (_archive.Storage, _archive.CurrentStorageDataLocation) =
                     _archiveStorage.UpdateAddDataType(
                         _archive.Storage,
-                        _archive.OsSystem,
+                        ShareData.App.directoryInfo.OsSystem,
                         _archive.TemporarilyData,
                         _archive.CurrentStorageDataLocation,
                         _archive.ProjectsDataLocation,

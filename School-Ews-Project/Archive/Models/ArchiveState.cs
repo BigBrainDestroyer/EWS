@@ -1,12 +1,11 @@
 using Raylib_cs;
 using System.Numerics;
+using ShareData;
 
 namespace Program;
 
 public class ArchiveState
 {
-    public OsSystem OsSystem { get; set; }
-
     public FileSystemWatcher ProjectsFolderWatcher { get; set; } = new FileSystemWatcher();
 
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();

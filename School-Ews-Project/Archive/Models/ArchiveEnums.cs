@@ -30,9 +30,3 @@ public enum ArchiveTexture2DNames //eerste 5 moeten in overeen komen met Archive
     OpenFolder,
     PlusSign
 }
-
-public enum OsSystem
-{
-    Linux,
-    Windows
-}

@@ -11,7 +11,7 @@ public class OutsideTerminal
         _state = state ?? throw new ArgumentNullException(nameof(state));
     } 
 
-    public void MakeProjectInNewProjectFolder(OsSystem osSystem, string requestedFolderPath)
+    public void MakeProjectInNewProjectFolder(ShareData.OsSystem osSystem, string requestedFolderPath)
     {
         if(!Directory.Exists(requestedFolderPath))
         {
@@ -22,7 +22,7 @@ public class OutsideTerminal
 
         ProcessStartInfo terminalParams = new ProcessStartInfo();
 
-        terminalParams.FileName = (osSystem == OsSystem.Linux) ? _terminal.LinuxTerminalAppName : _terminal.WindowsTerminalAppName;
+        terminalParams.FileName = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalAppName : _terminal.WindowsTerminalAppName;
         terminalParams.RedirectStandardInput = true;
 
         Process terminal = Process.Start(terminalParams);

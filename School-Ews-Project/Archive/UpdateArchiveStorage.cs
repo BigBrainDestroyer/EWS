@@ -1,3 +1,4 @@
+using ShareData;
 
 namespace Program;
 
@@ -12,7 +13,7 @@ public class UpdateArchiveStorage
         _terminal = new OutsideTerminal(_state);
     }
 
-    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, OsSystem osSystem,ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
+    public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ShareData.OsSystem osSystem, ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
     {
         if (name.Length > 0)
         {
