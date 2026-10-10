@@ -62,7 +62,9 @@ public class DrawMazeLayout
         if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() != 0)
         {
             Color navigatorColor = Color.DarkBlue;
-            Color navigatorPathColor = Color.RayWhite;
+            Color navigatorPathColor = new Color((int)Color.RayWhite.A, Color.RayWhite.B, Color.RayWhite.G, 7);
+
+
 
             for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
             {   

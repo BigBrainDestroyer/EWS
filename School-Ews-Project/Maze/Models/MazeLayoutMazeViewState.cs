@@ -21,7 +21,7 @@ public class MazeLayoutMazeViewState
         new Dictionary<CommonDataNames, bool>{
             {CommonDataNames.State, true},
             {CommonDataNames.CoreProcessorUsagePercentage, true},
-            {CommonDataNames.GPU, true},
+            {CommonDataNames.GPU, false},
             {CommonDataNames.RamTotalUsage, true},
             {CommonDataNames.SlotSearched, true},
             {CommonDataNames.Time, true}
