@@ -218,7 +218,7 @@ public class Initialize
         }
         else
         {
-            _play.IsAlgoLoaded = true;
+            _play.IsAlgoLoaded = false;
         }
     }
 

@@ -38,36 +38,40 @@ public static class NavigatorHelper
             switch(requestedDirection)
             {
                 case Directions.Up: 
-                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
                 App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y - 1
-                    ); break;
+                    ); 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                    break;
 
                 case Directions.Right: 
-                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
                 App.runningMaze.CurrentNavigatorCoordinates = 
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X + 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
-                    ) ; break; 
+                    ) ; 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                    break; 
 
                 case Directions.Down: 
-                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
                 App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y + 1
-                    ); break;
+                    );
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                    break;
 
                 case Directions.Left: 
-                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
                 App.runningMaze.CurrentNavigatorCoordinates =
                     new IVector2(
                         App.runningMaze.CurrentNavigatorCoordinates.X - 1, 
                         App.runningMaze.CurrentNavigatorCoordinates.Y
-                    ); break;
+                    ); 
+                AddNewSearchedSlot(App.runningMaze.CurrentNavigatorCoordinates, App.runningMaze.CurrentMazeNumber);
+                    break;
             }
         }
     }

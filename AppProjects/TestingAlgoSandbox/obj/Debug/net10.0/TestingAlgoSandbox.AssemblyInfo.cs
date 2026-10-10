@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TestingAlgoSandbox")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf2b36cee7369716921c0e76d589a8274f0cec34")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8640b34f7ba7e9fd0f89b541e71a54b657ef2a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("TestingAlgoSandbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TestingAlgoSandbox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

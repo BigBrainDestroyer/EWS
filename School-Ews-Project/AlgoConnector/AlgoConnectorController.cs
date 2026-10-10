@@ -25,6 +25,7 @@ public class AlgoConnectorController
         if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
         {
             _state.playMaze.IsAlgoProgramPauzed = !_state.playMaze.IsAlgoProgramPauzed;
+            
             _state.common.time.MazeRunStopwatch = 
                 new MazeRunStopwatch(
                     _state.common.time.MazeRunStopwatch.StartTime,
@@ -34,7 +35,14 @@ public class AlgoConnectorController
                     true,
                     _state.common.time.MazeRunStopwatch.ResetStopwatch
                 );
+
+            Console.WriteLine("kasjdf;lja s;fjas;dlfja;lsdjfa;l dsjf;lasjdf;lk asjfklasjf;klasj dflkjasdf jasfjasldkfjasjff");
         }
+        //if(Raylib.IsKeyPressed(KeyboardKey.LeftAlt))
+        //{
+        //    _generate.Generator();
+        //}
+
     }
 
     private void UpdateNewMazeToShareAlgoFile()
@@ -62,7 +70,9 @@ public class AlgoConnectorController
             _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
 
             _mazeGenerator.BuildingMazes = false;
-            _mazeGenerator.MazesAreDone = false;
+            
+
+            Console.WriteLine("Done");
         }
     }
     
@@ -82,7 +92,10 @@ public class AlgoConnectorController
             File.WriteAllText(
                 ShareData.App.directoryInfo.ShareMazeDataFilePath,
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
-            );  
+            );
+            _mazeGenerator.MazesAreDone = false;
+
+            Console.WriteLine("Done Running");
         }
     }
 }

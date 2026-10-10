@@ -49,7 +49,7 @@ public class DrawMazeLayout
         var _generator = _state.maze.generator;
         var _mazeView = _state.maze.layout.mazeView;
         var _play = _state.playMaze;
-        var _shareAlgoDate = _state.shareAlgoData;
+        var _shareAlgoData = _state.shareAlgoData;
 
         Raylib.DrawRectangleV(
             _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
@@ -59,18 +59,22 @@ public class DrawMazeLayout
 
         Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
-        if (_shareAlgoDate.CommonDataHistory.SlotSearchedHistory.Count() != 0)
+        if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() != 0)
         {
+            Color navigatorColor = Color.DarkBlue;
+            Color navigatorPathColor = Color.RayWhite;
+
             for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
-            {
-                if (_shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].MazeNumber == _play.MazeListPosition)
+            {   
+                if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].MazeNumber == _play.MazeListPosition)
                 {
-                    Raylib.DrawRectangle(
-                        (int)(startPosition.X + (_mazeView.MazeSlotLengths.X * _shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.X)),
-                        (int)(startPosition.Y + (_mazeView.MazeSlotLengths.Y * _shareAlgoDate.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.Y)),
-                        (int)_mazeView.MazeSlotLengths.X,
-                        (int)_mazeView.MazeSlotLengths.Y,
-                        Color.Red
+                    Raylib.DrawRectangleV(
+                      new Vector2(
+                          startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
+                          startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.Y -1))
+                      ),
+                      _mazeView.MazeSlotLengths,
+                      navigatorPathColor
                     );
                 }
                 else
@@ -78,6 +82,15 @@ public class DrawMazeLayout
                     break;
                 }
             }
+
+            Raylib.DrawRectangleV(
+              new Vector2(
+                  startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
+                  startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y -1))
+              ),
+              _mazeView.MazeSlotLengths,
+              navigatorColor
+            );
         }
 
 
@@ -88,6 +101,36 @@ public class DrawMazeLayout
             foreach (WallState wallState in _mazeView.CurrentMaze.UsingYToGetRightArray[i])
             {
                 if ( wallState == WallState.Closed)
+                {
+                    Raylib.DrawLineEx(
+                        new Vector2(
+                            startPosition.X,
+                            startPosition.Y - (_mazeView.LineThick/2)
+                        ),
+                        new Vector2(
+                            startPosition.X,
+                            startPosition.Y + _mazeView.MazeSlotLengths.Y + (_mazeView.LineThick/2)
+                        ),
+                        _mazeView.LineThick,
+                        Color.Pink
+                    );
+                }
+
+
+                startPosition.X += _mazeView.MazeSlotLengths.X;
+            }
+
+            startPosition.X = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze].X;
+            startPosition.Y += _mazeView.MazeSlotLengths.Y;
+        }
+
+        startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
+            
+        for (int i = 1; i < _mazeView.CurrentMaze.UsingXToGetRightArray.Length; i++)
+        {
+            foreach (WallState wallState in _mazeView.CurrentMaze.UsingXToGetRightArray[i])
+            {
+                if (wallState == WallState.Closed)
                 {
                     Raylib.DrawLineEx(
                         new Vector2(
@@ -104,39 +147,10 @@ public class DrawMazeLayout
                 }
 
                 startPosition.Y += _mazeView.MazeSlotLengths.Y;
-            }
+            }    
 
             startPosition.X += _mazeView.MazeSlotLengths.X;
             startPosition.Y = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze].Y;
-        }
-
-        startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
-            
-        for (int i = 1; i < _mazeView.CurrentMaze.UsingXToGetRightArray.Length; i++)
-        {
-            foreach (WallState wallState in _mazeView.CurrentMaze.UsingXToGetRightArray[i])
-            {
-                if (wallState == WallState.Closed)
-                {
-                    Raylib.DrawLineEx(
-                        new Vector2(
-                            startPosition.X,
-                            startPosition.Y - (_mazeView.LineThick/2)
-                        ),
-                        new Vector2(
-                            startPosition.X,
-                            startPosition.Y + _mazeView.MazeSlotLengths.Y + (_mazeView.LineThick/2)
-                        ),
-                        _mazeView.LineThick,
-                        Color.Pink
-                    );
-                }
-
-                startPosition.X += _mazeView.MazeSlotLengths.X;
-            }
-
-            startPosition.X = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze].X;
-            startPosition.Y += _mazeView.MazeSlotLengths.Y;    
         }
     }
 
