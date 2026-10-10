@@ -1,3 +1,4 @@
+using ShareData;
 
 namespace Program;
 
@@ -19,7 +20,7 @@ public class UpdateRunFolder
             UpdateAllProjectFolderNames(
                 _archive.ArchiveProjectFolderPaths, 
                 _header.AllProjectFolderNames, 
-                _archive.PathSyntax, 
+                App.directoryInfo.PathSyntax, 
                 _header.AllProjectFolderNamesListPosition
             );
 

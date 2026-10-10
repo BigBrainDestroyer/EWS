@@ -9,8 +9,6 @@ internal class DirectoryInfoState
 
     public string PathSyntax { get; } = Initialize.PathSyntax();
 
-    public string DllPath => Initialize.DllPath();
-
     public string ProgramStorageFolderPath => Initialize.ProgramStorageFolderPath();
 
     public string SharedDataFolderPath => Initialize.SharedDataFolderPath();

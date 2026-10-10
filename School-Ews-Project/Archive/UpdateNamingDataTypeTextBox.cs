@@ -1,4 +1,5 @@
 using Raylib_cs;
+using ShareData;
 
 namespace Program;
 
@@ -61,7 +62,7 @@ public class UpdateNamingDataTypeTextBox
                         _archive.CurrentStorageDataLocation,
                         _archive.ProjectsDataLocation,
                         _archive.ArchiveNamingDataTypeTextBox.Text.Text,
-                        _archive.PathSyntax
+                        App.directoryInfo.PathSyntax
                     );
             }
             else
@@ -72,7 +73,7 @@ public class UpdateNamingDataTypeTextBox
                         _archive.ArchiveEditDataType.DataType,
                         _archive.ArchiveEditDataType.DataTypePath,
                         _archive.ArchiveNamingDataTypeTextBox.Text.Text,
-                        _archive.PathSyntax,
+                        App.directoryInfo.PathSyntax,
                         _archive.ProjectsDataLocation
                     );
 

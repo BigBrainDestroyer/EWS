@@ -1,5 +1,6 @@
 using Raylib_cs;
 using System.Numerics;
+using ShareData;
 
 namespace Program;
 
@@ -26,7 +27,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],
             _archive.ArchiveBoxPixelLengths[ArchiveBoxesNames.Archive],
             _archive.DataTypeBoxPercentage,
-            _archive.PathSyntax,
+            App.directoryInfo.PathSyntax,
             _archive.ArchiveWhiteSpaceToFunctionBar,
             _archive.ArchiveDataTypeBoxTextSpacing,
             _archive.DataTypeBoxTextureTextPercentageOffSet,
@@ -49,7 +50,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 _archive.ProjectsDataLocation,
                 _archive.CurrentStorageDataLocation, 
                 _archive.LoadedFileDirectory,
-                _archive.PathSyntax,
+                App.directoryInfo.PathSyntax,
                 _archive.DataTypeBoxesMouseOnBoxColor
             );
             
@@ -60,7 +61,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
                 _archive.CurrentStorageDataLocation, 
                 _archive.ArchiveEditDataType.DataTypePath,
                 _archive.LoadedFileDirectory,
-                _archive.PathSyntax,
+                App.directoryInfo.PathSyntax,
                 _archive.DataTypeBoxesLoadedFileColor,
                 _archive.DataTypeBoxesEditDataTypeColor,
                 _archive.DataTypeBoxesCurrentStorageLocationColor
@@ -214,7 +215,7 @@ public class UpdateArchiveDataTypeLayoutBoxes
             else
             {
                 folderPath = folderName.Split(pathSyntax);
-                lastPathNameLength = folderPath.Last().Length + 1;
+                lastPathNameLength = folderPath.Last().Length + pathSyntax.Length;
 
                 parentFolder = folderName.Substring(0, folderName.Length - lastPathNameLength);
 

@@ -67,11 +67,6 @@ internal static class Initialize
         return sharedDataFolderPath;
     }
 
-    public static string DllPath()
-    {
-        return typeof(Initialize).Assembly.Location;
-    } 
-
     public static string ShareMazeDataFilePath()
     {
         string filePath = SharedDataFolderPath() + State.PathSyntax + State.ShareMazeDataFileName;

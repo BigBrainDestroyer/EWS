@@ -103,9 +103,6 @@ public class ArchiveState
     public string LoadedFileDirectory { get; set; } = "";
     public string ProjectsDataLocation { get; set; } = ""; //Base
     public string ProjectFolderName { get; } = "AppProjects";
-    public string PathSyntax { get; set; } = "";
-    public string LinuxPathSyntax { get; } = "/";
-    public string WindowsPathSyntax { get; } = "\\";
 
     public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 20f;
     public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }

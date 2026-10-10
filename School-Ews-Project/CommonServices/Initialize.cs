@@ -109,14 +109,14 @@ public class Initialize
 
     public void OsPlatform()
     {
-        var _archive = _state.archive;       
+        var _archive = _state.archive;  
     }
 
     public void InitializeProjectsDataLocation()
     {
         var _archive = _state.archive;
 
-        string baseProjectPath = ShareData.App.directoryInfo.ProgramStorageFolderPath + _archive.PathSyntax + _archive.ProjectFolderName;
+        string baseProjectPath = ShareData.App.directoryInfo.ProgramStorageFolderPath + App.directoryInfo.PathSyntax + _archive.ProjectFolderName;
 
         
         if(!Directory.Exists(baseProjectPath))
@@ -133,23 +133,21 @@ public class Initialize
         var _archive = _state.archive;
         var _terminal = _state.common.terminal;
 
-        string dllFolderPath =
-            App.directoryInfo.ProgramStorageFolderPath +
-            _terminal.DllProjectFolderName;
+        string dllCsprojPath = Path.GetFullPath(
+            Path.Combine(AppContext.BaseDirectory,
+            "..", "..", "..", "..",
+            _terminal.DllProjectFolderName,
+            _terminal.DllProjectReferenceFileName
+        ));
 
-        if(!Directory.Exists(dllFolderPath))
+        if(!File.Exists(dllCsprojPath))
         {
-            Directory.CreateDirectory(dllFolderPath);
-        }
+            Console.WriteLine("Missing Library DLL Project Folder In EWS Folder");
 
-        string mainProjectDllPath = App.directoryInfo.DllPath;
-
-        if(!File.Exists(Directory.CreateDirectory(dllFolderPath) + _archive.PathSyntax + mainProjectDllPath.Split(_archive.PathSyntax).Last()))
-        {
-            
+            Environment.Exit(0);
         }
         
-        _terminal.ProjectsDllReferenceFileLocation = App.directoryInfo.DllPath;
+        _terminal.ProjectsDllReferenceFileLocation = dllCsprojPath;
     }
 
     public void LoadStorage()

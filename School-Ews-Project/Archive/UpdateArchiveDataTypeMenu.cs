@@ -83,5 +83,4 @@ public class UpdateArchiveDataTypeMenu
 
         return new Vector2(0,0);
     }
-    
 }

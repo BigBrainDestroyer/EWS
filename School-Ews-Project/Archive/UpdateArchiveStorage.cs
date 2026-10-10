@@ -160,6 +160,16 @@ public class UpdateArchiveStorage
             _archive.Storage = LoadStorage(_archive.Storage, _archive.ProjectsDataLocation);
 
             _archive.ArchiveProjectFolderPaths = Directory.GetDirectories(_archive.ProjectsDataLocation);
+
+
+            Console.WriteLine("jalksdfj;asdjf;lasjdf;lkjasd;lfja;sfj ;lasdjf;lasdjf;ljasd;lfj;asdfja;sldkj");
+            Console.WriteLine(_archive.CurrentStorageDataLocation);
+            Console.WriteLine(Directory.Exists(_archive.CurrentStorageDataLocation));
+
+            if(!Directory.Exists(_archive.CurrentStorageDataLocation))
+            {
+                _archive.CurrentStorageDataLocation = _archive.ProjectsDataLocation;
+            }
         }
     }
 } 

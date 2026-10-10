@@ -1,5 +1,6 @@
 using Raylib_cs;
 using System.Numerics;
+using ShareData;
 
 namespace Program;
     
@@ -74,7 +75,7 @@ public class UpdateArchiveClicks
 
         if(CheckField.MouseOnField(_archive.AddOnButtonPixelPosition, _archive.AddOnButtonPixelLengths, Raylib.GetMousePosition()) && Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
-            _archive.AddLegalDataTypeToStorage = GetLegalDataTypes(_archive.CurrentStorageDataLocation, _archive.ProjectsDataLocation, _archive.PathSyntax);
+            _archive.AddLegalDataTypeToStorage = GetLegalDataTypes(_archive.CurrentStorageDataLocation, _archive.ProjectsDataLocation, App.directoryInfo.PathSyntax);
 
             _archive.AddDataTypeMenu = _dataTypeMenu.UpdateArchiveTypeMenuActiveState(_archive.AddDataTypeMenu);
         }
