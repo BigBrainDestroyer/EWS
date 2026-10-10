@@ -25,6 +25,11 @@ public static class NavigatorHelper
             return false;
         }
     }
+
+    public static IVector2 GetCurrentNavigatorCoordinates()
+    {
+        return App.runningMaze.CurrentNavigatorCoordinates;
+    }
     
     public static IVector2 CurrentMazeEndPoint()
     {

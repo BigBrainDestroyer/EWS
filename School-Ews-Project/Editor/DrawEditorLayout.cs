@@ -23,8 +23,6 @@ public class DrawEditorLayout
             DrawEditorTextPanel();
 
             DrawWriteOverTextBoxes();
-
-            DrawEditorTerminal();
         }
         else 
         {
@@ -119,7 +117,7 @@ public class DrawEditorLayout
     {
         var _panel = _state.editor.layout.textPanel;
 
-        float maxBottomY = _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal].Y;
+        float maxBottomY = _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive].Y + _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Archive].Y;
         float RowIncrement = 0;
 
         for (int i = 0; _panel.TextPosition.Y + RowIncrement <= maxBottomY && i < _panel.ViewText.Count; i++)
@@ -204,17 +202,6 @@ public class DrawEditorLayout
             _textPanel.WriteOverBoxPositionVerticalText,
             _textPanel.WriteOverBoxLengthsVerticalText,
             _state.common.boxes.MainBoxesBackgroundColor
-        );
-    }
-    
-    private void DrawEditorTerminal()
-    {
-        Custom.DrawCustomRectangle(
-            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Terminal],
-            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Terminal],
-            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Terminal],
-            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Terminal],
-            _state.editor.layout.textPanel.TerminalBackgroundColor
         );
     }
 }

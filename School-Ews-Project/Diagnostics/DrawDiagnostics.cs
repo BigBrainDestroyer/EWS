@@ -36,14 +36,6 @@ public class DrawDiagnostics
             _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Maze],
             Color.DarkGray
         );
-    
-        Custom.DrawCustomRectangle(
-            _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Statistics], 
-            _state.common.boxes.MainBoxPixelLengts[MainBoxNames.Statistics],
-            _state.common.boxes.MainBoxesCornerRadius[MainBoxNames.Statistics],
-            _state.common.boxes.MainBoxesCornerStates[MainBoxNames.Statistics],
-            Color.DarkBlue
-        );
 
         Custom.DrawCustomRectangle(
             _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor], 

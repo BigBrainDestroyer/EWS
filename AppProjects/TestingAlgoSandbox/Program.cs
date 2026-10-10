@@ -42,7 +42,7 @@ public class Program()
 
             if(ShareData.NavigatorHelper.IsCurrentMazeSolved())
             {
-                Console.WriteLine("JA HIJ KOMT HIER");
+                Console.WriteLine("Maze Solved");
 
                 ShareData.NavigatorHelper.GiveCurrentMazeFinalPath(new MazeFinalPath());
             }

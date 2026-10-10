@@ -23,7 +23,7 @@ public class CalculateMainBoxes
             CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPercentageSpacing);
 
         _mainBoxes.MainBoxPixelLengts =
-            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxPercentages, _mainBoxes.MainBoxesPixelSpacing);
+            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
 
         _mainBoxes.MainBoxPixelPositions =
             CalculateMainBoxPositions(_mainBoxes.MainBoxPixelLengts, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
@@ -68,36 +68,14 @@ public class CalculateMainBoxes
         return (newMainColumnLengths, mainBoxPixelSpacing);
     }
 
-    private Dictionary<MainBoxNames, Vector2> CalculateMainBoxLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPixelLengths, Dictionary<MainBoxNames, Vector2> mainBoxPercentages, float mainBoxPixelSpacing)
+    private Dictionary<MainBoxNames, Vector2> CalculateMainBoxLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPixelLengths, float mainBoxPixelSpacing)
     {
-        MainBoxNames[] boxNames = Enum.GetValues<MainBoxNames>();
-
         Dictionary<MainBoxNames, Vector2> newMainBoxPixelLengths = new Dictionary<MainBoxNames, Vector2>();
 
-        foreach(MainBoxNames boxName in boxNames)
-        {
-            if(boxName == MainBoxNames.Archive)
-            {
-                newMainBoxPixelLengths.Add(boxName, mainColumnsPixelLengths[MainColumnsName.Archive]);
-            }
-            else if(boxName == MainBoxNames.Editor || boxName == MainBoxNames.Terminal)
-            {
-                newMainBoxPixelLengths.Add(boxName,
-                    new Vector2(
-                        (mainColumnsPixelLengths[MainColumnsName.Editor].X - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].X / 100f),
-                        (mainColumnsPixelLengths[MainColumnsName.Editor].Y - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].Y / 100f)
-                    ));
-            }
-            else if(boxName == MainBoxNames.Maze || boxName == MainBoxNames.Statistics)
-            {
-                newMainBoxPixelLengths.Add(boxName,
-                    new Vector2(
-                        mainColumnsPixelLengths[MainColumnsName.Visualize].X * (mainBoxPercentages[boxName].X / 100f),
-                        (mainColumnsPixelLengths[MainColumnsName.Visualize].Y - mainBoxPixelSpacing) * (mainBoxPercentages[boxName].Y / 100f)
-                    ));
-            }
-        }
-
+        newMainBoxPixelLengths.Add(MainBoxNames.Archive, mainColumnsPixelLengths[MainColumnsName.Archive]);
+        newMainBoxPixelLengths.Add(MainBoxNames.Maze, mainColumnsPixelLengths[MainColumnsName.Visualize]);
+        newMainBoxPixelLengths.Add(MainBoxNames.Editor, new Vector2(mainColumnsPixelLengths[MainColumnsName.Editor].X - mainBoxPixelSpacing, mainColumnsPixelLengths[MainColumnsName.Editor].Y));
+        
         return newMainBoxPixelLengths;
     }
 
@@ -117,22 +95,10 @@ public class CalculateMainBoxes
                 headerPixelLengths.Y + mainBoxPixelSpacing
             ));
 
-        newMainBoxPixelPositions.Add(MainBoxNames.Statistics,
-            new Vector2(
-                newMainBoxPixelPositions[MainBoxNames.Archive].X + mainBoxPixelLengths[MainBoxNames.Archive].X + mainBoxPixelSpacing,
-                newMainBoxPixelPositions[MainBoxNames.Maze].Y + mainBoxPixelLengths[MainBoxNames.Maze].Y + mainBoxPixelSpacing
-            ));
-
         newMainBoxPixelPositions.Add(MainBoxNames.Editor,
             new Vector2(
                 newMainBoxPixelPositions[MainBoxNames.Maze].X + mainBoxPixelLengths[MainBoxNames.Maze].X + mainBoxPixelSpacing,
                 headerPixelLengths.Y + mainBoxPixelSpacing
-            ));
-
-        newMainBoxPixelPositions.Add(MainBoxNames.Terminal,
-            new Vector2(
-                newMainBoxPixelPositions[MainBoxNames.Statistics].X + mainBoxPixelLengths[MainBoxNames.Statistics].X + mainBoxPixelSpacing,
-                newMainBoxPixelPositions[MainBoxNames.Editor].Y + mainBoxPixelLengths[MainBoxNames.Editor].Y + mainBoxPixelSpacing
             ));
         
         return newMainBoxPixelPositions;

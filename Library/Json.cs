@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace ShareData;
 
-public static class Json
+internal static class Json
 {
     public static JsonSerializerOptions JsonSerializeSettings()
     {
