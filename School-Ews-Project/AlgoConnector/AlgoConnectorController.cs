@@ -38,10 +38,10 @@ public class AlgoConnectorController
 
             Console.WriteLine("kasjdf;lja s;fjas;dlfja;lsdjfa;l dsjf;lasjdf;lk asjfklasjf;klasj dflkjasdf jasfjasldkfjasjff");
         }
-        //if(Raylib.IsKeyPressed(KeyboardKey.LeftAlt))
-        //{
-        //    _generate.Generator();
-        //}
+        if(Raylib.IsKeyPressed(KeyboardKey.LeftAlt))
+        {
+            _generate.Generator();
+        }
 
     }
 

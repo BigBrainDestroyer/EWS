@@ -1,11 +1,15 @@
 
 namespace ShareData;
 
-internal enum OsSystem
+[EditorBrowsable(EditorBrowsableState.Never)]
+
+
+public enum OsSystem
 {
-    Linux,
-    Windows
+     Linux,
+     Windows
 }
+
 
 public enum WallState
 {

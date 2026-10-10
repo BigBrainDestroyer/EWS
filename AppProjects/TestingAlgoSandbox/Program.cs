@@ -38,7 +38,7 @@ public class Program()
 
             ShareData.NavigatorHelper.RequestNewNavigatorPosition((Directions)moveList[direction]);
 
-            Thread.Sleep(2);
+            Thread.Sleep(1);
 
             if(ShareData.NavigatorHelper.IsCurrentMazeSolved())
             {
