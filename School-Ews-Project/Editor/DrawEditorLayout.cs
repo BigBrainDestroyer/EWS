@@ -23,13 +23,15 @@ public class DrawEditorLayout
             DrawEditorTextPanel();
 
             DrawWriteOverTextBoxes();
+
+            DrawEditorTerminal();
         }
         else 
-        { 
-            //meschien LOADFILE OFZO
+        {
+            DrawLoadFile();
         }
 
-        //DrawEditorTerminal();
+        
     }
 
     private void DrawEditorTextPanel()
@@ -43,6 +45,28 @@ public class DrawEditorLayout
         DrawTextRowNumbersBox();
 
         DrawRowNumbers();
+    }
+
+    private void DrawLoadFile()
+    {
+        var _textPanel = _state.editor.layout.textPanel;
+
+        Custom.DrawCustomRectangle(
+            _textPanel.FileNotLoadedText.Box.PixelPosition, 
+            _textPanel.FileNotLoadedText.Box.PixelLengths,
+            _textPanel.FileNotLoadedText.Box.Radius,
+            _textPanel.FileNotLoadedText.Box.CornerStates,
+            _textPanel.FileNotLoadedText.BoxBackgroundColor
+        );
+
+        Raylib.DrawTextEx(
+            _textPanel.FileNotLoadedText.Font,
+            _textPanel.FileNotLoadedText.Text.Text,
+            _textPanel.FileNotLoadedText.TextPosition,
+            _textPanel.FileNotLoadedText.Text.TextSize,
+            _textPanel.FileNotLoadedText.Text.TextSpacing,
+            _textPanel.FileNotLoadedText.TextColor
+        );
     }
 
 

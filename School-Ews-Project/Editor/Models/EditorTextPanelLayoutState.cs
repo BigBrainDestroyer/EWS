@@ -28,6 +28,23 @@ public class EditorTextPanelLayoutState
 
     public MouseCursorBox MouseCursorBox { get; set; } = new MouseCursorBox(new Box(), false, Color.Red);
 
+    public CenterTextInBox FileNotLoadedText { get; set; } =
+        new CenterTextInBox(
+            new Font(),
+            new CustomBox(
+                new BoolVector4(true, true, true, true),
+                new Vector2(),
+                new Vector2(),
+                0
+            ),
+            new RaylibText("Load File", 0, 0),
+            new Vector2(),
+            new Vector2(30, 40),
+            StaticVariablesInitialize.FontLilexSemiBoldPath,
+            new Color(51, 59, 67, 255),
+            Color.LightGray
+        );
+    
     public Dictionary<KeyboardKey, KeyboardKeyDownSettings> KeyboardKeyDownSettings =
         new Dictionary<KeyboardKey, KeyboardKeyDownSettings>{
             {KeyboardKey.Backspace, new KeyboardKeyDownSettings(0, 0.05)},

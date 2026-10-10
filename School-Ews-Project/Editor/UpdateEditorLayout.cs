@@ -14,9 +14,24 @@ public class UpdateEditorLayout
 
     public void EditorLayout()
     {
-        if (_state.editor.layout.textPanel.CurrentLoadedFile.Length > 0)
+        var _textPanel = _state.editor.layout.textPanel;
+        var _mainBoxes = _state.common.boxes;
+
+        if (_textPanel.CurrentLoadedFile.Length > 0)
         {   
             _updateEditorTextPanel.UpdateTextPanel();
+        }
+        else
+        {
+            _state.editor.layout.textPanel.FileNotLoadedText.Box =
+                new CustomBox(
+                    _textPanel.FileNotLoadedText.Box.CornerStates,
+                    _mainBoxes.MainBoxPixelPositions[MainBoxNames.Editor],
+                    _mainBoxes.MainBoxPixelLengts[MainBoxNames.Editor],
+                    _mainBoxes.MainBoxesCornerRadius[MainBoxNames.Editor]
+                );
+
+            _textPanel.FileNotLoadedText = CalculateCenterTextInBox.Calculate(_textPanel.FileNotLoadedText);
         }
     }
 }

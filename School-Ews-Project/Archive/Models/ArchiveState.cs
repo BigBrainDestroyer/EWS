@@ -12,7 +12,7 @@ public class ArchiveState
     public ArchiveStorageNames?[] AddLegalDataTypeToStorage { get; set; } = new ArchiveStorageNames?[3];
     public ArchiveDataTypeBox[] DataTypeBoxes { get; set; } = new ArchiveDataTypeBox[0];
     public ArchiveEditDataType ArchiveEditDataType { get; set; } = new ArchiveEditDataType();
-    
+
     public ArchiveDataTypeBox SingleArchiveDataTypeBox { get; set; } = 
         new ArchiveDataTypeBox(
             new Color(51, 59, 67, 255), 

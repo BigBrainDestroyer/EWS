@@ -170,6 +170,11 @@ public class UpdateArchiveStorage
             {
                 _archive.CurrentStorageDataLocation = _archive.ProjectsDataLocation;
             }
+
+            if(!File.Exists(_archive.LoadedFileDirectory))
+            {
+                _archive.LoadedFileDirectory = "";
+            }
         }
     }
 } 
