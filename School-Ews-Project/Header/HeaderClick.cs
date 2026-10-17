@@ -6,11 +6,13 @@ public class HeaderClick
 {
     private readonly AppState _state;
     private readonly UpdateRunFolder _runFolder;
+    private readonly RunButtonCore _runButton;
 
     public HeaderClick(AppState state)
     {
         _state = state ?? throw new ArgumentNullException();
         _runFolder = new UpdateRunFolder(_state);
+        _runButton = new RunButtonCore(_state);
     }
 
     public void Click()
@@ -133,7 +135,7 @@ public class HeaderClick
     {
         if(objectName == DrawHeaderObjectNames.RunButton && isAvailable)
         {
-            
+            _runButton.ButtonClick();
         }
         else if(objectName == DrawHeaderObjectNames.BuildButton && isAvailable)
         {

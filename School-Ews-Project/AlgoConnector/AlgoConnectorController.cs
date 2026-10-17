@@ -24,7 +24,7 @@ public class AlgoConnectorController
 
         if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
         {
-            _state.playMaze.IsAlgoProgramPauzed = !_state.playMaze.IsAlgoProgramPauzed;
+            _state.playMaze.IsAlgoProgramPaused = !_state.playMaze.IsAlgoProgramPaused;
             
             _state.common.time.MazeRunStopwatch = 
                 new MazeRunStopwatch(

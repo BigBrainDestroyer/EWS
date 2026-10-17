@@ -100,7 +100,7 @@ public class UpdateMazeLayoutMazeView
         //Console.WriteLine(!_play.IsAlgoLoaded);
         //Console.WriteLine(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.Time);
         
-        if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPauzed || !_play.IsAlgoLoaded)
+        if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPaused || !_play.IsAlgoLoaded)
         {
             return;
         }
