@@ -38,12 +38,10 @@ public struct TerminalCommands
 
 public class TerminalState
 {
-    public Dictionary<string, Process> TerminalProcesses { get; set; } = new Dictionary<string, Process>();
-
     public TerminalCommands LinuxTerminalCommands =
         new TerminalCommands(
             "bash", //Process Starting App
-            "ptyxis --new-window --working-directory=\"$PWD\" --bash",
+            "ptyxis --new-window --working-directory=\"$PWD\" -- bash",
             "dotnet new console --force",
             "dotnet add reference ", //Add Path
             "dotnet run",

@@ -95,7 +95,7 @@ public class OutsideTerminal
         return;
     }
 
-    async Task RunningProject(Process terminal)
+    private async Task RunningProject(Process terminal)
     {
         var _terminal = _state.common.terminal;
         var _play = _state.playMaze;
@@ -111,5 +111,65 @@ public class OutsideTerminal
         terminal.Dispose();
 
         _play.IsAlgoRunning = false;
+    }
+
+    public void BuildAlgoProject(ShareData.OsSystem osSystem, string requestedFolderPath)
+    {
+        if (!Directory.Exists(requestedFolderPath))
+        {
+            return;
+        }
+
+        var _terminal = _state.common.terminal;
+        var _play = _state.playMaze;
+
+        TerminalCommands commands = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalCommands : _terminal.WindowsTerminalCommands;
+        
+        ProcessStartInfo terminalParams = new ProcessStartInfo();
+
+        terminalParams.FileName = commands.TerminalAppName;
+        terminalParams.WorkingDirectory = requestedFolderPath;
+        terminalParams.RedirectStandardInput = true;
+        terminalParams.CreateNoWindow = true;
+
+        Process terminal = Process.Start(terminalParams) ?? throw new ArgumentNullException(nameof(terminal));
+
+        if (terminal != null)
+        {
+            terminal.StandardInput.WriteLine(commands.BuildProject);
+            terminal.Dispose();
+        }
+
+        return;
+    }
+
+    public void RequestVisualTerminal(ShareData.OsSystem osSystem, string requestedFolderPath)
+    {
+        if (!Directory.Exists(requestedFolderPath))
+        {
+            return;
+        }
+
+        var _terminal = _state.common.terminal;
+        var _play = _state.playMaze;
+
+        TerminalCommands commands = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalCommands : _terminal.WindowsTerminalCommands;
+        
+        ProcessStartInfo terminalParams = new ProcessStartInfo();
+
+        terminalParams.FileName = commands.TerminalAppName;
+        terminalParams.WorkingDirectory = requestedFolderPath;
+        terminalParams.RedirectStandardInput = true;
+        terminalParams.CreateNoWindow = true;
+
+        Process terminal = Process.Start(terminalParams) ?? throw new ArgumentNullException(nameof(terminal));
+
+        if (terminal != null)
+        {
+            terminal.StandardInput.WriteLine(commands.StartTerminal);
+            terminal.Dispose();
+        }
+
+        return;
     }
 }

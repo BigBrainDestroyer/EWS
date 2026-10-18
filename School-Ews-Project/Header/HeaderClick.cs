@@ -7,12 +7,16 @@ public class HeaderClick
     private readonly AppState _state;
     private readonly UpdateRunFolder _runFolder;
     private readonly RunButtonCore _runButton;
+    private readonly BuildButtonCore _buildButton;
+    private readonly TerminalButtonCore _terminalButton;
 
     public HeaderClick(AppState state)
     {
         _state = state ?? throw new ArgumentNullException();
         _runFolder = new UpdateRunFolder(_state);
         _runButton = new RunButtonCore(_state);
+        _buildButton = new BuildButtonCore(_state);
+        _terminalButton = new TerminalButtonCore(_state);
     }
 
     public void Click()
@@ -82,7 +86,7 @@ public class HeaderClick
                     _header.HeaderButtons[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.Y;
                 }
 
-                if(CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
+                if(Raylib.IsMouseButtonPressed(MouseButton.Left) && CheckField.MouseOnField(_header.HeaderButtons[objectName].Box.PixelPosition, _header.HeaderButtons[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
                     HeaderButtonsClick(objectName, _header.HeaderObjectAvailable[objectName]);
                 }
@@ -95,17 +99,9 @@ public class HeaderClick
                     _header.HeaderCenterTextureInBox[objectName].BoxBackgroundColor = _header.HeaderButtonColors[objectName].BoxColors.Y;
                 }
                 
-                if(objectName == DrawHeaderObjectNames.TerminalRequest && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
+                if(Raylib.IsMouseButtonPressed(MouseButton.Left) && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
                 {
-                    
-                }
-                else if(objectName == DrawHeaderObjectNames.StartStopAlgoPlayBack && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
-                {
-                    
-                }
-                else if(objectName == DrawHeaderObjectNames.BuildMaze && CheckField.MouseOnField(_header.HeaderCenterTextureInBox[objectName].Box.PixelPosition, _header.HeaderCenterTextureInBox[objectName].Box.PixelLengths, Raylib.GetMousePosition()))
-                {
-                    
+                    HeaderButtonsClick(objectName, _header.HeaderObjectAvailable[objectName]);
                 }
             }
         }
@@ -139,7 +135,11 @@ public class HeaderClick
         }
         else if(objectName == DrawHeaderObjectNames.BuildButton && isAvailable)
         {
-            
+            _buildButton.ButtonCLick();
+        }
+        else if(objectName == DrawHeaderObjectNames.TerminalRequest)
+        {
+            _terminalButton.ButtonCLick();
         }
     }
 }

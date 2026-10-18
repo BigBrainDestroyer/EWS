@@ -7,6 +7,7 @@ public class HeaderController
     private readonly UpdateHeaderLayout _headerLayout;
     private readonly HeaderClick _click;
     private readonly UpdateRunFolder _runFolder;
+    private readonly RunButtonCore _runButton;
 
     public HeaderController(AppState state)
     {
@@ -14,6 +15,7 @@ public class HeaderController
         _headerLayout = new UpdateHeaderLayout(_state);
         _click = new HeaderClick(_state);
         _runFolder = new UpdateRunFolder(_state);
+        _runButton = new RunButtonCore(_state);
     }
 
     public void Controller()
@@ -23,5 +25,7 @@ public class HeaderController
         _headerLayout.Update();
 
         _click.Click();
+
+        _runButton.ButtonCore();
     }
 }

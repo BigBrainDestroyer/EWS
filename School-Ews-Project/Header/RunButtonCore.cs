@@ -1,3 +1,4 @@
+using Raylib_cs;
 using ShareData;
 
 namespace Program;
@@ -15,7 +16,6 @@ public class RunButtonCore
 
     public void ButtonCore()
     {
-        //we willen hier eigelijk evalueren he mogen we ... comando uitvoeren .. staat voor terminal run
         var _play = _state.playMaze;
         var _generator = _state.maze.generator;
         var _header = _state.HeaderState;
@@ -31,6 +31,8 @@ public class RunButtonCore
 
             _header.HeaderButtons[DrawHeaderObjectNames.RunButton].TextColor = 
                 _header.HeaderButtonColors[DrawHeaderObjectNames.RunButton].SymbolColors.Y;
+
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.RunButton] = false;
         }
         else
         {
@@ -45,13 +47,7 @@ public class RunButtonCore
         var _archive = _state.archive;
         var _header = _state.HeaderState;
 
-        Console.WriteLine(!_play.IsAlgoProgramPaused);
-        Console.WriteLine(!_play.IsAlgoRunning);
-        Console.WriteLine(!_generator.BuildingMazes);
-        Console.WriteLine(!_generator.MazesAreDone);
-        Console.WriteLine(_archive.ArchiveProjectFolderPaths.Length > 0);
-        
-        if (!_play.IsAlgoProgramPaused && !_play.IsAlgoRunning && !_generator.BuildingMazes && !_generator.MazesAreDone && _archive.ArchiveProjectFolderPaths.Length > 0)
+        if (_play.IsAlgoProgramPaused && !_play.IsAlgoRunning && !_generator.BuildingMazes && !_generator.MazesAreDone && _archive.ArchiveProjectFolderPaths.Length > 0)
         {
             if (_header.AllProjectFolderNamesListPosition < _archive.ArchiveProjectFolderPaths.Length && _header.AllProjectFolderNamesListPosition >= 0 && _archive.ArchiveProjectFolderPaths.Length != 0 && _archive.ArchiveProjectFolderPaths[_header.AllProjectFolderNamesListPosition] != null)
             {

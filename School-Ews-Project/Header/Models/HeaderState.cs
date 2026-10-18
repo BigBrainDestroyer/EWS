@@ -80,8 +80,8 @@ public class HeaderState
     public Dictionary<DrawHeaderObjectNames, bool> HeaderObjectAvailable { get; set; } =
         new Dictionary<DrawHeaderObjectNames, bool>() { 
             {DrawHeaderObjectNames.RunButton, true},
-            {DrawHeaderObjectNames.BuildButton, false},
-            {DrawHeaderObjectNames.TerminalRequest, false},
+            {DrawHeaderObjectNames.BuildButton, true},
+            {DrawHeaderObjectNames.TerminalRequest, true},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
             {DrawHeaderObjectNames.BuildMaze, false},
             {DrawHeaderObjectNames.MazeSize, false},
