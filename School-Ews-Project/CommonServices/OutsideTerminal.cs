@@ -21,63 +21,44 @@ public class OutsideTerminal
 
         var _terminal = _state.common.terminal;
 
-        //requestedFolderPath = UpdateRequestedFolderPathToOsSystemRequirements(requestedFolderPath);
-
-        string projectsDllReferenceFileLocation = UpdateRequestedDllPathToOsSystemRequirements(_terminal.ProjectsDllReferenceFileLocation);
+        TerminalCommands commands = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalCommands : _terminal.WindowsTerminalCommands;
+        
+        string projectsDllReferenceFileLocation = UpdateRequestedPathToOsSystemRequirements(_terminal.ProjectsDllReferenceFileLocation);
 
         ProcessStartInfo terminalParams = new ProcessStartInfo();
 
-        terminalParams.FileName = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalAppName : _terminal.WindowsTerminalAppName;
+        terminalParams.FileName = commands.TerminalAppName;
         terminalParams.WorkingDirectory = requestedFolderPath;
         terminalParams.RedirectStandardInput = true;
-
+        terminalParams.CreateNoWindow = true;
+        
         Process terminal = Process.Start(terminalParams) ?? throw new ArgumentNullException(nameof(terminal));
 
         if (terminal != null)
         {
-            terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath);
-            //terminal.StandardInput.WriteLine($"{_terminal.CommandRequestedPath} {requestedFolderPath}");
-            terminal.StandardInput.WriteLine(_terminal.CommandNewConsole);
-            terminal.StandardInput.WriteLine(_terminal.CommandNewReference + " " + projectsDllReferenceFileLocation);
-            terminal.StandardInput.WriteLine(_terminal.CommandCloseTerminal);
+            terminal.StandardInput.WriteLine(commands.NewConsole);
+            terminal.StandardInput.WriteLine(commands.NewReference + projectsDllReferenceFileLocation);
+            terminal.StandardInput.WriteLine(commands.CloseTerminal);
             terminal.Dispose();
         }
 
         return;
     }
 
-    private string UpdateRequestedFolderPathToOsSystemRequirements(string requestedFolderPath)
+    private string UpdateRequestedPathToOsSystemRequirements(string requestedPath)
     {
         if (App.directoryInfo.OsSystem == OsSystem.Linux)
         {
-            requestedFolderPath = requestedFolderPath.Replace("'", "'\\''");
+            requestedPath = requestedPath.Replace("'", "'\\''");
 
-            requestedFolderPath = "'" + requestedFolderPath + "'";
+            requestedPath = "'" + requestedPath + "'";
         }
         else if (App.directoryInfo.OsSystem == OsSystem.Windows)
         {
-            requestedFolderPath = "\"" + requestedFolderPath + "\"";
-
-            requestedFolderPath = "/d" + " " + requestedFolderPath;
+            requestedPath = "\"" + requestedPath + "\"";
         }
 
-        return requestedFolderPath;
-    }
-
-    private string UpdateRequestedDllPathToOsSystemRequirements(string requestedDllPath)
-    {
-        if (App.directoryInfo.OsSystem == OsSystem.Linux)
-        {
-            requestedDllPath = requestedDllPath.Replace("'", "'\\''");
-
-            requestedDllPath = "'" + requestedDllPath + "'";
-        }
-        else if (App.directoryInfo.OsSystem == OsSystem.Windows)
-        {
-            requestedDllPath = "\"" + requestedDllPath + "\"";
-        }
-        
-        return requestedDllPath;
+        return requestedPath;
     }
 
     public void RunAlgoProject(ShareData.OsSystem osSystem, string requestedFolderPath)
@@ -90,48 +71,45 @@ public class OutsideTerminal
         var _terminal = _state.common.terminal;
         var _play = _state.playMaze;
 
+        TerminalCommands commands = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalCommands : _terminal.WindowsTerminalCommands;
+        
         ProcessStartInfo terminalParams = new ProcessStartInfo();
 
-        terminalParams.FileName = (osSystem == ShareData.OsSystem.Linux) ? _terminal.LinuxTerminalAppName : _terminal.WindowsTerminalAppName;
+        terminalParams.FileName = commands.TerminalAppName;
         terminalParams.WorkingDirectory = requestedFolderPath;
-        terminalParams.RedirectStandardError = true;
         terminalParams.RedirectStandardInput = true;
-        terminalParams.RedirectStandardOutput = true;
-        terminalParams.CreateNoWindow = false;
-
-        terminalParams.ArgumentList.Add(_terminal.StartTerminal);
-
-        _play.IsAlgoRunning = true;
+        terminalParams.CreateNoWindow = true;
 
         Process terminal = Process.Start(terminalParams) ?? throw new ArgumentNullException(nameof(terminal));
 
         if (terminal != null)
         {
-            terminal.StandardInput.WriteLine(_terminal.StartTerminal);
-            terminal.StandardInput.WriteLine(_terminal.CommandRequestedPath);
-            terminal.StandardInput.WriteLine($"{_terminal.CommandRequestedPath} {requestedFolderPath}");
-            terminal.StandardInput.WriteLine(_terminal.CommandNewConsole);
-            terminal.StandardInput.WriteLine(_terminal.CommandNewReference + " " + _terminal.CommandRunProjectRelease);
-            terminal.StandardInput.WriteLine("exec bash");
+            terminal.StandardInput.WriteLine(commands.RunProject);
+            terminal.StandardInput.WriteLine(commands.CloseTerminal);
 
-            RunningProject(terminal, _play.IsAlgoRunning);
+            _play.IsAlgoRunning = true;
+            
+            RunningProject(terminal);
         }
 
         return;
     }
 
-    async Task RunningProject(Process terminal, bool isAlgoRunning)
+    async Task RunningProject(Process terminal)
     {
         var _terminal = _state.common.terminal;
+        var _play = _state.playMaze;
         
-        while(terminal.HasExited)
+        while(!terminal.HasExited)
         {   
-            
             await Task.Delay(200);
+            Console.WriteLine("AlgoIsRunning");
         }
+
+        Console.WriteLine("AlgoIsDone");
 
         terminal.Dispose();
 
-        isAlgoRunning = false;
+        _play.IsAlgoRunning = false;
     }
 }

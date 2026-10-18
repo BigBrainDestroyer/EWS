@@ -50,7 +50,7 @@ public class RunButtonCore
         Console.WriteLine(!_generator.BuildingMazes);
         Console.WriteLine(!_generator.MazesAreDone);
         Console.WriteLine(_archive.ArchiveProjectFolderPaths.Length > 0);
-
+        
         if (!_play.IsAlgoProgramPaused && !_play.IsAlgoRunning && !_generator.BuildingMazes && !_generator.MazesAreDone && _archive.ArchiveProjectFolderPaths.Length > 0)
         {
             if (_header.AllProjectFolderNamesListPosition < _archive.ArchiveProjectFolderPaths.Length && _header.AllProjectFolderNamesListPosition >= 0 && _archive.ArchiveProjectFolderPaths.Length != 0 && _archive.ArchiveProjectFolderPaths[_header.AllProjectFolderNamesListPosition] != null)
