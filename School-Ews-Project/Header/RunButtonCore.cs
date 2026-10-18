@@ -14,7 +14,7 @@ public class RunButtonCore
         _terminal = new OutsideTerminal(_state);
     }
 
-    public void ButtonCore()
+    public void UpdateButtonAvailability()
     {
         var _play = _state.playMaze;
         var _generator = _state.maze.generator;

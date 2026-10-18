@@ -83,7 +83,7 @@ public class HeaderState
             {DrawHeaderObjectNames.BuildButton, true},
             {DrawHeaderObjectNames.TerminalRequest, true},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
-            {DrawHeaderObjectNames.BuildMaze, false},
+            {DrawHeaderObjectNames.BuildMaze, true},
             {DrawHeaderObjectNames.MazeSize, false},
             {DrawHeaderObjectNames.BatchSize, true},
             {DrawHeaderObjectNames.PlayBackSpeed, false},

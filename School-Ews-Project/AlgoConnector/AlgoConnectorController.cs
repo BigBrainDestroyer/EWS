@@ -8,12 +8,10 @@ namespace Program;
 public class AlgoConnectorController
 {
     private readonly AppState _state;
-    private readonly MazeGenerator _generate;
 
     public AlgoConnectorController(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
-        _generate = new MazeGenerator(_state);
     }
 
     public void Controller()
@@ -40,7 +38,7 @@ public class AlgoConnectorController
         }
         if(Raylib.IsKeyPressed(KeyboardKey.LeftAlt))
         {
-            _generate.Generator();
+            //_generate.Generator();
         }
 
     }
@@ -70,7 +68,7 @@ public class AlgoConnectorController
             _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
 
             _mazeGenerator.BuildingMazes = false;
-            
+            _mazeGenerator.MazesAreDone = false;
 
             Console.WriteLine("Done");
         }
@@ -93,7 +91,6 @@ public class AlgoConnectorController
                 ShareData.App.directoryInfo.ShareMazeDataFilePath,
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
             );
-            _mazeGenerator.MazesAreDone = false;
 
             Console.WriteLine("Done Running");
         }

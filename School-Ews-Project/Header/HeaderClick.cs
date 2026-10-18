@@ -9,6 +9,7 @@ public class HeaderClick
     private readonly RunButtonCore _runButton;
     private readonly BuildButtonCore _buildButton;
     private readonly TerminalButtonCore _terminalButton;
+    private readonly BuildMazeButtonCore _buildMaze;
 
     public HeaderClick(AppState state)
     {
@@ -17,6 +18,7 @@ public class HeaderClick
         _runButton = new RunButtonCore(_state);
         _buildButton = new BuildButtonCore(_state);
         _terminalButton = new TerminalButtonCore(_state);
+        _buildMaze = new BuildMazeButtonCore(_state);
     }
 
     public void Click()
@@ -137,9 +139,13 @@ public class HeaderClick
         {
             _buildButton.ButtonCLick();
         }
-        else if(objectName == DrawHeaderObjectNames.TerminalRequest)
+        else if(objectName == DrawHeaderObjectNames.TerminalRequest && isAvailable)
         {
             _terminalButton.ButtonCLick();
+        }
+        else if(objectName == DrawHeaderObjectNames.BuildMaze && isAvailable)
+        {
+            _buildMaze.ButtonClick();
         }
     }
 }

@@ -8,6 +8,7 @@ public class HeaderController
     private readonly HeaderClick _click;
     private readonly UpdateRunFolder _runFolder;
     private readonly RunButtonCore _runButton;
+    private readonly BuildMazeButtonCore _buildMaze;
 
     public HeaderController(AppState state)
     {
@@ -16,6 +17,7 @@ public class HeaderController
         _click = new HeaderClick(_state);
         _runFolder = new UpdateRunFolder(_state);
         _runButton = new RunButtonCore(_state);
+        _buildMaze = new BuildMazeButtonCore(_state);
     }
 
     public void Controller()
@@ -26,6 +28,8 @@ public class HeaderController
 
         _click.Click();
 
-        _runButton.ButtonCore();
+        _runButton.UpdateButtonAvailability();
+
+        _buildMaze.UpdateButtonAvailability();
     }
 }

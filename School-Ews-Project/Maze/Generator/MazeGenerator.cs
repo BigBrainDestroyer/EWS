@@ -19,10 +19,10 @@ public class MazeGenerator
         var _generator = _state.maze.generator;
         var _play = _state.playMaze;
 
-        //if(_generator.BuildingMazes || _play.IsAlgoRunning|| !_play.IsAlgoProgramPauzed)
-        //{
-        //    return;
-        //}
+        if(_generator.BuildingMazes || _play.IsAlgoRunning|| !_play.IsAlgoProgramPaused)
+        {
+            return;
+        }
 
         _generator.AllMazes = new Maze[_generator.MazeBachSize];
         _generator.MazeBeginPoints = new IVector2[_generator.MazeBachSize];
@@ -48,7 +48,10 @@ public class MazeGenerator
                     MakeMaze(
                         _generator.MazeSize,
                         _generator.MazeSeedBach[i]
-                    );     
+                    );   
+                
+                  
+                    
             });
 
             _generator.MazesAreDone = true;
