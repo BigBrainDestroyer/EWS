@@ -26,20 +26,20 @@ public class AlgoConnectorController
         
         UpdateShareAlgoData();
 
-        //if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
-        //{
-        //    _state.playMaze.IsAlgoProgramPaused = !_state.playMaze.IsAlgoProgramPaused;
+        if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
+        {
+            _state.playMaze.IsAlgoProgramPaused = !_state.playMaze.IsAlgoProgramPaused;
 
-        //    _state.common.time.MazeRunStopwatch =
-        //        new MazeRunStopwatch(
-        //            _state.common.time.MazeRunStopwatch.StartTime,
-        //            _state.common.time.MazeRunStopwatch.TotalTime,
-        //            _state.common.time.MazeRunStopwatch.MazeStopwatch,
-        //            1,
-        //            true,
-        //            _state.common.time.MazeRunStopwatch.ResetStopwatch
-        //        );
-        //}
+            _state.common.time.MazeRunStopwatch =
+                new MazeRunStopwatch(
+                    _state.common.time.MazeRunStopwatch.StartTime,
+                    _state.common.time.MazeRunStopwatch.TotalTime,
+                    _state.common.time.MazeRunStopwatch.MazeStopwatch,
+                    1,
+                    true,
+                    _state.common.time.MazeRunStopwatch.ResetStopwatch
+                );
+        }
     }
 
     private void UpdateShareFiles()

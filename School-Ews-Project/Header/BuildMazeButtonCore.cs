@@ -1,7 +1,4 @@
 
-using Raylib_cs;
-using ShareData;
-
 namespace Program;
 
 public class BuildMazeButtonCore

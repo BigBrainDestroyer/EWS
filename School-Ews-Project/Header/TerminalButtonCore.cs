@@ -12,6 +12,21 @@ public class TerminalButtonCore
         _terminal = new OutsideTerminal(_state);
     }
 
+    public void UpdateButtonAvailability()
+    {
+        var _header = _state.HeaderState;
+        var _archive = _state.archive;
+
+        if (_archive.ArchiveProjectFolderPaths.Length > 0)
+        {
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.TerminalRequest] = true;
+        }
+        else
+        {
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.TerminalRequest] = false;
+        }
+    }
+    
     public void ButtonCLick()
     {
         var _archive = _state.archive;

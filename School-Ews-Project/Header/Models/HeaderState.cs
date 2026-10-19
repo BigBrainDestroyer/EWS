@@ -79,13 +79,13 @@ public class HeaderState
 
     public Dictionary<DrawHeaderObjectNames, bool> HeaderObjectAvailable { get; set; } =
         new Dictionary<DrawHeaderObjectNames, bool>() { 
-            {DrawHeaderObjectNames.RunButton, true},
-            {DrawHeaderObjectNames.BuildButton, true},
-            {DrawHeaderObjectNames.TerminalRequest, true},
+            {DrawHeaderObjectNames.RunButton, false},
+            {DrawHeaderObjectNames.BuildButton, false},
+            {DrawHeaderObjectNames.TerminalRequest, false},
             {DrawHeaderObjectNames.StartStopAlgoPlayBack, false},
-            {DrawHeaderObjectNames.BuildMaze, true},
+            {DrawHeaderObjectNames.BuildMaze, false},
             {DrawHeaderObjectNames.MazeSize, false},
-            {DrawHeaderObjectNames.BatchSize, true},
+            {DrawHeaderObjectNames.BatchSize, false},
             {DrawHeaderObjectNames.PlayBackSpeed, false},
             {DrawHeaderObjectNames.RunFolderName, false}  
         };
