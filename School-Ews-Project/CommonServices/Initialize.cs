@@ -3,6 +3,7 @@ using ShareData;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Diagnostics;
 
 namespace Program;
 
@@ -142,7 +143,7 @@ public class Initialize
 
         if(!File.Exists(dllCsprojPath))
         {
-            Console.WriteLine("Missing Library DLL Project Folder In EWS Folder");
+            Debug.WriteLine("Missing Library DLL Project Folder");
 
             Environment.Exit(0);
         }

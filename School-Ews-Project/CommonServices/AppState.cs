@@ -1,4 +1,3 @@
-using ShareData;
 
 namespace Program;
 
