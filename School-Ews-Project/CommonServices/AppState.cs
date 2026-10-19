@@ -10,5 +10,5 @@ public class AppState
     public MazeState maze { get; set; } = new MazeState();
     public ArchiveState archive { get; set; } = new ArchiveState();
     public PlayMaze playMaze { get; set; } = new PlayMaze();
-    public ShareData.ShareAlgoData shareAlgoData { get; set; } = new ShareData.ShareAlgoData();
+    public ShareData.ShareAlgoData shareAlgoData = new ShareData.ShareAlgoData();
 }

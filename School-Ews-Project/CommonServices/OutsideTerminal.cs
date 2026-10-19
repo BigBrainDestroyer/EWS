@@ -110,7 +110,7 @@ public class OutsideTerminal
 
         terminal.Dispose();
 
-        _play.IsAlgoRunning = false;
+        _play.IsAlgoRunningDone = true;
     }
 
     public void BuildAlgoProject(ShareData.OsSystem osSystem, string requestedFolderPath)

@@ -16,15 +16,23 @@ public class AlgoConnectorController
 
     public void Controller()
     {
-        UpdateNewMazeToShareAlgoFile();
+        var _mazeGenerator = _state.maze.generator;
+        var _play = _state.playMaze;
+
+        if (_mazeGenerator.MazesAreDone && !_play.WritingMazeDataToFile)
+        {
+            _play.WritingMazeDataToFile = true;
+
+            UpdateNewMazeToShareAlgoFile();
+        }
 
         RunAlgo();
 
         if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
         {
             _state.playMaze.IsAlgoProgramPaused = !_state.playMaze.IsAlgoProgramPaused;
-            
-            _state.common.time.MazeRunStopwatch = 
+
+            _state.common.time.MazeRunStopwatch =
                 new MazeRunStopwatch(
                     _state.common.time.MazeRunStopwatch.StartTime,
                     _state.common.time.MazeRunStopwatch.TotalTime,
@@ -33,53 +41,61 @@ public class AlgoConnectorController
                     true,
                     _state.common.time.MazeRunStopwatch.ResetStopwatch
                 );
-
-            Console.WriteLine("kasjdf;lja s;fjas;dlfja;lsdjfa;l dsjf;lasjdf;lk asjfklasjf;klasj dflkjasdf jasfjasldkfjasjff");
-        }
-        if(Raylib.IsKeyPressed(KeyboardKey.LeftAlt))
-        {
-            //_generate.Generator();
         }
 
     }
 
-    private void UpdateNewMazeToShareAlgoFile()
+    private async Task UpdateNewMazeToShareAlgoFile()
     {
         var _mazeGenerator = _state.maze.generator;
         var _shareAlgoData = _state.shareAlgoData;
+        var _play = _state.playMaze;
 
-        if(_mazeGenerator.MazesAreDone)
+        var shareObj = new ShareAlgoData();
+
+        shareObj.CommonDataHistory = new CommonDataHistory();
+        shareObj.AllMazes = _mazeGenerator.AllMazes;
+        shareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
+        shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
+
+        bool fileHasBeenWritten = false;
+
+        while(!fileHasBeenWritten)
         {
-            var shareObj = new ShareAlgoData();
+            try
+            {
+                File.WriteAllText(
+                    ShareData.App.directoryInfo.ShareAlgoDataFilePath,
+                    JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
+                );
 
-            shareObj.CommonDataHistory = new CommonDataHistory();
-            shareObj.AllMazes = _mazeGenerator.AllMazes;
-            shareObj.MazeBeginPoints = _mazeGenerator.MazeBeginPoints;
-            shareObj.MazeEndPoints = _mazeGenerator.MazeEndPoints;
-
-            File.WriteAllText(
-                ShareData.App.directoryInfo.ShareAlgoDataFilePath,
-                JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
-            );
-
-            _shareAlgoData.CommonDataHistory = new CommonDataHistory();
-            _shareAlgoData.AllMazes = shareObj.AllMazes;
-            _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
-            _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
-
-            _mazeGenerator.BuildingMazes = false;
-            _mazeGenerator.MazesAreDone = false;
-
-            Console.WriteLine("Done");
+                fileHasBeenWritten = true;
+            }
+            catch
+            {
+                await Task.Delay(200);
+            }
         }
+
+        _shareAlgoData.CommonDataHistory = new CommonDataHistory();
+        _shareAlgoData.AllMazes = shareObj.AllMazes;
+        _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
+        _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
+
+        
+        _mazeGenerator.BuildingMazes = false;
+        _mazeGenerator.MazesAreDone = false;
+        _play.WritingMazeDataToFile = false;
+
+        Console.WriteLine("Done");
     }
-    
+
     private void RunAlgo()
     {
         var _play = _state.playMaze;
         var _mazeGenerator = _state.maze.generator;
-        
-        if(_mazeGenerator.MazesAreDone)//net voor runnign algo
+
+        if(_play.IsAlgoRunningDone)
         {
             var shareObj = new ShareMazeData();
 
@@ -92,7 +108,12 @@ public class AlgoConnectorController
                 JsonSerializer.Serialize(shareObj, ShareData.Json.JsonSerializeSettings())
             );
 
+            //Hier checks over of het wel legale data is
+
             Console.WriteLine("Done Running");
+
+            _play.IsAlgoRunningDone = false;
+            _play.IsAlgoRunning = false;
         }
     }
 }

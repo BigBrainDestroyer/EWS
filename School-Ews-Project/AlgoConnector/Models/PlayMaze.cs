@@ -10,6 +10,12 @@ public class PlayMaze
     public volatile bool IsAlgoProgramPaused = true;
 
     public volatile bool IsAlgoRunning = false;
-    
+
+    public volatile bool IsAlgoRunningDone = false;
+
     public volatile bool IsAlgoLoaded = false;
+
+    public volatile bool WritingMazeDataToFile = false;
+
+    public volatile bool WritingAlgoData
 }
