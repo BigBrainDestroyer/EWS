@@ -6,18 +6,18 @@ namespace ShareData;
 
 public class ShareAlgoData
 {
-    public volatile CommonDataHistory CommonDataHistory = new CommonDataHistory();
+    public CommonDataHistory CommonDataHistory { get; set; } = new CommonDataHistory();
 
-    public volatile Maze[] AllMazes = new Maze[0];
+    public Maze[] AllMazes { get; set; } = new Maze[0];
 
-    public volatile IVector2[] MazeEndPoints = new IVector2[0];
+    public IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
 
-    public volatile IVector2[] MazeBeginPoints = new IVector2[0];
+    public IVector2[] MazeBeginPoints { get; set; } = new IVector2[0];
 }
 
 public class CommonDataHistory
 {
-    public Double ProjectTotalSeconds = 0;
+    public Double ProjectTotalSeconds { get; set; } = 0;
     public List<CommonUsageDataHistory> CommonUsageDataHistory  { get; set; } = new List<CommonUsageDataHistory>();
     public List<SlotDataVariables> SlotSearchedHistory { get; set; } = new List<SlotDataVariables>();
     public List<MazeFinalPath> MazeFinalPaths { get; set; } = new List<MazeFinalPath>();
