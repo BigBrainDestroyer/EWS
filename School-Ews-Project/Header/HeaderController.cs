@@ -55,5 +55,8 @@ public class HeaderController
         _buildButton.UpdateButtonAvailability();
 
         _terminalButton.UpdateButtonAvailability();
+
+        Console.WriteLine(_state.common.time.MazeRunStopwatch.TotalTime);
+        Console.WriteLine(_state.common.time.MazeRunStopwatch.MazeStopwatch);
     }
 }

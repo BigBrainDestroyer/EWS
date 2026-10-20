@@ -48,19 +48,34 @@ public class StartStopAlgoPlayBackButtonCore
         var _play = _state.playMaze;
         var _generator = _state.maze.generator;
         var _header = _state.HeaderState;
-        
+        var _time = _state.common.time;
+
         if(_play.IsAlgoLoaded && !_play.IsAlgoRunning && !_generator.BuildingMazes && !_generator.MazesAreDone)
         {
             _play.IsAlgoProgramPaused = !_play.IsAlgoProgramPaused;
 
-            _state.common.time.MazeRunStopwatch =
+            double currentPausedTime = 0;
+            double currentLastPausedTime = 0;
+
+            if(_play.IsAlgoProgramPaused)
+            {
+                currentLastPausedTime = _time.Stopwatch.Elapsed.TotalSeconds;
+            }
+            else if(_time.MazeRunStopwatch.LastTimePaused != 0)
+            {
+                currentPausedTime = _time.Stopwatch.Elapsed.TotalSeconds - _time.MazeRunStopwatch.LastTimePaused;
+            }
+            
+            _time.MazeRunStopwatch =
                 new MazeRunStopwatch(
-                    _state.common.time.MazeRunStopwatch.StartTime,
+                    _time.MazeRunStopwatch.StartTime,
                     _state.common.time.MazeRunStopwatch.TotalTime,
-                    _state.common.time.MazeRunStopwatch.MazeStopwatch,
+                    _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
+                    currentLastPausedTime,
+                    _time.MazeRunStopwatch.MazeStopwatch,
                     _play.PlaySpeed,
                     !_play.IsAlgoProgramPaused,
-                    _state.common.time.MazeRunStopwatch.ResetStopwatch
+                    _time.MazeRunStopwatch.ResetStopwatch
                 );
             
             if(_play.IsAlgoProgramPaused)

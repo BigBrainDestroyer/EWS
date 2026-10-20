@@ -35,15 +35,19 @@ public struct MazeRunStopwatch
 {
     public double StartTime;
     public double TotalTime;
+    public double TotalPausedTime;
+    public double LastTimePaused;
     public double MazeStopwatch;
-    public float PlaySpeed;
+    public double PlaySpeed;
     public bool UpdateStopwatch;
     public bool ResetStopwatch;
 
-    public MazeRunStopwatch(double startTime, double totalTime, double mazeStopWatch, float playSpeed, bool updateStopWatch, bool resetStopwatch)
+    public MazeRunStopwatch(double startTime, double totalTime, double totalPausedTime, double lastTimePaused, double mazeStopWatch, double playSpeed, bool updateStopWatch, bool resetStopwatch)
     {
         StartTime = startTime;
         TotalTime = totalTime;
+        TotalPausedTime = totalPausedTime;
+        LastTimePaused = lastTimePaused;
         MazeStopwatch = mazeStopWatch;
         PlaySpeed = playSpeed;
         UpdateStopwatch = updateStopWatch;
@@ -67,5 +71,5 @@ public class TimeState
     
     public FileChangeTimer FileChangeTimer { get; set; } = new FileChangeTimer(0, 0, 0.65, false);
 
-    public MazeRunStopwatch MazeRunStopwatch { get; set; } = new MazeRunStopwatch(0, 0, 0, 0, false, false);
+    public MazeRunStopwatch MazeRunStopwatch { get; set; } = new MazeRunStopwatch(0, 0, 0, 0, 0, 0, false, false);
 }

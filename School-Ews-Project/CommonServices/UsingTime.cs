@@ -73,7 +73,9 @@ public static class CalculateUsingTime
                 new MazeRunStopwatch(
                     0, 
                     0, 
+                    0,
                     0, 
+                    0,
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     false
@@ -86,7 +88,9 @@ public static class CalculateUsingTime
                 new MazeRunStopwatch(
                     currentStopwatch.Elapsed.TotalSeconds, 
                     0, 
-                    0, 
+                    0,
+                    0,
+                    0,
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
@@ -97,8 +101,10 @@ public static class CalculateUsingTime
             currentMazeRunStopwatch = 
                 new MazeRunStopwatch(
                     currentMazeRunStopwatch.StartTime, 
-                    currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime, 
-                    (currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime) * currentMazeRunStopwatch.PlaySpeed, 
+                    currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime, 
+                    currentMazeRunStopwatch.TotalPausedTime,
+                    currentMazeRunStopwatch.LastTimePaused,
+                    currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * currentMazeRunStopwatch.PlaySpeed), 
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
