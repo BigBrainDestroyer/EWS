@@ -158,6 +158,18 @@ public static class AlgoSandbox
         else
         {
             App.commonData.AllMazesSolved = true;
+
+            double currentTime = App.commonData.ProjectStopWatch.Elapsed.TotalSeconds;
+
+            while(true)
+            {
+                if(App.commonData.ProjectStopWatch.Elapsed.TotalSeconds >= currentTime + 10)
+                {
+                    EndProgram();
+                }
+
+                Thread.Sleep(10);
+            }
         }
     }
 }

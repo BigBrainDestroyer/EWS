@@ -3,10 +3,6 @@ namespace ShareData;
 
 public static class NavigatorHelper
 {
-    //Je kan Doel einde van de maze krijgen 
-    //Nieuwe positie aanvragen als legaal door
-    //Je omgeving data krijgen 
-
     public static void GiveCurrentMazeFinalPath(MazeFinalPath finalPath)
     {
         App.commonData.MazeFinalPaths.Add(finalPath);
