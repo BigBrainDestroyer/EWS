@@ -102,7 +102,7 @@ public class RunFolderStringSliderCore
         }
     }
 
-    public void UpdateStringSliderAvailability()
+    private void UpdateStringSliderAvailability()
     {
         var _header = _state.HeaderState;
         var _archive = _state.archive;
@@ -113,7 +113,7 @@ public class RunFolderStringSliderCore
         }
         else
         {
-            _header.HeaderObjectAvailable[DrawHeaderObjectNames.RunFolderName] = false;
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.BuildButton] = false;
         }
     }
 }

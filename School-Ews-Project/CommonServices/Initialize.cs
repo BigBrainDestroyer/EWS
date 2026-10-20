@@ -164,7 +164,8 @@ public class Initialize
     {
         var _shareAlgoData = _state.shareAlgoData;
         var _play = _state.playMaze;
-        
+        var _generator = _state.maze.generator;
+
         Debug.WriteLine("Loading ShareAlgoData");
 
         string jsonText = "";
@@ -203,11 +204,32 @@ public class Initialize
                 var shareObj = new ShareAlgoData();
 
                 shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
-                
+
                 _shareAlgoData.CommonDataHistory = shareObj.CommonDataHistory;
                 _shareAlgoData.AllMazes = shareObj.AllMazes;
                 _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
                 _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
+
+                int shareAlgoMazeSize = _shareAlgoData.AllMazes.First().UsingXToGetRightArray.Length;
+                int shareAlgoBatchSize = _shareAlgoData.AllMazes.Count();
+
+                if (shareAlgoMazeSize >= 3)
+                {
+                    _generator.MazeSize = shareAlgoMazeSize;
+                }
+                else
+                {
+                    _generator.MazeSize = 3;
+                }
+                
+                if (shareAlgoBatchSize >= 1)
+                {
+                    _generator.MazeBatchSize = shareAlgoBatchSize;
+                }
+                else
+                {
+                    _generator.MazeBatchSize = 1;
+                }
             }
         }
         catch

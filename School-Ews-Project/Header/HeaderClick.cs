@@ -11,6 +11,8 @@ public class HeaderClick
     private readonly TerminalButtonCore _terminalButton;
     private readonly BuildMazeButtonCore _buildMaze;
     private readonly StartStopAlgoPlayBackButtonCore _playBackButton;
+    private readonly MazeSizeStringSliderCore _mazeSizeStringSlider;
+    private readonly BatchSizeStringSlider _batchSizeStringSlider;
 
     public HeaderClick(AppState state)
     {
@@ -21,6 +23,8 @@ public class HeaderClick
         _terminalButton = new TerminalButtonCore(_state);
         _buildMaze = new BuildMazeButtonCore(_state);
         _playBackButton = new StartStopAlgoPlayBackButtonCore(_state);
+        _mazeSizeStringSlider = new MazeSizeStringSliderCore(_state);
+        _batchSizeStringSlider = new BatchSizeStringSlider(_state);
     }
 
     public void Click()
@@ -115,11 +119,11 @@ public class HeaderClick
     {
         if(objectName == DrawHeaderObjectNames.MazeSize && isAvailable)
         {
-            
+            _mazeSizeStringSlider.StringSliderClick(addRequest);
         }
         else if(objectName == DrawHeaderObjectNames.BatchSize && isAvailable)
         {
-            
+            _batchSizeStringSlider.StringSliderClick(addRequest);
         }
         else if(objectName == DrawHeaderObjectNames.PlayBackSpeed && isAvailable)
         {

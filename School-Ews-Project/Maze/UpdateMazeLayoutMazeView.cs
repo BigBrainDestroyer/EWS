@@ -21,7 +21,7 @@ public class UpdateMazeLayoutMazeView
 
         _layout.mazeView.MazeSlotLengths = CalculateMazeSlotPixelLength(
                 _layout.boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
-                _generator.MazeSize
+                new Vector2(_layout.mazeView.CurrentMaze.UsingYToGetRightArray.Count(), _layout.mazeView.CurrentMaze.UsingXToGetRightArray.Count())
             );
 
         (_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.AmountOfCommonDataBoxes) =

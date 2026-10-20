@@ -24,9 +24,9 @@ public class MazeGenerator
             return;
         }
 
-        _generator.AllMazes = new Maze[_generator.MazeBachSize];
-        _generator.MazeBeginPoints = new IVector2[_generator.MazeBachSize];
-        _generator.MazeEndPoints = new IVector2[_generator.MazeBachSize];
+        _generator.AllMazes = new Maze[_generator.MazeBatchSize];
+        _generator.MazeBeginPoints = new IVector2[_generator.MazeBatchSize];
+        _generator.MazeEndPoints = new IVector2[_generator.MazeBatchSize];
         _generator.MazesAreDone = false;
         _generator.BuildingMazes = true;
 
@@ -46,12 +46,9 @@ public class MazeGenerator
 
                 (_generator.AllMazes[i], _generator.MazeBeginPoints[i], _generator.MazeEndPoints[i]) =
                     MakeMaze(
-                        _generator.MazeSize,
+                        new Vector2(_generator.MazeSize, _generator.MazeSize),
                         _generator.MazeSeedBach[i]
-                    );   
-                
-                  
-                    
+                    );       
             });
 
             _generator.MazesAreDone = true;

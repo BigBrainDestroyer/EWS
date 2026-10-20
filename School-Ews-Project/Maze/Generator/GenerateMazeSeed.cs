@@ -17,8 +17,8 @@ public class GenerateMazeSeed
 
         _generator.MazeSeedBach = 
             MakeSeed(
-                _generator.MazeSize,
-                _generator.MazeBachSize
+                new Vector2(_generator.MazeSize, _generator.MazeSize),
+                _generator.MazeBatchSize
             );
     }
 

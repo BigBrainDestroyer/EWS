@@ -13,9 +13,11 @@ public class MazeGeneratorState
 
     public IVector2[] MazeEndPoints { get; set; } = new IVector2[0];
 
-    public Vector2 MazeSize { get; set; } = new Vector2(7, 7); // boxes length als 4 dan 3 breed dus -1
+    //public Vector2 MazeSize { get; set; } = new Vector2(7, 7); // boxes length als 4 dan 3 breed dus -1
 
-    public int MazeBachSize { get; set; } = 1;
+    public int MazeSize { get; set; } = 7;
+
+    public int MazeBatchSize { get; set; } = 1;
 
     //bools
     public volatile bool MazesAreDone = false;

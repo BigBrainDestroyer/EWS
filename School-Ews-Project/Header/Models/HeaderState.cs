@@ -205,7 +205,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("counter", 0, 0),
+                    new RaylibText("-1", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
@@ -266,7 +266,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("counter", 0, 0),
+                    new RaylibText("-1", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
@@ -327,7 +327,7 @@ public class HeaderState
                         new Vector2(),
                         8
                     ),
-                    new RaylibText("counter", 0, 0),
+                    new RaylibText("1", 0, 0),
                     new Vector2(),
                     new Vector2(10,4),
                     StaticVariablesInitialize.FontLilexBoldPath,
