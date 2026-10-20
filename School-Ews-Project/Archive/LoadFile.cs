@@ -26,13 +26,13 @@ public class UpdateLoadFile
 
         if(_textPanel.CurrentLoadedFile != _archive.LoadedFileDirectory)
         {
-            Console.WriteLine(_archive.LoadedFileDirectory);
+            Debug.WriteLine(_archive.LoadedFileDirectory);
 
             (_time.FileChangeTimer, _textPanel.CurrentLoadedFile) = UpdateFileText(_textPanel.PanelText, _time.FileChangeTimer, _textPanel.CurrentLoadedFile);
             
             (_textPanel.PanelText, _archive.LoadedFileDirectory) = LoadNewFile(_archive.LoadedFileDirectory);
 
-            Console.WriteLine(_textPanel.PanelText.Count());
+            Debug.WriteLine(_textPanel.PanelText.Count());
 
             (_textPanel.CursorTextPosition, _textPanel.TextGridBoxesOffSetX, _textPanel.TextGridBoxesOffSetY) = ResetAllPanelTextViewParameters();
 
@@ -84,7 +84,7 @@ public class UpdateLoadFile
 
         if(File.Exists(requestedDirectoryDirectory))
         {
-            Console.WriteLine("LoadedFileUpdate");
+            Debug.WriteLine("LoadedFileUpdate");
             File.WriteAllLines(requestedDirectoryDirectory, panelText);
         }
         else

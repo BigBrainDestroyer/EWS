@@ -1,7 +1,6 @@
 using ShareData;
 using Raylib_cs;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Diagnostics;
 
 
@@ -25,21 +24,6 @@ public class AlgoConnectorController
         UpdateShareFiles();
         
         UpdateShareAlgoData();
-
-        if(Raylib.IsKeyPressed(KeyboardKey.RightAlt))
-        {
-            _state.playMaze.IsAlgoProgramPaused = !_state.playMaze.IsAlgoProgramPaused;
-
-            _state.common.time.MazeRunStopwatch =
-                new MazeRunStopwatch(
-                    _state.common.time.MazeRunStopwatch.StartTime,
-                    _state.common.time.MazeRunStopwatch.TotalTime,
-                    _state.common.time.MazeRunStopwatch.MazeStopwatch,
-                    1,
-                    true,
-                    _state.common.time.MazeRunStopwatch.ResetStopwatch
-                );
-        }
     }
 
     private void UpdateShareFiles()
@@ -59,14 +43,26 @@ public class AlgoConnectorController
         //reset params
         if(_play.UpdatedNewMazeToShareAlgoFile && _play.UpdatedNewMazeToShareMazeFile)
         {
+            _play.IsAlgoLoaded = false;
+
             _mazeGenerator.MazesAreDone = false;
             _mazeGenerator.BuildingMazes = false;
-
+            
             _play.UpdatedNewMazeToShareAlgoFile = false;
             _play.UpdatedNewMazeToShareMazeFile = false;
 
+            ResetAlgoRunParams();
+
             Debug.WriteLine("Updating ShareFiles Is SuccessFull");
         }
+    }
+
+    private void ResetAlgoRunParams()
+    {
+        var _play = _state.playMaze;
+
+        _play.MazeListPosition = 0;
+        _play.SlotHistoryListPosition = 0;
     }
 
     private void UpdateNewMazeToShareAlgoFile()
@@ -152,7 +148,7 @@ public class AlgoConnectorController
     private void UpdateShareAlgoData()
     {
         var _play = _state.playMaze;
-        
+
         if(!_play.IsAlgoRunningDone)
         {
             return;
@@ -165,10 +161,10 @@ public class AlgoConnectorController
         string jsonText = "";
         
         try
-        {
-            Debug.WriteLine("Reading ShareAlgoData File Is SuccessFull");
-            
+        {            
             jsonText = File.ReadAllText(ShareData.App.directoryInfo.ShareAlgoDataFilePath);
+            
+            Debug.WriteLine("Reading ShareAlgoData File Is SuccessFull");
         }   
         catch
         {
@@ -181,8 +177,8 @@ public class AlgoConnectorController
         {
             Debug.WriteLine("AlgoShareData File Is Corrupt");
 
-            _play.IsAlgoRunningDone = false;
-            _play.IsAlgoRunning = false;
+            UpdateAlgoRunningState();
+            
             _play.IsAlgoLoaded = false;
 
             return;
@@ -210,26 +206,24 @@ public class AlgoConnectorController
         {
             Debug.WriteLine("AlgoShareData File Is Corrupt");
 
-            _play.IsAlgoRunningDone = false;
-            _play.IsAlgoRunning = false;
+            UpdateAlgoRunningState();
+            
             _play.IsAlgoLoaded = false;
 
             return;
         }
 
-
-        //UITGEBRIJDE Checks HIER
-        if(_shareAlgoData.CommonDataHistory.ProjectTotalSeconds != 0)
-        {            
-            _play.IsAlgoLoaded = true;
-        }
-        else
-        {
-            _play.IsAlgoLoaded = false;
-        }
+        _play.IsAlgoLoaded = IsShareAlgoDataLegal.Check(_shareAlgoData);
 
         Debug.WriteLine($"IsAlgoLoaded: {_play.IsAlgoLoaded}");
 
+        UpdateAlgoRunningState();
+    }
+
+    private void UpdateAlgoRunningState()
+    {
+        var _play = _state.playMaze;
+        
         _play.IsAlgoRunningDone = false;
         _play.IsAlgoRunning = false;
     }

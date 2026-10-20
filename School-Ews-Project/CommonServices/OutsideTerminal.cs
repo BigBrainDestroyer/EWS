@@ -103,10 +103,10 @@ public class OutsideTerminal
         while(!terminal.HasExited)
         {   
             await Task.Delay(200);
-            Console.WriteLine("AlgoIsRunning");
+            Debug.WriteLine("AlgoIsRunning");
         }
 
-        Console.WriteLine("AlgoIsDone");
+        Debug.WriteLine("AlgoIsDone");
 
         terminal.Dispose();
 

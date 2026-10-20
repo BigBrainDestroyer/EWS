@@ -164,64 +164,67 @@ public class Initialize
     {
         var _shareAlgoData = _state.shareAlgoData;
         var _play = _state.playMaze;
-
-        bool stop = false;
+        
+        Debug.WriteLine("Loading ShareAlgoData");
 
         string jsonText = "";
-
-        while(stop == false)
+        
+        try
+        {   
+            jsonText = File.ReadAllText(ShareData.App.directoryInfo.ShareAlgoDataFilePath);
+            
+            Debug.WriteLine("Reading ShareAlgoData File Is SuccessFull");
+        }   
+        catch
         {
-            try
-            {
-                jsonText = File.ReadAllText(ShareData.App.directoryInfo.ShareAlgoDataFilePath);
-
-                if(string.IsNullOrWhiteSpace(jsonText))
-                {
-                    jsonText = "";
-                }
-                else
-                {
-                    if (JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings()) != null)
-                    {
-                        var shareObj = new ShareAlgoData();
-    
-                        shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
-                        
-                        _shareAlgoData.CommonDataHistory = shareObj.CommonDataHistory;
-                        _shareAlgoData.AllMazes = shareObj.AllMazes;
-                        _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
-                        _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
-                    }
-                    else
-                    {
-                        _shareAlgoData = new ShareAlgoData();
-                    }
-                }
-                
-                stop = true;
-            }
-            catch
-            {
-                Thread.Sleep(100);
-            }
+            Debug.WriteLine("Reading ShareAlgoData File Is UnSuccessFull");
+            
+            return;
         }
 
-        Console.WriteLine("JA;LDFJA;LJDF;LASJDF;LAJSD;FLasdkjfhaslkj fh;alksd jf;lasjdf;ljasd;fljasd;lkfj;alskdjf;l aksdjf;lkasjd;flkjas;dlf");
-        Console.WriteLine(_shareAlgoData.CommonDataHistory.ProjectTotalSeconds);
-
-        if(_shareAlgoData.CommonDataHistory.ProjectTotalSeconds != 0)
+        
+        if(string.IsNullOrWhiteSpace(jsonText))
         {
-            _play.IsAlgoLoaded = true;
+            Debug.WriteLine("AlgoShareData File Is Corrupt");
 
-            Console.WriteLine("JA;LDFJA;LJDF;LASJDF;LAJSD;FLasdkjfhaslkj fh;alksd jf;lasjdf;ljasd;fljasd;lkfj;alskdjf;l aksdjf;lkasjd;flkjas;dlf");
-        }
-        else
-        {
             _play.IsAlgoLoaded = false;
+
+            return;
         }
+        
+        try
+        {
+            if(JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings()) == null)
+            {   
+                _shareAlgoData = new ShareAlgoData();
+            }
+            else
+            {
+                var shareObj = new ShareAlgoData();
+
+                shareObj = JsonSerializer.Deserialize<ShareData.ShareAlgoData>(jsonText, ShareData.Json.JsonSerializeSettings());
+                
+                _shareAlgoData.CommonDataHistory = shareObj.CommonDataHistory;
+                _shareAlgoData.AllMazes = shareObj.AllMazes;
+                _shareAlgoData.MazeBeginPoints = shareObj.MazeBeginPoints;
+                _shareAlgoData.MazeEndPoints = shareObj.MazeEndPoints;
+            }
+        }
+        catch
+        {
+            Debug.WriteLine("AlgoShareData File Is Corrupt");
+
+            _play.IsAlgoLoaded = false;
+
+            return;
+        }
+
+        _play.IsAlgoLoaded = IsShareAlgoDataLegal.Check(_shareAlgoData);
+
+        Debug.WriteLine($"IsAlgoLoaded: {_play.IsAlgoLoaded}");
     }
 
-    public void FileWatcher()
+    public void FileWatchers()
     {
         var _archive = _state.archive;
 

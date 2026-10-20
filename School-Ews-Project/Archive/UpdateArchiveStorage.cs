@@ -104,10 +104,10 @@ public class UpdateArchiveStorage
 
         foreach(string key in newStorage.Keys)
         {
-            Console.WriteLine(key);
+            Debug.WriteLine(key);
             foreach(string file in newStorage[key].FolderStorage)
             {
-                Console.WriteLine(file);
+                Debug.WriteLine(file);
             }
         }
         
@@ -161,10 +161,6 @@ public class UpdateArchiveStorage
 
             _archive.ArchiveProjectFolderPaths = Directory.GetDirectories(_archive.ProjectsDataLocation);
 
-
-            Console.WriteLine("jalksdfj;asdjf;lasjdf;lkjasd;lfja;sfj ;lasdjf;lasdjf;ljasd;lfj;asdfja;sldkj");
-            Console.WriteLine(_archive.CurrentStorageDataLocation);
-            Console.WriteLine(Directory.Exists(_archive.CurrentStorageDataLocation));
 
             if(!Directory.Exists(_archive.CurrentStorageDataLocation))
             {

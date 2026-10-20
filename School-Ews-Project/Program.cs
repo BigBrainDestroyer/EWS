@@ -8,6 +8,8 @@ public class Program
 {
     public static void Main()
     {
+        Trace.Listeners.Add(new ConsoleTraceListener());
+
         var program = new Program();
         program.Window();
 
@@ -26,7 +28,7 @@ public class Program
 
         initialize.LoadShareAlgoData();
         
-        initialize.FileWatcher();
+        initialize.FileWatchers();
 
         initialize.Fonts();
 

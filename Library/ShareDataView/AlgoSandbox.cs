@@ -69,11 +69,20 @@ public static class AlgoSandbox
             App.shareMazeData.AllMazes = shareObj.AllMazes;
             App.shareMazeData.MazeBeginPoints = shareObj.MazeBeginPoints;
             App.shareMazeData.MazeEndPoints = shareObj.MazeEndPoints;
+
+            App.commonData.SlotSearchedHistory.Add(
+                new SlotDataVariables(
+                    new SlotSearchedWithTime(
+                        0,
+                        App.shareMazeData.MazeBeginPoints[0]
+                    ),
+                    false,
+                    0
+                )
+            );
         }
         else
-        {
-            Console.WriteLine("JA HIJ KOMT DAAR");
-            
+        {       
             EndProgram();
         }
     }
@@ -109,10 +118,25 @@ public static class AlgoSandbox
         ShareObj.CommonDataHistory.ProjectTotalSeconds = App.commonData.ProjectStopWatch.Elapsed.TotalSeconds;
         ShareObj.CommonDataHistory.MazeFinalPaths = App.commonData.MazeFinalPaths;
 
-        File.WriteAllText(
-            App.directoryInfo.ShareAlgoDataFilePath,
-            JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
-        );
+        bool stop = true;
+
+        while(stop)
+        {
+            try
+            {
+                File.WriteAllText(
+                    App.directoryInfo.ShareAlgoDataFilePath,
+                    JsonSerializer.Serialize(ShareObj, ShareData.Json.JsonSerializeSettings())
+                );
+
+                stop = false;
+            }
+            catch
+            {
+                Thread.Sleep(500);
+            }
+        }
+            
     }
 
     internal static void UpdateRunningMazeVariables()

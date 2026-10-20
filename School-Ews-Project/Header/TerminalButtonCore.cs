@@ -27,7 +27,7 @@ public class TerminalButtonCore
         }
     }
     
-    public void ButtonCLick()
+    public void ButtonClick()
     {
         var _archive = _state.archive;
         var _header = _state.HeaderState;

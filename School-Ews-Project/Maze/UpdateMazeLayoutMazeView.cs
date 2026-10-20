@@ -122,8 +122,6 @@ public class UpdateMazeLayoutMazeView
 
             _play.SlotHistoryListPosition = 0;
 
-            Console.WriteLine("kaljf;kasjdf;klajdf; ajdfjadl fjaldjf ajdf lajd f ");
-
             NextMaze();
 
             _time.MazeRunStopwatch =

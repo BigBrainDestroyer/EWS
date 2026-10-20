@@ -2,16 +2,16 @@ using ShareData;
 
 namespace Program;
 
-public class UpdateRunFolder
+public class RunFolderStringSliderCore
 {
     private readonly AppState _state;
 
-    public UpdateRunFolder(AppState state)
+    public RunFolderStringSliderCore(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));
     }
 
-    public void Update()
+    public void StringSliderCore()
     {
         var _header = _state.HeaderState;
         var _archive = _state.archive;
@@ -26,6 +26,8 @@ public class UpdateRunFolder
 
         _header.HeaderStringSlider[DrawHeaderObjectNames.RunFolderName].StringSliderBox.Text = 
             UpdateRunFolderNameText(_header.HeaderStringSlider[DrawHeaderObjectNames.RunFolderName].StringSliderBox.Text, _header.AllProjectFolderNames, _header.AllProjectFolderNamesListPosition);
+
+        UpdateStringSliderAvailability();
     }
 
     private (string[], int) UpdateAllProjectFolderNames(string[] projectFolderPaths, string[] allProjectFolderNames, string pathSyntax, int allProjectFolderNamesListPosition)
@@ -97,6 +99,21 @@ public class UpdateRunFolder
         else
         {
             _header.AllProjectFolderNamesListPosition += addRequest;
+        }
+    }
+
+    public void UpdateStringSliderAvailability()
+    {
+        var _header = _state.HeaderState;
+        var _archive = _state.archive;
+        
+        if (_archive.ArchiveProjectFolderPaths.Length > 0)
+        {
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.RunFolderName] = true;
+        }
+        else
+        {
+            _header.HeaderObjectAvailable[DrawHeaderObjectNames.RunFolderName] = false;
         }
     }
 }
