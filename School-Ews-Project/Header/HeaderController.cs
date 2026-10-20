@@ -14,6 +14,7 @@ public class HeaderController
     private readonly StartStopAlgoPlayBackButtonCore _playBackButton;
     private readonly MazeSizeStringSliderCore _mazeSizeStringSlider;
     private readonly BatchSizeStringSlider _batchSizeStringSlider;
+    private readonly PlayBackSpeedStringSliderCore _playBackSpeedStringSlider;
 
     public HeaderController(AppState state)
     {
@@ -28,6 +29,7 @@ public class HeaderController
         _playBackButton = new StartStopAlgoPlayBackButtonCore(_state);
         _mazeSizeStringSlider = new MazeSizeStringSliderCore(_state);
         _batchSizeStringSlider = new BatchSizeStringSlider(_state);
+        _playBackSpeedStringSlider = new PlayBackSpeedStringSliderCore(_state);
     }
 
     public void Controller()
@@ -42,6 +44,8 @@ public class HeaderController
 
         _runButton.UpdateButtonAvailability();
 
+        _playBackSpeedStringSlider.StringSliderCore();
+        
         _buildMaze.UpdateButtonAvailability();
 
         _mazeSizeStringSlider.StringSliderCore();

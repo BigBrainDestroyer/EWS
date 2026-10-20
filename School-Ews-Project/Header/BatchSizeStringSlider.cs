@@ -75,7 +75,7 @@ public class BatchSizeStringSlider
     {
         var _generator = _state.maze.generator;
         
-        if(_generator.MazeSize > 1)
+        if(_generator.MazeBatchSize > 1)
         {
             _generator.MazeBatchSize += addRequest;
         }

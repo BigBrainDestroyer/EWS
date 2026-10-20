@@ -13,6 +13,7 @@ public class HeaderClick
     private readonly StartStopAlgoPlayBackButtonCore _playBackButton;
     private readonly MazeSizeStringSliderCore _mazeSizeStringSlider;
     private readonly BatchSizeStringSlider _batchSizeStringSlider;
+    private readonly PlayBackSpeedStringSliderCore _playBackSpeedStringSlider;
 
     public HeaderClick(AppState state)
     {
@@ -25,6 +26,7 @@ public class HeaderClick
         _playBackButton = new StartStopAlgoPlayBackButtonCore(_state);
         _mazeSizeStringSlider = new MazeSizeStringSliderCore(_state);
         _batchSizeStringSlider = new BatchSizeStringSlider(_state);
+        _playBackSpeedStringSlider = new PlayBackSpeedStringSliderCore(_state);
     }
 
     public void Click()
@@ -127,7 +129,7 @@ public class HeaderClick
         }
         else if(objectName == DrawHeaderObjectNames.PlayBackSpeed && isAvailable)
         {
-            
+            _playBackSpeedStringSlider.StringSliderClick(addRequest);
         }
         else if(objectName == DrawHeaderObjectNames.RunFolderName && isAvailable)
         {

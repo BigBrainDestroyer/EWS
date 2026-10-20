@@ -7,6 +7,8 @@ public class PlayMaze
 
     public int SlotHistoryListPosition { get; set; } = 0;
 
+    public float PlaySpeed { get; set; } = 1;
+
     public volatile bool IsAlgoProgramPaused = true;
 
     public volatile bool IsAlgoRunning = false;
