@@ -16,6 +16,9 @@ public class UpdateMazeLayoutMazeView
     {
         var _generator = _state.maze.generator;
         var _layout = _state.maze.layout;
+        var _play = _state.playMaze;
+        var _time = _state.common.time;
+        var _shareAlgoData = _state.shareAlgoData;
 
         UpdateAlgoRunData();
 
@@ -24,15 +27,36 @@ public class UpdateMazeLayoutMazeView
                 new Vector2(_layout.mazeView.CurrentMaze.UsingYToGetRightArray.Count(), _layout.mazeView.CurrentMaze.UsingXToGetRightArray.Count())
             );
 
-        (_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.AmountOfCommonDataBoxes) =
-            CalculateCommonDataSingleBoxLengths(_layout.mazeView.CommonDataBoxState, _layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData]);
+        (double usagePercentageCpu, double usagePercentageGpu, double usagePercentageRamMb) = 
+            UpdateUsagePercentage(
+                _time.MazeRunStopwatch,
+                _shareAlgoData.CommonDataHistory.CommonUsageDataHistory,
+                _play.CommonUsageDataListPosition,
+                _play.IsAlgoLoaded
+            );
 
-        _layout.mazeView.CommonDataBoxPixelSpacing =
-                CalculatingCommonDataBoxLengthsPixelSpacing(_layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData], _layout.mazeView.CommonDataBoxPercentageSpacing);
+        _layout.mazeView.CurrentCommonDataInformation =
+            UpdateCurrentCommonDataInformation(
+                _layout.mazeView.CurrentCommonDataInformation,
+                _layout.mazeView.CommonDataInactiveInformation,
+                _time.MazeRunStopwatch,
+                usagePercentageCpu,
+                usagePercentageGpu,
+                usagePercentageRamMb,
+                _shareAlgoData.AllMazes.Count(),
+                _play.MazeListPosition,
+                _play.SlotHistoryListPosition,
+                _play.IsAlgoLoaded
+            );
 
-
-        _layout.mazeView.CommonDataCharHeight =
-            CalculatingCommonDataCharHeight(_layout.mazeView.CommonDataSingleBoxLengths, _layout.mazeView.CommonDataBoxPercentageSpacing, _layout.mazeView.AmountOfCommonDataBoxes);
+        _layout.mazeView.CommonDataBoxes =
+            CalculateCommonDataBox(
+                _layout.mazeView.CommonDataBoxes,
+                _layout.mazeView.CurrentCommonDataInformation,
+                _layout.mazeView.CommonDataBoxState, 
+                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.CommonData],
+                _layout.boxes.BoxPixelLengths[MazeViewBoxNames.CommonData]
+            );
     }
 
     private Vector2 CalculateMazeSlotPixelLength(Vector2 mazeBoxLengths, Vector2 mazeSize)
@@ -46,60 +70,90 @@ public class UpdateMazeLayoutMazeView
         return newSlotPixelLengths;
     }
 
-    private (Vector2, int) CalculateCommonDataSingleBoxLengths(Dictionary<CommonDataNames, bool> commonDataState, Vector2 parentBoxLengths)
+    private (double, double, double) UpdateUsagePercentage(MazeRunStopwatch currentMazeRunStopWatch, List<CommonUsageDataHistory> commonUsageDataHistory, int commonUsageDataListPosition, bool isAlgoLoaded)
+    {
+        if(!isAlgoLoaded || commonUsageDataHistory.Count() == 0) return (0, 0, 0);
+
+        for (int i = commonUsageDataListPosition; i < commonUsageDataHistory.Count(); i++)
+        {
+            if (currentMazeRunStopWatch.MazeStopwatch <= commonUsageDataHistory[i].StopWatchTime.X)
+            {
+                Console.WriteLine(i);
+                
+                commonUsageDataListPosition = i;
+                break;
+            }
+        }
+
+        return (
+            commonUsageDataHistory[commonUsageDataListPosition].UsagePercentageCpu,
+            commonUsageDataHistory[commonUsageDataListPosition].UsagePercentageGpu,
+            commonUsageDataHistory[commonUsageDataListPosition].UsagePercentageRamMb
+        );
+    }
+    
+    private Dictionary<CommonDataNames, string> UpdateCurrentCommonDataInformation(Dictionary<CommonDataNames, string> currentDataInformation, Dictionary<CommonDataNames, string> commonDataInactiveInformation, MazeRunStopwatch mazeRunStopwatch, double cpuUsage, double gpuUsage, double ramUsage, int totalBatchSize, int currentMazeNumber, int totalSlotSearched, bool isAlgoLoaded)
+    {
+        if (!isAlgoLoaded) return commonDataInactiveInformation;
+
+        currentDataInformation[CommonDataNames.State] = "Loaded";
+        currentDataInformation[CommonDataNames.CoreProcessorUsagePercentage] = $"{cpuUsage:F3}%";
+        currentDataInformation[CommonDataNames.GPU] = $"{gpuUsage:F3}%";
+        currentDataInformation[CommonDataNames.RamTotalUsage] = $"{ramUsage:F3}";
+        currentDataInformation[CommonDataNames.BatchState] = $"{currentMazeNumber + 1}/{totalBatchSize}";
+        currentDataInformation[CommonDataNames.SlotSearched] = $"{totalSlotSearched}";
+        currentDataInformation[CommonDataNames.Time] = $"{mazeRunStopwatch.MazeStopwatch:F60}";
+
+        return currentDataInformation;
+    }
+
+    private Dictionary<CommonDataNames, InformationViewer> CalculateCommonDataBox(Dictionary<CommonDataNames, InformationViewer> currentCommonDataBoxes, Dictionary<CommonDataNames, string> currentCommonDataInformation, Dictionary<CommonDataNames, bool> commonDataState, Vector2 parentBoxPixelPosition, Vector2 parentBoxPixelLengths)
     {
         CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
-        int amountOfCommonDataBoxes = 0;
+
+        Vector2 newBoxLengths =
+            new Vector2(
+                parentBoxPixelLengths.X,
+                parentBoxPixelLengths.Y / commonDataState.Values.Count(value => value)
+            );
+
+        float boxVerticalPositionIncrement = 0;
 
         foreach (CommonDataNames boxName in boxNames)
         {
             if (commonDataState[boxName] == true)
-            {
-                amountOfCommonDataBoxes += 1;
+            {   
+                currentCommonDataBoxes[boxName].InformationBox.Text = 
+                    new RaylibText(
+                        currentCommonDataInformation[boxName],
+                        currentCommonDataBoxes[boxName].InformationBox.Text.TextSize,
+                        currentCommonDataBoxes[boxName].InformationBox.Text.TextSpacing
+                    );
+
+                currentCommonDataBoxes[boxName] = 
+                    CalculateInformationViewer.Calculate(
+                        currentCommonDataBoxes[boxName], 
+                        new Box(
+                            new Vector2(
+                                parentBoxPixelPosition.X, 
+                                parentBoxPixelPosition.Y + boxVerticalPositionIncrement
+                            ),
+                            newBoxLengths
+                        )
+                    );
+
+                boxVerticalPositionIncrement += newBoxLengths.Y;
             }
         }
 
-        Vector2 newBoxLengths =
-            new Vector2(
-                parentBoxLengths.X,
-                parentBoxLengths.Y / amountOfCommonDataBoxes
-            );
-
-        return (newBoxLengths, amountOfCommonDataBoxes);
-    }
-
-    private Vector2 CalculatingCommonDataBoxLengthsPixelSpacing(Vector2 commonDataSingleBoxLengths, Vector2 commonDataSingleBoxPercentageSpacing)
-    {
-        Vector2 newCommonDataBoxPixelSpacing =
-            new Vector2(
-                (commonDataSingleBoxPercentageSpacing.X / 100f) * commonDataSingleBoxLengths.X,
-                (commonDataSingleBoxPercentageSpacing.X / 100f) * commonDataSingleBoxLengths.Y
-            );
-
-        return newCommonDataBoxPixelSpacing;
-    }
-
-    private float CalculatingCommonDataCharHeight(Vector2 commonDataSingleBoxLengths, Vector2 CommonDataBoxPixelSpacing, int amountOfCommonDataBoxes)
-    {
-        float newCharHeight = (commonDataSingleBoxLengths.Y - CommonDataBoxPixelSpacing.Y) / 2;
-
-        return newCharHeight;
+        return currentCommonDataBoxes;
     }
 
     private void UpdateAlgoRunData()
     {
         var _generator = _state.maze.generator;
-        var _layout = _state.maze.layout;
         var _play = _state.playMaze;
-        var _shareAlgoData = _state.shareAlgoData;
-        var _time = _state.common.time;
-
-        //Console.WriteLine(_generator.BuildingMazes);
-        //Console.WriteLine(_play.IsAlgoRunning);
-        //Console.WriteLine(_play.IsAlgoProgramPauzed);
-        //Console.WriteLine(!_play.IsAlgoLoaded);
-        //Console.WriteLine(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.Time);
-        
+   
         if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPaused || !_play.IsAlgoLoaded)
         {
             return;
@@ -107,7 +161,6 @@ public class UpdateMazeLayoutMazeView
 
         UpdateCurrentMazeNavigatorSlots();
 
-        UpdateCommonData();
     }
 
     private void UpdateCurrentMazeNavigatorSlots()
@@ -144,7 +197,7 @@ public class UpdateMazeLayoutMazeView
         
         if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition + 1].SlotSearchedWithTime.Time)
         {
-            for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count()&& _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)
+            for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() && _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)
             {
                 _play.SlotHistoryListPosition = i;
             }
@@ -176,31 +229,6 @@ public class UpdateMazeLayoutMazeView
                  NextMaze();
             }
         }
-    }
-
-    private void UpdateCommonData()
-    {
-        var _generator = _state.maze.generator;
-        var _layout = _state.maze.layout;
-        var _play = _state.playMaze;
-        var _shareAlgoData = _state.shareAlgoData;
-        var _time = _state.common.time;
-
-        string time = _time.MazeRunStopwatch.MazeStopwatch.ToString();
-
-        if(time.Length > 7)
-        {
-            time = time.Substring(0, 7);
-        }
-
-        _layout.mazeView.CommonDataInformation[CommonDataNames.Time] = time;
-        _layout.mazeView.CommonDataInformation[CommonDataNames.SlotSearched] = _play.SlotHistoryListPosition.ToString();
-
-        //if (_shareAlgoData.CommonDataHistory.CommonUsageDataHistory[_play.SlotHistoryListPosition].StopWatchTime.X <)
-        //{
-        //    _layout.mazeView.CommonDataInformation[CommonDataNames.CoreProcessorUsagePercentage] = _shareAlgoData.CommonDataHistory.CommonUsageDataHistory[_play.SlotHistoryListPosition].UsagePercentageCpu.ToString();
-        //}
-
     }
 
     private void NextMaze()

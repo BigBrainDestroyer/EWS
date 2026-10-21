@@ -158,46 +158,34 @@ public class DrawMazeLayout
 
     private void DrawCommonData()
     {
-        var _layout = _state.maze.layout;
+        var _mazeView = _state.maze.layout.mazeView;
         var _font = _state.common.font;
 
         CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
 
-        Vector2 textPosition =
-            new Vector2(
-                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.CommonData].X + _layout.mazeView.CommonDataBoxPixelSpacing.X,
-                _layout.boxes.BoxPixelPositions[MazeViewBoxNames.CommonData].Y
-            );
-
-        int counter = 0;
-
         foreach(CommonDataNames boxName in boxNames)
         {
-            if(_layout.mazeView.CommonDataBoxState[boxName])
+            if (_mazeView.CommonDataBoxState[boxName])
             {
-                counter++;
+                Console.WriteLine(_mazeView.CommonDataBoxes[boxName].TitleBox.Text.Text);
 
                 Raylib.DrawTextEx(
-                    _font.EditorPanelText,
-                    _layout.mazeView.CommonDataTitle[boxName],
-                    textPosition,
-                    _layout.mazeView.CommonDataCharHeight,
-                    _layout.mazeView.CommonDataCharSpacing,
-                    Color.RayWhite
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.Font,
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.Text.Text,
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.TextPosition,
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.Text.TextSize,
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.Text.TextSpacing,
+                    _mazeView.CommonDataBoxes[boxName].TitleBox.TextColor
                 );
-
-                textPosition.Y += _layout.mazeView.CommonDataCharHeight;
 
                 Raylib.DrawTextEx(
-                    _font.EditorPanelText,
-                    _layout.mazeView.CommonDataInformation[boxName],
-                    textPosition,
-                    _layout.mazeView.CommonDataCharHeight,
-                    _layout.mazeView.CommonDataCharSpacing,
-                    Color.Gray
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.Font,
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.Text.Text,
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.TextPosition,
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.Text.TextSize,
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.Text.TextSpacing,
+                    _mazeView.CommonDataBoxes[boxName].InformationBox.TextColor
                 );
-
-                textPosition.Y +=_layout.mazeView.CommonDataSingleBoxLengths.Y - _layout.mazeView.CommonDataCharHeight;
             }
         }
     }
