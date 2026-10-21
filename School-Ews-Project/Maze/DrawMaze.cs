@@ -16,6 +16,7 @@ public class DrawMazeLayout
     public void Maze()
     {
         var _play = _state.playMaze;
+        var _boxes = _state.maze.layout.boxes;
 
         DrawBackground();
 
@@ -37,6 +38,12 @@ public class DrawMazeLayout
         {
             //mazeLoadScreen
         }
+
+        //Raylib.DrawRectangleV(
+        //    _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
+        //    _boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
+        //    new Color(200, 200, 200, 219)
+        //);
     }
 
     private void DrawBackground()

@@ -27,7 +27,7 @@ public class UpdateEditorPanelText
         if (_commonBoxes.ActiveMainBox == MainBoxNames.Editor)
         {
             _updateTextView.IsMouseWheelActive();
-            
+   
             if (_input.KeyboardCharInput.Count > 0 || Raylib.IsKeyPressed(KeyboardKey.Tab) || Raylib.IsKeyPressed(KeyboardKey.Backspace) || Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.Down) || Raylib.IsKeyPressed(KeyboardKey.Up) || Raylib.IsKeyPressed(KeyboardKey.Left) || Raylib.IsKeyPressed(KeyboardKey.Right) || _time.KeyboardKeyTimeDown.Values.Any(time => time.StartDownTime >= _textPanel.KeyboardKeyDownTimeDuration))
             {
                 (_textPanel.CursorTextPosition, _textPanel.PanelText, _input.KeyboardCharInput, _textPanel.KeyboardKeyDownSettings, _time.FileChangeTimer) =
@@ -50,14 +50,41 @@ public class UpdateEditorPanelText
 
                 _updateTextView.UpdateView();
             }
+
+            
+            if(Raylib.IsKeyDown(KeyboardKey.LeftControl) && Raylib.IsKeyPressed(KeyboardKey.Equal))
+            {
+                _textPanel.TextSize = UpdateTextCharHeight(
+                    _textPanel.TextSize,
+                    _textPanel.CharHeightIncrement,
+                    _textPanel.MinimumCharHeight
+                );
+    
+                _textPanel.CharHeightHasChanged = true;
+            }
+            else if(Raylib.IsKeyDown(KeyboardKey.LeftControl) && Raylib.IsKeyPressed(KeyboardKey.Minus))
+            {
+                _textPanel.TextSize = UpdateTextCharHeight(
+                    _textPanel.TextSize,
+                    -_textPanel.CharHeightIncrement,
+                    _textPanel.MinimumCharHeight
+                );
+    
+                _textPanel.CharHeightHasChanged = true;
+            }
+            else if(_textPanel.CharHeightHasChanged)
+            {
+                _updateTextView.UpdateView();
+    
+                _textPanel.CharHeightHasChanged = false;
+            }
         }
         
-        if(Raylib.IsWindowResized())
+        if(Raylib.IsWindowResized() || Raylib.IsWindowMaximized())
         {
             _updateTextView.UpdateView();
         }
     }
-
 
     private (Vector2, List<string>, List<int>, Dictionary<KeyboardKey, KeyboardKeyDownSettings>, FileChangeTimer) UpdatingText(Stopwatch stopwatch, FileChangeTimer fileChangeTimer, Dictionary<KeyboardKey, KeyboardKeyTimeDown> keyboardKeyTimeDown, Dictionary<KeyboardKey, KeyboardKeyDownSettings> keyboardKeyDownSettings, double keyboardDownDuration, Vector2 cursorTextPosition, List<string> panelText, List<int> chars, float[] gridColumnPositions, float[] gridRowPositions, string tapTextSpaces, int textGridBoxesOffSetX, int textGridBoxesOffSetY, int gridBoxesSpaceOffRowNumbers)
     {
@@ -308,5 +335,21 @@ public class UpdateEditorPanelText
         panelText[(int)cursorTextPosition.Y] = newString.ToString();
 
         return (cursorTextPosition, panelText, chars);
+    }
+
+    private int  UpdateTextCharHeight(int currentCharHeight, int charHeightIncrement, int minimumCharHeight)
+    {
+        if(charHeightIncrement > 0)
+        {
+            return currentCharHeight + charHeightIncrement;
+        }
+        else if(currentCharHeight + charHeightIncrement >= minimumCharHeight)
+        {
+            return currentCharHeight + charHeightIncrement;
+        }
+        else
+        {
+            return minimumCharHeight;
+        }
     }
 }

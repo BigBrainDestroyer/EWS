@@ -7,7 +7,6 @@ public class UpdateEditorTextPanel
 {
     private readonly AppState _state;
     private readonly UpdateEditorPanelText _updateEditorPanelText;
-
     public UpdateEditorTextPanel(AppState state)
     {
         _state = state ?? throw new ArgumentNullException(nameof(state));

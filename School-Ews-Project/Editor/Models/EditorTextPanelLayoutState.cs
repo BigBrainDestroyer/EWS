@@ -98,4 +98,10 @@ public class EditorTextPanelLayoutState
     public int CursorWidth { get; set; }
     public int TextSize { get; set; } = 25;
     public int CharSpacing { get; set; } = 0;
+
+    public int CharHeightIncrement { get; set; } = 1;
+
+    public int MinimumCharHeight { get; set; } = 5;
+
+    public bool CharHeightHasChanged { get; set; } = false;
 }

@@ -13,7 +13,7 @@ public class DrawDiagnostics
 
     public void Draw()
     {
-        if(_state.common.settings.DrawDiagnostics == true)
+        if(_state.common.settings.DrawDiagnostics == false)
         {
             DrawMainBoxes();
         }
