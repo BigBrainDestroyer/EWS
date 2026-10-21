@@ -144,13 +144,13 @@ public class UpdateMazeLayoutMazeView
         
         if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition + 1].SlotSearchedWithTime.Time)
         {
-            for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() -1&& _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)
+            for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count()&& _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)
             {
                 _play.SlotHistoryListPosition = i;
             }
             
 
-            _play.SlotHistoryListPosition += 1;
+            //_play.SlotHistoryListPosition += 1;
 
              Console.WriteLine(_time.MazeRunStopwatch.MazeStopwatch);
 
