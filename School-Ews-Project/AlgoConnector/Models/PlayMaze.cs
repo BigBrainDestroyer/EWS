@@ -19,6 +19,8 @@ public class PlayMaze
 
     public volatile bool IsAlgoLoaded = false;
 
+    public volatile bool IsMazeLoaded = false;
+
     public volatile bool UpdatedNewMazeToShareAlgoFile = false;
     
     public volatile bool UpdatedNewMazeToShareMazeFile = false;

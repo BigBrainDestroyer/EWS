@@ -216,9 +216,11 @@ public class Initialize
                 if (shareAlgoMazeSize >= 3)
                 {
                     _generator.MazeSize = shareAlgoMazeSize;
+                    _play.IsMazeLoaded = true;
                 }
                 else
                 {
+                    _play.IsMazeLoaded = false;
                     _generator.MazeSize = 3;
                 }
                 
@@ -241,7 +243,7 @@ public class Initialize
             return;
         }
 
-        _play.IsAlgoLoaded = IsShareAlgoDataLegal.Check(_shareAlgoData);
+        (_play.IsAlgoLoaded, _play.IsMazeLoaded) = IsShareAlgoDataLegal.Check(_shareAlgoData);
 
         Debug.WriteLine($"IsAlgoLoaded: {_play.IsAlgoLoaded}");
     }

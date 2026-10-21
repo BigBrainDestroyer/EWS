@@ -40,6 +40,7 @@ public class AlgoConnectorController
         if(_play.UpdatedNewMazeToShareAlgoFile && _play.UpdatedNewMazeToShareMazeFile)
         {
             _play.IsAlgoLoaded = false;
+            _play.IsMazeLoaded = true;
 
             _mazeGenerator.MazesAreDone = false;
             _mazeGenerator.BuildingMazes = false;
@@ -209,7 +210,7 @@ public class AlgoConnectorController
             return;
         }
 
-        _play.IsAlgoLoaded = IsShareAlgoDataLegal.Check(_shareAlgoData);
+        (_play.IsAlgoLoaded, _play.IsMazeLoaded) = IsShareAlgoDataLegal.Check(_shareAlgoData);
 
         Debug.WriteLine($"IsAlgoLoaded: {_play.IsAlgoLoaded}");
 

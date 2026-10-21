@@ -4,21 +4,24 @@ namespace Program;
 
 public static class IsShareAlgoDataLegal
 {
-    public static bool Check(ShareAlgoData shareAlgoData)
+    public static (bool, bool) Check(ShareAlgoData shareAlgoData)
     {
-        if(shareAlgoData.CommonDataHistory.ProjectTotalSeconds == 0)
+        bool isAlgoDataLegal = true;
+        bool isMazeDataLegal = true;
+
+        if (shareAlgoData.CommonDataHistory.ProjectTotalSeconds == 0)
         {
-            return false;
+            isAlgoDataLegal = false;
         }
 
         if(shareAlgoData.AllMazes.Count() < 1)
         {
-            return false;
+            return (false, false);
         }
 
         if(shareAlgoData.AllMazes.Count() != shareAlgoData.MazeBeginPoints.Length || shareAlgoData.AllMazes.Count() != shareAlgoData.MazeEndPoints.Length)
         {
-            return false;
+            return (false, false);
         }
 
         int mazeSize = shareAlgoData.AllMazes[0].UsingXToGetRightArray.Count();
@@ -27,10 +30,10 @@ public static class IsShareAlgoDataLegal
         {
             if(mazeSize != maze.UsingXToGetRightArray.Count() || mazeSize != maze.UsingYToGetRightArray.Count())
             {
-                return false;
+                return (false, false);
             }
         }
 
-        return true;
+        return (isAlgoDataLegal, isMazeDataLegal);
     }
 }

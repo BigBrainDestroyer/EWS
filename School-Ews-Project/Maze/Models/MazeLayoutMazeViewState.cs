@@ -320,5 +320,9 @@ public class MazeLayoutMazeViewState
 
     public float CommonDataCharSpacing { get; set; } = 0;
 
+    public float CurrentLoadedLayoutMazeListPosition { get; set; } = 0;
+
     public int AmountOfCommonDataBoxes { get; set; } = 5;
+
+    public bool NeedToUpdateNewToMaze { get; set; } = false;
 } 

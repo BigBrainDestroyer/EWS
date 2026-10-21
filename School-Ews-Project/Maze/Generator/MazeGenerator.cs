@@ -17,6 +17,7 @@ public class MazeGenerator
     public void Generator() // 0 Up 1 Right 2 Down 3 Left
     {
         var _generator = _state.maze.generator;
+        var _mazeView = _state.maze.layout.mazeView;
         var _play = _state.playMaze;
 
         if(_generator.BuildingMazes || _play.IsAlgoRunning|| !_play.IsAlgoProgramPaused)
@@ -29,6 +30,8 @@ public class MazeGenerator
         _generator.MazeEndPoints = new IVector2[_generator.MazeBatchSize];
         _generator.MazesAreDone = false;
         _generator.BuildingMazes = true;
+        _mazeView.NeedToUpdateNewToMaze = true;
+        _play.IsMazeLoaded = false;
 
         Task.Run(() =>
         {

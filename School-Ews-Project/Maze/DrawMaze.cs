@@ -15,18 +15,27 @@ public class DrawMazeLayout
 
     public void Maze()
     {
-        DrawMazeView();
-    }
+        var _play = _state.playMaze;
 
-    private void DrawMazeView()
-    {
         DrawBackground();
 
-        DrawMaze();
-
-        if(_state.maze.layout.mazeView.CommonDataCharHeight > 0)
+        if (_play.IsMazeLoaded)
         {
+            DrawMazeBackground();
+
+            if(_play.IsAlgoLoaded)
+            {
+                DrawNavigatorHistory();
+                DrawNavigator();
+            }
+            
+            DrawMaze();
+
             DrawCommonData();
+        }
+        else
+        {
+            //mazeLoadScreen
         }
     }
 
@@ -42,6 +51,71 @@ public class DrawMazeLayout
             _boxes.BackgroundColor
         );
     }
+    
+    private void DrawMazeBackground()
+    {
+        var _boxes = _state.maze.layout.boxes;
+        
+        Raylib.DrawRectangleV(
+            _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
+            _boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
+            Color.Black
+        );
+    }
+    
+    private void DrawNavigatorHistory()
+    {
+        var _boxes = _state.maze.layout.boxes;
+        var _generator = _state.maze.generator;
+        var _mazeView = _state.maze.layout.mazeView;
+        var _play = _state.playMaze;
+        var _shareAlgoData = _state.shareAlgoData;
+        
+        Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
+
+        Color navigatorPathColor = new Color((int)Color.RayWhite.A, Color.RayWhite.B, Color.RayWhite.G, 7);
+
+        for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
+        {   
+            if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].MazeNumber == _play.MazeListPosition)
+            {
+                Raylib.DrawRectangleV(
+                  new Vector2(
+                      startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
+                      startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.Y -1))
+                  ),
+                  _mazeView.MazeSlotLengths,
+                  navigatorPathColor
+                );
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    private void DrawNavigator()
+    {
+        var _boxes = _state.maze.layout.boxes;
+        var _generator = _state.maze.generator;
+        var _mazeView = _state.maze.layout.mazeView;
+        var _play = _state.playMaze;
+        var _shareAlgoData = _state.shareAlgoData;
+        
+        Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
+
+        Color navigatorColor = Color.DarkBlue;
+        
+        Raylib.DrawRectangleV(
+          new Vector2(
+              startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
+              startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y -1))
+          ),
+          _mazeView.MazeSlotLengths,
+          navigatorColor
+        );
+    }
 
     private void DrawMaze()
     {
@@ -51,52 +125,7 @@ public class DrawMazeLayout
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
 
-        Raylib.DrawRectangleV(
-            _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
-            _boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
-            Color.Black
-        );
-
         Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
-
-        if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() != 0)
-        {
-            Color navigatorColor = Color.DarkBlue;
-            Color navigatorPathColor = new Color((int)Color.RayWhite.A, Color.RayWhite.B, Color.RayWhite.G, 7);
-
-
-
-            for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
-            {   
-                if (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].MazeNumber == _play.MazeListPosition)
-                {
-                    Raylib.DrawRectangleV(
-                      new Vector2(
-                          startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
-                          startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.SlotCoordinates.Y -1))
-                      ),
-                      _mazeView.MazeSlotLengths,
-                      navigatorPathColor
-                    );
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            Raylib.DrawRectangleV(
-              new Vector2(
-                  startPosition.X + (_mazeView.MazeSlotLengths.X * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.X -1)) ,
-                  startPosition.Y + (_mazeView.MazeSlotLengths.Y * (_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].SlotSearchedWithTime.SlotCoordinates.Y -1))
-              ),
-              _mazeView.MazeSlotLengths,
-              navigatorColor
-            );
-        }
-
-
-        startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
         for (int i = 1; i < _mazeView.CurrentMaze.UsingYToGetRightArray.Length; i++)
         {
@@ -147,6 +176,7 @@ public class DrawMazeLayout
                         Color.Pink
                     );
                 }
+                
 
                 startPosition.Y += _mazeView.MazeSlotLengths.Y;
             }    
@@ -167,8 +197,6 @@ public class DrawMazeLayout
         {
             if (_mazeView.CommonDataBoxState[boxName])
             {
-                Console.WriteLine(_mazeView.CommonDataBoxes[boxName].TitleBox.Text.Text);
-
                 Raylib.DrawTextEx(
                     _mazeView.CommonDataBoxes[boxName].TitleBox.Font,
                     _mazeView.CommonDataBoxes[boxName].TitleBox.Text.Text,
