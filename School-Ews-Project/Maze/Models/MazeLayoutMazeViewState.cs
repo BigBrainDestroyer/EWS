@@ -316,13 +316,13 @@ public class MazeLayoutMazeViewState
 
     public float LineThick { get; set; } = 3;
 
-    public float CommonDataCharHeight { get; set; } = 10;
+    public float BaseLineThick { get; set; } = 4;
 
-    public float CommonDataCharSpacing { get; set; } = 0;
+    public float MaximumLineThickToMazeSlotPercentage { get; } = 15f;
 
     public float CurrentLoadedLayoutMazeListPosition { get; set; } = 0;
 
-    public int AmountOfCommonDataBoxes { get; set; } = 5;
+    public bool MazeSlotsAreToSmall { get; set; } = false;
 
     public bool NeedToUpdateNewToMaze { get; set; } = false;
 } 

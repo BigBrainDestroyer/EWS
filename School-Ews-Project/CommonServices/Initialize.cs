@@ -79,12 +79,6 @@ public class Initialize
                 _state.editor.layout.textPanel.TextSize
             );
 
-        _state.common.font.MazeCommonData = 
-            Load.LoadFontEx(
-                "Resources/Font/Lilex-ExtraLight.ttf", 
-                _state.maze.layout.mazeView.CommonDataCharHeight
-            );
-
         _state.common.font.ArchiveDataBoxType = 
             Load.LoadFontEx(
                 "Resources/Font/Lilex-ExtraLight.ttf", 

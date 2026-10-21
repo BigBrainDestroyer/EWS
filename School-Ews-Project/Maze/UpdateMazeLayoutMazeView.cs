@@ -32,6 +32,13 @@ public class UpdateMazeLayoutMazeView
                 new Vector2(_layout.mazeView.CurrentMaze.UsingYToGetRightArray.Count(), _layout.mazeView.CurrentMaze.UsingXToGetRightArray.Count())
             );
 
+        _layout.mazeView.LineThick =
+            CalculateMazeLineThick(
+                _layout.mazeView.MazeSlotLengths,
+                _layout.mazeView.BaseLineThick,
+                _layout.mazeView.MaximumLineThickToMazeSlotPercentage
+            );
+
         (double usagePercentageCpu, double usagePercentageGpu, double usagePercentageRamMb) = 
             UpdateUsagePercentage(
                 _time.MazeRunStopwatch,
@@ -182,6 +189,34 @@ public class UpdateMazeLayoutMazeView
             );
 
         return newSlotPixelLengths;
+    }
+
+    private (bool, float) CalculateMazeLineThick(Vector2 mazeSlotLengths, float baseLineThick, float maximumLineThickToMazeSlotPercentage)
+    {
+        float smallestSlotLength = (mazeSlotLengths.X < mazeSlotLengths.Y) ? mazeSlotLengths.X : mazeSlotLengths.Y;
+
+        float maxLineThick = (maximumLineThickToMazeSlotPercentage/100f) * smallestSlotLength;
+        
+        if(baseLineThick > maxLineThick)
+        {
+            bool isMaxLineToSmall = false;
+
+            if(maxLineThick < 1f)
+            {
+                if(smallestSlotLength < 3)
+                {
+                    isMaxLineToSmall = true;
+                }
+                else
+                {
+                    return (isMaxLineToSmall, 1);
+                }
+            }
+            
+            return (isMaxLineToSmall, maxLineThick);
+        }
+
+        return (false, baseLineThick);
     }
 
     private (double, double, double) UpdateUsagePercentage(MazeRunStopwatch currentMazeRunStopWatch, List<CommonUsageDataHistory> commonUsageDataHistory, int commonUsageDataListPosition, bool isAlgoLoaded)
