@@ -32,7 +32,7 @@ public class UpdateMazeLayoutMazeView
                 new Vector2(_layout.mazeView.CurrentMaze.UsingYToGetRightArray.Count(), _layout.mazeView.CurrentMaze.UsingXToGetRightArray.Count())
             );
 
-        _layout.mazeView.LineThick =
+        (_layout.mazeView.MazeSlotsAreToSmall, _layout.mazeView.LineThick) =
             CalculateMazeLineThick(
                 _layout.mazeView.MazeSlotLengths,
                 _layout.mazeView.BaseLineThick,
