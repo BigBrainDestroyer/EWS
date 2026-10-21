@@ -65,7 +65,7 @@ public static class CalculateUsingTime
         return currentFileChangeTimer;
     }
 
-    public static MazeRunStopwatch MazePlaySpeedStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch)
+    public static MazeRunStopwatch MazePlaySpeedStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch, double playSpeed)
     {
         if(currentMazeRunStopwatch.ResetStopwatch)
         {
@@ -75,7 +75,7 @@ public static class CalculateUsingTime
                     0, 
                     0,
                     0, 
-                    0,
+                    playSpeed,
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     false
@@ -91,7 +91,7 @@ public static class CalculateUsingTime
                     0,
                     0,
                     0,
-                    currentMazeRunStopwatch.PlaySpeed, 
+                    playSpeed,
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
                 );
@@ -104,8 +104,8 @@ public static class CalculateUsingTime
                     currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime, 
                     currentMazeRunStopwatch.TotalPausedTime,
                     currentMazeRunStopwatch.LastTimePaused,
-                    currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * currentMazeRunStopwatch.PlaySpeed), 
-                    currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * playSpeed), 
+                    playSpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
                 );

@@ -73,7 +73,7 @@ public class StartStopAlgoPlayBackButtonCore
                     _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
                     currentLastPausedTime,
                     _time.MazeRunStopwatch.MazeStopwatch,
-                    _play.PlaySpeed,
+                    _time.MazeRunStopwatch.PlaySpeed,
                     !_play.IsAlgoProgramPaused,
                     _time.MazeRunStopwatch.ResetStopwatch
                 );

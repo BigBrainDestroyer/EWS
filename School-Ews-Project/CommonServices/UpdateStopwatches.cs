@@ -14,11 +14,12 @@ public class UpdateStopwatches
     {
         var _input = _state.common.input;
         var _time = _state.common.time;
+        var _play = _state.playMaze;
         
         _time.KeyboardKeyTimeDown = CalculateUsingTime.UpdateKeyboardKeyTimeDown(_time.KeyboardKeyTimeDown, _time.Stopwatch);
 
         _time.FileChangeTimer = CalculateUsingTime.UpdateFileChangeTimer(_time.FileChangeTimer, _time.Stopwatch, _time.FileChangeTimer.FileHasChanged);
 
-        _time.MazeRunStopwatch = CalculateUsingTime.MazePlaySpeedStopWatch(_time.Stopwatch, _time.MazeRunStopwatch);
+        _time.MazeRunStopwatch = CalculateUsingTime.MazePlaySpeedStopWatch(_time.Stopwatch, _time.MazeRunStopwatch, _play.PlaySpeed);
     }
 }
