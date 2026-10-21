@@ -125,7 +125,7 @@ public class DrawEditorLayout
             float currentY = _panel.TextPosition.Y + RowIncrement;
 
             Raylib.DrawTextEx(
-                _state.common.font.EditorPanelText,
+                _panel.EditorPanelTextFont,
                 _state.editor.layout.textPanel.ViewText[i],
                 new Vector2(_panel.TextPosition.X, currentY),
                 _panel.TextSize,
@@ -174,7 +174,7 @@ public class DrawEditorLayout
             float currentY = _panel.RowNumbersPosition.Y + RowIncrement;
 
             Raylib.DrawTextEx(
-                _state.common.font.EditorPanelRowNumbers,
+                _panel.EditorPanelRowNumbersFont,
                 $"{i}",
                 new Vector2(_panel.RowNumbersPosition.X, currentY),
                 _panel.TextSize,

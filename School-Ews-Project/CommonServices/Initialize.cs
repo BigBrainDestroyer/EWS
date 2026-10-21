@@ -25,6 +25,10 @@ public static class StaticVariablesInitialize
     public static string TextureOpenProjectFolderPath { get; } = "Resources/Png/OpenProjectFolder.png";
     public static string TextureOpenFolderPath { get; } = "Resources/Png/OpenFolder.png";
     public static string TexturePlusSignPath { get; } = "Resources/Png/PlusSign.png";
+    public static string TextureTerminalPath { get; } = "Resources/Png/Terminal.png";
+    public static string TexturePauzePath { get; } = "Resources/Png/Pauze.png";
+    public static string TexturePlayPath { get; } = "Resources/Png/Play.png";
+    public static string TextureMazePath { get; } = "Resources/Png/Maze.png";
 
     //Textures
     public static Texture2D TextureArrowUp { get;  private set; }
@@ -35,6 +39,10 @@ public static class StaticVariablesInitialize
     public static Texture2D TextureOpenProjectFolder { get;  private set; }
     public static Texture2D TextureOpenFolder { get;  private set; }
     public static Texture2D TexturePlusSign { get;  private set; }
+    public static Texture2D TextureTerminal { get;  private set; }
+    public static Texture2D TexturePauze { get;  private set; }
+    public static Texture2D TexturePlay { get;  private set; }
+    public static Texture2D TextureMaze { get;  private set; }
 
     public static void Init()
     {
@@ -46,6 +54,11 @@ public static class StaticVariablesInitialize
         StaticVariablesInitialize.TextureOpenProjectFolder = Load.LoadResizableTexture2D(TextureOpenProjectFolderPath);
         StaticVariablesInitialize.TextureOpenFolder = Load.LoadResizableTexture2D(TextureOpenFolderPath);
         StaticVariablesInitialize.TexturePlusSign = Load.LoadResizableTexture2D(TexturePlusSignPath);
+        
+        StaticVariablesInitialize.TextureTerminal = Load.LoadResizableTexture2D(TextureTerminalPath);
+        StaticVariablesInitialize.TexturePauze = Load.LoadResizableTexture2D(TexturePauzePath);
+        StaticVariablesInitialize.TexturePlay = Load.LoadResizableTexture2D(TexturePlayPath);
+        StaticVariablesInitialize.TextureMaze = Load.LoadResizableTexture2D(TextureMazePath);
     }
 }
 
@@ -63,27 +76,6 @@ public class Initialize
     public void StartStopwatch()
     {
         _state.common.time.Stopwatch.Start();
-    }
-
-    public void Fonts()
-    {
-        _state.common.font.EditorPanelText = 
-            Load.LoadFontEx(
-                "Resources/Font/Lilex-Regular.ttf",
-                _state.editor.layout.textPanel.TextSize
-            );
-
-        _state.common.font.EditorPanelRowNumbers = 
-            Load.LoadFontEx(
-                "Resources/Font/Lilex-ExtraLight.ttf", 
-                _state.editor.layout.textPanel.TextSize
-            );
-
-        _state.common.font.ArchiveDataBoxType = 
-            Load.LoadFontEx(
-                "Resources/Font/Lilex-ExtraLight.ttf", 
-                _state.archive.DataTypeBoxCharLoadFontSize
-            );
     }
 
     public void Texture2D()

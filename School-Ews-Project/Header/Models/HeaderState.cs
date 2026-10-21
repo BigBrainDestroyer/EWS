@@ -408,7 +408,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                new RaylibTexture(StaticVariablesInitialize.TextureTerminal, new Rectangle(), new Rectangle()),
                 new Vector2(10,10),
                 Color.Blue,
                 Color.Red
@@ -420,7 +420,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                new RaylibTexture(StaticVariablesInitialize.TexturePauze, new Rectangle(), new Rectangle()),
                 new Vector2(40,10),
                 Color.Blue,
                 Color.Red
@@ -432,7 +432,7 @@ public class HeaderState
                     new Vector2(),
                     8
                 ),
-                new RaylibTexture(StaticVariablesInitialize.TextureArrowUp, new Rectangle(), new Rectangle()),
+                new RaylibTexture(StaticVariablesInitialize.TextureMaze, new Rectangle(), new Rectangle()),
                 new Vector2(10,10),
                 Color.Blue,
                 Color.Red

@@ -30,8 +30,6 @@ public class Program
         
         initialize.FileWatchers();
 
-        initialize.Fonts();
-
         initialize.Texture2D();
 
         var game = new ProgramLoop(state);

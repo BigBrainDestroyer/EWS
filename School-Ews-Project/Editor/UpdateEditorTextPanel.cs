@@ -29,7 +29,7 @@ public class UpdateEditorTextPanel
 
         (_layout.textPanel.GridColumnPositions, _layout.textPanel.GridRowPositions) =
             CalculateTextGrid(
-                _state.common.font.EditorPanelText,
+                _layout.textPanel.EditorPanelTextFont,
                 (float)_layout.textPanel.TextSize,
                 (float)_layout.textPanel.CharSpacing,
                 (int)_boxes.MainBoxPixelLengts[MainBoxNames.Editor].X,
@@ -251,12 +251,14 @@ public class UpdateEditorTextPanel
 
     private int CalculateTextPanelCursorWidth()
     {
+        var _textPanel = _state.editor.layout.textPanel;
+
         Vector2 newCursorWidth =
             Raylib.MeasureTextEx(
-                _state.common.font.EditorPanelText,
+                _textPanel.EditorPanelTextFont,
                 " ",
-                _state.editor.layout.textPanel.TextSize,
-                _state.editor.layout.textPanel.CharSpacing
+                _textPanel.TextSize,
+                _textPanel.CharSpacing
             );
 
         newCursorWidth.X = MathF.Round(newCursorWidth.X);

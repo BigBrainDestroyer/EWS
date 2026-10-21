@@ -32,6 +32,16 @@ public class StartStopAlgoPlayBackButtonCore
 
             _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].TextureColor = 
                 _header.HeaderButtonColors[DrawHeaderObjectNames.StartStopAlgoPlayBack].SymbolColors.Y;
+
+            if(_header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.Texture.Id != StaticVariablesInitialize.TexturePlay.Id)
+            {
+                _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture =
+                    new RaylibTexture(
+                        StaticVariablesInitialize.TexturePlay,
+                        _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.TextureUsage,
+                        _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.TextureSize
+                    );
+            }
         }
         else if(_header.HeaderObjectAvailable[DrawHeaderObjectNames.StartStopAlgoPlayBack])
         {
@@ -39,7 +49,17 @@ public class StartStopAlgoPlayBackButtonCore
                 _header.HeaderButtonColors[DrawHeaderObjectNames.StartStopAlgoPlayBack].BoxColors.X;
 
             _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].TextureColor = 
-                _header.HeaderButtonColors[DrawHeaderObjectNames.StartStopAlgoPlayBack].SymbolColors.X;            
+                _header.HeaderButtonColors[DrawHeaderObjectNames.StartStopAlgoPlayBack].SymbolColors.X;     
+          
+                if(_header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.Texture.Id != StaticVariablesInitialize.TexturePauze.Id)
+                {
+                    _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture =
+                        new RaylibTexture(
+                            StaticVariablesInitialize.TexturePauze,
+                            _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.TextureUsage,
+                            _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture.TextureSize
+                        );
+                }      
         }
     }
 

@@ -54,6 +54,7 @@ public class UpdateArchiveClicks
                             _archive.ArchiveTextures, 
                             dataType.Value, 
                             _archive.ArchiveNamingDataTypeTextBoxCornerStates, 
+                            _archive.NamingDataTypeTextBarFontPath,
                             _mainBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
                             _archive.NamingDataTypeBackgroundColor,
                             _archive.NamingDataTypeTextureColor,
@@ -154,7 +155,7 @@ public class UpdateArchiveClicks
     }
     
     //nog een goede plek vinden
-    public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType, BoolVector4 cornerStates, float cornerRadius, Color backgroundColor, Color textureColor, Color cursorColor, Color textColor)
+    public TextBar GetNewNamingDataTypeBox(Texture2D[] archiveTextures, ArchiveStorageNames dataType, BoolVector4 cornerStates, string fontPath, float cornerRadius, Color backgroundColor, Color textureColor, Color cursorColor, Color textColor)
     {
         TextBar newTextBar = new TextBar();
 
@@ -163,6 +164,10 @@ public class UpdateArchiveClicks
         newTextBar.IsBoxActive = true;
 
         newTextBar.Box = new CustomBox(cornerStates, new Vector2(0,0), new Vector2(0,0), cornerRadius);
+
+        newTextBar.FontPath = fontPath;
+        
+        newTextBar.TextFont = new Font();
 
         newTextBar.BackgroundColor = backgroundColor;
         newTextBar.TextureColor = textureColor;
@@ -218,8 +223,9 @@ public class UpdateArchiveClicks
                 _archive.ArchiveNamingDataTypeTextBox = 
                     GetNewNamingDataTypeBox(
                         _archive.ArchiveTextures,
-                        archiveEditDataType.DataType,//dataType.Value, 
+                        archiveEditDataType.DataType,
                         _archive.ArchiveNamingDataTypeTextBoxCornerStates,
+                        _archive.NamingDataTypeTextBarFontPath,
                         _mainBoxes.MainBoxesCornerRadius[MainBoxNames.Archive],
                         _archive.NamingDataTypeBackgroundColor,
                         _archive.RenamingDataTypeTextureColor,

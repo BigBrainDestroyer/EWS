@@ -56,7 +56,6 @@ public class DrawArchive
     private void DrawArchiveDataTypeBoxes()
     {
         var _archive = _state.archive;
-        var _font = _state.common.font;
 
         foreach(ArchiveDataTypeBox dataTypeBox in _archive.DataTypeBoxes)
         {   
@@ -76,7 +75,7 @@ public class DrawArchive
             );
 
             Raylib.DrawTextEx(
-                _font.EditorPanelRowNumbers,
+                _archive.DataTypeBoxFont,
                 dataTypeBox.ViewText,
                 new Vector2(
                     dataTypeBox.Texture.TextureSize.Position.X + dataTypeBox.Texture.TextureSize.Width, 
@@ -279,7 +278,7 @@ public class DrawArchive
             }
 
             Raylib.DrawTextEx(
-                _state.common.font.EditorPanelText,
+                _archive.ArchiveNamingDataTypeTextBox.TextFont,
                 _archive.ArchiveNamingDataTypeTextBox.ViewText,
                 _archive.ArchiveNamingDataTypeTextBox.ViewTextPixelPosition,
                 _archive.ArchiveNamingDataTypeTextBox.Text.TextSize,

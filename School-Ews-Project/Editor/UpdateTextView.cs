@@ -133,7 +133,7 @@ public class UpdateTextView
         return (cursorTextPosition, newTextGridBoxesOffSetX, newTextGridBoxesOffSetY);
     }
 
-    public (int, int) UpdateScrollWheelOffSet(List<string> panelText, int currentTextGridBoxesOffSetX, int currentTextGridBoxesOffSetY)
+    private (int, int) UpdateScrollWheelOffSet(List<string> panelText, int currentTextGridBoxesOffSetX, int currentTextGridBoxesOffSetY)
     {
         var _input = _state.common.input;
         var _textPanel = _state.editor.layout.textPanel;

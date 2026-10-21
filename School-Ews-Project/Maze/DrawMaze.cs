@@ -196,7 +196,6 @@ public class DrawMazeLayout
     private void DrawCommonData()
     {
         var _mazeView = _state.maze.layout.mazeView;
-        var _font = _state.common.font;
 
         CommonDataNames[] boxNames = Enum.GetValues<CommonDataNames>();
 

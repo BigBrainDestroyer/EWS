@@ -14,7 +14,7 @@ public class UpdateCustomTextBar
     }
 
     public TextBar UpdateTextBar(TextBar currentTextBar, List<int> chars, Vector2 boxPosition, Vector2 boxLengths)
-    {
+    {   
         if (currentTextBar.IsBoxActive)
         {
             StringBuilder newString = new StringBuilder(currentTextBar.Text.Text);
@@ -34,10 +34,10 @@ public class UpdateCustomTextBar
         currentTextBar.Texture2D.TextureUsage = CalculateTextureUsage(currentTextBar.Texture2D.Texture);
 
         int textAreaWidth = CalculateTextAreaWidth(currentTextBar.Box.PixelLengths, new Vector2(currentTextBar.Texture2D.TextureSize.Width, currentTextBar.Texture2D.TextureSize.Height), currentTextBar.TextureToTextWhiteSpace);
-        
+
         (currentTextBar.ViewText, currentTextBar.CursorTextOffSet) =
             UpdateViewText(
-                _state.common.font.EditorPanelText,
+                currentTextBar.TextFont,
                 currentTextBar.Text.Text,
                 currentTextBar.Box.PixelLengths.Y,
                 currentTextBar.Text.TextSpacing,
@@ -58,7 +58,7 @@ public class UpdateCustomTextBar
         {
             currentTextBar.CursorBox =
                 CalculateCursorBox(
-                    _state.common.font.EditorPanelText,
+                    currentTextBar.TextFont,
                     currentTextBar.Text,
                     currentTextBar.ViewTextPixelPosition,
                     currentTextBar.ViewText.Length,
@@ -67,6 +67,26 @@ public class UpdateCustomTextBar
                 );
         }
 
+        if((int)currentTextBar.Text.TextSize != (int)currentTextBar.Box.PixelLengths.Y)
+        {
+            currentTextBar.Text =
+                new RaylibText(
+                    currentTextBar.Text.Text,
+                    currentTextBar.Box.PixelLengths.Y,
+                    currentTextBar.Text.TextSpacing
+                );
+        }
+        
+        if(currentTextBar.TextFont.BaseSize != (int)currentTextBar.Text.TextSize)
+        {
+            currentTextBar.TextFont = Load.UpdateMonoSpaceFontEx(
+                currentTextBar.TextFont,
+                currentTextBar.FontPath,
+                (int)currentTextBar.Text.TextSize,
+                currentTextBar.MaxCharHeightOffSet
+            );
+        }
+        
         return currentTextBar;
     }
 

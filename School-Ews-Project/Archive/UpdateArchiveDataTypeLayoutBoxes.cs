@@ -18,10 +18,19 @@ public class UpdateArchiveDataTypeLayoutBoxes
     public void ArchiveDataTypeLayoutBoxes()
     {
         var _archive = _state.archive;
-        var _font = _state.common.font;
-        
+
+        if(_archive.DataTypeBoxFont.BaseSize != _archive.DataTypeBoxCharLoadFontSize)
+        {
+            _archive.DataTypeBoxFont = Load.UpdateMonoSpaceFontEx(
+                _archive.DataTypeBoxFont,
+                _archive.DataTypeBoxFontPath,
+                (int)_archive.DataTypeBoxCharLoadFontSize,
+                _archive.MaxCharHeightOffSet
+            );
+        }
+
         (_archive.DataTypeBoxes, _archive.TotalViewStorageCount) = UpdateArchiveDataTypeBox(
-            _font.ArchiveDataBoxType,
+            _archive.DataTypeBoxFont,
             _archive.Storage,
             _archive.ArchiveTextures,
             _archive.ArchiveBoxPixelPositions[ArchiveBoxesNames.Archive],

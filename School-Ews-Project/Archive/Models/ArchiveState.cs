@@ -6,6 +6,8 @@ namespace Program;
 
 public class ArchiveState
 {
+    public Font DataTypeBoxFont { get; set; }
+
     public FileSystemWatcher ProjectsFolderWatcher { get; set; } = new FileSystemWatcher();
 
     public ArchiveAddDataTypeMenu AddDataTypeMenu { get; set; } = new ArchiveAddDataTypeMenu();
@@ -104,6 +106,10 @@ public class ArchiveState
     public string ProjectsDataLocation { get; set; } = ""; //Base
     public string ProjectFolderName { get; } = "AppProjects";
 
+    public string DataTypeBoxFontPath { get; } = StaticVariablesInitialize.FontLilexExtraLightPath;
+
+    public string NamingDataTypeTextBarFontPath { get; } = StaticVariablesInitialize.FontLilexRegular;
+
     public float ArchiveFunctionBarBoxPercentageWhiteSpace { get; } = 20f;
     public float ArchiveFunctionBarBoxPixelWhiteSpace { get; set; }
 
@@ -120,6 +126,8 @@ public class ArchiveState
     
     public int TotalViewStorageCount { get; set; } = 0;
     public int ArchiveDataTypeBoxRowOffSet { get; set; } = 0;
+
+    public int MaxCharHeightOffSet { get; set; } = 0;
 
     public volatile bool ProjectsFolderHasChanged;
 }

@@ -18,6 +18,9 @@ public struct KeyboardKeyDownSettings
 
 public class EditorTextPanelLayoutState
 {
+    public Font EditorPanelTextFont { get; set; }
+    public Font EditorPanelRowNumbersFont { get; set; }
+
     public Color TextPanelBackgroundColor { get; set; } = new Color(51, 59, 67, 255);
     public Color TerminalBackgroundColor { get; set; } = new Color(51, 59, 67, 255);
     
@@ -79,6 +82,9 @@ public class EditorTextPanelLayoutState
     
     public string TapTextSpaces { get; set; } = "    ";//4
 
+    public string PanelTextFontPath { get; set; } = StaticVariablesInitialize.FontLilexRegular;
+    public string RowNumbersFontPath { get; set; } = StaticVariablesInitialize.FontLilexExtraLightPath;
+    
     public double KeyboardKeyDownTimeDuration { get; } = 0.5;
 
     public int ExtraGridBoxSpaceBetweenTextAndRowNumbers { get; set; } = 0;
@@ -101,7 +107,9 @@ public class EditorTextPanelLayoutState
 
     public int CharHeightIncrement { get; set; } = 1;
 
-    public int MinimumCharHeight { get; set; } = 5;
+    public int MaximumCharHeightOffSet { get; } = 0;
+
+    public int MinimumCharHeight { get; } = 5;
 
     public bool CharHeightHasChanged { get; set; } = false;
 }

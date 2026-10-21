@@ -21,14 +21,16 @@ public class TextBar
     public Box CursorBox { get; set; }
     
     public string ViewText { get; set; } = "";
+    public string FontPath { get; set; } = "";
 
     public float TextureToTextWhiteSpace { get; set; }
 
     public int CursorTextPosition { get; set; }
     public int CursorTextOffSet { get; set; }
     public int TextTypingWhiteSpaceRight { get; set; } = 2;
-    public int TextTypingWhiteSpaceLeft { get; set; } = 0;//
+    public int TextTypingWhiteSpaceLeft { get; set; } = 0;
+    public int MaxCharHeightOffSet { get; set; } = 0;
 
-    public bool IsCursorVisible { get; set; } = true;//
+    public bool IsCursorVisible { get; set; } = true;
     public bool IsBoxActive { get; set; }
 }

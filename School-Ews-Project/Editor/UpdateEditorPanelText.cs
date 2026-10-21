@@ -50,7 +50,6 @@ public class UpdateEditorPanelText
 
                 _updateTextView.UpdateView();
             }
-
             
             if(Raylib.IsKeyDown(KeyboardKey.LeftControl) && Raylib.IsKeyPressed(KeyboardKey.Equal))
             {
@@ -74,15 +73,48 @@ public class UpdateEditorPanelText
             }
             else if(_textPanel.CharHeightHasChanged)
             {
-                _updateTextView.UpdateView();
-    
                 _textPanel.CharHeightHasChanged = false;
+                
+                _textPanel.ViewText = _updateTextView.UpdateViewText(
+                    _textPanel.PanelText, 
+                    _textPanel.GridColumnPositions,
+                    _textPanel.GridRowPositions,
+                    _textPanel.TextGridBoxesOffSetX,
+                    _textPanel.TextGridBoxesOffSetY,
+                    _textPanel.GridBoxesSpaceOffRowNumbers
+                );
             }
+        }
+
+        if(_textPanel.TextSize != _textPanel.EditorPanelTextFont.BaseSize)
+        {
+            _textPanel.EditorPanelTextFont =
+                Load.UpdateMonoSpaceFontEx(
+                    _textPanel.EditorPanelTextFont,
+                    _textPanel.PanelTextFontPath,
+                    _textPanel.TextSize,
+                    _textPanel.MaximumCharHeightOffSet
+                );
+
+            _textPanel.EditorPanelRowNumbersFont =
+                Load.UpdateMonoSpaceFontEx(
+                    _textPanel.EditorPanelRowNumbersFont,
+                    _textPanel.RowNumbersFontPath,
+                    _textPanel.TextSize,
+                    _textPanel.MaximumCharHeightOffSet
+                );
         }
         
         if(Raylib.IsWindowResized() || Raylib.IsWindowMaximized())
         {
-            _updateTextView.UpdateView();
+            _textPanel.ViewText = _updateTextView.UpdateViewText(
+                _textPanel.PanelText, 
+                _textPanel.GridColumnPositions,
+                _textPanel.GridRowPositions,
+                _textPanel.TextGridBoxesOffSetX,
+                _textPanel.TextGridBoxesOffSetY,
+                _textPanel.GridBoxesSpaceOffRowNumbers
+            );
         }
     }
 
