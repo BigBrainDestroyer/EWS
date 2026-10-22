@@ -103,7 +103,29 @@ public class UpdateMazeLayoutMazeView
 
             if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition - 1].MazeNumber != _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].MazeNumber)
             {
-                 _play.MazeListPosition += 1;
+                _play.ShowCurrentMazeFinalPath = true;
+
+                _time.MazeRunFinalPathStopWatch =
+                    new MazeRunStopwatch(
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        _time.MazeRunStopwatch.PlaySpeed,
+                        _play.ShowCurrentMazeFinalPath,
+                        true
+                    );
+
+                if (!_play.ShowCurrentMazeFinalPath)
+                {
+                    _play.MazeListPosition += 1;
+                }
+            }
+
+            if(_play.ShowCurrentMazeFinalPath)
+            {
+                if(_play.SlotHistoryListPosition - 1 >= 0) _play.SlotHistoryListPosition -= 1;
             }
         }
     }

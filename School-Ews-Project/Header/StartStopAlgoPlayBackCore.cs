@@ -77,27 +77,70 @@ public class StartStopAlgoPlayBackButtonCore
             double currentPausedTime = 0;
             double currentLastPausedTime = 0;
 
+            double lastTimePaused = (_play.ShowCurrentMazeFinalPath) ? _time.MazeRunFinalPathStopWatch.LastTimePaused : _time.MazeRunStopwatch.LastTimePaused;
+
             if(_play.IsAlgoProgramPaused)
             {
                 currentLastPausedTime = _time.Stopwatch.Elapsed.TotalSeconds;
             }
             else if(_time.MazeRunStopwatch.LastTimePaused != 0)
             {
-                currentPausedTime = _time.Stopwatch.Elapsed.TotalSeconds - _time.MazeRunStopwatch.LastTimePaused;
+                currentPausedTime = _time.Stopwatch.Elapsed.TotalSeconds - lastTimePaused;
             }
-            
-            _time.MazeRunStopwatch =
-                new MazeRunStopwatch(
-                    _time.MazeRunStopwatch.StartTime,
-                    _state.common.time.MazeRunStopwatch.TotalTime,
-                    _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
-                    currentLastPausedTime,
-                    _time.MazeRunStopwatch.MazeStopwatch,
-                    _time.MazeRunStopwatch.PlaySpeed,
-                    !_play.IsAlgoProgramPaused,
-                    _time.MazeRunStopwatch.ResetStopwatch
-                );
-            
+
+            if (!_play.ShowCurrentMazeFinalPath)
+            {
+                _time.MazeRunStopwatch =
+                    new MazeRunStopwatch(
+                        _time.MazeRunStopwatch.StartTime,
+                        _state.common.time.MazeRunStopwatch.TotalTime,
+                        _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
+                        currentLastPausedTime,
+                        _time.MazeRunStopwatch.MazeStopwatch,
+                        _time.MazeRunStopwatch.PlaySpeed,
+                        !_play.IsAlgoProgramPaused,
+                        _time.MazeRunStopwatch.ResetStopwatch
+                    );
+
+                _time.MazeRunStopwatch =
+                    new MazeRunStopwatch(
+                        _time.MazeRunFinalPathStopWatch.StartTime,
+                        _state.common.time.MazeRunFinalPathStopWatch.TotalTime,
+                        _time.MazeRunFinalPathStopWatch.TotalPausedTime,
+                        _time.MazeRunFinalPathStopWatch.LastTimePaused,
+                        _time.MazeRunFinalPathStopWatch.MazeStopwatch,
+                        _time.MazeRunFinalPathStopWatch.PlaySpeed,
+                        !_play.IsAlgoProgramPaused,
+                        _time.MazeRunFinalPathStopWatch.ResetStopwatch
+                    );
+            }
+            else
+            {
+                _time.MazeRunStopwatch =
+                    new MazeRunStopwatch(
+                        _time.MazeRunFinalPathStopWatch.StartTime,
+                        _state.common.time.MazeRunFinalPathStopWatch.TotalTime,
+                        _time.MazeRunFinalPathStopWatch.TotalPausedTime + currentPausedTime,
+                        currentLastPausedTime,
+                        _time.MazeRunFinalPathStopWatch.MazeStopwatch,
+                        _time.MazeRunFinalPathStopWatch.PlaySpeed,
+                        !_play.IsAlgoProgramPaused,
+                        _time.MazeRunFinalPathStopWatch.ResetStopwatch
+                    );
+
+                    _time.MazeRunStopwatch =
+                        new MazeRunStopwatch(
+                            _time.MazeRunStopwatch.StartTime,
+                            _state.common.time.MazeRunStopwatch.TotalTime,
+                            _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
+                            _time.MazeRunStopwatch.LastTimePaused,
+                            _time.MazeRunStopwatch.MazeStopwatch,
+                            _time.MazeRunStopwatch.PlaySpeed,
+                            !_play.IsAlgoProgramPaused,
+                            _time.MazeRunStopwatch.ResetStopwatch
+                        );
+            }
+
             if(_play.IsAlgoProgramPaused)
             {
                 _header.HeaderCenterTextureInBox[DrawHeaderObjectNames.StartStopAlgoPlayBack].Texture =

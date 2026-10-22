@@ -28,6 +28,7 @@ public class DrawMazeLayout
             {
                 DrawNavigatorHistory();
                 DrawNavigator();
+                DrawMazeFinalPath();
             }
             
             DrawMaze();
@@ -122,6 +123,41 @@ public class DrawMazeLayout
           _mazeView.MazeSlotLengths,
           navigatorColor
         );
+    }
+
+    private void DrawMazeFinalPath()
+    {
+        var _play = _state.playMaze;
+        
+        if(!_play.ShowCurrentMazeFinalPath) return;
+        
+        var _boxes = _state.maze.layout.boxes;
+        var _mazeView = _state.maze.layout.mazeView;
+        var _shareAlgoData = _state.shareAlgoData;
+        var _time = _state.common.time;
+
+        Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
+
+        int counter = 1;
+
+        foreach(IVector2 finalPathSlot in _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates)
+        {
+            if(_play.FinalMazeQueSpeed * (double)counter >= _time.MazeRunFinalPathStopWatch.MazeStopwatch) return;
+
+            Raylib.DrawRectangleV(
+              new Vector2(
+                  startPosition.X + (_mazeView.MazeSlotLengths.X * (finalPathSlot.X -1)) ,
+                  startPosition.Y + (_mazeView.MazeSlotLengths.Y * (finalPathSlot.Y -1))
+              ),
+              _mazeView.MazeSlotLengths,
+              Color.Yellow
+            );
+        }
+
+        if(_time.MazeRunFinalPathStopWatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates.Length * _play.FinalMazeQueSpeed + _play.FinalPathHolePathShowTime)
+        {
+            _play.ShowCurrentMazeFinalPath = false;
+        }            
     }
 
     private void DrawMaze()

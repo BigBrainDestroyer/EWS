@@ -65,7 +65,7 @@ public static class CalculateUsingTime
         return currentFileChangeTimer;
     }
 
-    public static MazeRunStopwatch MazePlaySpeedStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch, double playSpeed)
+    public static MazeRunStopwatch MazePlaySpeedStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch, double playSpeed, bool showMazeFinalPath)
     {
         if(currentMazeRunStopwatch.ResetStopwatch)
         {
@@ -82,7 +82,7 @@ public static class CalculateUsingTime
                 );
         }
 
-        if(currentMazeRunStopwatch.UpdateStopwatch && currentMazeRunStopwatch.StartTime == 0)
+        if(currentMazeRunStopwatch.UpdateStopwatch && currentMazeRunStopwatch.StartTime == 0 && !showMazeFinalPath)
         {
             currentMazeRunStopwatch = 
                 new MazeRunStopwatch(
@@ -96,7 +96,7 @@ public static class CalculateUsingTime
                     currentMazeRunStopwatch.ResetStopwatch
                 );
         }
-        else if(currentMazeRunStopwatch.UpdateStopwatch)
+        else if(currentMazeRunStopwatch.UpdateStopwatch && !showMazeFinalPath)
         {
             currentMazeRunStopwatch = 
                 new MazeRunStopwatch(
@@ -105,6 +105,55 @@ public static class CalculateUsingTime
                     currentMazeRunStopwatch.TotalPausedTime,
                     currentMazeRunStopwatch.LastTimePaused,
                     currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * playSpeed), 
+                    playSpeed, 
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    currentMazeRunStopwatch.ResetStopwatch
+                );
+        }
+
+        return currentMazeRunStopwatch;
+    }
+
+    public static MazeRunStopwatch MazeFinalPathStopWatch(Stopwatch currentStopwatch, MazeRunStopwatch currentMazeRunStopwatch, double playSpeed, double finalMazeQueSpeed, bool showMazeFinalPath)
+    {
+        if(currentMazeRunStopwatch.ResetStopwatch)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    0, 
+                    0, 
+                    0,
+                    0, 
+                    playSpeed,
+                    currentMazeRunStopwatch.PlaySpeed, 
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    false
+                );
+        }
+
+        if(currentMazeRunStopwatch.UpdateStopwatch && currentMazeRunStopwatch.StartTime == 0 && showMazeFinalPath)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    currentStopwatch.Elapsed.TotalSeconds, 
+                    0, 
+                    0,
+                    0,
+                    0,
+                    playSpeed,
+                    currentMazeRunStopwatch.UpdateStopwatch, 
+                    currentMazeRunStopwatch.ResetStopwatch
+                );
+        }
+        else if(currentMazeRunStopwatch.UpdateStopwatch && showMazeFinalPath)
+        {
+            currentMazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    currentMazeRunStopwatch.StartTime, 
+                    currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime, 
+                    currentMazeRunStopwatch.TotalPausedTime,
+                    currentMazeRunStopwatch.LastTimePaused,
+                    currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * (playSpeed * finalMazeQueSpeed)), 
                     playSpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch

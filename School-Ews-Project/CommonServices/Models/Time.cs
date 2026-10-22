@@ -72,4 +72,6 @@ public class TimeState
     public FileChangeTimer FileChangeTimer { get; set; } = new FileChangeTimer(0, 0, 0.65, false);
 
     public MazeRunStopwatch MazeRunStopwatch { get; set; } = new MazeRunStopwatch(0, 0, 0, 0, 0, 0, false, false);
+
+    public MazeRunStopwatch MazeRunFinalPathStopWatch { get; set; } = new MazeRunStopwatch(0, 0, 0, 0, 0, 0, false, false);
 }
