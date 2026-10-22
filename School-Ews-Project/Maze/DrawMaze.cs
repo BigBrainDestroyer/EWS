@@ -17,7 +17,7 @@ public class DrawMazeLayout
     {
         var _play = _state.playMaze;
         var _boxes = _state.maze.layout.boxes;
-
+        
         DrawBackground();
 
         if (_play.IsMazeLoaded)
@@ -152,12 +152,7 @@ public class DrawMazeLayout
               _mazeView.MazeSlotLengths,
               Color.Yellow
             );
-        }
-
-        if(_time.MazeRunFinalPathStopWatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates.Length * _play.FinalMazeQueSpeed + _play.FinalPathHolePathShowTime)
-        {
-            _play.ShowCurrentMazeFinalPath = false;
-        }            
+        }        
     }
 
     private void DrawMaze()

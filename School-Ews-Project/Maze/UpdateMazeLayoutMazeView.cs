@@ -77,15 +77,105 @@ public class UpdateMazeLayoutMazeView
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
-   
+
+        Console.WriteLine("stopwatches");
+        Console.WriteLine(_time.MazeRunFinalPathStopWatch.MazeStopwatch);
+        Console.WriteLine(_time.MazeRunStopwatch.MazeStopwatch);
+
+
+
         if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPaused || !_play.IsAlgoLoaded)
         {
             return;
         }
 
+        //bool isReturnTrue = UpdateStopwatches();
+
+        //if(isReturnTrue) return;
+
         IsAlgoDone();
 
         UpdateListPositions();
+    }
+
+    private bool UpdateStopwatches()
+    {
+        var _play = _state.playMaze;
+        var _shareAlgoData = _state.shareAlgoData;
+        var _time = _state.common.time;
+        
+        if(_time.MazeRunFinalPathStopWatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates.Length * _play.FinalMazeQueSpeed + _play.FinalPathHolePathShowTime)
+        {
+            _play.ShowCurrentMazeFinalPath = false;
+        }
+
+        if(!_play.ShowCurrentMazeFinalPath && !_time.MazeRunStopwatch.UpdateStopwatch && _time.MazeRunFinalPathStopWatch.UpdateStopwatch)
+        {
+            _time.MazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    _time.MazeRunStopwatch.StartTime,
+                    _state.common.time.MazeRunStopwatch.TotalTime,
+                    _time.MazeRunStopwatch.TotalPausedTime + _time.MazeRunFinalPathStopWatch.MazeStopwatch,
+                    0,
+                    _time.MazeRunStopwatch.MazeStopwatch,
+                    _time.MazeRunStopwatch.PlaySpeed,
+                    true,
+                    _time.MazeRunStopwatch.ResetStopwatch
+                );
+
+            _time.MazeRunFinalPathStopWatch = 
+                new MazeRunStopwatch(
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    _time.MazeRunStopwatch.PlaySpeed,
+                    false,
+                    true
+                );
+
+            return false;
+        }
+        else if(_play.ShowCurrentMazeFinalPath && _time.MazeRunStopwatch.UpdateStopwatch && !_time.MazeRunFinalPathStopWatch.UpdateStopwatch)
+        {
+            _time.MazeRunStopwatch = 
+                new MazeRunStopwatch(
+                    _time.MazeRunStopwatch.StartTime,
+                    _state.common.time.MazeRunStopwatch.TotalTime,
+                    _time.MazeRunStopwatch.TotalPausedTime,
+                    _time.MazeRunStopwatch.LastTimePaused,
+                    _time.MazeRunStopwatch.MazeStopwatch,
+                    _time.MazeRunStopwatch.PlaySpeed,
+                    false,
+                    _time.MazeRunStopwatch.ResetStopwatch
+                );
+
+            _play.CurrentMazeFinalPathDone = true;
+
+            //_time.MazeRunFinalPathStopWatch = 
+            //    new MazeRunStopwatch(
+            //        0,
+            //        0,
+            //        0,
+            //        0,
+            //        0,
+            //        _time.MazeRunStopwatch.PlaySpeed,
+            //        true,
+            //        false
+            //    );
+
+            return true;
+        }
+
+        if(_play.ShowCurrentMazeFinalPath)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void UpdateListPositions()
@@ -101,31 +191,38 @@ public class UpdateMazeLayoutMazeView
                 _play.SlotHistoryListPosition = i;
             }
 
+            
+            
             if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition - 1].MazeNumber != _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition].MazeNumber)
             {
-                _play.ShowCurrentMazeFinalPath = true;
+                //if(!_play.CurrentMazeFinalPathDone)
+                //{
+                //    _play.ShowCurrentMazeFinalPath = true;
+    
 
-                _time.MazeRunFinalPathStopWatch =
-                    new MazeRunStopwatch(
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        _time.MazeRunStopwatch.PlaySpeed,
-                        _play.ShowCurrentMazeFinalPath,
-                        true
-                    );
+    
+                //    _time.MazeRunFinalPathStopWatch =
+                //        new MazeRunStopwatch(
+                //            0,
+                //            0,
+                //            0,
+                //            0,
+                //            0,
+                //            _time.MazeRunStopwatch.PlaySpeed,
+                //            _play.ShowCurrentMazeFinalPath,
+                //            true
+                //        );
+                //}
 
+                _play.MazeListPosition += 1;
                 if (!_play.ShowCurrentMazeFinalPath)
                 {
-                    _play.MazeListPosition += 1;
+                    
                 }
             }
-
-            if(_play.ShowCurrentMazeFinalPath)
+            else
             {
-                if(_play.SlotHistoryListPosition - 1 >= 0) _play.SlotHistoryListPosition -= 1;
+                _play.CurrentMazeFinalPathDone = false;
             }
         }
     }
@@ -181,14 +278,26 @@ public class UpdateMazeLayoutMazeView
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
-        
-        if(_play.SlotHistoryListPosition + 1 >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())
+
+        if (_play.SlotHistoryListPosition + 1 >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())
         {
             _play.MazeListPosition = 0;
 
             _play.SlotHistoryListPosition = 0;
 
             _time.MazeRunStopwatch =
+                new MazeRunStopwatch(
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    _time.MazeRunStopwatch.PlaySpeed,
+                    _time.MazeRunStopwatch.UpdateStopwatch,
+                    true
+                );
+
+            _time.MazeRunFinalPathStopWatch =
                 new MazeRunStopwatch(
                     0,
                     0,
@@ -248,9 +357,7 @@ public class UpdateMazeLayoutMazeView
         for (int i = commonUsageDataListPosition; i < commonUsageDataHistory.Count(); i++)
         {
             if (currentMazeRunStopWatch.MazeStopwatch <= commonUsageDataHistory[i].StopWatchTime.X)
-            {
-                Console.WriteLine(i);
-                
+            {   
                 commonUsageDataListPosition = i;
                 break;
             }

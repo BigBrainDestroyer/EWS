@@ -3,9 +3,15 @@ namespace ShareData;
 
 public static class NavigatorHelper
 {
-    public static void GiveCurrentMazeFinalPath(MazeFinalPath finalPath)
+    public static void GiveCurrentMazeFinalPath(IVector2[] finalPath)
     {
-        App.commonData.MazeFinalPaths.Add(finalPath);
+        MazeFinalPath mazeFinalPath =
+            new MazeFinalPath(
+                finalPath,
+                App.runningMaze.CurrentMazeNumber
+            );
+
+        App.commonData.MazeFinalPaths.Add(mazeFinalPath);
 
         AlgoSandbox.UpdateRunningMazeVariables();
     }

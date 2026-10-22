@@ -30,4 +30,6 @@ public class PlayMaze
     public volatile bool UpdatedNewMazeToShareMazeFile = false;
 
     public volatile bool ShowCurrentMazeFinalPath = false;
+
+    public volatile bool CurrentMazeFinalPathDone = false;
 }

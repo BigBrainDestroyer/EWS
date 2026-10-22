@@ -79,7 +79,7 @@ public struct SlotDataVariables
 
 public struct MazeFinalPath
 {
-    public IVector2[] SlotFinalPathCoordinates { get; set; }
+    public IVector2[] SlotFinalPathCoordinates { get; set; } = new IVector2[0];
     public int MazeNumber { get; set; }
 
     public MazeFinalPath(IVector2[] slotFinalPathCoordinates, int mazeNumber)

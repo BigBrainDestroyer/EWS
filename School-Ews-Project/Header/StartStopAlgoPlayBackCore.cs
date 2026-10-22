@@ -101,22 +101,10 @@ public class StartStopAlgoPlayBackButtonCore
                         !_play.IsAlgoProgramPaused,
                         _time.MazeRunStopwatch.ResetStopwatch
                     );
-
-                _time.MazeRunStopwatch =
-                    new MazeRunStopwatch(
-                        _time.MazeRunFinalPathStopWatch.StartTime,
-                        _state.common.time.MazeRunFinalPathStopWatch.TotalTime,
-                        _time.MazeRunFinalPathStopWatch.TotalPausedTime,
-                        _time.MazeRunFinalPathStopWatch.LastTimePaused,
-                        _time.MazeRunFinalPathStopWatch.MazeStopwatch,
-                        _time.MazeRunFinalPathStopWatch.PlaySpeed,
-                        !_play.IsAlgoProgramPaused,
-                        _time.MazeRunFinalPathStopWatch.ResetStopwatch
-                    );
             }
             else
             {
-                _time.MazeRunStopwatch =
+                _time.MazeRunFinalPathStopWatch =
                     new MazeRunStopwatch(
                         _time.MazeRunFinalPathStopWatch.StartTime,
                         _state.common.time.MazeRunFinalPathStopWatch.TotalTime,
@@ -127,18 +115,6 @@ public class StartStopAlgoPlayBackButtonCore
                         !_play.IsAlgoProgramPaused,
                         _time.MazeRunFinalPathStopWatch.ResetStopwatch
                     );
-
-                    _time.MazeRunStopwatch =
-                        new MazeRunStopwatch(
-                            _time.MazeRunStopwatch.StartTime,
-                            _state.common.time.MazeRunStopwatch.TotalTime,
-                            _time.MazeRunStopwatch.TotalPausedTime + currentPausedTime,
-                            _time.MazeRunStopwatch.LastTimePaused,
-                            _time.MazeRunStopwatch.MazeStopwatch,
-                            _time.MazeRunStopwatch.PlaySpeed,
-                            !_play.IsAlgoProgramPaused,
-                            _time.MazeRunStopwatch.ResetStopwatch
-                        );
             }
 
             if(_play.IsAlgoProgramPaused)

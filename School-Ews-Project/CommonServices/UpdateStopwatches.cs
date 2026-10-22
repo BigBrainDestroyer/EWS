@@ -22,6 +22,6 @@ public class UpdateStopwatches
 
         _time.MazeRunStopwatch = CalculateUsingTime.MazePlaySpeedStopWatch(_time.Stopwatch, _time.MazeRunStopwatch, _play.PlaySpeed, _play.ShowCurrentMazeFinalPath);
 
-        _time.MazeRunFinalPathStopWatch = CalculateUsingTime.MazeFinalPathStopWatch(_time.Stopwatch, _time.MazeRunStopwatch, _play.PlaySpeed, _play.FinalMazeQueSpeed, _play.ShowCurrentMazeFinalPath);
+        _time.MazeRunFinalPathStopWatch = CalculateUsingTime.MazeFinalPathStopWatch(_time.Stopwatch, _time.MazeRunFinalPathStopWatch, _play.PlaySpeed, _play.FinalMazeQueSpeed, _play.ShowCurrentMazeFinalPath);
     }
 }
