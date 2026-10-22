@@ -220,6 +220,8 @@ public class AlgoConnectorController
     private void UpdateAlgoRunningState()
     {
         var _play = _state.playMaze;
+
+        ResetAlgoRunParams();
         
         _play.IsAlgoRunningDone = false;
         _play.IsAlgoRunning = false;

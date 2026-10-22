@@ -27,9 +27,11 @@ public class Program
         initialize.LoadStorage();
 
         initialize.LoadShareAlgoData();
-        
-        initialize.FileWatchers();
 
+        initialize.InitializeCommonDataState();
+
+        initialize.FileWatchers();
+        
         initialize.Texture2D();
 
         var game = new ProgramLoop(state);

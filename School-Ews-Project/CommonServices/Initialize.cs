@@ -234,6 +234,20 @@ public class Initialize
         Debug.WriteLine($"IsAlgoLoaded: {_play.IsAlgoLoaded}");
     }
 
+    public void InitializeCommonDataState()
+    {
+        var _mazeView = _state.maze.layout.mazeView;
+
+        if(App.directoryInfo.OsSystem == ShareData.OsSystem.Linux)
+        {
+            _mazeView.CommonDataBoxState[CommonDataNames.RamTotalUsage] = false;
+        }
+        else
+        {
+            _mazeView.CommonDataBoxState[CommonDataNames.RamTotalUsage] = true;
+        }
+    }
+    
     public void FileWatchers()
     {
         var _archive = _state.archive;
