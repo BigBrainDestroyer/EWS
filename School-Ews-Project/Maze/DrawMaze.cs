@@ -28,7 +28,7 @@ public class DrawMazeLayout
             {
                 DrawNavigatorHistory();
                 DrawNavigator();
-                DrawMazeFinalPath();
+                //DrawMazeFinalPath();
             }
             
             DrawMaze();
