@@ -28,7 +28,7 @@ public class DrawMazeLayout
             {
                 DrawNavigatorHistory();
                 DrawNavigator();
-                //DrawMazeFinalPath();
+                DrawMazeFinalPath();
             }
             
             DrawMaze();
@@ -43,7 +43,7 @@ public class DrawMazeLayout
         //Raylib.DrawRectangleV(
         //    _boxes.BoxPixelPositions[MazeViewBoxNames.Maze],
         //    _boxes.BoxPixelLengths[MazeViewBoxNames.Maze],
-        //    new Color(200, 200, 200, 219)
+        //    Raylib.Fade(Color.White, 0.60f)
         //);
     }
 
@@ -152,6 +152,8 @@ public class DrawMazeLayout
               _mazeView.MazeSlotLengths,
               Color.Yellow
             );
+
+            counter++;
         }        
     }
 

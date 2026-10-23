@@ -11,9 +11,9 @@ public class PlayMaze
 
     public int CommonUsageDataListPosition { get; set; } = 0;
 
-    public double FinalMazeQueSpeed { get; } = 0.250;
+    public double FinalMazeQueSpeed { get; } = 0.100;
 
-    public double FinalPathHolePathShowTime { get; } = 1.5;
+    public double FinalPathHolePathShowTime { get; } = 0.150;
 
     public volatile bool IsAlgoProgramPaused = true;
 
