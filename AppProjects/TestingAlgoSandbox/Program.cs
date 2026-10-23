@@ -75,7 +75,7 @@ public class Program()
                     int counter = 0;
                     List<int> moveList = new List<int>();
 
-                    if(crossWayList.Last().LegalWays.Count(x => x == WallState.Open) <= 1 && !NavigatorHelper.CurrentMazeBeginPoint().Equals(NavigatorHelper.GetCurrentNavigatorCoordinates))
+                    if(crossWayList.Last().LegalWays.Count(x => x == WallState.Open) <= 1 && !NavigatorHelper.CurrentMazeBeginPoint().Equals(NavigatorHelper.GetCurrentNavigatorCoordinates()))
                     {
                         oldPath = ExploredRoad.Last();
     
@@ -198,7 +198,7 @@ public class Program()
                     }
                 }
 
-                if(NavigatorHelper.CurrentMazeBeginPoint().Equals(NavigatorHelper.GetCurrentNavigatorCoordinates))
+                if(NavigatorHelper.CurrentMazeBeginPoint().Equals(NavigatorHelper.GetCurrentNavigatorCoordinates()))
                 {
                     crossWayList.Add(
                         new CrossWay(

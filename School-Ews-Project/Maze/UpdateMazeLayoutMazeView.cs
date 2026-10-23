@@ -97,8 +97,6 @@ public class UpdateMazeLayoutMazeView
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
 
-        Console.WriteLine(_time.MazeRunFinalPathStopWatch.MazeStopwatch);
-
         if(_time.MazeRunFinalPathStopWatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates.Length * _play.FinalMazeQueSpeed + _play.FinalPathHolePathShowTime)
         {
             _play.ShowCurrentMazeFinalPath = false;
@@ -149,11 +147,7 @@ public class UpdateMazeLayoutMazeView
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
-
-        Console.WriteLine("Debug");
-        Console.WriteLine(_play.MazeListPosition);
-        Console.WriteLine(_play.SlotHistoryListPosition);
-
+        
         if(_time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[_play.SlotHistoryListPosition + 1].SlotSearchedWithTime.Time)
         {
             for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() && _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)

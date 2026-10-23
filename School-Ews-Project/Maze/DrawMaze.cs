@@ -81,7 +81,7 @@ public class DrawMazeLayout
         
         Vector2 startPosition = _boxes.BoxPixelPositions[MazeViewBoxNames.Maze];
 
-        Color navigatorPathColor = new Color((int)Color.RayWhite.A, Color.RayWhite.B, Color.RayWhite.G, 7);
+        Color navigatorPathColor = new Color((int)Color.RayWhite.A, Color.RayWhite.B, Color.RayWhite.G, 0.30f);
 
         for (int i = _play.SlotHistoryListPosition; i >= 0; i--)
         {   
@@ -186,7 +186,6 @@ public class DrawMazeLayout
                         Color.Pink
                     );
                 }
-
 
                 startPosition.X += _mazeView.MazeSlotLengths.X;
             }
