@@ -57,9 +57,38 @@ public class AlgoConnectorController
     private void ResetAlgoRunParams()
     {
         var _play = _state.playMaze;
-
+        var _time = _state.common.time;
+        
+        _play.ShowCurrentMazeFinalPath = false;
+        _play.CurrentMazeFinalPathDone = false;
+        
         _play.MazeListPosition = 0;
+
         _play.SlotHistoryListPosition = 0;
+
+        _time.MazeRunStopwatch =
+            new MazeRunStopwatch(
+                0,
+                0,
+                0,
+                0,
+                0,
+                _play.PlaySpeed,
+                false,
+                true
+            );
+
+        _time.MazeRunFinalPathStopWatch =
+            new MazeRunStopwatch(
+                0,
+                0,
+                0,
+                0,
+                0,
+                _play.PlaySpeed,
+                false,
+                true
+            );
     }
 
     private void UpdateNewMazeToShareAlgoFile()

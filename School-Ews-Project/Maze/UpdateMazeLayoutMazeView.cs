@@ -272,9 +272,9 @@ public class UpdateMazeLayoutMazeView
             _play.CurrentMazeFinalPathDone = false;
             
             _play.MazeListPosition = 0;
-
+    
             _play.SlotHistoryListPosition = 0;
-
+    
             _time.MazeRunStopwatch =
                 new MazeRunStopwatch(
                     0,
@@ -286,7 +286,7 @@ public class UpdateMazeLayoutMazeView
                     _time.MazeRunStopwatch.UpdateStopwatch,
                     true
                 );
-
+    
             _time.MazeRunFinalPathStopWatch =
                 new MazeRunStopwatch(
                     0,
