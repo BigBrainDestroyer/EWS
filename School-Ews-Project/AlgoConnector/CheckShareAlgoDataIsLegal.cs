@@ -34,7 +34,7 @@ public static class IsShareAlgoDataLegal
             }
         }
 
-        if(shareAlgoData.CommonDataHistory.MazeFinalPaths.Any(final => final.SlotFinalPathCoordinates != null && final.SlotFinalPathCoordinates.Any(c => c.X > mazeSize - 1 && c.X < 1) && final.SlotFinalPathCoordinates.Any(c => c.Y > mazeSize - 1 && c.Y < 1)))
+        if(shareAlgoData.CommonDataHistory.MazeFinalPaths.Any(final => final.SlotFinalPathCoordinates == null || final.SlotFinalPathCoordinates.Any(c => c.X > mazeSize - 1 || c.X < 1) || final.SlotFinalPathCoordinates.Any(c => c.Y > mazeSize - 1 || c.Y < 1)))
         {
             return (false, false);
         }
