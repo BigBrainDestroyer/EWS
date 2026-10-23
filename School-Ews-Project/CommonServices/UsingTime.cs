@@ -104,7 +104,7 @@ public static class CalculateUsingTime
                     currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime, 
                     currentMazeRunStopwatch.TotalPausedTime,
                     currentMazeRunStopwatch.LastTimePaused,
-                    currentMazeRunStopwatch.MazeStopwatch + ((currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * playSpeed), 
+                    currentMazeRunStopwatch.MazeStopwatch + Math.Max(0, (currentStopwatch.Elapsed.TotalSeconds - currentMazeRunStopwatch.StartTime - currentMazeRunStopwatch.TotalPausedTime - currentMazeRunStopwatch.TotalTime) * playSpeed), 
                     playSpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch

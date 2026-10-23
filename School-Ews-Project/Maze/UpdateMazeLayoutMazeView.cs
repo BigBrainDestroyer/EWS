@@ -103,17 +103,17 @@ public class UpdateMazeLayoutMazeView
             _play.CurrentMazeFinalPathDone = true;
         }
 
-        if(!_play.ShowCurrentMazeFinalPath && !_time.MazeRunStopwatch.UpdateStopwatch && _time.MazeRunFinalPathStopWatch.UpdateStopwatch)
+        if(!_play.ShowCurrentMazeFinalPath && !_time.MazeRunStopwatch.UpdateStopwatch && _play.CurrentMazeFinalPathDone)
         {
             _time.MazeRunStopwatch = 
                 new MazeRunStopwatch(
                     _time.MazeRunStopwatch.StartTime,
                     _state.common.time.MazeRunStopwatch.TotalTime,
                     _time.MazeRunStopwatch.TotalPausedTime + _time.MazeRunFinalPathStopWatch.TotalTime + _time.MazeRunFinalPathStopWatch.TotalPausedTime,
-                    0,
+                    _time.MazeRunFinalPathStopWatch.LastTimePaused,
                     _time.MazeRunStopwatch.MazeStopwatch,
                     _time.MazeRunStopwatch.PlaySpeed,
-                    true,
+                    !_play.IsAlgoProgramPaused,
                     _time.MazeRunStopwatch.ResetStopwatch
                 );
 
@@ -159,12 +159,16 @@ public class UpdateMazeLayoutMazeView
                         _play.ShowCurrentMazeFinalPath = true;
 
                         _play.SlotHistoryListPosition = i - 1;
-                            
+
+                        double timePausedIncrement = (_time.MazeRunStopwatch.MazeStopwatch - _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time) / _time.MazeRunStopwatch.PlaySpeed;
+
+                        if(timePausedIncrement < 0) timePausedIncrement = 0;
+
                         _time.MazeRunStopwatch = 
                             new MazeRunStopwatch(
                                 _time.MazeRunStopwatch.StartTime,
-                                _state.common.time.MazeRunStopwatch.TotalTime,
-                                _time.MazeRunStopwatch.TotalPausedTime + (_time.MazeRunStopwatch.MazeStopwatch - _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time),
+                                _state.common.time.MazeRunStopwatch.TotalTime - timePausedIncrement,
+                                _time.MazeRunStopwatch.TotalPausedTime + timePausedIncrement,
                                 _time.MazeRunStopwatch.LastTimePaused,
                                 _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time,
                                 _time.MazeRunStopwatch.PlaySpeed,

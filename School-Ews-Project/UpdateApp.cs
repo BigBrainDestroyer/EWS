@@ -32,9 +32,9 @@ public class UpdateApp
         
         _calculateMainBoxes.UpdateMainBoxes();
 
-        _updateStopwatches.Update();
-
         _headerController.Controller();
+
+        _updateStopwatches.Update();
 
         _archive.Archive();
 

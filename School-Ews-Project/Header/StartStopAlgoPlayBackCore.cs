@@ -79,15 +79,17 @@ public class StartStopAlgoPlayBackButtonCore
 
             double lastTimePaused = (_play.ShowCurrentMazeFinalPath) ? _time.MazeRunFinalPathStopWatch.LastTimePaused : _time.MazeRunStopwatch.LastTimePaused;
 
+            if(lastTimePaused < 0) lastTimePaused = 0;
+
             if(_play.IsAlgoProgramPaused)
             {
                 currentLastPausedTime = _time.Stopwatch.Elapsed.TotalSeconds;
             }
-            else if(_time.MazeRunStopwatch.LastTimePaused != 0)
+            else if(lastTimePaused != 0)
             {
                 currentPausedTime = _time.Stopwatch.Elapsed.TotalSeconds - lastTimePaused;
             }
-
+            
             if (!_play.ShowCurrentMazeFinalPath)
             {
                 _time.MazeRunStopwatch =

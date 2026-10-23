@@ -90,7 +90,7 @@ public class PlayBackSpeedStringSliderCore
             }
             else if (_play.PlaySpeed < 10)
             {
-                _play.PlaySpeed = Math.Round(_play.PlaySpeed + (Double)addRequest / 8, 6);
+                _play.PlaySpeed = Math.Round(_play.PlaySpeed + (Double)addRequest / 2, 8);
                 return;
             }
             else if (_play.PlaySpeed < 20)
@@ -100,7 +100,7 @@ public class PlayBackSpeedStringSliderCore
             }
             else
             {
-                _play.PlaySpeed = Math.Round(_play.PlaySpeed + (Double)addRequest * 5, 8);
+                _play.PlaySpeed = Math.Round(_play.PlaySpeed + (Double)addRequest * 100, 8);
                 return;
             }
         }
