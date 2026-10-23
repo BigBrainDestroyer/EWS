@@ -75,7 +75,7 @@ public static class CalculateUsingTime
                     0, 
                     0,
                     0, 
-                    playSpeed,
+                    0,
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     false
@@ -91,7 +91,7 @@ public static class CalculateUsingTime
                     0,
                     0,
                     0,
-                    playSpeed,
+                    0,
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
                 );
@@ -124,7 +124,7 @@ public static class CalculateUsingTime
                     0, 
                     0,
                     0, 
-                    playSpeed,
+                    0,
                     currentMazeRunStopwatch.PlaySpeed, 
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     false
@@ -140,7 +140,7 @@ public static class CalculateUsingTime
                     0,
                     0,
                     0,
-                    playSpeed,
+                    0,
                     currentMazeRunStopwatch.UpdateStopwatch, 
                     currentMazeRunStopwatch.ResetStopwatch
                 );
