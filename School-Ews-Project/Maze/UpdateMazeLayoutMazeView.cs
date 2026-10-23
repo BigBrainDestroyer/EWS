@@ -238,6 +238,8 @@ public class UpdateMazeLayoutMazeView
         else if(!_state.maze.generator.BuildingMazes && _mazeView.NeedToUpdateNewToMaze)
         {
             _mazeView.CurrentMaze = _shareAlgoData.AllMazes[0];
+
+            _mazeView.NeedToUpdateNewToMaze = false;
         }
     }
 
