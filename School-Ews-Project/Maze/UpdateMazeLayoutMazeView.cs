@@ -78,10 +78,6 @@ public class UpdateMazeLayoutMazeView
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
 
-        Console.WriteLine("stopwatches");
-        Console.WriteLine(_time.MazeRunFinalPathStopWatch.MazeStopwatch);
-        Console.WriteLine(_time.MazeRunStopwatch.MazeStopwatch);
-
         if (_generator.BuildingMazes || _play.IsAlgoRunning || _play.IsAlgoProgramPaused || !_play.IsAlgoLoaded)
         {
             return;
@@ -161,7 +157,7 @@ public class UpdateMazeLayoutMazeView
         {
             for (int i = _play.SlotHistoryListPosition + 1; i < _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() && _time.MazeRunStopwatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].SlotSearchedWithTime.Time; i++)
             {
-                if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i - 1].MazeNumber != _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].MazeNumber || i + 1 >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() - 1)                
+                if(_shareAlgoData.CommonDataHistory.SlotSearchedHistory[i - 1].MazeNumber != _shareAlgoData.CommonDataHistory.SlotSearchedHistory[i].MazeNumber || i + 1 >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count())                
                 {
                     if(!_play.CurrentMazeFinalPathDone)
                     {
@@ -195,9 +191,17 @@ public class UpdateMazeLayoutMazeView
                     }
                     else
                     {
-                        _play.MazeListPosition += 1;
-                        _play.CurrentMazeFinalPathDone = false;
                         _play.SlotHistoryListPosition = i;
+                        _play.CurrentMazeFinalPathDone = false;
+                        
+                        if(i >= _shareAlgoData.CommonDataHistory.SlotSearchedHistory.Count() - 1)
+                        {
+                            IsAlgoDone();
+                        }
+                        else
+                        {
+                            _play.MazeListPosition += 1;
+                        }
                     }
 
                     break;
