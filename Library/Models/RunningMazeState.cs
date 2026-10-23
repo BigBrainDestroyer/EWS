@@ -9,6 +9,8 @@ internal class RunningMazeState
 
     public IVector2 CurrentNavigatorCoordinates { get; set; } = new IVector2(1,1);
 
+    public IVector2 CurrentMazeBeginPoint { get; set; } = new IVector2(1,1);
+    
     public IVector2 CurrentMazeEndPoint { get; set; } = new IVector2(1,1);
 
     public int CurrentMazeNumber { get; set; } = 0;

@@ -146,6 +146,7 @@ public static class AlgoSandbox
             App.runningMaze.CurrentMazeNumber = 0;
             App.runningMaze.CurrentMaze = App.shareMazeData.AllMazes[App.runningMaze.CurrentMazeNumber];
             App.runningMaze.CurrentNavigatorCoordinates = App.shareMazeData.MazeBeginPoints[App.runningMaze.CurrentMazeNumber];
+            App.runningMaze.CurrentMazeBeginPoint = App.shareMazeData.MazeBeginPoints[App.runningMaze.CurrentMazeNumber];
             App.runningMaze.CurrentMazeEndPoint = App.shareMazeData.MazeEndPoints[App.runningMaze.CurrentMazeNumber];
         }
         else if(App.runningMaze.CurrentMazeNumber + 1 < App.shareMazeData.AllMazes.Count())
@@ -153,6 +154,7 @@ public static class AlgoSandbox
             App.runningMaze.CurrentMazeNumber += 1;
             App.runningMaze.CurrentMaze = App.shareMazeData.AllMazes[App.runningMaze.CurrentMazeNumber];
             App.runningMaze.CurrentNavigatorCoordinates = App.shareMazeData.MazeBeginPoints[App.runningMaze.CurrentMazeNumber];
+            App.runningMaze.CurrentMazeBeginPoint = App.shareMazeData.MazeBeginPoints[App.runningMaze.CurrentMazeNumber];
             App.runningMaze.CurrentMazeEndPoint = App.shareMazeData.MazeEndPoints[App.runningMaze.CurrentMazeNumber];
         }
         else

@@ -2,7 +2,7 @@
 namespace ShareData;
 
 public static class NavigatorHelper
-{
+{    
     public static void GiveCurrentMazeFinalPath(IVector2[] finalPath)
     {
         MazeFinalPath mazeFinalPath =
@@ -32,7 +32,12 @@ public static class NavigatorHelper
     {
         return App.runningMaze.CurrentNavigatorCoordinates;
     }
-    
+
+    public static IVector2 CurrentMazeBeginPoint()
+    {
+        return App.runningMaze.CurrentMazeBeginPoint;
+    }
+
     public static IVector2 CurrentMazeEndPoint()
     {
         return App.runningMaze.CurrentMazeEndPoint;

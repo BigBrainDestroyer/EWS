@@ -23,7 +23,6 @@ public class UpdateMazeLayoutMazeView
         //updatenavigatorplay enz action
         UpdateMazeNavigator();
 
-
         //UpdateMaze
         UpdateCurrentLayoutMaze();
 
@@ -97,7 +96,9 @@ public class UpdateMazeLayoutMazeView
         var _play = _state.playMaze;
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
-        
+
+        Console.WriteLine(_time.MazeRunFinalPathStopWatch.MazeStopwatch);
+
         if(_time.MazeRunFinalPathStopWatch.MazeStopwatch >= _shareAlgoData.CommonDataHistory.MazeFinalPaths[_play.MazeListPosition].SlotFinalPathCoordinates.Length * _play.FinalMazeQueSpeed + _play.FinalPathHolePathShowTime)
         {
             _play.ShowCurrentMazeFinalPath = false;
@@ -221,9 +222,9 @@ public class UpdateMazeLayoutMazeView
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
 
-        if(!_play.IsMazeLoaded)
+        if(!_play.IsMazeLoaded || !_play.IsAlgoLoaded)
         {
-            CalculateNoMazeLoadedScreen();
+            CalculateLoadScreen();
             return;
         }
 
@@ -242,7 +243,7 @@ public class UpdateMazeLayoutMazeView
         }
     }
 
-    private void CalculateNoMazeLoadedScreen()
+    private void CalculateLoadScreen()
     {
         var _generator = _state.maze.generator;
         var _mazeView = _state.maze.layout.mazeView;
@@ -250,6 +251,11 @@ public class UpdateMazeLayoutMazeView
         var _shareAlgoData = _state.shareAlgoData;
         var _time = _state.common.time;
 
+        if(_play.IsAlgoRunning)
+        {
+            
+        }
+        
         if(_generator.BuildingMazes)
         {
             //BuildingMazes Screen
