@@ -240,7 +240,7 @@ public class Initialize
 
         if(App.directoryInfo.OsSystem == ShareData.OsSystem.Linux)
         {
-            _mazeView.CommonDataBoxState[CommonDataNames.RamTotalUsage] = false;
+            _mazeView.CommonDataBoxState[CommonDataNames.RamTotalUsage] = true;
         }
         else
         {

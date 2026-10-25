@@ -55,7 +55,7 @@ public class TerminalState
             "start \"\" /d \"%CD%\" cmd.exe /d",
             "dotnet new console --force",
             "dotnet add reference ", // Add Path
-            "dotnet run", 
+            "dotnet run -c release", 
             "start \"\" /d \"%CD%\" cmd.exe /d /k dotnet build",
             "exit"
         );

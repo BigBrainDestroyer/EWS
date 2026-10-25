@@ -183,7 +183,7 @@ public class DrawMazeLayout
                             startPosition.Y + _mazeView.MazeSlotLengths.Y + (_mazeView.LineThick/2)
                         ),
                         _mazeView.LineThick,
-                        Color.Pink
+                        Color.Red
                     );
                 }
 

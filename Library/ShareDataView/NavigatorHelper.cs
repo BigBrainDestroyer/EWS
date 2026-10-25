@@ -141,25 +141,14 @@ public static class NavigatorHelper
 
     private static void AddNewSearchedSlot(IVector2 newDiscovertSlotCoordinates, int currentMazeNumber)
     {
-        SlotDataVariables slotData =
+        App.commonData.SlotSearchedHistory.Add(
             new SlotDataVariables(
-                new SlotSearchedWithTime(
-                        App.commonData.ProjectStopWatch.Elapsed.TotalSeconds,
-                        newDiscovertSlotCoordinates
-                    ),
-                false,
-                currentMazeNumber
-            );
-        
-        if(App.commonData.SlotSearchedHistory.Any(maze => maze.SlotSearchedWithTime.SlotCoordinates.X == slotData.SlotSearchedWithTime.SlotCoordinates.X && maze.SlotSearchedWithTime.SlotCoordinates.Y == slotData.SlotSearchedWithTime.SlotCoordinates.Y && maze.MazeNumber == slotData.MazeNumber))
-        {
-            slotData.RepeatedSlotSearched = true;
-
-            App.commonData.SlotSearchedHistory.Add(slotData);
-        }
-        else
-        {
-            App.commonData.SlotSearchedHistory.Add(slotData);
-        }
+            new SlotSearchedWithTime(
+                    App.commonData.ProjectStopWatch.Elapsed.TotalSeconds,
+                    newDiscovertSlotCoordinates
+                ),
+            false,
+            currentMazeNumber
+        ));
     }
 }
