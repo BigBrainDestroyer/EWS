@@ -328,7 +328,7 @@ public class UpdateMazeLayoutMazeView
         {
             bool isMaxLineToSmall = false;
 
-            if(maxLineThick < 1f)
+            if(maxLineThick < 1)
             {
                 if(smallestSlotLength < 3)
                 {

@@ -17,7 +17,7 @@ internal static class DataWatcher
             double firstTime = App.commonData.ProjectStopWatch.Elapsed.TotalSeconds;
             double firstCpuUsage = projectProcess.TotalProcessorTime.TotalSeconds;
 
-            Thread.Sleep(100);
+            Thread.Sleep(1);
 
             projectProcess.Refresh();
             double secondTime = App.commonData.ProjectStopWatch.Elapsed.TotalSeconds;
@@ -31,7 +31,7 @@ internal static class DataWatcher
                 new CommonUsageDataHistory(
                     new DVector2(firstTime, secondTime),
                     usagePercentageCpu,
-                    GC.GetTotalMemory(false) / 1024.0 / 1024.0,
+                    GC.GetTotalMemory(true) / 1024.0 / 1024.0,
                     -1 //gpu niet goed goed mogelijk   
             ));            
         }
