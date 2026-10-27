@@ -146,11 +146,11 @@ public class DrawMazeLayout
 
             Raylib.DrawRectangleV(
               new Vector2(
-                  startPosition.X + (_mazeView.MazeSlotLengths.X * (finalPathSlot.X -1)) ,
-                  startPosition.Y + (_mazeView.MazeSlotLengths.Y * (finalPathSlot.Y -1))
+                  startPosition.X + (_mazeView.MazeSlotLengths.X * (finalPathSlot.X - 1)),
+                  startPosition.Y + (_mazeView.MazeSlotLengths.Y * (finalPathSlot.Y - 1))
               ),
               _mazeView.MazeSlotLengths,
-              Color.Yellow
+              new Color(0, 140, 160, 255)
             );
 
             counter++;
@@ -183,7 +183,7 @@ public class DrawMazeLayout
                             startPosition.Y + _mazeView.MazeSlotLengths.Y + (_mazeView.LineThick/2)
                         ),
                         _mazeView.LineThick,
-                        Color.Red
+                        Color.Pink
                     );
                 }
 

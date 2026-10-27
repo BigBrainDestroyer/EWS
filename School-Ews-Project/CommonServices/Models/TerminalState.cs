@@ -41,11 +41,11 @@ public class TerminalState
     public TerminalCommands LinuxTerminalCommands =
         new TerminalCommands(
             "bash", //Process Starting App
-            "ptyxis --new-window --working-directory=\"$PWD\" -- bash",
+            "ptyxis --working-directory=\"$PWD\" -- bash",
             "dotnet new console --force",
             "dotnet add reference ", //Add Path
             "dotnet run",
-            "ptyxis --new-window --working-directory=\"$PWD\" -- bash -c 'dotnet build; exec bash'",
+            "ptyxis --working-directory=\"$PWD\" -- bash -c 'dotnet build; exec bash'",
             "exit"
         );
 

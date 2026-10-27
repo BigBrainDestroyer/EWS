@@ -609,53 +609,16 @@ public class MazeGenerator
 
     private int FindIndex(bool[] array, int currentSeedNumber)
     {
-        int index = 0;
-        int counter = 0;
-
-        for (int i = 0; i < array.Length; i++)
+        for (int i = currentSeedNumber, x = 0; x < array.Length; i++, x++)
         {
-            bool result = array[i];
+            if(i > array.Length - 1) i = 0;
 
-            if (result == true)
-            {   
-                if (i == currentSeedNumber)
-                {
-                    return i;
-                }   
-
-                counter += 1;
-            }
-
-            //Random Paden
-            if (i == array.Length - 1)
+            if(array[i] == true)
             {
-                int randomIndex = Random.Shared.Next(0, counter);
-                int randomIndexCounter = 0;
-                counter = 0;
-
-                foreach(bool wallState in array)
-                {
-                    if(wallState == true)
-                    {
-                        if(randomIndexCounter == randomIndex)
-                        {
-                            return counter;  
-                        }
-
-                        randomIndexCounter++;
-                    }
-
-                    counter++;
-                }
+                return i;
             }
-
-            // Diagornale paden 
-            //if(i == array.Length - 1)
-            //{
-            //    return (currentSeedNumber < 2) ? Array.IndexOf(array, true) : Array.LastIndexOf(array, true);
-            //}
         }
 
-        return index;
+        return 0;
     }
 }
