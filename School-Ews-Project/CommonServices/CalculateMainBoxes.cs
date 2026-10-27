@@ -12,106 +12,95 @@ public class CalculateMainBoxes
         _state = state ?? throw new ArgumentNullException(nameof(state));
     } 
 
-    public void UpdateMainBoxes()
+    public void  UpdateMainBoxes()
     {
-        if(_state.common.boxes.MainBoxPixelLengths != null && _state.common.boxes.MainBoxPixelLengths.Count() > 0)
-        {   
-            int[] pixelWidths = CalculatePixelLength(
-                new float[]{_state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Archive],
-                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Maze],
-                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Statistics],
-                    _state.common.boxes.MainBoxPercentageWidths[MainBoxNames.Editor]}, 
-                    Raylib.GetScreenWidth());
+        var _mainBoxes = _state.common.boxes;
 
-            int[] pixelHeights = CalculatePixelLength(
-               new float[]{_state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Archive],
-                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Maze],
-                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Statistics],
-                    _state.common.boxes.MainBoxPercentageHeights[MainBoxNames.Editor]}, 
-                    Raylib.GetScreenHeight());
-            
-            if (pixelHeights != null && pixelWidths != null && pixelHeights.Length > 0 && pixelWidths.Length > 0)
-            {
-                MainBoxNames[] boxName = (MainBoxNames[])Enum.GetValues(typeof(MainBoxNames));
+        _mainBoxes.HeaderPixelLengths =
+            CalculateHeaderPixelLengths(_mainBoxes.HeaderPercentages);
 
-                for (int i = 0; i < boxName.Length; i++)
-                {
-                    _state.common.boxes.MainBoxPixelLengths[boxName[i]] = new Vector2(pixelWidths[i], pixelHeights[i]);
-                }
-                
-                CalculateMainBoxPositions();
-            }
-        }       
+        (_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing) =
+            CalculateMainColumnLengths(_mainBoxes.MainColumnsPercentage, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPercentageSpacing);
+
+        _mainBoxes.MainBoxPixelLengts =
+            CalculateMainBoxLengths(_mainBoxes.MainColumnsPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
+
+        _mainBoxes.MainBoxPixelPositions =
+            CalculateMainBoxPositions(_mainBoxes.MainBoxPixelLengts, _mainBoxes.HeaderPixelLengths, _mainBoxes.MainBoxesPixelSpacing);
     }
 
-    private int[] CalculatePixelLength(float[] pieces, int screenLength)
+    private Vector2 CalculateHeaderPixelLengths(Vector2 HeaderPercentages)
     {
-        if(pieces == null || pieces.Length == 0)
-        {
-            return new int[0];
-        }
-        
-        int[] newPieceLengths = new int[pieces.Length];
-        double leftOverPixels = 0;
-        int counter = 0;
+        Vector2 newHeaderPixelLengths =
+            new Vector2(
+                MathF.Round(Raylib.GetScreenWidth()  * (HeaderPercentages.X / 100f)),
+                MathF.Round(Raylib.GetScreenHeight() * (HeaderPercentages.Y / 100f))
+            );
 
-        foreach(float piece in pieces)
-        {
-            float pieceLength = (piece/100) * (float)screenLength;
-            newPieceLengths[counter] = (int)pieceLength;
-
-            leftOverPixels += pieceLength - (int)pieceLength;
-
-            counter += 1;
-        }
-
-        counter = 0;
-        
-        leftOverPixels = Math.Ceiling(leftOverPixels);
-
-        if(leftOverPixels == 2)
-        {
-            leftOverPixels = 3;
-        }
-
-        foreach(float piece in pieces)
-        {
-            if(piece < 100f && leftOverPixels > 0)
-            {
-                newPieceLengths[counter] += 1;
-                leftOverPixels -= 1;
-            }
-
-            counter += 1;
-        }
-
-        return newPieceLengths;
+        return newHeaderPixelLengths;
     }
 
-    private void CalculateMainBoxPositions()
+    private (Dictionary<MainColumnsName, Vector2>, float)CalculateMainColumnLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPercentage, Vector2 headerPixelLengths, float mainBoxesSpacing)
     {
-        _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Archive] = 
-        new Vector2(
-            0, 
-            0
-        );
+        MainColumnsName[] columnNames = Enum.GetValues<MainColumnsName>();
 
-        _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Maze] = 
-        new Vector2(
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Archive].X, 
-            0
-        );
+        Dictionary<MainColumnsName, Vector2> newMainColumnLengths = new Dictionary<MainColumnsName, Vector2>();
 
-        _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Statistics] = 
-        new Vector2(
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Archive].X, 
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Maze].Y
-        );
+        float mainBoxPixelSpacing = MathF.Round((Raylib.GetScreenHeight() - headerPixelLengths.Y) * (mainBoxesSpacing/100f));
 
-        _state.common.boxes.MainBoxPixelPositions[MainBoxNames.Editor] =
-        new Vector2(
-            _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Archive].X + _state.common.boxes.MainBoxPixelLengths[MainBoxNames.Maze].X, 
-            0
-        );
+        Vector2 leftOverWindowPixelLengths = 
+            new Vector2(
+                Raylib.GetScreenWidth() - (mainBoxPixelSpacing * mainColumnsPercentage.Count),
+                (Raylib.GetScreenHeight() - headerPixelLengths.Y) - (mainBoxPixelSpacing * 2) 
+            );
+
+        foreach(MainColumnsName columnName in columnNames)
+        {
+            newMainColumnLengths.Add(
+                columnName, 
+                new Vector2(
+                    leftOverWindowPixelLengths.X * (mainColumnsPercentage[columnName].X/100f),
+                    leftOverWindowPixelLengths.Y * (mainColumnsPercentage[columnName].Y/100f)
+                )
+            );
+        }
+
+        return (newMainColumnLengths, mainBoxPixelSpacing);
+    }
+
+    private Dictionary<MainBoxNames, Vector2> CalculateMainBoxLengths(Dictionary<MainColumnsName, Vector2> mainColumnsPixelLengths, float mainBoxPixelSpacing)
+    {
+        Dictionary<MainBoxNames, Vector2> newMainBoxPixelLengths = new Dictionary<MainBoxNames, Vector2>();
+
+        newMainBoxPixelLengths.Add(MainBoxNames.Archive, mainColumnsPixelLengths[MainColumnsName.Archive]);
+        newMainBoxPixelLengths.Add(MainBoxNames.Maze, mainColumnsPixelLengths[MainColumnsName.Visualize]);
+        newMainBoxPixelLengths.Add(MainBoxNames.Editor, new Vector2(mainColumnsPixelLengths[MainColumnsName.Editor].X - mainBoxPixelSpacing, mainColumnsPixelLengths[MainColumnsName.Editor].Y));
+        
+        return newMainBoxPixelLengths;
+    }
+
+    private Dictionary<MainBoxNames, Vector2> CalculateMainBoxPositions(Dictionary<MainBoxNames, Vector2> mainBoxPixelLengths, Vector2 headerPixelLengths, float mainBoxPixelSpacing)
+    {
+        Dictionary<MainBoxNames, Vector2> newMainBoxPixelPositions= new Dictionary<MainBoxNames, Vector2>();
+
+        newMainBoxPixelPositions.Add(MainBoxNames.Archive,
+            new Vector2(
+                mainBoxPixelSpacing,
+                headerPixelLengths.Y + mainBoxPixelSpacing
+            ));
+
+        newMainBoxPixelPositions.Add(MainBoxNames.Maze,
+            new Vector2(
+                newMainBoxPixelPositions[MainBoxNames.Archive].X + mainBoxPixelLengths[MainBoxNames.Archive].X + mainBoxPixelSpacing,
+                headerPixelLengths.Y + mainBoxPixelSpacing
+            ));
+
+        newMainBoxPixelPositions.Add(MainBoxNames.Editor,
+            new Vector2(
+                newMainBoxPixelPositions[MainBoxNames.Maze].X + mainBoxPixelLengths[MainBoxNames.Maze].X + mainBoxPixelSpacing,
+                headerPixelLengths.Y + mainBoxPixelSpacing
+            ));
+        
+        return newMainBoxPixelPositions;
     }
 }

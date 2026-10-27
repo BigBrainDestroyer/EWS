@@ -13,10 +13,14 @@ public class InputController
     
     public void GetInput()
     {
-        _state.common.input.KeyboardCharInput = GetKeyboardInput();
+        var _input = _state.common.input;
+        var _time = _state.common.time;
+
+        _input.KeyboardCharInput = GetKeyboardInput();
+
+        _input.MouseWheelInput = GetMouseWheelInput();
     }
 
-    
     public List<int> GetKeyboardInput()
     {
         int Char = Raylib.GetCharPressed();
@@ -30,5 +34,10 @@ public class InputController
         }
 
         return newKeyboardInput;
+    }
+
+    public float GetMouseWheelInput()
+    {
+        return Raylib.GetMouseWheelMove();
     }
 }
