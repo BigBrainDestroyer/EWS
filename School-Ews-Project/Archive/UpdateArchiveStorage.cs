@@ -15,6 +15,11 @@ public class UpdateArchiveStorage
 
     public (Dictionary<string, ArchiveStorage>, string) UpdateAddDataType(Dictionary<string, ArchiveStorage> currentStorage, ShareData.OsSystem osSystem, ArchiveStorageNames dataType, string dataLocation, string projectDataLocation, string name, string pathSyntax)
     {
+        if(dataType == ArchiveStorageNames.ProjectFolder && projectDataLocation != dataLocation)
+        {
+            return (currentStorage, dataLocation);
+        }
+        
         if (name.Length > 0)
         {
             if (dataType != ArchiveStorageNames.File && !currentStorage.ContainsKey(dataLocation + pathSyntax + name))

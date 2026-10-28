@@ -1,5 +1,6 @@
 using ShareData;
 using System.Numerics;
+using System.Collections.Concurrent;
 
 namespace Program;
 
@@ -13,6 +14,8 @@ public class MazeGenerator
         _state = state ?? throw new ArgumentNullException(nameof(state));
         _seed = new GenerateMazeSeed(_state);
     }
+
+    volatile ConcurrentBag<double> times = new ConcurrentBag<double>();
 
     public void Generator() // 0 Up 1 Right 2 Down 3 Left
     {
@@ -39,9 +42,13 @@ public class MazeGenerator
 
             int mazeLength = _generator.AllMazes.Length;
             int seedBachLength = _generator.MazeSeedBach.Length;
-
+            
             Parallel.For(0, mazeLength, (i, loop) =>
             {
+                Stopwatch watch = new Stopwatch();
+
+                watch.Start();
+
                 if (i == seedBachLength)
                 {
                     loop.Break();
@@ -51,8 +58,23 @@ public class MazeGenerator
                     MakeMaze(
                         new Vector2(_generator.MazeSize, _generator.MazeSize),
                         _generator.MazeSeedBach[i]
-                    );       
+                    );
+
+                watch.Stop();
+
+                times.Add(watch.Elapsed.TotalSeconds);
             });
+
+            double totaltime = 0;
+
+            foreach(double time in times)
+            {
+                totaltime += time;
+            }
+
+            totaltime = totaltime / times.Count();
+
+            Console.WriteLine(totaltime);
 
             _generator.MazesAreDone = true;
         });
@@ -91,13 +113,17 @@ public class MazeGenerator
         int seedPosition = 0;
         bool lostNavigator = false;
 
+        int visitedSlots = 1;
+
+        int totalVisitedBoxGoal = ((int)mazeSize.X - 1) * ((int)mazeSize.Y - 1);
+
         MazeNavigator navigator;
-        navigator.X = 1;
-        navigator.Y = 1;
+        navigator.X = ((int)mazeSize.X - 1)/2;
+        navigator.Y = ((int)mazeSize.Y - 1)/2;
 
         for (int i = 0; i < (int)mazeSize.X * (int)mazeSize.Y; i++)
         {
-            if (navigator.X > mazeSize.X - 1 || navigator.Y > mazeSize.Y - 1)
+            if (navigator.X > mazeSize.X - 1 || navigator.Y > mazeSize.Y - 1 || visitedSlots == totalVisitedBoxGoal)
             {
                 break;
             }
@@ -116,7 +142,7 @@ public class MazeGenerator
                 oldNavigator.X = navigator.X;
                 oldNavigator.Y = navigator.Y;
 
-                navigator = HelpLostNavigatorSlot(navigator, newMaze, seed, mazeSize, seedPosition);
+                (navigator, seedPosition) = HelpLostNavigatorSlot(navigator, newMaze, seed, mazeSize, seedPosition);
 
                 if(oldNavigator.X == navigator.X && oldNavigator.Y == navigator.Y)
                 {
@@ -129,7 +155,7 @@ public class MazeGenerator
                 }
             }
 
-            (navigator, newMaze) = UpdateNavigator(navigator, newMaze, currentNavigatorSlotOptions, seed, seedPosition);
+            (navigator, newMaze, visitedSlots, seedPosition) = UpdateNavigator(navigator, newMaze, currentNavigatorSlotOptions, seed, seedPosition, visitedSlots);
 
             seedPosition++;
         }
@@ -137,11 +163,11 @@ public class MazeGenerator
         return newMaze;
     }
 
-    private (MazeNavigator, Maze) UpdateNavigator(MazeNavigator navigator, Maze newMaze, bool[] currentNavigatorSlotOptions, int[] seed, int seedPosition)
+    private (MazeNavigator, Maze, int, int) UpdateNavigator(MazeNavigator navigator, Maze newMaze, bool[] currentNavigatorSlotOptions, int[] seed, int seedPosition, int visitedSlots)
     {
         int currentSeedNumber = seed[seedPosition];
 
-        int index = FindIndex(currentNavigatorSlotOptions, currentSeedNumber);
+        (int index, seedPosition) = FindIndex(seed, currentNavigatorSlotOptions, seedPosition);
 
         switch(index)
         {
@@ -155,10 +181,12 @@ public class MazeGenerator
                 navigator.X -= 1; break;
         }
 
-        return (navigator, newMaze);
+        visitedSlots++;
+
+        return (navigator, newMaze, visitedSlots, seedPosition);
     }
 
-    private MazeNavigator HelpLostNavigatorSlot(MazeNavigator navigator, Maze newMaze, int[] seed, Vector2 mazeSize, int seedPosition)
+    private (MazeNavigator, int) HelpLostNavigatorSlot(MazeNavigator navigator, Maze newMaze, int[] seed, Vector2 mazeSize, int seedPosition)
     {
         List<int> historyIncrement = new List<int>();
         bool[] currentNavigatorSlotOptions = new bool[4];
@@ -177,7 +205,7 @@ public class MazeGenerator
             historyIncrement.Add(currentIncrement);
 
             searchDistantCorners = false;
-
+            
             (currentNavigatorSlotOptions, currentIncrementIsX , varyingIncrement) = SearchDistantSlots(navigator, newMaze, mazeSize, historyIncrement, searchDistantCorners, currentIncrement);
             index = Array.IndexOf(currentNavigatorSlotOptions, true);
 
@@ -197,16 +225,14 @@ public class MazeGenerator
             }
         }
 
-        int currentSeedNumber = seed[seedPosition];
-
         if(index != -1)
         {
-            index = FindIndex(currentNavigatorSlotOptions, currentSeedNumber);
+            (index, seedPosition) = FindIndex(seed, currentNavigatorSlotOptions, seedPosition);
 
             navigator = FindRightLostNavigatorInstructions(navigator, searchDistantCorners, currentIncrementIsX, index, currentIncrement, varyingIncrement);
         }
 
-        return navigator;
+        return (navigator, seedPosition);
     }
 
     private MazeNavigator FindRightLostNavigatorInstructions(MazeNavigator navigator, bool searchDistantCorners, bool currentIncrementIsX, int index, int currentIncrement, int varyingIncrement)
@@ -288,21 +314,21 @@ public class MazeGenerator
     }
 
     private bool[] SearchDistantLinearBoxes(MazeNavigator navigator, Maze newMaze, Vector2 mazeSize, int currentIncrement)
-    {
+    {   
         WallState[][] allNearWallStates= new WallState[4][];
         bool[][] checkNearSlotStates = new bool[4][];
         bool[] currentNavigatorSlotOptions = new bool[4];
 
-        MazeNavigator checkNavigator;
+        //MazeNavigator checkNavigator;
 
         if(navigator.Y - currentIncrement >= 0)
         {
             allNearWallStates[(int)Directions.Up] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y - currentIncrement);
 
-            checkNavigator.X = navigator.X;
-            checkNavigator.Y = navigator.Y - currentIncrement;
+            //checkNavigator.X = navigator.X;
+            //checkNavigator.Y = navigator.Y - currentIncrement;
 
-            checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -319,10 +345,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Right] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + currentIncrement, navigator.Y);
 
-            checkNavigator.X = navigator.X + currentIncrement;
-            checkNavigator.Y = navigator.Y;
+            //checkNavigator.X = navigator.X + currentIncrement;
+            //checkNavigator.Y = navigator.Y;
 
-            checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -339,10 +365,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Down] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X, navigator.Y + currentIncrement);
 
-            checkNavigator.X = navigator.X;
-            checkNavigator.Y = navigator.Y + currentIncrement;
+            //checkNavigator.X = navigator.X;
+            //checkNavigator.Y = navigator.Y + currentIncrement;
 
-            checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -359,10 +385,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Left] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - currentIncrement, navigator.Y);
 
-            checkNavigator.X = navigator.X - currentIncrement;
-            checkNavigator.Y = navigator.Y;
+            //checkNavigator.X = navigator.X - currentIncrement;
+            //checkNavigator.Y = navigator.Y;
 
-            checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -377,7 +403,7 @@ public class MazeGenerator
 
         for (int i = 0; i < currentNavigatorSlotOptions.Length; i++)
         {
-            if(!allNearWallStates[i].Contains(WallState.Open) && !allNearWallStates[i].Contains(WallState.OutsideMaze) && checkNearSlotStates[i].Contains(true))
+            if(!allNearWallStates[i].Contains(WallState.Open) && !allNearWallStates[i].Contains(WallState.OutsideMaze))// && checkNearSlotStates[i].Contains(true))
             {
                 currentNavigatorSlotOptions[i] = true;
             }
@@ -390,22 +416,22 @@ public class MazeGenerator
         return currentNavigatorSlotOptions;
     }
 
-    private bool[] SearchDistanceCorners(MazeNavigator navigator, Maze newMaze,Vector2 mazeSize, int incrementX, int incrementY)
+    private bool[] SearchDistanceCorners(MazeNavigator navigator, Maze newMaze, Vector2 mazeSize, int incrementX, int incrementY)
     {
         WallState[][] allNearWallStates = new WallState[4][];
         bool[] currentNavigatorSlotOptions = new bool[4];
         bool[][] checkNearSlotStates = new bool[4][];
 
-        MazeNavigator checkNavigator;
+        //MazeNavigator checkNavigator;
 
         if(navigator.Y - incrementY >= 0 && navigator.X + incrementX < mazeSize.X)
         {
             allNearWallStates[(int)Directions.Up] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y - incrementY);
 
-            checkNavigator.X = navigator.X + incrementX;
-            checkNavigator.Y = navigator.Y - incrementY;
+            //checkNavigator.X = navigator.X + incrementX;
+            //checkNavigator.Y = navigator.Y - incrementY;
 
-            checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Up] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -422,10 +448,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Right] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X + incrementX, navigator.Y + incrementY);
 
-            checkNavigator.X = navigator.X + incrementX;
-            checkNavigator.Y = navigator.Y + incrementY;
+            //checkNavigator.X = navigator.X + incrementX;
+            //checkNavigator.Y = navigator.Y + incrementY;
 
-            checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Right] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -442,10 +468,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Down] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y + incrementY);
 
-            checkNavigator.X = navigator.X - incrementX;
-            checkNavigator.Y = navigator.Y + incrementY;
+            //checkNavigator.X = navigator.X - incrementX;
+            //checkNavigator.Y = navigator.Y + incrementY;
 
-            checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Down] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -462,10 +488,10 @@ public class MazeGenerator
         {
             allNearWallStates[(int)Directions.Left] = CheckGivenSlotWalls(newMaze, mazeSize, navigator.X - incrementX, navigator.Y - incrementY);
 
-            checkNavigator.X = navigator.X - incrementX;
-            checkNavigator.Y = navigator.Y - incrementY;
+            //checkNavigator.X = navigator.X - incrementX;
+            //checkNavigator.Y = navigator.Y - incrementY;
 
-            checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
+            //checkNearSlotStates[(int)Directions.Left] = UpdateNearBySlotsState(checkNavigator, newMaze, mazeSize, true);
         }
         else
         {
@@ -480,7 +506,7 @@ public class MazeGenerator
 
         for (int i = 0; i < currentNavigatorSlotOptions.Length; i++)
         {
-            if(!allNearWallStates[i].Contains(WallState.Open) && !allNearWallStates[i].Contains(WallState.OutsideMaze) && checkNearSlotStates[i].Contains(true))
+            if(!allNearWallStates[i].Contains(WallState.Open) && !allNearWallStates[i].Contains(WallState.OutsideMaze))// && checkNearSlotStates[i].Contains(true))
             {
                 currentNavigatorSlotOptions[i] = true;
             }
@@ -607,55 +633,32 @@ public class MazeGenerator
         return newWallState;
     }
 
-    private int FindIndex(bool[] array, int currentSeedNumber)
+    private (int, int) FindIndex(int[] seedArray, bool[] array, int seedPosition)
     {
-        int index = 0;
-        int counter = 0;
-
-        for (int i = 0; i < array.Length; i++)
+        for (int i = seedPosition; i < seedArray.Length; i++)
         {
-            bool result = array[i];
-
-            if (result == true)
-            {   
-                if (i == currentSeedNumber)
-                {
-                    return i;
-                }   
-
-                counter += 1;
-            }
-
-            //Random Paden
-            if (i == array.Length - 1)
+            if (array[seedArray[i]] == true)
             {
-                int randomIndex = Random.Shared.Next(0, counter);
-                int randomIndexCounter = 0;
-                counter = 0;
-
-                foreach(bool wallState in array)
-                {
-                    if(wallState == true)
-                    {
-                        if(randomIndexCounter == randomIndex)
-                        {
-                            return counter;  
-                        }
-
-                        randomIndexCounter++;
-                    }
-
-                    counter++;
-                }
+                
+                
+                return (seedArray[i], i);
             }
-
-            // Diagornale paden 
-            //if(i == array.Length - 1)
-            //{
-            //    return (currentSeedNumber < 2) ? Array.IndexOf(array, true) : Array.LastIndexOf(array, true);
-            //}
         }
 
-        return index;
+        seedPosition = 0;
+
+        for (int i = seedPosition; i < seedArray.Length; i++)
+        {
+            if (array[seedArray[i]] == true)
+            {
+                return (seedArray[i], i);
+            }
+        }
+
+        int index = array.IndexOf(true);
+
+        if(index == -1) index = 0;
+
+        return (index, 0);
     }
 }
